@@ -1,56 +1,7 @@
-# watchapp
-Web application created as a requirement for Langara College's term 2 Integrated Project class
+# Vue 3 + Vite
 
-This app will provide to the user the possibility to follow up the person’s favorite programs, including keeping track of the movies / shows already watched, completing monthly challenges, making their own watchlist and more.
+This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
 
-## Before downloading the project, make sure that NODE, NPM, VUE and SASS are set and configured on the local environment.
-In any case, check:
+## Recommended IDE Setup
 
-### 1 - Install Node
-The latest version of Node can be find at the official site:
-```
-https://nodejs.org/en/download/
-```
-
-### 2 - Install NPM
-It is possible to install the npm through the terminal using the code below:
-```
-npm install -g npm
-```
-
-Also, it's possible to check more details about the installation process at the link:
-https://docs.npmjs.com/downloading-and-installing-node-js-and-npm
-
-### 3 - Install VUE
-It is possible to install the VUE through the terminal using the code below:
-```
-npm init vue@latest
-```
-
-Also, it's possible to check more details about the installation process at the link:
-https://vuejs.org/guide/quick-start.html
-
-### 4 - Install SASS
-It is possible to install the SASS through the terminal using the code below:
-```
-npm install -g sass
-```
-
-Also, it's possible to check more details about the installation process at the link:
-https://sass-lang.com/install
-
-## An easier way to have everything ready is using VITE.
-At the terminal, type the code below:
-```
-npm create vite@latest
-```
-After pressing enter with the code above:
-- The terminal will ask for a Project Name. type: watchapp
-- The terminal will ask for a framework. select: Vue
-- The terminal will ask for a variant. select: JavaScript
-After the process above, type the instructions:
-```
-cd {your_project_name} 
-npm install
-npm run dev
-```
+- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar)

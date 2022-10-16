@@ -1,0 +1,50 @@
+.carouselContainer {
+    position: relative;
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    padding: 0 1.125rem;
+    margin-bottom: 3.75rem;
+
+    @media only screen and (min-width: $media-desktop) {
+        padding: 0 2.5rem;
+    }
+}
+
+.carouselContainer .headContainer {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.carouselContainer .moviesDisplay {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+}
+
+.carouselContainer .moviesDisplay .movieItem {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding-right: 1.125rem;
+    cursor: pointer;
+}
+
+.carouselContainer .moviesDisplay .movieItem img {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 10rem;
+    height: 13rem;
+    margin-bottom: 1rem;
+
+    @media only screen and (min-width: $media-desktop) {
+        width: 15rem;
+        height: 20rem;
+        border-radius: $poster_radius;
+    }
+}
