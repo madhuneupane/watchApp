@@ -37,19 +37,3 @@ npm install -g sass
 
 Also, it's possible to check more details about the installation process at the link:
 https://sass-lang.com/install
-
-## An easier way to have everything ready is using VITE.
-At the terminal, type the code below:
-```
-npm create vite@latest
-```
-After pressing enter with the code above:
-- The terminal will ask for a Project Name. type: watchapp
-- The terminal will ask for a framework. select: Vue
-- The terminal will ask for a variant. select: JavaScript
-After the process above, type the instructions:
-```
-cd {your_project_name} 
-npm install
-npm run dev
-```
