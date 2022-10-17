@@ -37,3 +37,17 @@ npm install -g sass
 
 Also, it's possible to check more details about the installation process at the link:
 https://sass-lang.com/install
+
+## After downloading the project, probably you'll need to install the vue-cli in order to run the serve (do this in the project terminal). Check first if the serve is running (step 2) and you have the node_modules folder. If not working, please proceed with step 1.
+
+### 1 - Run vue-cli
+npm install -g @vue/cli
+```
+
+### 2 - Run the serve
+npm run serve
+```
+This will present the serve you can check the site, just copy and paste the serve presented.
+
+### 3 - Check for additional needs
+The terminal might bring additional necessities to run the serve, specially if you forgot to install any of the tools in you machine environment. You can talk with your fellow team members to help sort it out.
