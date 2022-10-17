@@ -41,13 +41,26 @@ https://sass-lang.com/install
 ## After downloading the project, probably you'll need to install the vue-cli in order to run the serve (do this in the project terminal). Check first if the serve is running (step 2) and you have the node_modules folder. If not working, please proceed with step 1.
 
 ### 1 - Run vue-cli
+```
 npm install -g @vue/cli
 ```
 
 ### 2 - Run the serve
+```
 npm run serve
 ```
 This will present the serve you can check the site, just copy and paste the serve presented.
 
 ### 3 - Check for additional needs
 The terminal might bring additional necessities to run the serve, specially if you forgot to install any of the tools in you machine environment. You can talk with your fellow team members to help sort it out.
+
+## GitHub instructions:
+
+### 1 - Clone Eden's repository - watchapp
+This must be done, otherwise you won't be able to keep track of the changes, and also to commit your changes to the project.
+
+### 2 - Commit
+Please include a short title and a more detailed description. This is extremely important to the rest of the team and also to yourself.
+
+### 3 - Pull Requests
+If you see there's something available to pull but not sure of what it's, please check the website (as through the app you won't be able to see the changes, only that they exist).
