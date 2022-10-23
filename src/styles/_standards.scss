@@ -50,7 +50,10 @@ div, p, span, a {
 
 a {
     cursor: pointer;
-    text-decoration: none;
+    margin-bottom: 5px;
+    text-decoration: underline;
+    
+    
 }
 
 img.icon {
