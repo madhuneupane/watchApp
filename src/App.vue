@@ -25,22 +25,6 @@
           />
           <span>Movie</span>
         </div>
-
-        <div class="movieItem">
-          <img
-            src="https://image.tmdb.org/t/p/w500/spCAxD99U1A6jsiePFoqdEcY0dG.jpg"
-            alt="posterImage"
-          />
-          <span>Movie</span>
-        </div>
-
-        <div class="movieItem">
-          <img
-            src="https://image.tmdb.org/t/p/w500/spCAxD99U1A6jsiePFoqdEcY0dG.jpg"
-            alt="posterImage"
-          />
-          <span>Movie</span>
-        </div>
       </div>
     </div>
   </section>
@@ -54,22 +38,6 @@
       </div>
 
       <div class="moviesDisplay">
-        <div class="movieItem">
-          <img
-            src="https://image.tmdb.org/t/p/w500/spCAxD99U1A6jsiePFoqdEcY0dG.jpg"
-            alt="posterImage"
-          />
-          <span>Movie</span>
-        </div>
-
-        <div class="movieItem">
-          <img
-            src="https://image.tmdb.org/t/p/w500/spCAxD99U1A6jsiePFoqdEcY0dG.jpg"
-            alt="posterImage"
-          />
-          <span>Movie</span>
-        </div>
-
         <div class="movieItem">
           <img
             src="https://image.tmdb.org/t/p/w500/spCAxD99U1A6jsiePFoqdEcY0dG.jpg"
