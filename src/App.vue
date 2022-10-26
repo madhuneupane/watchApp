@@ -81,18 +81,11 @@
   <FooterWatchapp />
   <ButtonSample /> -->
 <template>
-  <router-view>
-    <Navigation></Navigation>
-    <Footer></Footer>
-  </router-view>
+  <router-view></router-view>
 </template>
 
 <script>
 export default {
   name: "App",
-  components: {
-    Navigation,
-    Footer,
-  },
 };
 </script>
