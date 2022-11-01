@@ -35,15 +35,17 @@ vue create {name of the project}
 (ex: vue create watchapp)
 
 select Vue 3 and press ENTER
-
+```
 After the creation of the project folder, move to the project folder and
 
-### 4 - Install SASS
+### 5 - Install SASS
 It is possible to install the SASS through the terminal using the 3 codes below:
 ```
 npm install -g sass
 ```
+```
 npm install sass-loader -D
+```
 ```
 npm install node-sass -D
 ```
@@ -53,29 +55,29 @@ https://sass-lang.com/install
 
 PS: The last to codes are to avoid any bug with sass-loader error
 
-### 5 - Install vue-firebase
+### 6 - Install vue-firebase
 ```
 npm install vuefire firebase
 ```
 
-### 6 - Install vueper slides
+### 7 - Install vueper slides
 ```
 npm i vueperslides
 ```
 
-### 7 - Install router
+### 8 - Install router
 ```
 npm install vue-router
 ```
 
-### 8 - Run the serve
+### 9 - Run the serve
 ```
 npm run serve
 ```
 If your local server runs correctly, without any issue, your local environment is ready and good to start working.
 After checking that your local server is running correctly, download the github files and replace the "src" folder
 
-### 9 - Check for additional needs
+### 10 - Check for additional needs
 The terminal might bring additional necessities to run the serve, specially if you forgot to install any of the tools in you machine environment. You can talk with your fellow team members to help sort it out.
 
 ## GitHub instructions:
