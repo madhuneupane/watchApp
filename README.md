@@ -23,45 +23,59 @@ https://docs.npmjs.com/downloading-and-installing-node-js-and-npm
 ### 3 - Install VUE
 It is possible to install the VUE through the terminal using the code below:
 ```
-npm init vue@latest
+npm install -g @vue/cli
 ```
 
 Also, it's possible to check more details about the installation process at the link:
 https://vuejs.org/guide/quick-start.html
 
+### 4 - Create a new VUE project
+```
+vue create {name of the project}
+(ex: vue create watchapp)
+
+select Vue 3 and press ENTER
+
+After the creation of the project folder, move to the project folder and
+
 ### 4 - Install SASS
-It is possible to install the SASS through the terminal using the code below:
+It is possible to install the SASS through the terminal using the 3 codes below:
 ```
 npm install -g sass
+```
+npm install sass-loader -D
+```
+npm install node-sass -D
 ```
 
 Also, it's possible to check more details about the installation process at the link:
 https://sass-lang.com/install
 
-## After downloading the project, probably you'll need to install the vue-cli in order to run the serve (do this in the project terminal). Check first if the serve is running (step 2) and you have the node_modules folder. If not working, please proceed with step 1.
+PS: The last to codes are to avoid any bug with sass-loader error
 
-### 1 - Install vue-cli
-```
-npm install -g @vue/cli
-```
-
-### 2 - Install vue-firebase
+### 5 - Install vue-firebase
 ```
 npm install vuefire firebase
 ```
 
-### 2 - Install router
+### 6 - Install vueper slides
+```
+npm i vueperslides
+```
+
+### 7 - Install router
 ```
 npm install vue-router
 ```
 
-### 5 - Run the serve
+### 8 - Run the serve
 ```
 npm run serve
 ```
-This will present the serve you can check the site, just copy and paste the serve presented.
+If your local server runs correctly, without any issue, your local environment is ready and good to start working.
+After checking that your local server is running correctly, download the github files and replace the "src" folder
 
-### 6 - Check for additional needs
+### 9 - Check for additional needs
 The terminal might bring additional necessities to run the serve, specially if you forgot to install any of the tools in you machine environment. You can talk with your fellow team members to help sort it out.
 
 ## GitHub instructions:
