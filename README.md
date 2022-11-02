@@ -2,7 +2,7 @@ Web application created as a requirement for Langara College's term 2 Integrated
 
 This app will provide to the user the possibility to follow up the person’s favorite programs, including keeping track of the movies / shows already watched, completing monthly challenges, making their own watchlist and more.
 
-# Before cloning the project, follow below steps to make sure that NODE, NPM, VUE and SASS are set and configured on the local environment. After finishing all the steps below, download the src folder from Github and rewrite the src of the newly created local folder.
+# Before cloning the project, follow below steps to make sure that NODE, NPM, VUE and SASS are set and configured on the local environment. Please note that the step(4) will create a new Vue project on your local machine! After finishing all the steps below, delete "src" folder and "Readme" file that are inside of the newly created local project folder. Then, just download the codes from Github and copy inside of the same newly created local project folder.
 
 ### 1 - Install Node
 The latest version of Node can be find at the official site:
