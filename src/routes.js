@@ -1,33 +1,24 @@
 import { createRouter, createWebHistory } from "vue-router";
-import createAccount from "./components/createAccount.vue";
-import loginPage from "./components/login.vue";
-import NavBarTest from "./components/NavBarTest.vue";
+import UpcomingMoviesPage from "./page-templates/UpcomingMoviesPage.vue";
+import RecommendationMoviesPage from "./page-templates/RecommendationMoviesPage.vue";
+import MainPage from "./page-templates/MainPage.vue";
 
 const routes = [
   {
-    name: "createAccount",
-    path: "/createAccount",
-
-    component: createAccount,
+    name: "RecommendationMoviesPage",
+    path: "/recommendations-page",
+    component: RecommendationMoviesPage,
   },
   {
-    name: "login",
+    name: "UpcomingMoviesPage",
+    path: "/upcomings-page",
+    component: UpcomingMoviesPage,
+  },
+  {
+    name: "MainPage",
     path: "/",
-
-    component: loginPage,
+    component: MainPage,
   },
-  {
-    name: "NavBarTest",
-    path: "/navbar",
-
-    component: NavBarTest,
-  },
-  // {
-  //   name: "login",
-  //   path: "/",
-  //   redirect: "/login",
-  //   component: loginPage,
-  // },
 ];
 const router = createRouter({
   history: createWebHistory(),
