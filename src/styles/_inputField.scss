@@ -7,8 +7,6 @@ input {
     padding: 1rem 1.5rem ;
     outline: none;
     color: $white;
-    width: 100%;
-    
 
     &::placeholder {
         color: $grey;
@@ -26,22 +24,8 @@ input {
 .inputArea {
     display: flex;
     flex-direction: column;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-    
 }
 
 .inputArea label {
     margin-bottom: .5rem;
-    
 }
-.error{
-    color:red;
-    margin-bottom: 1rem;
-}
-.req{
-    color: red;
-
-}
-
-
