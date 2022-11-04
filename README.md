@@ -69,7 +69,12 @@ npm i vueperslides
 npm install vue-router
 ```
 
-### 9 - Run the serve
+### 9 - Install Axios
+```
+npm install --save axios
+```
+
+### 10 - Run the serve
 ```
 npm run serve
 ```
