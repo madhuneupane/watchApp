@@ -2,14 +2,22 @@ import { createRouter, createWebHistory } from "vue-router";
 import UpcomingMoviesPage from "./page-templates/UpcomingMoviesPage.vue";
 import RecommendationMoviesPage from "./page-templates/RecommendationMoviesPage.vue";
 import MainPage from "./page-templates/MainPage.vue";
-import CreateAccount from "./components/CreateAccount.vue";
-import LoginPage from "./components/LoginPage.vue";
+// import CreateAccount from "./page-templates/CreateAccount.vue";
+// import LoginPage from "./page-templates/LoginPage.vue";
+import ResetPassword from "./page-templates/ResetPassword.vue";
+import ForgotEmail from "./page-templates/ForgotEmail.vue";
 import ChallengeMain from "./page-templates/ChallengeMain.vue";
-import CreateChallenges from "./page-templates/CreateChallenges.vue";
-import CMovieSelect from "./page-templates/CMovieSelect.vue";
-import CChallengeDescription from "./page-templates/CChallengeDescription.vue";
-// import TestTest from "./page-templates/TestTest.vue";
+import OngoingChallenges from "./page-templates/OngoingChallenges.vue";
+import CreateChallenge from "./page-templates/CreateChallenge.vue";
+import AboutUs from "./page-templates/AboutUs.vue";
+import AdminChallenge from "./page-templates/AdminChallenge.vue";
 
+
+// Test page just for testing things
+import TestPage from "./TEST/TestPage.vue";
+
+// Additional pages that will be consolidated into a single one.
+import JoinSelection from "./TEST/JoinSelection.vue";
 
 const routes = [
   {
@@ -32,36 +40,67 @@ const routes = [
   //   path: "/",
   //   component: TestTest,
   // },
+  // {
+  //   name: "CreateAccount",
+  //   path: "/CreateAccount",
+  //   component: CreateAccount,
+  // },
+  // {
+  //   name: "LoginPage",
+  //   path: "/LoginPage",
+  //   component: LoginPage,
+  // },
   {
-    name: "CreateAccount",
-    path: "/CreateAccount",
-    component: CreateAccount,
+    name: "ResetPassword",
+    path: "/reset-password",
+    component: ResetPassword,
   },
   {
-    name: "LoginPage",
-    path: "/LoginPage",
-    component: LoginPage,
+    name: "ForgotEmail",
+    path: "/forgot-email",
+    component: ForgotEmail,
   },
   {
     name: "ChallengeMain",
-    path: "/ChallengeMain",
+    path: "/challenge-main",
     component: ChallengeMain,
   },
   {
-    name: "CreateChallenges",
-    path: "/CreateChallenges",
-    component: CreateChallenges,
+    name: "OngoingChallenges",
+    path: "/ongoing-challenges",
+    component: OngoingChallenges,
   },
   {
-    name: "CMovieSelect",
-    path: "/CMovieSelect",
-    component: CMovieSelect,
+    name: "CreateChallenge",
+    path: "/create-challenge",
+    component: CreateChallenge,
   },
   {
-    name: "CChallengeDescription",
-    path: "/CChallengeDescription",
-    component: CChallengeDescription,
+    name: "AboutUs",
+    path: "/about-us",
+    component: AboutUs,
   },
+  {
+    name: "AdminChallenge",
+    path: "/admin-challenge",
+    component: AdminChallenge,
+  },
+
+  // Test page just for testing things
+  {
+    name: "TestPage",
+    path: "/test-page",
+    component: TestPage,
+  },
+
+  // Additional pages that will be consolidated into a single one.
+  {
+    name: "JoinSelection",
+    path: "/join-selection",
+    component: JoinSelection,
+  },
+
+
 ];
 
 const router = createRouter({
