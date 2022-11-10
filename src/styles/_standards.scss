@@ -3,12 +3,19 @@
     box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
     font-family: 'Noto Sans Ethiopic Regular', sans-serif;
     background-color: $bg-blue;
 }
 
-h1, h2, h3, h4, h5, h6, a {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+a {
     color: $white;
 }
 
@@ -30,7 +37,10 @@ h2 {
     }
 }
 
-h3, h4, h5, h6 {
+h3,
+h4,
+h5,
+h6 {
     font-size: 1.188rem; //19px
     font-weight: 500;
 
@@ -39,7 +49,10 @@ h3, h4, h5, h6 {
     }
 }
 
-div, p, span, a {
+div,
+p,
+span,
+a {
     font-size: 1rem; //16px
     color: $white;
 
@@ -58,5 +71,14 @@ img.icon {
 }
 
 button {
-    font-family: 'Noto Sans Ethiopic SemiBold', 'Noto Sans Ethiopic Regular', sans-serif;;
+    font-family: 'Noto Sans Ethiopic SemiBold', 'Noto Sans Ethiopic Regular', sans-serif;
+    ;
+}
+
+.navbar-gradient {
+    background: linear-gradient(91.25deg, $blue 0%, $purple 51.47%, $orange 100%);
+}
+
+.card-gradient {
+    background: linear-gradient(91.25deg, $blue 0%, $purple 51.47%, $orange 100%);
 }

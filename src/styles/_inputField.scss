@@ -1,10 +1,10 @@
 input {
-    background: 
-            linear-gradient($bg-blue, $bg-blue) padding-box,
-            linear-gradient(to right, $white, $white) border-box;
+    background:
+        linear-gradient($bg-blue, $bg-blue) padding-box,
+        linear-gradient(to right, $white, $white) border-box;
     border-radius: $btn_radius;
     border: 3px solid transparent;
-    padding: 1rem 1.5rem ;
+    padding: 1rem 1.5rem;
     outline: none;
     color: $white;
 
@@ -13,7 +13,7 @@ input {
     }
 
     &:focus {
-        background: 
+        background:
             linear-gradient($bg-blue, $bg-blue) padding-box,
             linear-gradient(to right, $purple, $orange) border-box;
         border-radius: $btn_radius;
@@ -29,3 +29,13 @@ input {
 .inputArea label {
     margin-bottom: .5rem;
 }
+
+.req {
+    color: $red;
+}
+
+.error {
+    color: $red;
+}
+
+// Image CSS
