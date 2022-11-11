@@ -19,6 +19,12 @@
 // export { db };
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
+
+// Marina
+import "firebase/auth";
+import "firebase/storage";
+
+
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -39,4 +45,11 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 //const analytics = getAnalytics(app);
 const db = getFirestore(app);
+
+// Marina
+// const auth = getAuth(app);
+
 export { db };
+
+// Marina
+// export { auth };
