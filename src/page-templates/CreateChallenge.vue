@@ -14,27 +14,26 @@
         <div class="movieSelection">
             <label for="genreDropdown">Genre</label>
             <select v-model="genreDropdown" name="genre" id="genreDropdown">
-                <option value="select" selected>Select</option>
-                <option value="action">Action</option>
-                <option value="adventure">Adventure</option>
-                <option value="animation">Animation</option>
-                <option value="comedy">Comedy</option>
-                <option value="crime">Crime</option>
-                <option value="documentary">Documentary</option>
-                <option value="drama">Drama</option>
-                <option value="family">Family</option>
-                <option value="fantasy">Fantasy</option>
-                <option value="fiction">Fiction</option>
-                <option value="history">History</option>
-                <option value="horror">Horror</option>
-                <option value="mistery">Mistery</option>
-                <option value="music">Music</option>
-                <option value="romance">Romance</option>
-                <option value="science">Science</option>
-                <option value="thriller">Thriller</option>
-                <option value="tvMovie">TV Movie</option>
-                <option value="war">War</option>
-                <option value="western">Western</option>
+                <option value="" selected disabled>Select</option>
+                <option value="28">Action</option>
+                <option value="12">Adventure</option>
+                <option value="16">Animation</option>
+                <option value="35">Comedy</option>
+                <option value="80">Crime</option>
+                <option value="99">Documentary</option>
+                <option value="18">Drama</option>
+                <option value="10751">Family</option>
+                <option value="14">Fantasy</option>
+                <option value="36">History</option>
+                <option value="27">Horror</option>
+                <option value="10402">Music</option>
+                <option value="9648">Mystery</option>
+                <option value="10749">Romance</option>
+                <option value="878">Science Fiction</option>
+                <option value="53">Thriller</option>
+                <option value="10770">TV Movie</option>
+                <option value="10752">War</option>
+                <option value="37">Western</option>
             </select>
         </div>
 
@@ -164,6 +163,7 @@ export default {
             a: "selected-movie.svg",
             imgPreURL: 'https://image.tmdb.org/t/p/w500',
             movieOfChoice: "",
+            description: ""
         }
     },
     created() {
@@ -228,14 +228,18 @@ export default {
             this.errorMessage = "";
             this.startError = "";
             this.endError = "";
+
             if (this.chalName == "") {
-                this.errorMessage = "Please input the challenge name"
+                this.errorMessage = "Please input the challenge name";
+                return false;
             }
             if (this.startDate == "") {
-                this.startError = "Please input the start date"
+                this.startError = "Please input the start date";
+                return false;
             }
             if (this.endDate == "") {
-                this.endError = "Please input the end date"
+                this.endError = "Please input the end date";
+                return false;
             }
             try {
                 const docRef = addDoc(collection(db, "challenge"), {
@@ -306,7 +310,7 @@ export default {
 select {
     border-radius: 0.75rem;
     padding: 10px;
-    background: blue;
+    background: #00002A;
     border: 3px solid white;
     margin: 10px;
     color: white;
@@ -338,7 +342,6 @@ div {
 
 ::-webkit-calendar-picker-indicator {
     filter: invert(1);
-    /* color: white; */
 }
 
 #chalName {
