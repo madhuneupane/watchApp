@@ -2,8 +2,8 @@ import { createRouter, createWebHistory } from "vue-router";
 import UpcomingMoviesPage from "./page-templates/UpcomingMoviesPage.vue";
 import RecommendationMoviesPage from "./page-templates/RecommendationMoviesPage.vue";
 import MainPage from "./page-templates/MainPage.vue";
-// import CreateAccount from "./page-templates/CreateAccount.vue";
-// import LoginPage from "./page-templates/LoginPage.vue";
+import CreateAccount from "./page-templates/CreateAccount.vue";
+import LoginPage from "./page-templates/LoginPage.vue";
 import ResetPassword from "./page-templates/ResetPassword.vue";
 import ForgotEmail from "./page-templates/ForgotEmail.vue";
 import ChallengeMain from "./page-templates/ChallengeMain.vue";
@@ -11,13 +11,20 @@ import OngoingChallenges from "./page-templates/OngoingChallenges.vue";
 import CreateChallenge from "./page-templates/CreateChallenge.vue";
 import AboutUs from "./page-templates/AboutUs.vue";
 import AdminChallenge from "./page-templates/AdminChallenge.vue";
+import ErrorPage from "./page-templates/404Page.vue";
+import JoinSignUp from "./page-templates/JoinSignUp.vue";
+import JoinSelection from "./page-templates/JoinSelection.vue";
+import OfflinePage from "./page-templates/OfflinePage.vue";
+import PastChallenge from "./page-templates/PastChallenge.vue";
 
 
 // Test page just for testing things
 import TestPage from "./TEST/TestPage.vue";
 
 // Additional pages that will be consolidated into a single one.
-import JoinSelection from "./TEST/JoinSelection.vue";
+
+
+
 
 const routes = [
   {
@@ -35,21 +42,16 @@ const routes = [
     path: "/",
     component: MainPage,
   },
-  // {
-  //   name: "TestTest",
-  //   path: "/",
-  //   component: TestTest,
-  // },
-  // {
-  //   name: "CreateAccount",
-  //   path: "/CreateAccount",
-  //   component: CreateAccount,
-  // },
-  // {
-  //   name: "LoginPage",
-  //   path: "/LoginPage",
-  //   component: LoginPage,
-  // },
+  {
+    name: "CreateAccount",
+    path: "/create-account",
+    component: CreateAccount,
+  },
+  {
+    name: "LoginPage",
+    path: "/login-page",
+    component: LoginPage,
+  },
   {
     name: "ResetPassword",
     path: "/reset-password",
@@ -85,6 +87,32 @@ const routes = [
     path: "/admin-challenge",
     component: AdminChallenge,
   },
+  {
+    name: "ErrorPage",
+    path: "/404-page",
+    component: ErrorPage,
+  },
+  {
+    name: "JoinSignUp",
+    path: "/join-signup",
+    component: JoinSignUp,
+  },
+  {
+    name: "JoinSelection",
+    path: "/join-selection",
+    component: JoinSelection,
+  },
+  {
+    name: "OfflinePage",
+    path: "/offline-page",
+    component: OfflinePage,
+  },
+  {
+    name: "PastChallenge",
+    path: "/past-challenge",
+    component: PastChallenge,
+  },
+
 
   // Test page just for testing things
   {
@@ -92,14 +120,6 @@ const routes = [
     path: "/test-page",
     component: TestPage,
   },
-
-  // Additional pages that will be consolidated into a single one.
-  {
-    name: "JoinSelection",
-    path: "/join-selection",
-    component: JoinSelection,
-  },
-
 
 ];
 
