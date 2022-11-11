@@ -10,7 +10,7 @@
                 <router-link to="/ongoing-challenges">Ongoing Challenges</router-link>
             </div>
             <div class="sub-menu">
-                <router-link to="/challenges-main/past-challenges">Past Challenges</router-link>
+                <router-link to="/past-challenge">Past Challenges</router-link>
             </div>
             <div class="sub-menu">
                 <router-link to="/create-challenge">Create Challenges</router-link>
@@ -34,7 +34,7 @@ export default {
 <style>
 .drop-down {
     position: absolute;
-    background-color: #7F11C3;
+    background: linear-gradient(91.25deg, #02025F 0%, #7F11C3 51.47%, #E74B02 100%);
     border: 1px solid white;
     z-index: 2;
     transform: translateX(20px);
