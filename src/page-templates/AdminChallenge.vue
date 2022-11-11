@@ -4,24 +4,26 @@
         <h1>Defy Us!</h1>
         <h2>Try beating WatchApp!</h2>
         <div class="chalList">
-            <div class="chalInfo" v-for="(challenge, index) in chalLoading" :key="index">
+            <div class="chalInfo" v-for="(challenge, index) in chalLoading" :key="index"
+                :class="{ active: index === activeItem }">
                 {{ challenge }}
                 <div>
                     <img src="" id="chalImage">
                     <h2 id="chalName" @click.prevent="chalDetailCall">TEST</h2>
                     <p id="dates">2022.10.01 - 2022.10.31</p>
                     <p id="qntExisting"># movies waiting for you!</p>
-                    <button v-if="fButton" @click.prevent="acceptChal">Accept Challenge</button>
+                    <button @click="selectItem">Accept Challenge</button>
+                    <!-- <button v-if="fButton" @click.prevent="acceptChal">Accept Challenge</button> -->
                     <!-- Include a v-model or whatever to save it to the DB -->
-                    <button v-if="sButton">Challenge Accepted <img src="../assets/icons/challenge-accepted.svg">
-                    </button>
+                    <!-- <button v-if="sButton">Challenge Accepted <img src="../assets/icons/challenge-accepted.svg"></button> -->
                 </div>
             </div>
             <button @click.prevent="loadMore">Load More</button>
             <BackButton title="Back to Challenge" @click.prevent="backChal" />
         </div>
-        <section id="ongoingChalDetails">
-            <div v-if="chalDetail">
+
+        <section id="ongoingChalDetails" v-if="chalDetail">
+            <div>
                 <img src="" id="chalImage">
                 <h1 id="chalName">TEST</h1>
                 <h2 id="dates">2022.10.01 - 2022.10.31</h2>
@@ -60,7 +62,6 @@ export default {
             sButton: false,
             chalBrief: true,
             chalDetail: false,
-
         };
     },
     methods: {
@@ -83,8 +84,11 @@ export default {
             this.chalBrief = true;
         },
         chalDetailCall() {
-            this.chalDetail = true;
             this.chalBrief = false;
+            this.chalDetail = true;
+        },
+        selectItem(event) {
+            event.target.classList.toggle('active');
         }
     },
     computed: {
@@ -94,3 +98,9 @@ export default {
     }
 }
 </script>
+
+<style>
+.active {
+    background-color: yellow;
+}
+</style>
