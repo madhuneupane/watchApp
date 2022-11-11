@@ -20,11 +20,11 @@
 </template>
 
 <script>
-import { getAuth, signInWithPopup, GoogleAuthProvider, FacebookAuthProvider } from "firebase/auth";
+import { auth } from "../firebase";
+import { signInWithPopup, GoogleAuthProvider, FacebookAuthProvider } from "firebase/auth";
 
 const providergo = new GoogleAuthProvider();
 const providerfb = new FacebookAuthProvider();
-const auth = getAuth();
 
 export default {
     name: "LoginAuth",
