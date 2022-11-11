@@ -29,15 +29,12 @@
   </div>
   <FooterBar />
 </template>
-<style>
-
-</style>
 
 <script>
 // import { db } from "@/firebase";
 // import { query, collection, getDocs } from "firebase/firestore";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-const auth = getAuth();
+import { auth } from "../firebase";
+import { signInWithEmailAndPassword } from "firebase/auth";
 
 import NavigationBar from "../components/NavigationBar.vue";
 import FooterBar from "../components/FooterBar.vue";
@@ -117,6 +114,8 @@ export default {
             const user = userCredential.user;
             alert("Login Successfully");
             console.log(user);
+
+            this.$router.push("/");
           })
           .catch((error) => {
             const errorCode = error.code;
