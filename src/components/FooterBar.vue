@@ -14,3 +14,11 @@ export default {
     name: 'FooterBar',
 }
 </script>
+
+<style>
+/* #footer {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+} */
+</style>
