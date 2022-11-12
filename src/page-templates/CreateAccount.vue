@@ -67,6 +67,20 @@
     </router-link> -->
     <!-- Necessary to check this -->
     <!-- <input type="file" id="imgInput" name="img" accept="image/*" v-bind:style="cssData" /> -->
+    <div v-if="secondPartFirst">
+      <img id="profilePicture" src="../assets/icons/profile.svg" alt="sorry" />
+      <!-- <router-link to="/create-account" @click.prevent="displayImage"
+        >Add your profile photo</router-link
+      > -->
+      <p style="text-decoration: underline" @click.prevent="clickImage">
+        Add your profile photo
+      </p>
+    </div>
+    <div v-if="secondPartSecond">
+      <video autoplay class="feed"></video>
+
+      <button class="secondaryBtn" @click.prevent="displayImage">Snap</button>
+    </div>
     <p>Please input your nickname</p>
     <input v-model="nickname" type="text" placeholder="Nickname" />
     <NextButton @click.prevent="genreSelection" />
@@ -76,6 +90,7 @@
 
 <script>
 // import { emitter } from "../main";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { addDoc, collection } from "firebase/firestore";
 // getDoc, query, where, doc
 
@@ -104,14 +119,21 @@ export default {
       fillMessage: "",
       nickname: "",
       uid: "",
+      a: "",
       firstPart: true,
       secondPart: false,
+      secondPartFirst: false,
+      secondPartSecond: false,
     };
   },
   methods: {
     async newAccount() {
-      // console.log(this.email);
       this.fillMessage = "";
+      // this.email = "";
+      // this.password = "";
+      // this.cpassword = "";
+      // this.fname = "";
+      // this.lname = "";
       if (
         this.email == "" ||
         this.password == "" ||
@@ -123,37 +145,13 @@ export default {
       } else if (this.password !== this.cpassword) {
         alert("Password and confirm password missmatch");
       } else {
-        sessionStorage.setItem("fname", this.fname);
-        createUserWithEmailAndPassword(auth, this.email, this.password)
-          .then((userCredential) => {
-            // Signed in
-            const uid = userCredential.user.uid;
-            // console.log(uid);
-            const docRef = addDoc(collection(db, "user"), {
-              fname: this.fname,
-              lname: this.lname,
-              uid: uid,
-            });
-            console.log(docRef);
-            this.secondPart = true;
-            this.firstPart = false;
-            this.email = "";
-            this.password = "";
-            this.cpassword = "";
-            this.fname = "";
-            this.lname = "";
-
-            // this.emitter.emit("docRef", docRef);
-            this.emitter.emit("uid", uid);
-          })
-          .catch((error) => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            console.log(errorCode);
-            console.log(errorMessage);
-          });
+        this.firstPart = false;
+        // console.log(this.email);
+        this.secondPart = true;
+        this.secondPartFirst = true;
       }
     },
+
     async genreSelection() {
       // CONSOLE PRESENTED -- Uncaught (in promise) FirebaseError: Invalid document reference. Document references must have an even number of segments, but user has 1.
       // const test = await query(doc(db, "user"), where("uid", "==", this.uid));
@@ -183,7 +181,95 @@ export default {
       //   .catch(error => {
       //     console.log(error)
       //   })
+
+      createUserWithEmailAndPassword(auth, this.email, this.password)
+        .then((userCredential) => {
+          // Signed in
+          const uid = userCredential.user.uid;
+          // console.log(uid);
+          const docRef = addDoc(collection(db, "user"), {
+            fname: this.fname,
+            lname: this.lname,
+            uid: uid,
+            nickname: this.nickname,
+            profilePicUrl: this.a,
+          });
+          console.log(docRef);
+
+          // this.emitter.emit("docRef", docRef);
+          this.emitter.emit("uid", uid);
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          console.log(errorCode);
+          console.log(errorMessage);
+        });
+      document.querySelector("video").pause();
+      this.$router.push("/");
+    },
+    clickImage() {
+      this.secondPartFirst = false;
+      this.secondPartSecond = true;
+      this.init();
+    },
+
+    displayImage() {
+      const picture = document.createElement("canvas");
+      const ctx = picture.getContext("2d");
+
+      ctx.imageSmoothingEnabled = true;
+      ctx.imageSmoothingQuality = "high";
+      ctx.drawImage(
+        document.querySelector("video"),
+        0,
+        0,
+        picture.width,
+        picture.height
+      );
+
+      // this.imageSource = picture.toDataURL();
+
+      picture.toBlob((blob) => {
+        const storage = getStorage();
+        const storageRef = ref(storage, `images/${this.fname}`);
+        uploadBytes(storageRef, blob).then(() => {
+          getDownloadURL(storageRef).then((result) => {
+            console.log(result);
+            this.a = result;
+            let profilePhoto = document.getElementById("profilePicture");
+            // console.log("this" + this.a);
+            profilePhoto.src = result;
+          });
+        });
+      });
+      picture.remove();
+
+      this.secondPartSecond = false;
+      this.secondPartFirst = true;
+    },
+    init() {
+      if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+        navigator.mediaDevices.getUserMedia({ video: true }).then((stream) => {
+          const videoPlayer = document.querySelector("video");
+          videoPlayer.srcObject = stream;
+          videoPlayer.play();
+        });
+      } else {
+        console.log("ok");
+      }
     },
   },
 };
 </script>
+<style>
+.feed {
+  display: block;
+  margin: 0 auto;
+  widows: 100%;
+  max-width: 1200px;
+  background-color: #171717;
+  padding: 25px;
+  box-shadow: 4px 4px 12px 0px rgba(0, 0, 0, 0.2);
+}
+</style>
