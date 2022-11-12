@@ -1,155 +1,169 @@
 <template>
   <NavigationBar />
-  <div v-if="this.fSectionOn">
-    <h1>Let's get started!</h1>
-    <h3>How many and what kind of movies<br />do you want to watch?</h3>
+  <div class="sectionContainer">
+    <div v-if="this.fSectionOn" class="createChallenge_fSection">
+      <h1>Let's get started!</h1>
+      <h3>How many and what kind of movies<br />do you want to watch?</h3>
 
-    <div class="movieSelection movieQuantity">
-      <label for="quantity">Movies</label>
-      <img
-        class="icon"
-        id="minusSign"
-        src="../assets/icons/minus-sign.svg"
-        @click.prevent="decrease"
-      />
-      <input
-        v-model="quantity"
-        type="number"
-        id="quantity"
-        name="quantity"
-        min="3"
-      />
-      <img
-        class="icon"
-        id="plusSign"
-        src="../assets/icons/plus-sign.svg"
-        @click.prevent="increase"
-      />
-    </div>
-
-    <div class="movieSelection">
-      <label for="genreDropdown">Genre</label>
-      <select v-model="genreDropdown" name="genre" id="genreDropdown">
-        <option value="" selected disabled>Select</option>
-        <option value="28">Action</option>
-        <option value="12">Adventure</option>
-        <option value="16">Animation</option>
-        <option value="35">Comedy</option>
-        <option value="80">Crime</option>
-        <option value="99">Documentary</option>
-        <option value="18">Drama</option>
-        <option value="10751">Family</option>
-        <option value="14">Fantasy</option>
-        <option value="36">History</option>
-        <option value="27">Horror</option>
-        <option value="10402">Music</option>
-        <option value="9648">Mystery</option>
-        <option value="10749">Romance</option>
-        <option value="878">Science Fiction</option>
-        <option value="53">Thriller</option>
-        <option value="10770">TV Movie</option>
-        <option value="10752">War</option>
-        <option value="37">Western</option>
-      </select>
-    </div>
-
-    <NextButton @click.prevent="movieSelect" />
-    <BackButton title="Back to Challenge" @click.prevent="chalMain" />
-  </div>
-
-  <div v-if="this.sSectionOn">
-    <h1>Time for selection!</h1>
-
-    <h3>Please select {{ quantity }} movies that suit your challenge</h3>
-
-    <section id="recommendPageSec">
-      <div class="movieList">
-        <div
-          id="movieSelected"
-          @click.prevent="chose"
-          class="movieItem"
-          :key="movie"
-          v-for="movie in chooseMovie"
-        >
+      <div class="movieSelection movieQuantity">
+        <label for="quantity">Movies</label>
+        <div class="movieQuantitySelection">
           <img
-            :src="'https://image.tmdb.org/t/p/w500' + movie.poster_path"
-            alt="{{ movie.original_title }} + ' Movie Poster'"
+          class="icon"
+          id="minusSign"
+          src="../assets/icons/minus-sign.svg"
+          @click.prevent="decrease"
           />
-          <span>{{ movie.original_title }}</span>
+          <input
+            v-model="quantity"
+            type="number"
+            id="quantity"
+            name="quantity"
+            min="3"
+          />
+          <img
+            class="icon"
+            id="plusSign"
+            src="../assets/icons/plus-sign.svg"
+            @click.prevent="increase"
+          />
         </div>
       </div>
-    </section>
 
-    <a href="#">Load More</a>
-
-    <NextButton @click.prevent="movieDesc" />
-    <BackButton @click.prevent="backMovieSelect" title="Back" />
-  </div>
-
-  <div v-if="this.tSectionOn">
-    <h1>We are almost there!</h1>
-    <h3>Please input information of the challenge</h3>
-
-    <hr />
-    <p>Movies Selected</p>
-    <ul>
-      <li>
-        {{ chooseMovie[0].original_title }}
-        <!-- Include the call from the db -->
-      </li>
-    </ul>
-    <hr />
-
-    <form>
-      <div>
-        <label for="chalName">Challenge Name<span class="req">*</span></label>
-        <input v-model="chalName" type="text" class="inputArea" id="chalName" />
-        <p class="error">{{ errorMessage }}</p>
+      <div class="movieSelection">
+        <label for="genreDropdown">Genre</label>
+        <select v-model="genreDropdown" name="genre" id="genreDropdown">
+          <option value="" selected disabled>Select</option>
+          <option value="28">Action</option>
+          <option value="12">Adventure</option>
+          <option value="16">Animation</option>
+          <option value="35">Comedy</option>
+          <option value="80">Crime</option>
+          <option value="99">Documentary</option>
+          <option value="18">Drama</option>
+          <option value="10751">Family</option>
+          <option value="14">Fantasy</option>
+          <option value="36">History</option>
+          <option value="27">Horror</option>
+          <option value="10402">Music</option>
+          <option value="9648">Mystery</option>
+          <option value="10749">Romance</option>
+          <option value="878">Science Fiction</option>
+          <option value="53">Thriller</option>
+          <option value="10770">TV Movie</option>
+          <option value="10752">War</option>
+          <option value="37">Western</option>
+        </select>
       </div>
-      <div>
-        <label for="startDate">Start Date<span class="req">*</span></label>
-        <input v-model="startDate" type="date" name="start" id="startDate" />
-        <p class="error">{{ startError }}</p>
-      </div>
-      <div>
-        <label for="endDate">End Date<span class="req">*</span></label>
-        <input v-model="endDate" type="date" name="end" id="endDate" />
-        <p class="error">{{ endError }}</p>
-      </div>
-    </form>
 
-    <h3>Challenge Cover Image</h3>
-    <p id="small">
-      This will be cover of the challenge. You can select from the default image
-      or you can upload the one you want!
-    </p>
-
-    <div>
-      <label class="picture">
-        <input type="file" accept="image/*" class="chalImageInput" />
-        <!-- @change.prevent="test" -->
-        <span class="chalImage"> Choose an image </span>
-      </label>
+      <div class="btnContainer">
+        <NextButton @click.prevent="movieSelect" />
+        <BackButton title="Back to Challenge" @click.prevent="chalMain" />
+      </div>
     </div>
 
-    <div>
-      <img
-        src="../assets/icons/plus-button-challenge.svg"
-        @click.prevent="addDescription"
-      />
-      <label>Add a Challenge Description</label>
-      <textarea
-        v-model="description"
-        v-if="descriptionArea"
-        name="chalDescription"
-        id="description"
-        cols="30"
-        rows="10"
-      ></textarea>
+    <div v-if="this.sSectionOn" class="createChallenge_sSection">
+      <h2>Time for selection!</h2>
+
+      <h3>Please select {{ quantity }} movies that suit your challenge</h3>
+
+      <section id="recommendPageSec">
+        <div class="movieList">
+          <div
+            id="movieSelected"
+            @click.prevent="chose"
+            class="movieItem"
+            :key="movie"
+            v-for="movie in chooseMovie"
+          >
+            <img
+              :src="'https://image.tmdb.org/t/p/w500' + movie.poster_path"
+              alt="{{ movie.original_title }} + ' Movie Poster'"
+            />
+            <span>{{ movie.original_title }}</span>
+          </div>
+        </div>
+      </section>
+
+      <a href="#">Load More</a>
+
+      <div class="btnContainer">
+        <NextButton @click.prevent="movieDesc" />
+        <BackButton @click.prevent="backMovieSelect" title="Back" />
+      </div>
     </div>
 
-    <SaveButton @click.prevent="addChallenge" />
-    <BackButton @click.prevent="backSelection" title="Back" />
+    <div v-if="this.tSectionOn" class="createChallenge_tSection">
+      <h2>We are almost there!</h2>
+      <h3>Please input information of the challenge</h3>
+
+      <hr />
+        <div class="selectedMoviesContainer">
+          <p class="moviesSelectedText">Movies Selected</p>
+          <ul class="selectedMoviesList">
+            <li class="selectedMovieTitle">
+              {{ chooseMovie[0].original_title }}
+              <!-- Include the call from the db -->
+            </li>
+          </ul>
+        </div>
+      <hr />
+
+      <form class="challengeInfoForm">
+        <div class="form_challangeName">
+          <label for="chalName">Challenge Name<span class="req">*</span></label>
+          <input v-model="chalName" type="text" class="inputArea" id="chalName" />
+          <p class="error">{{ errorMessage }}</p>
+        </div>
+        <div class="dateContainer">
+          <div class="form_startDate">
+            <label for="startDate">Start Date<span class="req">*</span></label>
+            <input v-model="startDate" type="date" name="start" id="startDate" />
+            <p class="error">{{ startError }}</p>
+          </div>
+          <div class="form_endDate">
+            <label for="endDate">End Date<span class="req">*</span></label>
+            <input v-model="endDate" type="date" name="end" id="endDate" />
+            <p class="error">{{ endError }}</p>
+          </div>
+        </div>
+      </form>
+
+      <h3>Challenge Cover Image</h3>
+      <p id="small">
+        This will be cover of the challenge. You can select from the default image
+        or you can upload the one you want!
+      </p>
+
+      <div class="imageSelectionContainer">
+        <label class="picture">
+          <input type="file" accept="image/*" class="chalImageInput" />
+          <!-- @change.prevent="test" -->
+          <span class="chalImage"> Choose an image </span>
+        </label>
+      </div>
+
+      <div>
+        <img
+          src="../assets/icons/plus-button-challenge.svg"
+          @click.prevent="addDescription"
+        />
+        <label>Add a Challenge Description</label>
+        <textarea
+          v-model="description"
+          v-if="descriptionArea"
+          name="chalDescription"
+          id="description"
+          cols="30"
+          rows="10"
+        ></textarea>
+      </div>
+
+      <div class="btnContainer">
+        <SaveButton @click.prevent="addChallenge" />
+        <BackButton @click.prevent="backSelection" title="Back" />
+      </div>
+    </div>
   </div>
   <FooterBar />
 </template>
@@ -328,7 +342,7 @@ export default {
 };
 </script>
 
-<style>
+<!-- <style>
 .chalImageInput {
   display: none;
 }
@@ -393,4 +407,4 @@ div {
 #chalName {
   width: 100%;
 }
-</style>
+</style> -->

@@ -82,3 +82,12 @@ button {
 .card-gradient {
     background: linear-gradient(91.25deg, $blue 0%, $purple 51.47%, $orange 100%);
 }
+
+select {
+    border: 2px solid $white;
+    background-color: transparent;
+    border-radius: $btn_radius;
+    height: 3rem;
+    color: $white;
+    padding: .75rem;
+}

@@ -1,0 +1,208 @@
+.sectionContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: $standardSpacement;
+
+    @media only screen and (min-width: $media-desktop) {
+        width: 100%;
+    }
+}
+
+//Create Challenge button's custom CSS
+.sectionContainer .btnContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.sectionContainer button {
+    margin-bottom: 1.5rem;
+
+    @media only screen and (min-width: $media-desktop) {
+        width: 100%;
+    }
+}
+
+.sectionContainer .primaryBtn {
+    margin-top: 3rem;
+}
+
+//First Section
+.createChallenge_fSection {
+    width: 100%;
+
+    @media only screen and (min-width: $media-desktop) {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+    }
+}
+
+.createChallenge_fSection h3{
+    /* text-align: center; */
+
+    @media only screen and (min-width: $media-desktop) {
+        text-align: center;
+    }
+}
+
+.createChallenge_fSection .movieSelection {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 1rem 0;
+
+    @media only screen and (min-width: $media-desktop) {
+        width: 30%;
+    }
+}
+
+.createChallenge_fSection .movieSelection .movieQuantitySelection {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    padding-right: 0.5rem
+}
+
+.createChallenge_fSection .movieSelection .movieQuantitySelection .icon {
+    transform: scale(1.5);
+}
+
+.createChallenge_fSection .movieSelection #quantity {
+    border: 0;
+    border-radius: 0;
+    width: 30%;
+    text-align: center;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+//End of First Section
+
+//Second Section
+.createChallenge_sSection {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    @media only screen and (min-width: $media-desktop) {
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+.createChallenge_sSection .btnContainer {
+
+    @media only screen and (min-width: $media-desktop) {
+        width: 30%;
+    }
+}
+//Second Section End
+
+//Third Section
+.createChallenge_tSection {
+    display: flex;
+    flex-direction: column;
+}
+.createChallenge_tSection h2, h3 {
+
+    @media only screen and (min-width: $media-desktop) {
+        text-align: center;
+    }
+}
+
+.createChallenge_tSection .selectedMoviesContainer {
+    @media only screen and (min-width: $media-desktop) {
+        padding: 0 5rem;
+    }
+}
+
+.createChallenge_tSection .selectedMoviesList {
+    display: flex;
+    flex-direction: column;
+
+    @media only screen and (min-width: $media-desktop) {
+        flex-direction: row;
+        margin-top: $standardSpacement;
+    }
+}
+
+.createChallenge_tSection .selectedMovieTitle {
+    background-color: $selectedMovie;
+    padding: .5rem;
+    width: fit-content;
+    border-radius: 5px;
+    margin-bottom: .5rem;
+    color: $black;
+
+    @media only screen and (min-width: $media-desktop) {
+        margin-right: $standardSpacement;
+    }
+}
+
+.createChallenge_tSection .moviesSelectedText {
+    margin: $standardSpacement 0 .5rem 0;
+}
+
+.createChallenge_tSection hr {
+    margin: $standardSpacement 0;
+}
+
+.createChallenge_tSection label {
+    margin-bottom: .5rem;
+}
+
+.createChallenge_tSection p {
+    margin-top: .5rem;
+}
+
+.createChallenge_tSection .challengeInfoForm {
+    @media only screen and (min-width: $media-desktop) {
+        padding: 0 5rem;
+    }
+}
+
+.createChallenge_tSection .dateContainer {
+    @media only screen and (min-width: $media-desktop) {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+}
+
+.createChallenge_tSection 
+.form_challangeName, 
+.form_startDate,
+.form_endDate {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: $standardSpacement;
+}
+
+.createChallenge_tSection 
+.form_startDate,
+.form_endDate {
+    @media only screen and (min-width: $media-desktop) {
+        width: 48%;
+    }
+}
+
+.createChallenge_tSection .imageSelectionContainer {
+    margin-top: $standardSpacement;
+}
+
+.createChallenge_tSection .btnContainer {
+
+    @media only screen and (min-width: $media-desktop) {
+        align-self: center;
+        width: 30%;
+    }
+}
