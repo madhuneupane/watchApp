@@ -248,7 +248,7 @@ export default {
                     chalName: this.chalName,
                     startDate: this.startDate,
                     endDate: this.endDate,
-                    description: this.description
+                    description: this.description,
                 });
                 this.$router.push("/challenge-main");
                 console.log(docRef);
