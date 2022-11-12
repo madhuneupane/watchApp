@@ -123,6 +123,7 @@ export default {
       } else if (this.password !== this.cpassword) {
         alert("Password and confirm password missmatch");
       } else {
+        sessionStorage.setItem("fname", this.fname);
         createUserWithEmailAndPassword(auth, this.email, this.password)
           .then((userCredential) => {
             // Signed in

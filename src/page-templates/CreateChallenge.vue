@@ -269,6 +269,8 @@ export default {
       }
     },
     async addChallenge() {
+      let lname = sessionStorage.getItem("fname");
+      console.log(lname);
       this.errorMessage = "";
       this.startError = "";
       this.endError = "";
