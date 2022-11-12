@@ -83,7 +83,89 @@
     </div>
     <p>Please input your nickname</p>
     <input v-model="nickname" type="text" placeholder="Nickname" />
-    <NextButton @click.prevent="genreSelection" />
+    <NextButton @click.prevent="submitted" />
+  </div>
+
+  <div v-if="genrePart">
+    <h1>Choose your genre</h1>
+    <h3>Select atleast one</h3>
+    <div>
+      <input name="genre" type="checkbox" value="28" />
+      <label for="genre">Action</label>
+      <input name="genre" type="checkbox" value="12" />
+      <label for="genre">Adventure</label>
+    </div>
+
+    <div>
+      <input name="genre" type="checkbox" value="16" />
+      <label for="genre">Animation</label>
+
+      <input name="genre" type="checkbox" value="35" />
+      <label for="genre">Comedy</label>
+    </div>
+
+    <div>
+      <input name="genre" type="checkbox" value="80" />
+      <label for="genre">Crime</label>
+
+      <input name="genre" type="checkbox" value="99" />
+      <label for="genre">Documentary</label>
+    </div>
+
+    <div>
+      <input name="genre" type="checkbox" value="18" />
+      <label for="genre">Drama</label>
+
+      <input name="genre" type="checkbox" value="10751" />
+      <label for="genre">Family</label>
+    </div>
+
+    <div>
+      <input name="genre" type="checkbox" value="14" />
+      <label for="genre">Fantasy</label>
+
+      <input name="genre" type="checkbox" value="36" />
+      <label for="genre">History</label>
+    </div>
+
+    <div>
+      <input name="genre" type="checkbox" value="27" />
+      <label for="genre">Horror</label>
+
+      <input name="genre" type="checkbox" value="10402" />
+      <label for="genre">Music</label>
+    </div>
+
+    <div>
+      <input name="genre" type="checkbox" value="9648" />
+      <label for="genre">Mystery</label>
+
+      <input name="genre" type="checkbox" value="10749" />
+      <label for="genre">Romance</label>
+    </div>
+
+    <div>
+      <input name="genre" type="checkbox" value="878" />
+      <label for="genre">Science Fiction</label>
+
+      <input name="genre" type="checkbox" value="10770" />
+      <label for="genre">TV Movie</label>
+    </div>
+
+    <div>
+      <input name="genre" type="checkbox" value="53" />
+      <label for="genre">Thriller</label>
+
+      <input name="genre" type="checkbox" value="1752" />
+      <label for="genre">War</label>
+    </div>
+    <div>
+      <input name="genre" type="checkbox" value="37" />
+      <label for="genre">Western</label>
+    </div>
+    <button class="primaryBtn" @click.prevent="genreSelection">
+      Finish Setup
+    </button>
   </div>
   <FooterBar />
 </template>
@@ -119,14 +201,20 @@ export default {
       fillMessage: "",
       nickname: "",
       uid: "",
-      a: "",
+      urlOfImage: "",
+      genreArray: [],
       firstPart: true,
       secondPart: false,
       secondPartFirst: false,
       secondPartSecond: false,
+      genrePart: false,
     };
   },
   methods: {
+    submitted() {
+      this.secondPart = false;
+      this.genrePart = true;
+    },
     async newAccount() {
       this.fillMessage = "";
       // this.email = "";
@@ -181,7 +269,14 @@ export default {
       //   .catch(error => {
       //     console.log(error)
       //   })
-
+      let checkboxes = document.getElementsByName("genre");
+      //let selected = [];
+      for (let i = 0; i < checkboxes.length; i++) {
+        if (checkboxes[i].checked) {
+          console.log(checkboxes[i].value);
+          this.genreArray.push(checkboxes[i].value);
+        }
+      }
       createUserWithEmailAndPassword(auth, this.email, this.password)
         .then((userCredential) => {
           // Signed in
@@ -192,7 +287,8 @@ export default {
             lname: this.lname,
             uid: uid,
             nickname: this.nickname,
-            profilePicUrl: this.a,
+            profilePicUrl: this.urlOfImage,
+            genre: this.genreArray,
           });
           console.log(docRef);
 
@@ -205,7 +301,7 @@ export default {
           console.log(errorCode);
           console.log(errorMessage);
         });
-      document.querySelector("video").pause();
+
       this.$router.push("/");
     },
     clickImage() {
@@ -236,7 +332,7 @@ export default {
         uploadBytes(storageRef, blob).then(() => {
           getDownloadURL(storageRef).then((result) => {
             console.log(result);
-            this.a = result;
+            this.urlOfImage = result;
             let profilePhoto = document.getElementById("profilePicture");
             // console.log("this" + this.a);
             profilePhoto.src = result;
