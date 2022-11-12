@@ -1,5 +1,4 @@
 <template>
-  <router-view />
   <NavigationBar />
   <UpcomingMovies />
   <RecommendationMovies />
@@ -9,9 +8,9 @@
 </template>
   
 <script>
-import UpcomingMovies from '../components/UpcomingMovies';
-import RecommendationMovies from '../components/RecommendationMovies.vue';
-import NavigationBar from '../components/NavigationBar.vue';
+import UpcomingMovies from "../components/UpcomingMovies";
+import RecommendationMovies from "../components/RecommendationMovies.vue";
+import NavigationBar from "../components/NavigationBar.vue";
 import FooterBar from "../components/FooterBar.vue";
 
 export default {
@@ -21,7 +20,7 @@ export default {
     UpcomingMovies,
     RecommendationMovies,
     NavigationBar,
-    FooterBar
-  }
-}
+    FooterBar,
+  },
+};
 </script>
