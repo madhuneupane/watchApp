@@ -1,6 +1,5 @@
 <template>
   <NavigationBar />
-  <router-view />
   <h1>Login</h1>
   <p class="error">{{ fillMessage }}</p>
   <div style="margin: 10px !important">
@@ -12,7 +11,7 @@
       </div>
       <div>
         <label>Password <span class="req">*</span></label>
-        <input class="inputArea" v-model="password" type="password" />
+        <input class="inputArea" v-model="password" type="password" placeholder="***********" />
         <p class="error">{{ pwdError }}</p>
       </div>
       <button type="submit" class="primaryBtn">
@@ -60,43 +59,6 @@ export default {
       console.log("Hello");
       this.$router.push("/create-account");
     },
-    // async addUser() {
-    //   this.errorMessage = "";
-    //   this.pwdError = "";
-    //   this.fillMessage = "";
-    //   if (this.email == "") {
-    //     this.errorMessage = "Please input a valid email address";
-    //     this.fillMessage = "Please fill in the required information below";
-    //   }
-    //   if (this.password == "") {
-    //     this.pwdError = "Please input a valid password";
-    //     this.fillMessage = "Please fill in the required information below";
-    //   }
-    //   if (this.email && this.password) {
-    //     const querySnap = await getDocs(query(collection(db, "user")));
-    //     let i = 0;
-
-    //     querySnap.forEach((doc) => {
-    //       const dbEmail = doc.data().email;
-    //       const dbPassword = doc.data().password;
-
-    //       if (dbEmail == this.email) {
-    //         if (dbPassword == this.password) {
-    //           i = 1;
-    //           console.log(doc.id);
-    //           alert("Login Successfully");
-    //         }
-    //       }
-    //     });
-    //     if (i == 0) {
-    //       alert("Sorry username and password missmatch");
-    //     }
-    //     this.email = "";
-    //     this.password = "";
-    //     //Working
-    //   }
-    // },
-
     // Auth testing
     async doLogin() {
       this.errorMessage = "";
