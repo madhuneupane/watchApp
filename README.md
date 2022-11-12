@@ -74,14 +74,19 @@ npm install vue-router
 npm install --save axios
 ```
 
-### 10 - Run the serve
+### 10 - Install mitt
+```
+npm install mitt
+```
+### 11 - Run the serve
 ```
 npm run serve
 ```
+
 If your local server runs correctly, without any issue, your local environment is ready and good to start working.
 After checking that your local server is running correctly, download the github files and replace the "src" folder
 
-### 10 - Check for additional needs
+### 12 - Check for additional needs
 The terminal might bring additional necessities to run the serve, specially if you forgot to install any of the tools in you machine environment. You can talk with your fellow team members to help sort it out.
 
 ## GitHub instructions:
