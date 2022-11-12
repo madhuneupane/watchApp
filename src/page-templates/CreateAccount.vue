@@ -8,24 +8,49 @@
       <div style="margin: 10px !important">
         <div>
           <label>Email Address <span class="req">*</span></label>
-          <input v-model="email" type="email" class="inputArea" placeholder="email@gmail.com" />
+          <input
+            v-model="email"
+            type="email"
+            class="inputArea"
+            placeholder="email@gmail.com"
+          />
         </div>
         <div style="float: left">
           <label>First Name <span class="req">*</span></label>
-          <input v-model="fname" type="text" class="inputArea" placeholder="John" />
+          <input
+            v-model="fname"
+            type="text"
+            class="inputArea"
+            placeholder="John"
+          />
         </div>
         <div style="float: left; margin-left: 30px !important">
           <label>Last Name <span class="req">*</span></label>
-          <input v-model="lname" type="text" class="inputArea" placeholder="Doe" />
+          <input
+            v-model="lname"
+            type="text"
+            class="inputArea"
+            placeholder="Doe"
+          />
         </div>
         <div style="clear: both"></div>
         <div>
           <label>Password <span class="req">*</span></label>
-          <input class="inputArea" v-model="password" type="password" placeholder="***********" />
+          <input
+            class="inputArea"
+            v-model="password"
+            type="password"
+            placeholder="***********"
+          />
         </div>
         <div>
           <label>Confirm Password <span class="req">*</span></label>
-          <input class="inputArea" v-model="cpassword" type="password" placeholder="***********" />
+          <input
+            class="inputArea"
+            v-model="cpassword"
+            type="password"
+            placeholder="***********"
+          />
         </div>
         <button type="submit" class="primaryBtn" @click.prevent="newAccount">
           Create Account
@@ -43,7 +68,7 @@
     <!-- Necessary to check this -->
     <!-- <input type="file" id="imgInput" name="img" accept="image/*" v-bind:style="cssData" /> -->
     <p>Please input your nickname</p>
-    <input v-model="nickname" type="text" placeholder="Nickname">
+    <input v-model="nickname" type="text" placeholder="Nickname" />
     <NextButton @click.prevent="genreSelection" />
   </div>
   <FooterBar />
@@ -58,7 +83,7 @@ import { db } from "@/firebase";
 import { auth } from "../firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 
-import NavigationBar from '../components/NavigationBar.vue';
+import NavigationBar from "../components/NavigationBar.vue";
 import FooterBar from "../components/FooterBar.vue";
 import NextButton from "../components/NextButton.vue";
 
@@ -67,7 +92,7 @@ export default {
   components: {
     NavigationBar,
     FooterBar,
-    NextButton
+    NextButton,
   },
   data() {
     return {
@@ -100,14 +125,14 @@ export default {
       } else {
         createUserWithEmailAndPassword(auth, this.email, this.password)
           .then((userCredential) => {
-            // Signed in 
+            // Signed in
             const uid = userCredential.user.uid;
             // console.log(uid);
             const docRef = addDoc(collection(db, "user"), {
               fname: this.fname,
               lname: this.lname,
               uid: uid,
-            })
+            });
             console.log(docRef);
             this.secondPart = true;
             this.firstPart = false;
@@ -116,6 +141,7 @@ export default {
             this.cpassword = "";
             this.fname = "";
             this.lname = "";
+
             // this.emitter.emit("docRef", docRef);
             this.emitter.emit("uid", uid);
           })
@@ -128,28 +154,20 @@ export default {
       }
     },
     async genreSelection() {
-
       // CONSOLE PRESENTED -- Uncaught (in promise) FirebaseError: Invalid document reference. Document references must have an even number of segments, but user has 1.
       // const test = await query(doc(db, "user"), where("uid", "==", this.uid));
       // getDoc(test);
       // console.log(test.id, test.data());
-
-
       // CONSOLE PRESENTED -- Zc{converter: null, _query: Ze, type: 'query', firestore: $a
       // const querySnapshot = await getDocs(collection(db, "user"));
       // querySnapshot.forEach((doc) => {
       //   // doc.data() is never undefined for query doc snapshots
       //   console.log(doc.id);
       // });
-
-
       // updateDoc(doc(db, "user", this.docRef.id), { nickname: this.nickname });
-
       // const userId = query(collection(db, "user"), where("uid", "==", this.uid));
       // console.log(userId);
       // getDoc(userId);
-
-
       // db.collection("user")
       //   .where("uid", "==", this.uid)
       //   .get()
@@ -164,17 +182,7 @@ export default {
       //   .catch(error => {
       //     console.log(error)
       //   })
-    }
+    },
   },
-  mounted() {
-    this.emitter.on("uid", (data) => {
-      this.uid = data;
-      console.log(data);
-    })
-    // this.emitter.on("docRef", (data2) => {
-    //   this.docRef = data2;
-    //   console.log(data2);
-    // })
-  }
 };
 </script>
