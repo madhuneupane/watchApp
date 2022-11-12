@@ -1,0 +1,41 @@
+input {
+    background:
+        linear-gradient($bg-blue, $bg-blue) padding-box,
+        linear-gradient(to right, $white, $white) border-box;
+    border-radius: $btn_radius;
+    border: 3px solid transparent;
+    padding: 1rem 1.5rem;
+    outline: none;
+    color: $grey;
+
+    &::placeholder {
+        color: $grey;
+    }
+
+    &:focus {
+        background:
+            linear-gradient($bg-blue, $bg-blue) padding-box,
+            linear-gradient(to right, $purple, $orange) border-box;
+        border-radius: $btn_radius;
+        border: 3px solid transparent;
+    }
+}
+
+.inputArea {
+    display: flex;
+    flex-direction: column;
+}
+
+.inputArea label {
+    margin-bottom: .5rem;
+}
+
+.req {
+    color: $red;
+}
+
+.error {
+    color: $red;
+}
+
+// Image CSS

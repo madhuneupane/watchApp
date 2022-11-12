@@ -1,0 +1,50 @@
+/* Default */
+* { 
+    -moz-box-sizing: border-box; 
+    -webkit-box-sizing: border-box; 
+    box-sizing: border-box; 
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Netflix Sans";
+    font-weight: var(--weight-regular);
+}
+
+h1 {
+    font-size: 1.75rem;
+   /*  margin: 1rem auto; */
+}
+
+h2 {
+    font-size: 1.125rem;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    padding: 0;
+    margin: 0;
+    font-size: 14px;
+}
+
+p {
+    margin: 0;
+    padding: 0;
+}
+
+button {
+	border: none;
+	padding: 0;
+	cursor: pointer;
+	outline: inherit;
+}

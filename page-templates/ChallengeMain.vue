@@ -1,0 +1,27 @@
+<template>
+    <NavigationBar />
+    <h1 id="chalTitle">Challenges</h1>
+    <OngoingCarousel />
+    <AdminCarousel />
+    <PastCarousel />
+    <FooterBar />
+</template>
+
+<script>
+import NavigationBar from '../components/NavigationBar.vue';
+import FooterBar from "../components/FooterBar.vue";
+import OngoingCarousel from '../components/OngoingCarousel.vue';
+import AdminCarousel from '../components/AdminCarousel.vue';
+import PastCarousel from '../components/PastCarousel.vue';
+
+export default {
+    name: "ChallengeMain",
+    components: {
+        NavigationBar,
+        FooterBar,
+        OngoingCarousel,
+        AdminCarousel,
+        PastCarousel
+    },
+}
+</script>
