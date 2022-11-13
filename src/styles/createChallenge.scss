@@ -105,6 +105,15 @@ input::-webkit-inner-spin-button {
         width: 30%;
     }
 }
+
+.createChallenge_sSection .selected{
+    background-color: $white;
+    border-radius: $poster_radius;
+}
+
+.createChallenge_sSection .selected img{
+    opacity: 0.55;
+}
 //Second Section End
 
 //Third Section
@@ -195,6 +204,13 @@ input::-webkit-inner-spin-button {
     }
 }
 
+.createChallenge_tSection .challengeCoverContainer {
+
+    @media only screen and (min-width: $media-desktop) {
+        padding: 0 5rem;
+    }
+}
+
 .createChallenge_tSection .imageSelectionContainer {
     margin-top: $standardSpacement;
 }
@@ -205,4 +221,19 @@ input::-webkit-inner-spin-button {
         align-self: center;
         width: 30%;
     }
+}
+
+.createChallenge_tSection .addDescriptionContainer {
+    margin-top: $standardSpacement;
+    display: flex;
+    align-items: center;
+}
+
+.createChallenge_tSection .addDescriptionContainer img {
+    margin-right: $standardSpacement;
+}
+
+.createChallenge_tSection .addDescriptionContainer label {
+    margin: 0;
+    font-size: 1.125rem;
 }

@@ -71,16 +71,17 @@
         <div class="movieList">
           <div
             id="movieSelected"
-            @click.prevent="chose"
             class="movieItem"
-            :key="movie"
-            v-for="movie in chooseMovie"
+            v-for="(movie, index) in chooseMovie"
+            :key="index"
+            :index="index"
+            @click="selectMovie"
           >
             <img
               :src="'https://image.tmdb.org/t/p/w500' + movie.poster_path"
               alt="{{ movie.original_title }} + ' Movie Poster'"
             />
-            <span>{{ movie.original_title }}</span>
+            <!-- <span>{{ movie.original_title }}</span> -->
           </div>
         </div>
       </section>
@@ -88,7 +89,7 @@
       <a href="#">Load More</a>
 
       <div class="btnContainer">
-        <NextButton @click.prevent="movieDesc" />
+        <NextButton @click.prevent="movieDesc(); setSelectedMoviesArray()" />
         <BackButton @click.prevent="backMovieSelect" title="Back" />
       </div>
     </div>
@@ -101,8 +102,11 @@
         <div class="selectedMoviesContainer">
           <p class="moviesSelectedText">Movies Selected</p>
           <ul class="selectedMoviesList">
-            <li class="selectedMovieTitle">
-              {{ chooseMovie[0].original_title }}
+            <li class="selectedMovieTitle"
+              v-for="movie in selectedMovies"
+              :key="movie">
+              <!-- {{ selectedMovies[movie].original_title }} -->
+              {{ movie.original_title }}
               <!-- Include the call from the db -->
             </li>
           </ul>
@@ -128,36 +132,38 @@
           </div>
         </div>
       </form>
+      <div class="challengeCoverContainer">
+        <h3>Challenge Cover Image</h3>
+        <p id="small">
+          This will be cover of the challenge. You can select from the default image
+          or you can upload the one you want!
+        </p>
 
-      <h3>Challenge Cover Image</h3>
-      <p id="small">
-        This will be cover of the challenge. You can select from the default image
-        or you can upload the one you want!
-      </p>
+        <div class="imageSelectionContainer">
+          <label class="picture">
+            <input type="file" accept="image/*" class="chalImageInput" />
+            <!-- @change.prevent="test" -->
+            <span class="chalImage"> Choose an image </span>
+          </label>
+        </div>
 
-      <div class="imageSelectionContainer">
-        <label class="picture">
-          <input type="file" accept="image/*" class="chalImageInput" />
-          <!-- @change.prevent="test" -->
-          <span class="chalImage"> Choose an image </span>
-        </label>
+        <div class="addDescriptionContainer">
+          <img
+            src="../assets/icons/plus-button-challenge.svg"
+            @click.prevent="addDescription"
+          />
+          <label>Add a Challenge Description</label>
+          <textarea
+            v-model="description"
+            v-if="descriptionArea"
+            name="chalDescription"
+            id="description"
+            cols="30"
+            rows="10"
+          ></textarea>
+        </div>
       </div>
-
-      <div>
-        <img
-          src="../assets/icons/plus-button-challenge.svg"
-          @click.prevent="addDescription"
-        />
-        <label>Add a Challenge Description</label>
-        <textarea
-          v-model="description"
-          v-if="descriptionArea"
-          name="chalDescription"
-          id="description"
-          cols="30"
-          rows="10"
-        ></textarea>
-      </div>
+      
 
       <div class="btnContainer">
         <SaveButton @click.prevent="addChallenge" />
@@ -208,6 +214,7 @@ export default {
       movieOfChoice: "",
       description: "",
       uid: "",
+      selectedMovies: [],
     };
   },
   mounted() {
@@ -265,15 +272,23 @@ export default {
     forceRerender() {
       this.carouselKey += 1;
     },
-    chose() {
-      document.getElementById(
-        "movieSelected"
-      ).innerHTML = `<img v-bind:src= "a" class="movieItem" style="width: 100%" />`;
+    selectMovie() {
+      event.currentTarget.classList.toggle('selected');
+    },
+
+    setSelectedMoviesArray(){
+      let selected = document.querySelectorAll(".selected")
+
+      for(let i=0; i<selected.length; i++) {
+        this.selectedMovies.push(this.chooseMovie[(selected[i].attributes.index.nodeValue)])
+      }
+
     },
     backSelection() {
       this.fSectionOn = false;
       this.sSectionOn = true;
       this.tSectionOn = false;
+      this.selectedMovies = [];
     },
     addDescription() {
       if (this.descriptionArea == false) {

@@ -24,7 +24,7 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    padding-right: .75rem;
+    /* padding-right: .75rem; */
     margin-bottom: 1.125rem;
     cursor: pointer;
     flex-basis: 10%;
@@ -42,7 +42,7 @@
     align-items: center;
     width: 8rem;
     height: 11rem;
-    margin-bottom: 1rem;
+    /* margin-bottom: 1rem; */
     border-radius: $poster_radius;
 
     @media only screen and (min-width: $media-desktop) {

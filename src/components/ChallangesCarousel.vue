@@ -33,17 +33,17 @@ export default {
             carouselKey: false,
             slides: [
                 {
-                    title: 'Christmas Challange',
+                    title: 'Christmas Challenge 1',
                     content: 'Christmas is coming!',
                     image: require('@/assets/challangePic.png')
                 },
                 {
-                    title: 'Christmas Challange',
+                    title: 'Christmas Challenge 2',
                     content: 'Christmas is coming!',
                     image: require('@/assets/challangePic.png')
                 },
                 {
-                    title: 'Christmas Challange',
+                    title: 'Christmas Challenge 3',
                     content: 'Christmas is coming!',
                     image: require('@/assets/challangePic.png')
                 },

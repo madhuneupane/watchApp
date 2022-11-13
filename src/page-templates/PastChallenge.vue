@@ -96,7 +96,7 @@ export default {
   }
 };
 </script>
-<style>
+<!-- <style>
 .mainContent {
   margin: 15px;
 }
@@ -119,7 +119,7 @@ export default {
   position: relative;
   display: flex;
   flex-direction: column;
-  padding-right: 1.125rem;
+  /* padding-right: 1.125rem; */
   cursor: pointer;
 
   text-align: center;
@@ -148,3 +148,4 @@ export default {
   transform: translate(-50%, -50%);
 }
 </style>
+ -->
