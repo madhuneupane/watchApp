@@ -91,3 +91,9 @@ select {
     color: $white;
     padding: .75rem;
 }
+
+.link {
+    cursor: pointer;
+    text-decoration: underline;
+    color: $white;
+}

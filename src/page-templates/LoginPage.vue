@@ -1,30 +1,31 @@
 <template>
   <NavigationBar />
-  <h1>Login</h1>
-  <p class="error">{{ fillMessage }}</p>
-  <div style="margin: 10px !important">
-    <form @submit.prevent="doLogin" class="formLogin">
-      <div>
-        <label>Email Address <span class="req">*</span></label>
-        <input v-model="email" type="email" class="inputArea" placeholder="email@gmail.com" />
-        <p class="error">{{ errorMessage }}</p>
-      </div>
-      <div>
-        <label>Password <span class="req">*</span></label>
-        <input class="inputArea" v-model="password" type="password" placeholder="***********" />
-        <p class="error">{{ pwdError }}</p>
-      </div>
-      <button type="submit" class="primaryBtn">
-        Login
+  <div id="loginPage">
+    <h2>Login</h2>
+    <p class="error">{{ fillMessage }}</p>
+    <div class="formContainer">
+      <form @submit.prevent="doLogin" class="formLogin">
+        <div class="emailContainer">
+          <label>Email Address <span class="req">*</span></label>
+          <input v-model="email" type="email" class="inputArea" placeholder="email@gmail.com" />
+          <p class="error">{{ errorMessage }}</p>
+        </div>
+        <div class="passwordContainer">
+          <label>Password <span class="req">*</span></label>
+          <input class="inputArea" v-model="password" type="password" placeholder="***********" />
+          <p class="error">{{ pwdError }}</p>
+        </div>
+        <button type="submit" class="primaryBtn">Login</button>
+        <!-- @click.prevent="addUser" -->
+      </form>
+      <button type="submit" class="secondaryBtn" @click.prevent="gotoAccount">
+        Create Account
       </button>
-      <!-- @click.prevent="addUser" -->
-
-    </form>
-    <button type="submit" class="secondaryBtn" @click.prevent="gotoAccount">
-      Create Account
-    </button>
-    <router-link to="/reset-password">Forgot Password? Click Here.</router-link>
-    <router-link to="/forgot-email">Forgot Email? Click Here.</router-link>
+      <div class="linksContainer">
+        <router-link to="/reset-password" class="link">Forgot Password? Click Here.</router-link>
+        <router-link to="/forgot-email" class="link">Forgot Email? Click Here.</router-link>
+      </div>
+    </div>
   </div>
   <FooterBar />
 </template>

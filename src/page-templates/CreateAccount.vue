@@ -1,172 +1,183 @@
 <template>
   <NavigationBar />
-  <div v-if="firstPart">
-    <h1>Sign Up</h1>
-    <p>Please fill the required details below</p>
-    <p class="error">{{ fillMessage }}</p>
-    <form>
-      <div style="margin: 10px !important">
-        <div>
-          <label>Email Address <span class="req">*</span></label>
-          <input
-            v-model="email"
-            type="email"
-            class="inputArea"
-            placeholder="email@gmail.com"
-          />
+  <div id="createAccount">
+    <div v-if="firstPart" class="fPart">
+      <h2>Sign Up</h2>
+      <p class="errorMsg">Please fill the required details below</p>
+      <form class="formContainer">
+        <p class="error">{{ fillMessage }}</p>
+          <div>
+            <label>Email Address <span class="req">*</span></label>
+            <input
+              v-model="email"
+              type="email"
+              class="inputArea"
+              placeholder="email@gmail.com"
+            />
+          </div>
+          <div class="nameContainer">
+            <div class="fNameContainer">
+              <label>First Name <span class="req">*</span></label>
+              <input
+                v-model="fname"
+                type="text"
+                class="inputArea"
+                placeholder="John"
+              />
+            </div>
+            <div class="lNameContainer">
+              <label>Last Name <span class="req">*</span></label>
+              <input
+                v-model="lname"
+                type="text"
+                class="inputArea"
+                placeholder="Doe"
+              />
+            </div>
+          </div>
+          <div></div>
+          <div>
+            <label>Password <span class="req">*</span></label>
+            <input
+              class="inputArea"
+              v-model="password"
+              type="password"
+              placeholder="***********"
+            />
+          </div>
+          <div>
+            <label>Confirm Password <span class="req">*</span></label>
+            <input
+              class="inputArea"
+              v-model="cpassword"
+              type="password"
+              placeholder="***********"
+            />
+          </div>
+          <button type="submit" class="primaryBtn" @click.prevent="newAccount">
+            Create Account
+          </button>
+      </form>
+      <router-link to="/login-page" class="link">Back to Login Page</router-link>
+    </div>
+
+    <div v-if="secondPart" class="sPart">
+      <h1>Howdy</h1>
+      <p>Can you tell about yourself more?</p>
+      <!-- <router-link to="/join-sign-up" class="routerLink" @click.prevent="displayImage">Add your profile photo
+      </router-link> -->
+      <!-- Necessary to check this -->
+      <!-- <input type="file" id="imgInput" name="img" accept="image/*" v-bind:style="cssData" /> -->
+      <div v-if="secondPartFirst" class="profilePicSectionFirst">
+        <div class="profilePictureContainer">
+          <img id="profilePicture" src="../assets/icons/profile.svg" alt="sorry" :class="{ 'capturedPicture' : photoSnapped === true}"/>
         </div>
-        <div style="float: left">
-          <label>First Name <span class="req">*</span></label>
-          <input
-            v-model="fname"
-            type="text"
-            class="inputArea"
-            placeholder="John"
-          />
-        </div>
-        <div style="float: left; margin-left: 30px !important">
-          <label>Last Name <span class="req">*</span></label>
-          <input
-            v-model="lname"
-            type="text"
-            class="inputArea"
-            placeholder="Doe"
-          />
-        </div>
-        <div style="clear: both"></div>
-        <div>
-          <label>Password <span class="req">*</span></label>
-          <input
-            class="inputArea"
-            v-model="password"
-            type="password"
-            placeholder="***********"
-          />
-        </div>
-        <div>
-          <label>Confirm Password <span class="req">*</span></label>
-          <input
-            class="inputArea"
-            v-model="cpassword"
-            type="password"
-            placeholder="***********"
-          />
-        </div>
-        <button type="submit" class="primaryBtn" @click.prevent="newAccount">
-          Create Account
-        </button>
+        <!-- <router-link to="/create-account" @click.prevent="displayImage"
+          >Add your profile photo</router-link
+        > -->
+        <p style="text-decoration: underline" @click.prevent="clickImage">
+          Add your profile photo
+        </p>
       </div>
-    </form>
-    <router-link to="/login-page">Back to Login Page</router-link>
+      <div v-if="secondPartSecond" class="profilePicSectionSecond">
+        <video autoplay class="feed"></video>
+        <button class="secondaryBtn" @click.prevent="displayImage">Snap</button>
+      </div>
+      <div class="nicknameContainer">
+        <p>Please input your nickname</p>
+        <input v-model="nickname" type="text" placeholder="Nickname" />
+      </div>
+      <NextButton @click.prevent="submitted" />
+    </div>
+
+    <div v-if="genrePart" class="genrePart">
+      <h2>Choose your genre</h2>
+      <h3>Select atleast one genre</h3>
+      <div class="genreSelectionContainer">
+        <div>
+          <input name="genre" type="checkbox" value="28" />
+          <label for="genre">Action</label>
+        </div>
+        <div>
+          <input name="genre" type="checkbox" value="12" />
+          <label for="genre">Adventure</label>
+        </div>
+        <div>
+          <input name="genre" type="checkbox" value="16" />
+          <label for="genre">Animation</label>
+        </div>
+        <div>
+          <input name="genre" type="checkbox" value="35" />
+          <label for="genre">Comedy</label>
+        </div>
+        <div>
+          <input name="genre" type="checkbox" value="80" />
+          <label for="genre">Crime</label>
+        </div>
+        <div>
+          <input name="genre" type="checkbox" value="99" />
+          <label for="genre">Documentary</label>
+        </div>
+        <div>
+          <input name="genre" type="checkbox" value="18" />
+          <label for="genre">Drama</label>
+        </div>
+        <div>
+          <input name="genre" type="checkbox" value="10751" />
+          <label for="genre">Family</label>
+        </div>
+        <div>
+          <input name="genre" type="checkbox" value="14" />
+          <label for="genre">Fantasy</label>
+        </div>
+        <div>
+          <input name="genre" type="checkbox" value="36" />
+          <label for="genre">History</label>
+        </div>
+        <div>
+          <input name="genre" type="checkbox" value="27" />
+          <label for="genre">Horror</label>
+        </div>
+        <div>
+          <input name="genre" type="checkbox" value="10402" />
+          <label for="genre">Music</label>
+        </div>      
+        <div>
+          <input name="genre" type="checkbox" value="9648" />
+          <label for="genre">Mystery</label>
+        </div>
+        <div>
+          <input name="genre" type="checkbox" value="10749" />
+          <label for="genre">Romance</label>
+        </div>
+        <div>
+          <input name="genre" type="checkbox" value="878" />
+          <label for="genre">Science Fiction</label>
+        </div>
+        <div>
+          <input name="genre" type="checkbox" value="10770" />
+          <label for="genre">TV Movie</label>
+        </div>
+        <div>
+          <input name="genre" type="checkbox" value="53" />
+          <label for="genre">Thriller</label>
+        </div>
+        <div>
+          <input name="genre" type="checkbox" value="1752" />
+          <label for="genre">War</label>
+        </div>
+        <div>
+          <input name="genre" type="checkbox" value="37" />
+          <label for="genre">Western</label>
+        </div>
+
+      </div>
+      <button class="primaryBtn" @click.prevent="genreSelection">
+        Finish Setup
+      </button>
+    </div>
   </div>
-
-  <div v-if="secondPart" style="margin: 10px !important">
-    <h1>Howdy</h1>
-    <p>Can you tell about yourself more?</p>
-    <!-- <router-link to="/join-sign-up" class="routerLink" @click.prevent="displayImage">Add your profile photo
-    </router-link> -->
-    <!-- Necessary to check this -->
-    <!-- <input type="file" id="imgInput" name="img" accept="image/*" v-bind:style="cssData" /> -->
-    <div v-if="secondPartFirst">
-      <img id="profilePicture" src="../assets/icons/profile.svg" alt="sorry" />
-      <!-- <router-link to="/create-account" @click.prevent="displayImage"
-        >Add your profile photo</router-link
-      > -->
-      <p style="text-decoration: underline" @click.prevent="clickImage">
-        Add your profile photo
-      </p>
-    </div>
-    <div v-if="secondPartSecond">
-      <video autoplay class="feed"></video>
-
-      <button class="secondaryBtn" @click.prevent="displayImage">Snap</button>
-    </div>
-    <p>Please input your nickname</p>
-    <input v-model="nickname" type="text" placeholder="Nickname" />
-    <NextButton @click.prevent="submitted" />
-  </div>
-
-  <div v-if="genrePart">
-    <h1>Choose your genre</h1>
-    <h3>Select atleast one</h3>
-    <div>
-      <input name="genre" type="checkbox" value="28" />
-      <label for="genre">Action</label>
-      <input name="genre" type="checkbox" value="12" />
-      <label for="genre">Adventure</label>
-    </div>
-
-    <div>
-      <input name="genre" type="checkbox" value="16" />
-      <label for="genre">Animation</label>
-
-      <input name="genre" type="checkbox" value="35" />
-      <label for="genre">Comedy</label>
-    </div>
-
-    <div>
-      <input name="genre" type="checkbox" value="80" />
-      <label for="genre">Crime</label>
-
-      <input name="genre" type="checkbox" value="99" />
-      <label for="genre">Documentary</label>
-    </div>
-
-    <div>
-      <input name="genre" type="checkbox" value="18" />
-      <label for="genre">Drama</label>
-
-      <input name="genre" type="checkbox" value="10751" />
-      <label for="genre">Family</label>
-    </div>
-
-    <div>
-      <input name="genre" type="checkbox" value="14" />
-      <label for="genre">Fantasy</label>
-
-      <input name="genre" type="checkbox" value="36" />
-      <label for="genre">History</label>
-    </div>
-
-    <div>
-      <input name="genre" type="checkbox" value="27" />
-      <label for="genre">Horror</label>
-
-      <input name="genre" type="checkbox" value="10402" />
-      <label for="genre">Music</label>
-    </div>
-
-    <div>
-      <input name="genre" type="checkbox" value="9648" />
-      <label for="genre">Mystery</label>
-
-      <input name="genre" type="checkbox" value="10749" />
-      <label for="genre">Romance</label>
-    </div>
-
-    <div>
-      <input name="genre" type="checkbox" value="878" />
-      <label for="genre">Science Fiction</label>
-
-      <input name="genre" type="checkbox" value="10770" />
-      <label for="genre">TV Movie</label>
-    </div>
-
-    <div>
-      <input name="genre" type="checkbox" value="53" />
-      <label for="genre">Thriller</label>
-
-      <input name="genre" type="checkbox" value="1752" />
-      <label for="genre">War</label>
-    </div>
-    <div>
-      <input name="genre" type="checkbox" value="37" />
-      <label for="genre">Western</label>
-    </div>
-    <button class="primaryBtn" @click.prevent="genreSelection">
-      Finish Setup
-    </button>
-  </div>
+  
   <FooterBar />
 </template>
 
@@ -201,6 +212,7 @@ export default {
       fillMessage: "",
       nickname: "",
       uid: "",
+      photoSnapped: false,
       urlOfImage: "",
       genreArray: [],
       firstPart: true,
@@ -308,6 +320,7 @@ export default {
       this.secondPartFirst = false;
       this.secondPartSecond = true;
       this.init();
+      this.photoSnapped = true
     },
 
     displayImage() {
@@ -358,14 +371,3 @@ export default {
   },
 };
 </script>
-<style>
-.feed {
-  display: block;
-  margin: 0 auto;
-  widows: 100%;
-  max-width: 1200px;
-  background-color: #171717;
-  padding: 25px;
-  box-shadow: 4px 4px 12px 0px rgba(0, 0, 0, 0.2);
-}
-</style>
