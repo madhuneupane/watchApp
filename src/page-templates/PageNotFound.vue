@@ -7,8 +7,8 @@
     <button type="submit" class="secondaryBtn" @click.prevent="home">
       Home
     </button>
-    <button type="submit" class="primaryBtn" @click.prevent="goBack">
-      Go Back
+    <button type="submit" class="secondaryBtn" @click.prevent="goChallenge">
+      Challenges
     </button>
   </div>
   <FooterBar />
@@ -19,7 +19,7 @@ import NavigationBar from "../components/NavigationBar.vue";
 import FooterBar from "../components/FooterBar.vue";
 
 export default {
-  name: "ErrorPage",
+  name: "PageNotFound",
   components: {
     NavigationBar,
     FooterBar
@@ -28,8 +28,8 @@ export default {
     home() {
       this.$router.push("/");
     },
-    goBack() {
-      this.$router.push("/");
+    goChallenge() {
+      this.$router.push("/challenge-main");
       // Necessary to check how to go back to the page that generated the error.
     }
   }
