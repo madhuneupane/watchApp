@@ -41,7 +41,7 @@
     }
 }
 
-.createChallenge_fSection h3{
+.createChallenge_fSection h3 {
     /* text-align: center; */
 
     @media only screen and (min-width: $media-desktop) {
@@ -84,6 +84,7 @@ input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
+
 //End of First Section
 
 //Second Section
@@ -106,14 +107,15 @@ input::-webkit-inner-spin-button {
     }
 }
 
-.createChallenge_sSection .selected{
+.createChallenge_sSection .selected {
     background-color: $white;
     border-radius: $poster_radius;
 }
 
-.createChallenge_sSection .selected img{
+.createChallenge_sSection .selected img {
     opacity: 0.55;
 }
+
 //Second Section End
 
 //Third Section
@@ -121,7 +123,9 @@ input::-webkit-inner-spin-button {
     display: flex;
     flex-direction: column;
 }
-.createChallenge_tSection h2, h3 {
+
+.createChallenge_tSection h2,
+h3 {
 
     @media only screen and (min-width: $media-desktop) {
         text-align: center;
@@ -187,8 +191,7 @@ input::-webkit-inner-spin-button {
     }
 }
 
-.createChallenge_tSection 
-.form_challangeName, 
+.createChallenge_tSection .form_challangeName,
 .form_startDate,
 .form_endDate {
     display: flex;
@@ -196,8 +199,7 @@ input::-webkit-inner-spin-button {
     margin-bottom: $standardSpacement;
 }
 
-.createChallenge_tSection 
-.form_startDate,
+.createChallenge_tSection .form_startDate,
 .form_endDate {
     @media only screen and (min-width: $media-desktop) {
         width: 48%;
@@ -236,4 +238,8 @@ input::-webkit-inner-spin-button {
 .createChallenge_tSection .addDescriptionContainer label {
     margin: 0;
     font-size: 1.125rem;
+}
+
+::-webkit-calendar-picker-indicator {
+    filter: invert(1);
 }
