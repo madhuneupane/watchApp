@@ -15,6 +15,7 @@ import PageNotFound from "./page-templates/PageNotFound.vue";
 import JoinSelection from "./page-templates/JoinSelection.vue";
 import OfflinePage from "./page-templates/OfflinePage.vue";
 import PastChallenge from "./page-templates/PastChallenge.vue";
+import ContactUs from "./page-templates/ContactUs.vue";
 
 // Test page just for testing things
 import TestPage from "./TEST/TestPage.vue";
@@ -106,7 +107,11 @@ const routes = [
     path: "/past-challenge",
     component: PastChallenge,
   },
-
+  {
+    name: "ContactUs",
+    path: "/contact-us",
+    component: ContactUs,
+  },
 
   // Test page just for testing things
   {
