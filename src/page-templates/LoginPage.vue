@@ -74,10 +74,10 @@ export default {
       } else {
         signInWithEmailAndPassword(auth, this.email, this.password)
           .then((userCredential) => {
-            const user = userCredential.user;
+            const uid = userCredential.user.uid;
             alert("Login Successfully");
-            console.log(user);
-
+            console.log(uid);
+            sessionStorage.setItem("uid", uid);
             this.$router.push("/");
           })
           .catch((error) => {
