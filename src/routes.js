@@ -11,11 +11,10 @@ import OngoingChallenges from "./page-templates/OngoingChallenges.vue";
 import CreateChallenge from "./page-templates/CreateChallenge.vue";
 import AboutUs from "./page-templates/AboutUs.vue";
 import AdminChallenge from "./page-templates/AdminChallenge.vue";
-import ErrorPage from "./page-templates/404Page.vue";
+import PageNotFound from "./page-templates/PageNotFound.vue";
 import JoinSelection from "./page-templates/JoinSelection.vue";
 import OfflinePage from "./page-templates/OfflinePage.vue";
 import PastChallenge from "./page-templates/PastChallenge.vue";
-
 
 // Test page just for testing things
 import TestPage from "./TEST/TestPage.vue";
@@ -87,11 +86,11 @@ const routes = [
     component: AdminChallenge,
   },
   {
-    name: "ErrorPage",
-    path: "/404-page",
-    component: ErrorPage,
+    name: "PageNotFound",
+    path: "/:pathMatch(.*)*",
+    component: PageNotFound,
   },
- 
+
   {
     name: "JoinSelection",
     path: "/join-selection",
