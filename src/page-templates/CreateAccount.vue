@@ -6,57 +6,32 @@
       <p class="errorMsg">Please fill the required details below</p>
       <form class="formContainer">
         <p class="error">{{ fillMessage }}</p>
-          <div>
-            <label>Email Address <span class="req">*</span></label>
-            <input
-              v-model="email"
-              type="email"
-              class="inputArea"
-              placeholder="email@gmail.com"
-            />
+        <div>
+          <label>Email Address <span class="req">*</span></label>
+          <input v-model="email" type="email" class="inputArea" placeholder="email@gmail.com" />
+        </div>
+        <div class="nameContainer">
+          <div class="fNameContainer">
+            <label>First Name <span class="req">*</span></label>
+            <input v-model="fname" type="text" class="inputArea" placeholder="John" />
           </div>
-          <div class="nameContainer">
-            <div class="fNameContainer">
-              <label>First Name <span class="req">*</span></label>
-              <input
-                v-model="fname"
-                type="text"
-                class="inputArea"
-                placeholder="John"
-              />
-            </div>
-            <div class="lNameContainer">
-              <label>Last Name <span class="req">*</span></label>
-              <input
-                v-model="lname"
-                type="text"
-                class="inputArea"
-                placeholder="Doe"
-              />
-            </div>
+          <div class="lNameContainer">
+            <label>Last Name <span class="req">*</span></label>
+            <input v-model="lname" type="text" class="inputArea" placeholder="Doe" />
           </div>
-          <div></div>
-          <div>
-            <label>Password <span class="req">*</span></label>
-            <input
-              class="inputArea"
-              v-model="password"
-              type="password"
-              placeholder="***********"
-            />
-          </div>
-          <div>
-            <label>Confirm Password <span class="req">*</span></label>
-            <input
-              class="inputArea"
-              v-model="cpassword"
-              type="password"
-              placeholder="***********"
-            />
-          </div>
-          <button type="submit" class="primaryBtn" @click.prevent="newAccount">
-            Create Account
-          </button>
+        </div>
+        <div></div>
+        <div>
+          <label>Password <span class="req">*</span></label>
+          <input class="inputArea" v-model="password" type="password" placeholder="***********" />
+        </div>
+        <div>
+          <label>Confirm Password <span class="req">*</span></label>
+          <input class="inputArea" v-model="cpassword" type="password" placeholder="***********" />
+        </div>
+        <button type="submit" class="primaryBtn" @click.prevent="newAccount">
+          Create Account
+        </button>
       </form>
       <router-link to="/login-page" class="link">Back to Login Page</router-link>
     </div>
@@ -70,7 +45,8 @@
       <!-- <input type="file" id="imgInput" name="img" accept="image/*" v-bind:style="cssData" /> -->
       <div v-if="secondPartFirst" class="profilePicSectionFirst">
         <div class="profilePictureContainer">
-          <img id="profilePicture" src="../assets/icons/profile.svg" alt="sorry" :class="{ 'capturedPicture' : photoSnapped === true}"/>
+          <img id="profilePicture" src="../assets/icons/profile.svg" alt="sorry"
+            :class="{ 'capturedPicture': photoSnapped === true }" />
         </div>
         <!-- <router-link to="/create-account" @click.prevent="displayImage"
           >Add your profile photo</router-link
@@ -92,7 +68,7 @@
 
     <div v-if="genrePart" class="genrePart">
       <h2>Choose your genre</h2>
-      <h3>Select atleast one genre</h3>
+      <h3>Select at least one genre</h3>
       <div class="genreSelectionContainer">
         <div>
           <input name="genre" type="checkbox" value="28" />
@@ -141,7 +117,7 @@
         <div>
           <input name="genre" type="checkbox" value="10402" />
           <label for="genre">Music</label>
-        </div>      
+        </div>
         <div>
           <input name="genre" type="checkbox" value="9648" />
           <label for="genre">Mystery</label>
@@ -177,7 +153,7 @@
       </button>
     </div>
   </div>
-  
+
   <FooterBar />
 </template>
 
@@ -303,7 +279,6 @@ export default {
             genre: this.genreArray,
           });
           console.log(docRef);
-
           // this.emitter.emit("docRef", docRef);
           this.emitter.emit("uid", uid);
         })
