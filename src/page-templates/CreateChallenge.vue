@@ -8,25 +8,9 @@
       <div class="movieSelection movieQuantity">
         <label for="quantity">Movies</label>
         <div class="movieQuantitySelection">
-          <img
-          class="icon"
-          id="minusSign"
-          src="../assets/icons/minus-sign.svg"
-          @click.prevent="decrease"
-          />
-          <input
-            v-model="quantity"
-            type="number"
-            id="quantity"
-            name="quantity"
-            min="3"
-          />
-          <img
-            class="icon"
-            id="plusSign"
-            src="../assets/icons/plus-sign.svg"
-            @click.prevent="increase"
-          />
+          <img class="icon" id="minusSign" src="../assets/icons/minus-sign.svg" @click.prevent="decrease" />
+          <input v-model="quantity" type="number" id="quantity" name="quantity" min="3" />
+          <img class="icon" id="plusSign" src="../assets/icons/plus-sign.svg" @click.prevent="increase" />
         </div>
       </div>
 
@@ -69,18 +53,10 @@
 
       <section id="recommendPageSec">
         <div class="movieList">
-          <div
-            id="movieSelected"
-            class="movieItem"
-            v-for="(movie, index) in chooseMovie"
-            :key="index"
-            :index="index"
-            @click="selectMovie"
-          >
-            <img
-              :src="'https://image.tmdb.org/t/p/w500' + movie.poster_path"
-              alt="{{ movie.original_title }} + ' Movie Poster'"
-            />
+          <div id="movieSelected" class="movieItem" v-for="(movie, index) in chooseMovie" :key="index" :index="index"
+            @click="selectMovie">
+            <img :src="'https://image.tmdb.org/t/p/w500' + movie.poster_path"
+              alt="{{ movie.original_title }} + ' Movie Poster'" />
             <!-- <span>{{ movie.original_title }}</span> -->
           </div>
         </div>
@@ -99,18 +75,16 @@
       <h3>Please input information of the challenge</h3>
 
       <hr />
-        <div class="selectedMoviesContainer">
-          <p class="moviesSelectedText">Movies Selected</p>
-          <ul class="selectedMoviesList">
-            <li class="selectedMovieTitle"
-              v-for="movie in selectedMovies"
-              :key="movie">
-              <!-- {{ selectedMovies[movie].original_title }} -->
-              {{ movie.original_title }}
-              <!-- Include the call from the db -->
-            </li>
-          </ul>
-        </div>
+      <div class="selectedMoviesContainer">
+        <p class="moviesSelectedText">Movies Selected</p>
+        <ul class="selectedMoviesList">
+          <li class="selectedMovieTitle" v-for="movie in selectedMovies" :key="movie">
+            <!-- {{ selectedMovies[movie].original_title }} -->
+            {{ movie.original_title }}
+            <!-- Include the call from the db -->
+          </li>
+        </ul>
+      </div>
       <hr />
 
       <form class="challengeInfoForm">
@@ -148,22 +122,13 @@
         </div>
 
         <div class="addDescriptionContainer">
-          <img
-            src="../assets/icons/plus-button-challenge.svg"
-            @click.prevent="addDescription"
-          />
+          <img src="../assets/icons/plus-button-challenge.svg" @click.prevent="addDescription" />
           <label>Add a Challenge Description</label>
-          <textarea
-            v-model="description"
-            v-if="descriptionArea"
-            name="chalDescription"
-            id="description"
-            cols="30"
-            rows="10"
-          ></textarea>
+          <textarea v-model="description" v-if="descriptionArea" name="chalDescription" id="description" cols="30"
+            rows="6"></textarea>
         </div>
       </div>
-      
+
 
       <div class="btnContainer">
         <SaveButton @click.prevent="addChallenge" />
@@ -276,10 +241,10 @@ export default {
       event.currentTarget.classList.toggle('selected');
     },
 
-    setSelectedMoviesArray(){
+    setSelectedMoviesArray() {
       let selected = document.querySelectorAll(".selected")
 
-      for(let i=0; i<selected.length; i++) {
+      for (let i = 0; i < selected.length; i++) {
         this.selectedMovies.push(this.chooseMovie[(selected[i].attributes.index.nodeValue)])
       }
 
@@ -317,6 +282,7 @@ export default {
         return false;
       }
       try {
+        const uid = sessionStorage.getItem("uid");
         const docRef = addDoc(collection(db, "challenge"), {
           quantity: this.quantity,
           genreDropdown: this.genreDropdown,
@@ -324,6 +290,8 @@ export default {
           startDate: this.startDate,
           endDate: this.endDate,
           description: this.description,
+          uid: uid,
+          selectedMovies: this.selectedMovies
         });
 
         this.$router.push("/challenge-main");
