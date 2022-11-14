@@ -1,14 +1,9 @@
 <template>
   <section id="challangeCarousel">
     <div v-if="carouselKey">
-      <vueper-slides fade :touchable="false">
-        <vueper-slide
-          v-for="(slide, i) in slides"
-          :key="i"
-          :image="slide.image"
-          :title="slide.title"
-          :content="slide.content"
-        />
+      <vueper-slides autoplay fade :touchable="false">
+        <vueper-slide v-for="(slide, i) in slides" :key="i" :image="slide.image" :title="slide.title"
+          :content="slide.content" />
       </vueper-slides>
     </div>
   </section>
