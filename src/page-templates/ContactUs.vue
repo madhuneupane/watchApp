@@ -35,11 +35,11 @@
         </div>
         <PopupModal @close="togglePopup" :popupActive="popupActive">
           <div class="popupContent">
-            <h1>This is a Modal Header</h1>
-            <p>This is a modal message</p>
+            <h1>Thank you for<br>your message!</h1>
+            <p>We'll be contacting you shortly to discuss your inquire</p>
+            <button @click="redirect" type="button" class="secondaryBtn">Go to Home</button>
           </div>
         </PopupModal>
-        <!-- <button @click="toggleModal" type="button" class="secondaryBtn">Open Popup</button> -->
       </div>
     </form>
   </div>
@@ -87,6 +87,9 @@ export default {
       this.subject = "";
       this.message = "";
     },
+    redirect() {
+      this.$router.push("/");
+    }
   },
   setup() {
     const popupActive = ref(false);
