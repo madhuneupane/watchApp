@@ -6,7 +6,6 @@
                     <img @click="close" src="../assets/icons/close.svg" alt="close" id="closePopup">
                     <!-- Modal content -->
                     <slot />
-                    <button @click="close" type="button" class="secondaryBtn">Close</button>
                 </div>
             </transition>
         </div>
