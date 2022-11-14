@@ -20,6 +20,7 @@
           v-for="movie in slides"
           :key="movie"
           :image="movie.image"
+          :title="movie.title"
         />
         <div
           class="card-gradient"
@@ -51,7 +52,7 @@ export default {
     return {
       recommendationMovieList: [],
       slides: [],
-      i: 0,
+
       breakpoints: {
         1023: { visibleSlides: 4, slideMultiple: 2, slideRatio: 1 / 3 },
       },
@@ -81,7 +82,6 @@ export default {
 
       const userId = doc.data().uid;
       if (userId == uid) {
-        this.i = 1;
         let newChallenge = {
           title: doc.data().chalName,
           image: doc.data().image,

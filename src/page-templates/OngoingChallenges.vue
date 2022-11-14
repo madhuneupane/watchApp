@@ -81,6 +81,7 @@ export default {
     challengeClicked(index) {
       this.firstPart = false;
       this.moviePart = true;
+      console.log(index);
     },
     createChallenge() {
       this.$router.push("/create-challenge");
