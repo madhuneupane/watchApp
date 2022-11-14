@@ -240,6 +240,21 @@ h3 {
     font-size: 1.125rem;
 }
 
+#description {
+    border: 3px solid $white;
+    border-radius: 0.75rem;
+    margin-left: 10px;
+    width: 20vw;
+    background-color: $bg-blue;
+    color: $white;
+    font-family: 'Noto Sans Ethiopic Regular', sans-serif;
+    padding: 1rem 1.5rem;
+}
+
+// #description:active {
+//     border: 3px solid linear-gradient(91.25deg, $blue 0%, $purple 51.47%, $orange 100%);
+// }
+
 ::-webkit-calendar-picker-indicator {
     filter: invert(1);
 }
