@@ -1,48 +1,63 @@
 <template>
   <NavigationBar />
-  <h1 class="contactUsHeading">Send us a message</h1>
-  <h3 class="contactUsHeading">We'd love to hear from you!</h3>
+  <div class="contactContainer">
+    <h1 class="contactUsHeading">Send us a message</h1>
+    <h3 class="contactUsHeading">We'd love to hear from you!</h3>
 
-  <form>
-    <div style="margin: 10px !important">
-      <p class="error">{{ fillMessage }}</p>
+    <form class="formContact">
       <div>
-        <label>Email Address <span class="req">*</span></label>
-        <input v-model="email" type="email" class="inputArea" placeholder="email@gmail.com" />
+        <p class="error">{{ fillMessage }}</p>
+        <div class="form_email">
+          <label>Email Address <span class="req">*</span></label>
+          <input v-model="email" type="email" class="inputArea" placeholder="email@gmail.com" />
+        </div>
+        <div class="form_fName">
+          <label>First Name <span class="req">*</span></label>
+          <input v-model="fName" type="text" class="inputArea" />
+        </div>
+        <div class="form_lName">
+          <label>Last Name <span class="req">*</span></label>
+          <input v-model="lName" type="text" class="inputArea" />
+        </div>
+        <div class="form_subject">
+          <label>Subject <span class="req">*</span></label>
+          <input v-model="subject" class="inputArea" type="subject" placeholder="Subject line" />
+        </div>
+        <div class="form_message">
+          <label>Message<span class="req">*</span></label><br>
+          <textarea v-model="message" class="messageArea" id="description" placeholder="Message"></textarea>
+        </div>
+
+        <div class="btnContainer">
+          <button type="submit" class="primaryBtn" @click.prevent="submitMessage(), togglePopup()">
+            Submit
+          </button>
+        </div>
+        <PopupModal @close="togglePopup" :popupActive="popupActive">
+          <div class="popupContent">
+            <h1>This is a Modal Header</h1>
+            <p>This is a modal message</p>
+          </div>
+        </PopupModal>
+        <!-- <button @click="toggleModal" type="button" class="secondaryBtn">Open Popup</button> -->
       </div>
-      <div style="float: left">
-        <label>First Name <span class="req">*</span></label>
-        <input v-model="fName" type="text" class="inputArea" />
-      </div>
-      <div style="float: left; margin-left: 30px !important">
-        <label>Last Name <span class="req">*</span></label>
-        <input v-model="lName" type="text" class="inputArea" />
-      </div>
-      <div>
-        <label>Subject <span class="req">*</span></label>
-        <input v-model="subject" class="inputArea" type="subject" placeholder="Subject line" />
-      </div>
-      <div>
-        <label>Message<span class="req">*</span></label>
-        <textarea v-model="message" placeholder="Message"></textarea>
-      </div>
-      <button type="submit" class="primaryBtn" @click.prevent="submitMessage">
-        Submit
-      </button>
-    </div>
-  </form>
+    </form>
+  </div>
   <FooterBar />
 </template>
 
 <script>
 import NavigationBar from '../components/NavigationBar.vue';
 import FooterBar from '../components/FooterBar.vue';
+import PopupModal from '../components/PopupModal.vue';
+import { ref } from 'vue';
 
 export default {
   name: "ContactUs",
   components: {
     NavigationBar,
-    FooterBar
+    FooterBar,
+    PopupModal
   },
   data() {
     return {
@@ -65,8 +80,6 @@ export default {
         this.message == ""
       ) {
         this.fillMessage = "Please fill in all the information";
-      } else {
-        alert("Message submitted and shortly we'll contact you!");
       }
       this.email = "";
       this.fName = "";
@@ -74,6 +87,13 @@ export default {
       this.subject = "";
       this.message = "";
     },
+  },
+  setup() {
+    const popupActive = ref(false);
+    const togglePopup = () => {
+      popupActive.value = !popupActive.value;
+    }
+    return { popupActive, togglePopup };
   }
 }
 </script>
