@@ -4,36 +4,63 @@
     <div v-if="firstPart" class="fPart">
       <h2>Sign Up</h2>
       <p class="errorMsg">Please fill the required details below</p>
-      <form class="formContainer">
+      <form class="formContainer" id="formData">
         <p class="error">{{ fillMessage }}</p>
         <div>
           <label>Email Address <span class="req">*</span></label>
-          <input v-model="email" type="email" class="inputArea" placeholder="email@gmail.com" />
+          <input
+            v-model="email"
+            type="email"
+            class="inputArea"
+            placeholder="email@gmail.com"
+          />
         </div>
         <div class="nameContainer">
           <div class="fNameContainer">
             <label>First Name <span class="req">*</span></label>
-            <input v-model="fname" type="text" class="inputArea" placeholder="John" />
+            <input
+              v-model="fname"
+              type="text"
+              class="inputArea"
+              placeholder="John"
+            />
           </div>
           <div class="lNameContainer">
             <label>Last Name <span class="req">*</span></label>
-            <input v-model="lname" type="text" class="inputArea" placeholder="Doe" />
+            <input
+              v-model="lname"
+              type="text"
+              class="inputArea"
+              placeholder="Doe"
+            />
           </div>
         </div>
         <div></div>
         <div>
           <label>Password <span class="req">*</span></label>
-          <input class="inputArea" v-model="password" type="password" placeholder="***********" />
+          <input
+            class="inputArea"
+            v-model="password"
+            type="password"
+            placeholder="***********"
+          />
         </div>
         <div>
           <label>Confirm Password <span class="req">*</span></label>
-          <input class="inputArea" v-model="cpassword" type="password" placeholder="***********" />
+          <input
+            class="inputArea"
+            v-model="cpassword"
+            type="password"
+            placeholder="***********"
+          />
         </div>
         <button type="submit" class="primaryBtn" @click.prevent="newAccount">
           Create Account
         </button>
       </form>
-      <router-link to="/login-page" class="link">Back to Login Page</router-link>
+      <router-link to="/login-page" class="link"
+        >Back to Login Page</router-link
+      >
     </div>
 
     <div v-if="secondPart" class="sPart">
@@ -45,8 +72,12 @@
       <!-- <input type="file" id="imgInput" name="img" accept="image/*" v-bind:style="cssData" /> -->
       <div v-if="secondPartFirst" class="profilePicSectionFirst">
         <div class="profilePictureContainer">
-          <img id="profilePicture" src="../assets/icons/profile.svg" alt="sorry"
-            :class="{ 'capturedPicture': photoSnapped === true }" />
+          <img
+            id="profilePicture"
+            src="../assets/icons/profile.svg"
+            alt="sorry"
+            :class="{ capturedPicture: photoSnapped === true }"
+          />
         </div>
         <!-- <router-link to="/create-account" @click.prevent="displayImage"
           >Add your profile photo</router-link
@@ -146,7 +177,6 @@
           <input name="genre" type="checkbox" value="37" />
           <label for="genre">Western</label>
         </div>
-
       </div>
       <button class="primaryBtn" @click.prevent="genreSelection">
         Finish Setup
@@ -198,6 +228,7 @@ export default {
       genrePart: false,
     };
   },
+
   methods: {
     submitted() {
       this.secondPart = false;
@@ -205,11 +236,7 @@ export default {
     },
     async newAccount() {
       this.fillMessage = "";
-      // this.email = "";
-      // this.password = "";
-      // this.cpassword = "";
-      // this.fname = "";
-      // this.lname = "";
+
       if (
         this.email == "" ||
         this.password == "" ||
@@ -278,6 +305,12 @@ export default {
             profilePicUrl: this.urlOfImage,
             genre: this.genreArray,
           });
+          this.email = "";
+          this.password.value = "";
+          this.cpassword = "";
+          this.fname = "";
+          this.lname.value = "";
+
           console.log(docRef);
           // this.emitter.emit("docRef", docRef);
           this.emitter.emit("uid", uid);
@@ -295,7 +328,7 @@ export default {
       this.secondPartFirst = false;
       this.secondPartSecond = true;
       this.init();
-      this.photoSnapped = true
+      this.photoSnapped = true;
     },
 
     displayImage() {
