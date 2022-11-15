@@ -16,13 +16,13 @@ import JoinSelection from "./page-templates/JoinSelection.vue";
 import OfflinePage from "./page-templates/OfflinePage.vue";
 import PastChallenge from "./page-templates/PastChallenge.vue";
 import ContactUs from "./page-templates/ContactUs.vue";
+import ChallengeReview from "./page-templates/ChallengeReview.vue";
 
 // Test page just for testing things
 import TestPage from "./TEST/TestPage.vue";
+import ProfileSettings from "./TEST/ProfileSettings.vue";
 
 // Additional pages that will be consolidated into a single one.
-
-
 
 
 const routes = [
@@ -112,6 +112,11 @@ const routes = [
     path: "/contact-us",
     component: ContactUs,
   },
+  {
+    name: "ChallengeReview",
+    path: "/challenge-review",
+    component: ChallengeReview,
+  },
 
   // Test page just for testing things
   {
@@ -119,6 +124,15 @@ const routes = [
     path: "/test-page",
     component: TestPage,
   },
+
+  {
+    name: "ProfileSettings",
+    path: "/profile-settings",
+    component: ProfileSettings,
+  },
+
+
+
 
 ];
 
