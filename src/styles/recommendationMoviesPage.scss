@@ -7,7 +7,7 @@
     }
 }
 
-#recommendPageSec .movieList{
+#recommendPageSec .movieList {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -49,4 +49,13 @@
         width: 16.5rem;
         height: 23rem;
     }
+}
+
+// CSS for the popup
+.movieImg {
+    width: 150px;
+}
+
+.movieOverview {
+    width: 400px;
 }
