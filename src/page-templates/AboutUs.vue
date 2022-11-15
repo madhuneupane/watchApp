@@ -1,7 +1,7 @@
 <template>
   <NavigationBar />
   <div id="aboutUs">
-    <h1>Meet The Seven Knight!</h1>
+    <h1>Meet The Seven Knights!</h1>
     <p>Loream ipsum dolor sit amet, consectetur adipiscing elt, sed do eiusmod tempor incididunt ut labore et dolore
       magna aliqua</p>
   </div>
