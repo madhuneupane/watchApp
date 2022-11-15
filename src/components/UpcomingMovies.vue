@@ -5,22 +5,10 @@
         <h2>Upcoming Movies</h2>
         <a class="seeMoreBtn" @click.prevent="gotoUpcomingsPage">See All</a>
       </div>
-      <vueper-slides
-        :arrows="false"
-        :infinite="false"
-        :bullets="false"
-        :visible-slides="5"
-        :slide-multiple="2"
-        :gap="2"
-        :slide-ratio="1 / 3.5"
-        :dragging-distance="200"
-        :breakpoints="breakpoints"
-      >
-        <vueper-slide
-          v-for="movie in upcomingMovieList"
-          :key="movie"
-          :image="'https://image.tmdb.org/t/p/w500' + movie.poster_path"
-        />
+      <vueper-slides :arrows="false" :infinite="false" :bullets="false" :visible-slides="5" :slide-multiple="2" :gap="2"
+        :slide-ratio="1 / 3.5" :dragging-distance="200" :breakpoints="breakpoints">
+        <vueper-slide v-for="movie in upcomingMovieList" :key="movie"
+          :image="'https://image.tmdb.org/t/p/w500' + movie.poster_path" />
       </vueper-slides>
     </div>
   </section>
@@ -30,12 +18,15 @@
 import { VueperSlides, VueperSlide } from "vueperslides";
 import "vueperslides/dist/vueperslides.css";
 import axios from "axios";
+// import PopupModal from "./PopupModal.vue";
+// import { ref } from 'vue';
 
 export default {
   name: "UpcomingMovies",
   components: {
     VueperSlides,
     VueperSlide,
+    // PopupModal
   },
   data() {
     return {
@@ -71,5 +62,13 @@ export default {
       this.$router.push("/upcomings-page");
     },
   },
+
+  // setup() {
+  //   const popupActive = ref(false);
+  //   const togglePopup = () => {
+  //     popupActive.value = !popupActive.value;
+  //   }
+  //   return { popupActive, togglePopup };
+  // }
 };
 </script>
