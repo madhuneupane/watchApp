@@ -20,7 +20,7 @@ import ChallengeReview from "./page-templates/ChallengeReview.vue";
 
 // Test page just for testing things
 import TestPage from "./TEST/TestPage.vue";
-import ProfileSettings from "./TEST/ProfileSettings.vue";
+/* import ProfileSettings from "./TEST/ProfileSettings.vue"; */
 
 // Additional pages that will be consolidated into a single one.
 
@@ -125,11 +125,11 @@ const routes = [
     component: TestPage,
   },
 
-  {
+  /* {
     name: "ProfileSettings",
     path: "/profile-settings",
     component: ProfileSettings,
-  },
+  }, */
 
 
 

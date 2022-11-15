@@ -11,7 +11,31 @@
     justify-content: center;
 }
 
+.popupContent {
+    display: flex;
+}
+
+.popupContent .infoArea{
+    margin: 0 $standardSpacement;
+}
+
+.popupContent .infoArea h3 {
+    text-align: unset;
+    margin: 0;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.popupContent .infoArea .dateRatingContainer {
+    margin: $standardSpacement 0;
+}
+
+.popupContent .infoArea .movieOverview {
+    margin: $standardSpacement 0 $standardSpacement;
+}
+
 .popupInner {
+    position: relative;
     background-color: $bg-blue;
     padding: 30px;
     border-radius: 0.75rem;
@@ -24,9 +48,12 @@
 #closePopup {
     cursor: pointer;
     width: 30px;
-    transform: translate(275px, 1px);
+    position: absolute;
+    right: $standardSpacement;
+    top: $standardSpacement;
+
 
     @media only screen and (min-width: 1024px) {
-        transform: translate(340px, 1px);
+        /* transform: translate(340px, 1px); */
     }
 }
