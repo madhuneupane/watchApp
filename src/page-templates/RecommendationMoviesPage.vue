@@ -3,12 +3,25 @@
     <section id="recommendPageSec">
         <h2>You will like this!</h2>
         <div class="movieList">
-            <div class="movieItem" :key="movie" v-for="movie in recommendationMovieList">
+            <div class="movieItem" @click="togglePopup" :key="movie" v-for="movie in recommendationMovieList">
                 <img :src="'https://image.tmdb.org/t/p/w500' + movie.poster_path"
                     alt="{{ movie.original_title }} + ' Movie Poster'">
             </div>
         </div>
     </section>
+    <PopupModal @close="togglePopup" :popupActive="popupActive" :key="movie" v-for="movie in recommendationMovieList">
+        <div class="popupContent">
+            <img class="movieImg" :src="'https://image.tmdb.org/t/p/w500' + movie.poster_path"
+                alt="{{ movie.original_title }} + ' Movie Poster'">
+            <h1>{{ movie.original_title }}</h1>
+            <p>{{ movie.genre_ids }}</p>
+            <p><strong>Release Date: </strong> {{ movie.release_date }}</p>
+            <p><strong>TMDB Rating: </strong> {{ movie.vote_average }}/10</p>
+            <br>
+            <p><strong>Overview</strong></p>
+            <p class="movieOverview">{{ movie.overview }}</p>
+        </div>
+    </PopupModal>
     <FooterBar />
 </template>
 
@@ -17,12 +30,15 @@ import axios from "axios";
 
 import NavigationBar from "../components/NavigationBar.vue";
 import FooterBar from "../components/FooterBar.vue";
+import PopupModal from "../components/PopupModal.vue";
+import { ref } from 'vue';
 
 export default {
     name: 'RecommendationMoviesPage',
     components: {
         NavigationBar,
-        FooterBar
+        FooterBar,
+        PopupModal
     },
     data() {
         return {
@@ -46,6 +62,19 @@ export default {
         forceRerender() {
             this.carouselKey += 1;
         }
-    }
+    },
+
+    setup() {
+        const popupActive = ref(false);
+        const togglePopup = () => {
+            // sessionStorage.setItem("movieArray", this.recommendationMovieList);
+            popupActive.value = !popupActive.value;
+        }
+        return { popupActive, togglePopup };
+    },
+
+    // mounted() {
+    //     this.movieArray = sessionStorage.getItem("movieArray");
+    // }
 };
 </script>
