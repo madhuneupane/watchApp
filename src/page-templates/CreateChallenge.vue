@@ -67,6 +67,13 @@
       <div class="btnContainer">
         <NextButton @click.prevent="movieDesc(); setSelectedMoviesArray()" />
         <BackButton @click.prevent="backMovieSelect" title="Back" />
+        <!-- <PopupModal @close="togglePopup" :popupActive="popupActive">
+          <div class="popupContent">
+            <h1 class="popUpHeading">Uh oh...</h1>
+            <h3 class="popUpText">It seems you have selected over {{ quantity }} movies.<br>Please check the movies
+              you've selected.</h3>
+          </div>
+        </PopupModal> -->
       </div>
     </div>
 
@@ -129,11 +136,17 @@
         </div>
       </div>
 
-
       <div class="btnContainer">
-        <SaveButton @click.prevent="addChallenge" />
+        <SaveButton @click.prevent="addChallenge(); togglePopup()" />
         <BackButton @click.prevent="backSelection" title="Back" />
       </div>
+      <PopupModal @close="togglePopup" :popupActive="popupActive">
+        <div class="popupContent">
+          <h1 class="popUpHeading">Saved!</h1>
+          <h3 class="popUpText">Hooray! Challenge created!<br>Watch movies to earn special badges!</h3>
+          <button @click="redirect" type="button" class="secondaryBtn">Go to Home</button>
+        </div>
+      </PopupModal>
     </div>
   </div>
   <FooterBar />
@@ -150,6 +163,9 @@ import FooterBar from "../components/FooterBar.vue";
 import NextButton from "../components/NextButton.vue";
 import BackButton from "../components/BackButton.vue";
 import SaveButton from "../components/SaveButton.vue";
+import PopupModal from '../components/PopupModal.vue';
+import { ref } from 'vue';
+
 
 export default {
   name: "CreateChallenge",
@@ -159,6 +175,7 @@ export default {
     NextButton,
     BackButton,
     SaveButton,
+    PopupModal
   },
   data() {
     return {
@@ -181,16 +198,6 @@ export default {
       uid: "",
       selectedMovies: [],
     };
-  },
-  mounted() {
-    this.emitter.on("uid", (data) => {
-      this.uid = data;
-      console.log(data);
-    });
-    //     // this.emitter.on("docRef", (data2) => {
-    //     //   this.docRef = data2;
-    //     //   console.log(data2);
-    //     // })
   },
   created() {
     this.chooseMovie = axios
@@ -293,35 +300,23 @@ export default {
           uid: uid,
           selectedMovies: this.selectedMovies
         });
-
-        this.$router.push("/challenge-main");
+        // this.$router.push("/challenge-main");
         console.log(docRef);
       } catch (e) {
         console.log(e);
       }
     },
-    // test(e) {
-    //     const inputFile = e.target;
-    //     const file = inputFile.files[0];
-
-    //     if (file) {
-    //         const reader = new FileReader();
-    //         reader.addEventListener('load', () => {
-    //             const readerTarget = e.target;
-
-    //             const img = document.createElement('img');
-    //             img.src = readerTarget.result;
-    //             img.classList.add('chalPicture');
-
-    //             document.querySelector('chalImage').innerHTML = "";
-
-    //             document.querySelector('chalImage').appendChild(img);
-    //         })
-
-    //         reader.readAsDataURL(file);
-    //     }
-    // }
+    redirect() {
+      this.$router.push("/ongoing-challenges");
+    },
   },
+  setup() {
+    const popupActive = ref(false);
+    const togglePopup = () => {
+      popupActive.value = !popupActive.value;
+    }
+    return { popupActive, togglePopup };
+  }
 };
 </script>
 
