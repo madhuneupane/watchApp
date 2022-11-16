@@ -8,25 +8,9 @@
       <div class="movieSelection movieQuantity">
         <label for="quantity">Movies</label>
         <div class="movieQuantitySelection">
-          <img
-            class="icon"
-            id="minusSign"
-            src="../assets/icons/minus-sign.svg"
-            @click.prevent="decrease"
-          />
-          <input
-            v-model="quantity"
-            type="number"
-            id="quantity"
-            name="quantity"
-            min="3"
-          />
-          <img
-            class="icon"
-            id="plusSign"
-            src="../assets/icons/plus-sign.svg"
-            @click.prevent="increase"
-          />
+          <img class="icon" id="minusSign" src="../assets/icons/minus-sign.svg" @click.prevent="decrease" />
+          <input v-model="quantity" type="number" id="quantity" name="quantity" min="3" />
+          <img class="icon" id="plusSign" src="../assets/icons/plus-sign.svg" @click.prevent="increase" />
         </div>
       </div>
 
@@ -69,18 +53,10 @@
 
       <section id="recommendPageSec">
         <div class="movieList">
-          <div
-            id="movieSelected"
-            class="movieItem"
-            v-for="(movie, index) in chooseMovie"
-            :key="index"
-            :index="index"
-            @click="selectMovie"
-          >
-            <img
-              :src="'https://image.tmdb.org/t/p/w500' + movie.poster_path"
-              alt="{{ movie.original_title }} + ' Movie Poster'"
-            />
+          <div id="movieSelected" class="movieItem" v-for="(movie, index) in chooseMovie" :key="index" :index="index"
+            @click="selectMovie">
+            <img :src="'https://image.tmdb.org/t/p/w500' + movie.poster_path"
+              alt="{{ movie.original_title }} + ' Movie Poster'" />
             <!-- <span>{{ movie.original_title }}</span> -->
           </div>
         </div>
@@ -89,12 +65,10 @@
       <a href="#">Load More</a>
 
       <div class="btnContainer">
-        <NextButton
-          @click.prevent="
-            movieDesc();
-            setSelectedMoviesArray();
-          "
-        />
+        <NextButton @click.prevent="
+  movieDesc();
+setSelectedMoviesArray();
+        " />
         <BackButton @click.prevent="backMovieSelect" title="Back" />
         <!-- <PopupModal @close="togglePopup" :popupActive="popupActive">
           <div class="popupContent">
@@ -114,11 +88,7 @@
       <div class="selectedMoviesContainer">
         <p class="moviesSelectedText">Movies Selected</p>
         <ul class="selectedMoviesList">
-          <li
-            class="selectedMovieTitle"
-            v-for="movie in selectedMovies"
-            :key="movie"
-          >
+          <li class="selectedMovieTitle" v-for="movie in selectedMovies" :key="movie">
             <!-- {{ selectedMovies[movie].original_title }} -->
             {{ movie.original_title }}
             <!-- Include the call from the db -->
@@ -130,23 +100,13 @@
       <form class="challengeInfoForm">
         <div class="form_challangeName">
           <label for="chalName">Challenge Name<span class="req">*</span></label>
-          <input
-            v-model="chalName"
-            type="text"
-            class="inputArea"
-            id="chalName"
-          />
+          <input v-model="chalName" type="text" class="inputArea" id="chalName" />
           <p class="error">{{ errorMessage }}</p>
         </div>
         <div class="dateContainer">
           <div class="form_startDate">
             <label for="startDate">Start Date<span class="req">*</span></label>
-            <input
-              v-model="startDate"
-              type="date"
-              name="start"
-              id="startDate"
-            />
+            <input v-model="startDate" type="date" name="start" id="startDate" />
             <p class="error">{{ startError }}</p>
           </div>
           <div class="form_endDate">
@@ -172,33 +132,24 @@
         </div>
 
         <div class="addDescriptionContainer">
-          <img
-            src="../assets/icons/plus-button-challenge.svg"
-            @click.prevent="addDescription"
-          />
+          <img src="../assets/icons/plus-button-challenge.svg" @click.prevent="addDescription" />
           <label>Add a Challenge Description</label>
-          <textarea
-            v-model="description"
-            v-if="descriptionArea"
-            name="chalDescription"
-            id="description"
-            cols="30"
-            rows="6"
-          ></textarea>
+          <textarea v-model="description" v-if="descriptionArea" name="chalDescription" id="description" cols="30"
+            rows="6"></textarea>
         </div>
       </div>
 
       <div class="btnContainer">
-        <SaveButton @click.prevent="addChallenge(); togglePopup()" />
+        <SaveButton @click.prevent="addChallenge" />
         <BackButton @click.prevent="backSelection" title="Back" />
       </div>
-      <PopupModal @close="togglePopup" :popupActive="popupActive">
+      <SimplePopup @close="togglePopup" :popupActive="popupActive">
         <div class="popupContent">
           <h1 class="popUpHeading">Saved!</h1>
           <h3 class="popUpText">Hooray! Challenge created!<br>Watch movies to earn special badges!</h3>
-          <button @click="redirect" type="button" class="secondaryBtn">Go to Home</button>
+          <button @click="redirect" type="button" class="secondaryBtn">Go to Challenges</button>
         </div>
-      </PopupModal>
+      </SimplePopup>
     </div>
   </div>
   <FooterBar />
@@ -215,7 +166,7 @@ import FooterBar from "../components/FooterBar.vue";
 import NextButton from "../components/NextButton.vue";
 import BackButton from "../components/BackButton.vue";
 import SaveButton from "../components/SaveButton.vue";
-import PopupModal from '../components/PopupModal.vue';
+import SimplePopup from '../components/SimplePopup.vue';
 import { ref } from 'vue';
 
 
@@ -227,7 +178,7 @@ export default {
     NextButton,
     BackButton,
     SaveButton,
-    PopupModal
+    SimplePopup
   },
   data() {
     return {
@@ -341,6 +292,7 @@ export default {
         this.endError = "Please input the end date";
         return false;
       }
+      this.togglePopup();
       try {
         const uid = sessionStorage.getItem("uid");
         const docRef = addDoc(collection(db, "challenge"), {

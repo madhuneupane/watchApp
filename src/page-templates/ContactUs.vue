@@ -4,7 +4,7 @@
     <h1 class="contactUsHeading">Send us a message</h1>
     <h3 class="contactUsHeading">We'd love to hear from you!</h3>
 
-    <form class="formContact">
+    <form @submit.prevent="submitMessage()" class="formContact">
       <div>
         <p class="error">{{ fillMessage }}</p>
         <div class="form_email">
@@ -29,7 +29,7 @@
         </div>
 
         <div class="btnContainer">
-          <button type="submit" class="primaryBtn" @click.prevent="submitMessage(), togglePopup()">
+          <button type="submit" class="primaryBtn">
             Submit
           </button>
         </div>
@@ -80,12 +80,9 @@ export default {
         this.message == ""
       ) {
         this.fillMessage = "Please fill in all the information";
+      } else {
+        this.togglePopup();
       }
-      this.email = "";
-      this.fName = "";
-      this.lName = "";
-      this.subject = "";
-      this.message = "";
     },
     redirect() {
       this.$router.push("/");

@@ -12,7 +12,6 @@ import CreateChallenge from "./page-templates/CreateChallenge.vue";
 import AboutUs from "./page-templates/AboutUs.vue";
 import AdminChallenge from "./page-templates/AdminChallenge.vue";
 import PageNotFound from "./page-templates/PageNotFound.vue";
-import JoinSelection from "./page-templates/JoinSelection.vue";
 import OfflinePage from "./page-templates/OfflinePage.vue";
 import PastChallenge from "./page-templates/PastChallenge.vue";
 import ContactUs from "./page-templates/ContactUs.vue";
@@ -20,10 +19,14 @@ import ChallengeReview from "./page-templates/ChallengeReview.vue";
 
 // Test page just for testing things
 import TestPage from "./TEST/TestPage.vue";
+<<<<<<< HEAD
 // import ProfileSettings from "./TEST/ProfileSettings.vue";
 
 // Additional pages that will be consolidated into a single one.
 
+=======
+/* import ProfileSettings from "./TEST/ProfileSettings.vue"; */
+>>>>>>> 0eeb97d4bdd891aff64a73d2f9d13d77c740a66c
 
 const routes = [
   {
@@ -91,12 +94,6 @@ const routes = [
     path: "/:pathMatch(.*)*",
     component: PageNotFound,
   },
-
-  {
-    name: "JoinSelection",
-    path: "/join-selection",
-    component: JoinSelection,
-  },
   {
     name: "OfflinePage",
     path: "/offline-page",
@@ -125,11 +122,19 @@ const routes = [
     component: TestPage,
   },
 
+<<<<<<< HEAD
   // {
   //   name: "ProfileSettings",
   //   path: "/profile-settings",
   //   component: ProfileSettings,
   // },
+=======
+  /* {
+    name: "ProfileSettings",
+    path: "/profile-settings",
+    component: ProfileSettings,
+  }, */
+>>>>>>> 0eeb97d4bdd891aff64a73d2f9d13d77c740a66c
 
 
 
