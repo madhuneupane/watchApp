@@ -143,13 +143,13 @@ setSelectedMoviesArray();
         <SaveButton @click.prevent="addChallenge" />
         <BackButton @click.prevent="backSelection" title="Back" />
       </div>
-      <PopupModal @close="togglePopup" :popupActive="popupActive">
+      <SimplePopup @close="togglePopup" :popupActive="popupActive">
         <div class="popupContent">
           <h1 class="popUpHeading">Saved!</h1>
           <h3 class="popUpText">Hooray! Challenge created!<br>Watch movies to earn special badges!</h3>
           <button @click="redirect" type="button" class="secondaryBtn">Go to Challenges</button>
         </div>
-      </PopupModal>
+      </SimplePopup>
     </div>
   </div>
   <FooterBar />
@@ -166,7 +166,7 @@ import FooterBar from "../components/FooterBar.vue";
 import NextButton from "../components/NextButton.vue";
 import BackButton from "../components/BackButton.vue";
 import SaveButton from "../components/SaveButton.vue";
-import PopupModal from '../components/PopupModal.vue';
+import SimplePopup from '../components/SimplePopup.vue';
 import { ref } from 'vue';
 
 
@@ -178,7 +178,7 @@ export default {
     NextButton,
     BackButton,
     SaveButton,
-    PopupModal
+    SimplePopup
   },
   data() {
     return {
