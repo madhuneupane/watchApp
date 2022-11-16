@@ -7,22 +7,12 @@
       <form @submit.prevent="doLogin" class="formLogin">
         <div class="emailContainer">
           <label>Email Address <span class="req">*</span></label>
-          <input
-            v-model="email"
-            type="email"
-            class="inputArea"
-            placeholder="email@gmail.com"
-          />
+          <input v-model="email" type="email" class="inputArea" placeholder="email@gmail.com" />
           <p class="error">{{ errorMessage }}</p>
         </div>
         <div class="passwordContainer">
           <label>Password <span class="req">*</span></label>
-          <input
-            class="inputArea"
-            v-model="password"
-            type="password"
-            placeholder="***********"
-          />
+          <input class="inputArea" v-model="password" type="password" placeholder="***********" />
           <p class="error">{{ pwdError }}</p>
         </div>
         <button type="submit" class="primaryBtn">Login</button>
@@ -32,12 +22,8 @@
         Create Account
       </button>
       <div class="linksContainer">
-        <router-link to="/reset-password" class="link"
-          >Forgot Password? Click Here.</router-link
-        >
-        <router-link to="/forgot-email" class="link"
-          >Forgot Email? Click Here.</router-link
-        >
+        <router-link to="/reset-password" class="link">Forgot Password? Click Here.</router-link>
+        <router-link to="/forgot-email" class="link">Forgot Email? Click Here.</router-link>
       </div>
     </div>
   </div>
@@ -57,7 +43,7 @@ export default {
   name: "LoginPage",
   components: {
     NavigationBar,
-    FooterBar,
+    FooterBar
   },
   data() {
     return {
@@ -66,7 +52,6 @@ export default {
       errorMessage: "",
       pwdError: "",
       fillMessage: "",
-      userID: "",
     };
   },
 
@@ -90,9 +75,8 @@ export default {
         signInWithEmailAndPassword(auth, this.email, this.password)
           .then((userCredential) => {
             const uid = userCredential.user.uid;
-            this.userID = uid;
             alert("Login Successfully");
-            //console.log(uid);
+            console.log(uid);
             sessionStorage.setItem("uid", uid);
             this.$router.push("/");
           })
@@ -102,12 +86,11 @@ export default {
             alert("Sorry, username and password missmatch");
             console.log(errorCode);
             console.log(errorMessage);
-          });
-
+          })
         this.email = "";
         this.password = "";
       }
-    },
+    }
     // Working
   },
 };

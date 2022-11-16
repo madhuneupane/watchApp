@@ -19,14 +19,14 @@ import ChallengeReview from "./page-templates/ChallengeReview.vue";
 
 // Test page just for testing things
 import TestPage from "./TEST/TestPage.vue";
-<<<<<<< HEAD
+
 // import ProfileSettings from "./TEST/ProfileSettings.vue";
+
 
 // Additional pages that will be consolidated into a single one.
 
-=======
 /* import ProfileSettings from "./TEST/ProfileSettings.vue"; */
->>>>>>> 0eeb97d4bdd891aff64a73d2f9d13d77c740a66c
+
 
 const routes = [
   {
@@ -122,19 +122,19 @@ const routes = [
     component: TestPage,
   },
 
-<<<<<<< HEAD
+
   // {
   //   name: "ProfileSettings",
   //   path: "/profile-settings",
   //   component: ProfileSettings,
   // },
-=======
+
   /* {
     name: "ProfileSettings",
     path: "/profile-settings",
     component: ProfileSettings,
   }, */
->>>>>>> 0eeb97d4bdd891aff64a73d2f9d13d77c740a66c
+
 
 
 

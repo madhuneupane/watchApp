@@ -32,21 +32,7 @@
     <BackButton title="Back to Challenge" @click.prevent="backChal" />
   </section>
 
-  <div v-if="moviePart">
-    <img :src="chalImage" alt="not displayed" style="height: 300px" />
-    <h2>{{ chalName }}</h2>
-    <h3>{{ startDate }}---{{ endDate }}</h3>
-    <p>
-      {{ description }}
-    </p>
-    <div v-for="(movies, i) in movie" :key="i">
-      <img
-        :src="'https://image.tmdb.org/t/p/w500' + movie[i].poster_path"
-        @click.prevent="movieClicked(movie[i])"
-      />
-      <h3>{{ movie[i].title }}</h3>
-    </div>
-  </div>
+  <div v-if="moviePart"></div>
   <FooterBar />
 </template>
 
@@ -71,12 +57,6 @@ export default {
       slides: [],
       moviePart: false,
       firstPart: true,
-      chalImage: "",
-      movie: [],
-      chalName: "",
-      startDate: "",
-      endDate: "",
-      description: "",
     };
   },
 
@@ -87,41 +67,20 @@ export default {
 
       const userId = doc.data().uid;
       if (userId == uid) {
-        sessionStorage.setItem("chalName", doc.data().chalName);
         let newChallenge = {
           title: doc.data().chalName,
           image: doc.data().image,
           content: doc.data().description,
           endDate: doc.data().endDate,
-          selectedMovies: doc.data().selectedMovies,
-          startDate: doc.data().startDate,
         };
         this.slides.push(newChallenge);
       }
     });
   },
   methods: {
-    movieClicked(movieArray) {
-      // let movieData = movieArray.title;
-      // console.log(movieData);
-      sessionStorage.setItem("movieName", movieArray.title);
-      sessionStorage.setItem("movieRelease", movieArray.release_date);
-      sessionStorage.setItem("movieID", movieArray.genre_ids);
-      sessionStorage.setItem("movieRating", movieArray.vote_average);
-      sessionStorage.setItem("movieOverview", movieArray.overview);
-
-      this.$router.push("/challenge-review");
-    },
     challengeClicked(index) {
       this.firstPart = false;
       this.moviePart = true;
-      this.chalImage = this.slides[index].image;
-      this.chalName = this.slides[index].title;
-      this.startDate = this.slides[index].startDate;
-      this.endDate = this.slides[index].endDate;
-      this.description = this.slides[index].content;
-      console.log(this.description);
-      this.movie = this.slides[index].selectedMovies;
       console.log(index);
     },
     createChallenge() {
