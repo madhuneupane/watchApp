@@ -32,7 +32,7 @@ export default {
       slides: [],
       i: 0,
       breakpoints: {
-        1023: { visibleSlides: 2, slideMultiple: 2, slideRatio: 1 / 3 },
+        1023: { visibleSlides: 2, slideMultiple: 2, slideRatio: 1 / 3, arrows: false },
       },
       carouselKey: false,
     };
