@@ -74,6 +74,12 @@ npm install vue-router
 npm install --save axios
 ```
 
+### Readme UPDATE - Vue Star Ratings
+To be able to do the rating more similar with the mockups, will be necessary to install the Vue library for stars rating. Inside the project, please run this command on the VS Code terminal (no additional requirements).
+```
+npm install vue3-star-ratings --save
+```
+
 ### 10 - Run the serve
 ```
 npm run serve
