@@ -51,7 +51,10 @@
         <!-- <router-link to="/create-account" @click.prevent="displayImage"
           >Add your profile photo</router-link
         > -->
-        <p style="text-decoration: underline" @click.prevent="clickImage">
+        <p
+          style="text-decoration: underline; cursor: default"
+          @click.prevent="clickImage"
+        >
           Add your profile photo
         </p>
       </div>
