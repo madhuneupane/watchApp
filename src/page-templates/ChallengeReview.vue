@@ -2,6 +2,7 @@
   <NavigationBar />
   <!-- <img src="https://images.pexels.com/photos/10313368/pexels-photo-10313368.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
         alt="testing"> -->
+  <img :src="'https://image.tmdb.org/t/p/w500' + moviePoster" />
   <h1>{{ movieName }}</h1>
   <h3>{{ movieID }}</h3>
   <p><strong>Release Date: </strong>{{ movieRelease }}</p>
@@ -79,6 +80,7 @@ export default {
       movieRating: "",
       movieOverview: "",
       chalID: "",
+      moviePoster: "",
     };
   },
   setup() {
@@ -94,6 +96,8 @@ export default {
     this.movieRelease = sessionStorage.getItem("movieRelease");
     this.movieRating = sessionStorage.getItem("movieRating");
     this.movieOverview = sessionStorage.getItem("movieOverview");
+    this.moviePoster = sessionStorage.getItem("moviePoster");
+    console.log(this.moviePoster);
 
     // console.log(test);
     // console.log(this.movieArray);

@@ -109,6 +109,7 @@ export default {
       sessionStorage.setItem("movieID", movieArray.genre_ids);
       sessionStorage.setItem("movieRating", movieArray.vote_average);
       sessionStorage.setItem("movieOverview", movieArray.overview);
+      sessionStorage.setItem("moviePoster", movieArray.poster_path);
 
       this.$router.push("/challenge-review");
     },
