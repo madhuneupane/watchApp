@@ -4,32 +4,24 @@
     <h1>Ongoing Challenges</h1>
     <h2>Keep up! You are almost there</h2>
     <div class="chalList">
-      <div
-        class="chalInfo"
-        v-for="(challenge, index) in chalLoading"
-        :key="index"
-      >
+      <div class="chalInfo" v-for="(challenge, index) in chalLoading" :key="index">
         {{ challenge.title }}
-        <img
-          :src="challenge.image"
-          id="chalImage"
-          @click.prevent="challengeClicked(index)"
-        />
+        <img :src="challenge.image" id="chalImage" @click.prevent="challengeClicked(index)" />
         <!-- <h2 id="chalName">TEST</h2> -->
         <p id="ending">Ending on {{ challenge.endDate }}</p>
         <p id="qntWatched">Watched # out of # movies!</p>
         <!-- Implement bar -->
       </div>
       <div class="card-gradient">
-        <img
-          src="../assets/icons/plus-button-challenge.svg"
-          @click.prevent="createChallenge"
-        />
+        <img src="../assets/icons/plus-button-challenge.svg" @click.prevent="createChallenge" />
         <h2>Create Your Own Challenge!</h2>
       </div>
-      <button @click.prevent="loadMore">Load More</button>
+      <a class="seeMoreBtn" @click.prevent="loadMore">Load More</a>
     </div>
-    <BackButton title="Back to Challenge" @click.prevent="backChal" />
+    <div class="btnContainer">
+      <BackButton title="Back to Challenge" @click.prevent="backChal" />
+    </div>
+
   </section>
 
   <div v-if="moviePart">
@@ -40,10 +32,7 @@
       {{ description }}
     </p>
     <div v-for="(movies, i) in movie" :key="i">
-      <img
-        :src="'https://image.tmdb.org/t/p/w500' + movie[i].poster_path"
-        @click.prevent="movieClicked(movie[i])"
-      />
+      <img :src="'https://image.tmdb.org/t/p/w500' + movie[i].poster_path" @click.prevent="movieClicked(movie[i])" />
       <h3>{{ movie[i].title }}</h3>
     </div>
   </div>
@@ -109,6 +98,7 @@ export default {
       sessionStorage.setItem("movieID", movieArray.genre_ids);
       sessionStorage.setItem("movieRating", movieArray.vote_average);
       sessionStorage.setItem("movieOverview", movieArray.overview);
+      sessionStorage.setItem("moviePoster", movieArray.poster_path);
 
       this.$router.push("/challenge-review");
     },
