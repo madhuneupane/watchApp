@@ -1,6 +1,8 @@
 <template>
     <NavigationBar />
-    <h1 id="chalTitle">Challenges</h1>
+    <div class="headContainer">
+        <h1>Challenges</h1>
+    </div>
     <OngoingCarousel />
     <AdminCarousel />
     <PastCarousel />
