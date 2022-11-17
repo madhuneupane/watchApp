@@ -1,11 +1,13 @@
 <template>
     <footer id="footer">
-        <img src="../assets/icons/whitelogo.svg" alt="watchapp">
-        <h4>The Seven Knights</h4>
-        <router-link to="/contact-us">Contact Us</router-link>
-        <router-link to="/about-us">About Us</router-link>
-        <span>100 W 49th Ave, Vancouver, BC V5Y 2Z6</span>
-        <span>The Seven Knights. All rights reserved</span>
+        <img id="watchappLogo" src="../assets/icons/whitelogo.svg" alt="watchapp">
+        <p id="sevenKnights">The Seven Knights</p>
+        <router-link id="linksAbout" to="/about-us">About Us</router-link>
+        <router-link id="linksContact" to="/contact-us">Contact Us</router-link>
+        <div class="addressAndReserved">
+            <span id="address">100 W 49th Ave, Vancouver, BC V5Y 2Z6</span>
+            <span id="reserved">All rights reserved</span>
+        </div>
     </footer>
 </template>
 
