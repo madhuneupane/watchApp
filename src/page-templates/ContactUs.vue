@@ -33,13 +33,13 @@
             Submit
           </button>
         </div>
-        <PopupModal @close="togglePopup" :popupActive="popupActive">
+        <SimplePopup @close="togglePopup" :popupActive="popupActive">
           <div class="popupContent">
             <h1>Thank you for<br>your message!</h1>
             <p>We'll be contacting you shortly to discuss your inquire</p>
             <button @click="redirect" type="button" class="secondaryBtn">Go to Home</button>
           </div>
-        </PopupModal>
+        </SimplePopup>
       </div>
     </form>
   </div>
@@ -49,15 +49,15 @@
 <script>
 import NavigationBar from '../components/NavigationBar.vue';
 import FooterBar from '../components/FooterBar.vue';
-import PopupModal from '../components/PopupModal.vue';
 import { ref } from 'vue';
+import SimplePopup from '@/components/SimplePopup.vue';
 
 export default {
   name: "ContactUs",
   components: {
     NavigationBar,
     FooterBar,
-    PopupModal
+    SimplePopup
   },
   data() {
     return {
