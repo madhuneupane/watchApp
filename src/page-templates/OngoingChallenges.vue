@@ -47,7 +47,7 @@
     <div v-for="(movies, i) in movie" :key="i">
       <img
         :src="'https://image.tmdb.org/t/p/w500' + movie[i].poster_path"
-        @click.prevent="movieClicked(movie[i])"
+        @click.prevent="movieClicked(movie[i], i)"
       />
       <h3>{{ movie[i].title }}</h3>
       <h3 v-if="movie[i].review">Congrats you watched this movie</h3>

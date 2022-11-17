@@ -122,7 +122,7 @@ export default {
         }
       }
     });
-
+    // console.log(i);
     //console.log(this.movieList[i]);
     // this.movieList[i].review = "hello there";
     // console.log(this.movieList[i]);
@@ -136,9 +136,11 @@ export default {
         this.fillMessage = "Don't forget to write your review!";
       } else {
         let i = sessionStorage.getItem("index");
+
         this.movieList[i].review = this.userReview;
         this.movieList[i].rating = this.userRating;
         let chalName = sessionStorage.getItem("chalName");
+
         const test = await getDocs(
           query(
             collection(db, "challenge"),
@@ -160,7 +162,7 @@ export default {
       this.$router.push("/ongoing-challenges");
     },
     redirect() {
-      this.$router.push("/");
+      this.$router.push("/ongoing-challenges");
     },
   },
 };
