@@ -1,4 +1,6 @@
-.primaryBtn, .secondaryBtn, .tertiaryBtn {
+.primaryBtn,
+.secondaryBtn,
+.tertiaryBtn {
     position: relative;
     border-radius: $btn_radius;
     border: none;
@@ -13,7 +15,7 @@
         width: fit-content;
         padding: 0.875rem 2rem;
 
-        &:hover{
+        &:hover {
             background: linear-gradient(91.25deg, $blue 0%, $purple 51.47%, $orange 100%);
             color: $white;
         }
@@ -44,5 +46,19 @@
 
     &::after {
         content: "Create Challenge";
+    }
+}
+
+.seeMoreBtn {
+    text-decoration: none;
+    padding: 0;
+    margin: 0;
+    font-size: 14px;
+}
+
+.btnContainer {
+
+    @media only screen and (min-width: $media-desktop) {
+        width: 30%;
     }
 }

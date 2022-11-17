@@ -9,7 +9,7 @@
 }
 
 //First Part Start
-#createAccount .fPart{
+#createAccount .fPart {
     display: flex;
     flex-direction: column;
 
@@ -48,7 +48,8 @@
     width: 100%;
 }
 
-#createAccount .formContainer .nameContainer .fNameContainer, .lNameContainer{
+#createAccount .formContainer .nameContainer .fNameContainer,
+.lNameContainer {
     display: flex;
     flex-direction: column;
     width: 48%;
@@ -65,6 +66,7 @@
     align-self: center;
     margin-top: $standardSpacement;
 }
+
 //First Part End
 
 //Second Part Start
@@ -86,6 +88,11 @@
     margin: $standardSpacement 0;
 }
 
+#createAccount .profilePicSectionFirst p {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
 #createAccount .profilePicSectionFirst .profilePictureContainer {
     display: flex;
     justify-content: center;
@@ -102,7 +109,11 @@
 }
 
 #createAccount .profilePicSectionFirst .profilePictureContainer .capturedPicture {
-    width: fit-content;
+    border-radius: 50%;
+    height: 8rem;
+    width: 8rem;
+    object-fit: cover;
+    object-position: 50% 25%;
 }
 
 #createAccount .profilePicSectionSecond {
@@ -138,17 +149,18 @@
     margin-bottom: $standardSpacement;
 }
 
-#createAccount .nicknameContainer  input {
+#createAccount .nicknameContainer input {
     @media only screen and (min-width: $media-desktop) {
         width: 100%;
     }
 }
 
-#createAccount .primaryBtn{
+#createAccount .primaryBtn {
     @media only screen and (min-width: $media-desktop) {
         width: 30%;
     }
 }
+
 //Second Part End
 
 //Genre Part Start
