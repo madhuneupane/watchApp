@@ -1,9 +1,63 @@
-.chalInfo #chalImage {
-    width: 15rem;
-    border-radius: 5px;
+#ongoingChalSec {
+    padding: $standardSpacement;
 }
 
-.chalInfo {
+#ongoingChalSec .challenge {
+    width: 15rem;
+    height: 20rem;
+    border-radius: $poster_radius;
+    margin-right: $standardSpacement*2;
+    background-size: cover;
     display: flex;
     flex-direction: column;
+    justify-content: flex-start;
+    position: relative;
+    cursor: pointer;
+}
+
+#ongoingChalSec .challenge .chalDetailsContainer {
+    position: absolute;
+    bottom: 0;
+    padding: $standardSpacement;
+    display: flex;
+    flex-direction: column;
+}
+
+#ongoingChalSec .challenge .chalDetailsContainer h3,
+span {
+    text-align: unset !important;
+}
+
+#ongoingChalSec .challenge .chalDetailsContainer h3 {
+    font-weight: bold;
+    font-size: 1.125rem;
+}
+
+#ongoingChalSec .challenge .chalDetailsContainer span {
+    font-size: 1rem;
+}
+
+#ongoingChalSec .chalList {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    /* justify-content: space-between; */
+}
+
+#ongoingChalSec .createChalCard {
+    background: linear-gradient(91.25deg, $blue 0%, $purple 51.47%, $orange 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: $standardSpacement;
+    width: 15rem;
+    height: 20rem;
+    border-radius: $poster_radius;
+    cursor: pointer;
+}
+
+#ongoingChalSec .primaryBtn {
+    font-size: 1rem;
+    padding: .75rem;
 }

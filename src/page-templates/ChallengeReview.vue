@@ -14,17 +14,31 @@
 
   <label>Rating<span class="req">*</span></label>
   <!-- <input v-model="userRating" type="number" name="userRating" id="userRating" /> -->
-  <vue3starRatings v-model="userRating" class="ratingStars" starColor="#ffffff" starSize="25" controlBg="#00002A" />
+  <vue3starRatings
+    v-model="userRating"
+    class="ratingStars"
+    starColor="#ffffff"
+    starSize="25"
+    controlBg="#00002A"
+  />
 
   <label for="userReview">Review<span class="req">*</span></label>
-  <textarea v-model="userReview" id="userReview" cols="30" rows="10" placeholder="Leave your review here!"></textarea>
+  <textarea
+    v-model="userReview"
+    id="userReview"
+    cols="30"
+    rows="10"
+    placeholder="Leave your review here!"
+  ></textarea>
 
   <p class="error">{{ fillMessage }}</p>
 
-  <SaveButton @click.prevent="
-  saveReview();
-togglePopup();
-  " />
+  <SaveButton
+    @click.prevent="
+      saveReview();
+      togglePopup();
+    "
+  />
   <BackButton @click.prevent="goBack" title="Back" />
   <SimplePopup @close="togglePopup" :popupActive="popupActive">
     <div class="popupContent">
@@ -64,7 +78,7 @@ export default {
     SaveButton,
     BackButton,
     vue3starRatings,
-    SimplePopup
+    SimplePopup,
   },
   data() {
     return {
@@ -78,6 +92,7 @@ export default {
       movieOverview: "",
       chalID: "",
       moviePoster: "",
+      movieList: [],
     };
   },
   setup() {
@@ -87,15 +102,30 @@ export default {
     };
     return { popupActive, togglePopup };
   },
-  mounted() {
+  async mounted() {
     this.movieName = sessionStorage.getItem("movieName");
     this.movieID = sessionStorage.getItem("movieID");
     this.movieRelease = sessionStorage.getItem("movieRelease");
     this.movieRating = sessionStorage.getItem("movieRating");
     this.movieOverview = sessionStorage.getItem("movieOverview");
     this.moviePoster = sessionStorage.getItem("moviePoster");
-    console.log(this.moviePoster);
+    const uid = sessionStorage.getItem("uid");
+    let chalName = sessionStorage.getItem("chalName");
+    console.log(chalName);
+    const querySnap = await getDocs(query(collection(db, "challenge")));
+    querySnap.forEach((doc) => {
+      const userId = doc.data().uid;
+      if (userId == uid) {
+        if (chalName == doc.data().chalName) {
+          // console.log(doc.data().chalName);
+          this.movieList = doc.data().selectedMovies;
+        }
+      }
+    });
 
+    //console.log(this.movieList[i]);
+    // this.movieList[i].review = "hello there";
+    // console.log(this.movieList[i]);
     // console.log(test);
     // console.log(this.movieArray);
   },
@@ -105,9 +135,15 @@ export default {
       if (this.userRating == "" || this.userReview == "") {
         this.fillMessage = "Don't forget to write your review!";
       } else {
+        let i = sessionStorage.getItem("index");
+        this.movieList[i].review = this.userReview;
+        this.movieList[i].rating = this.userRating;
         let chalName = sessionStorage.getItem("chalName");
         const test = await getDocs(
-          query(collection(db, "challenge"), where("chalName", "==", chalName, true))
+          query(
+            collection(db, "challenge"),
+            where("chalName", "==", chalName, true)
+          )
         );
         test.forEach((doc) => {
           this.chalID = doc.id;
@@ -115,8 +151,7 @@ export default {
         });
         //let review = this.movieName + "userReview";
         updateDoc(doc(db, "challenge", this.chalID), {
-          userReview: this.userReview,
-          userRating: this.userRating,
+          selectedMovies: this.movieList,
         });
       }
       // We need to update db using the challenge title

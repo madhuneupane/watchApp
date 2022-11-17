@@ -4,24 +4,37 @@
     <h1>Ongoing Challenges</h1>
     <h2>Keep up! You are almost there</h2>
     <div class="chalList">
-      <div class="chalInfo" v-for="(challenge, index) in chalLoading" :key="index">
-        {{ challenge.title }}
-        <img :src="challenge.image" id="chalImage" @click.prevent="challengeClicked(index)" />
-        <!-- <h2 id="chalName">TEST</h2> -->
-        <p id="ending">Ending on {{ challenge.endDate }}</p>
-        <p id="qntWatched">Watched # out of # movies!</p>
+      <div
+        class="chalInfo"
+        v-for="(challenge, index) in chalLoading"
+        :key="index"
+      >
+        <div
+          class="challenge"
+          v-bind:style="{ backgroundImage: 'url(' + challenge.image + ')' }"
+          @click.prevent="challengeClicked(index)"
+        >
+          <div class="chalDetailsContainer">
+            <h3>{{ challenge.title }}</h3>
+            <span id="ending">Ending on {{ challenge.endDate }}</span>
+            <span id="qntWatched"
+              >Watched # out of
+              {{ challenge.selectedMovies.length }} movies!</span
+            >
+          </div>
+        </div>
         <!-- Implement bar -->
       </div>
-      <div class="card-gradient">
-        <img src="../assets/icons/plus-button-challenge.svg" @click.prevent="createChallenge" />
-        <h2>Create Your Own Challenge!</h2>
+      <div class="createChalCard" @click.prevent="createChallenge">
+        <img src="../assets/icons/plus-button-challenge.svg" />
+        <h3>Create Your Own Challenge!</h3>
+        <button class="primaryBtn">Create a Challenge</button>
       </div>
-      <a class="seeMoreBtn" @click.prevent="loadMore">Load More</a>
     </div>
+    <a class="seeMoreBtn" @click.prevent="loadMore">Load More</a>
     <div class="btnContainer">
       <BackButton title="Back to Challenge" @click.prevent="backChal" />
     </div>
-
   </section>
 
   <div v-if="moviePart">
@@ -32,13 +45,16 @@
       {{ description }}
     </p>
     <div v-for="(movies, i) in movie" :key="i">
-      <img :src="'https://image.tmdb.org/t/p/w500' + movie[i].poster_path" @click.prevent="movieClicked(movie[i])" />
+      <img
+        :src="'https://image.tmdb.org/t/p/w500' + movie[i].poster_path"
+        @click.prevent="movieClicked(movie[i])"
+      />
       <h3>{{ movie[i].title }}</h3>
+      <h3 v-if="movie[i].review">Congrats you watched this movie</h3>
     </div>
   </div>
   <FooterBar />
 </template>
-
 <script>
 import NavigationBar from "../components/NavigationBar.vue";
 import FooterBar from "../components/FooterBar.vue";
@@ -76,7 +92,6 @@ export default {
 
       const userId = doc.data().uid;
       if (userId == uid) {
-        sessionStorage.setItem("chalName", doc.data().chalName);
         let newChallenge = {
           title: doc.data().chalName,
           image: doc.data().image,
@@ -90,7 +105,7 @@ export default {
     });
   },
   methods: {
-    movieClicked(movieArray) {
+    movieClicked(movieArray, j) {
       // let movieData = movieArray.title;
       // console.log(movieData);
       sessionStorage.setItem("movieName", movieArray.title);
@@ -99,6 +114,7 @@ export default {
       sessionStorage.setItem("movieRating", movieArray.vote_average);
       sessionStorage.setItem("movieOverview", movieArray.overview);
       sessionStorage.setItem("moviePoster", movieArray.poster_path);
+      sessionStorage.setItem("index", j);
 
       this.$router.push("/challenge-review");
     },
@@ -107,6 +123,7 @@ export default {
       this.moviePart = true;
       this.chalImage = this.slides[index].image;
       this.chalName = this.slides[index].title;
+      sessionStorage.setItem("chalName", this.chalName);
       this.startDate = this.slides[index].startDate;
       this.endDate = this.slides[index].endDate;
       this.description = this.slides[index].content;
