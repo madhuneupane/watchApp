@@ -5,28 +5,10 @@
         <h2>Keep Up! You are almost there!</h2>
         <a class="seeMoreBtn" @click.prevent="gotoOngoingPage">See All</a>
       </div>
-      <vueper-slides
-        :arrows="false"
-        :infinite="false"
-        :bullets="false"
-        :visible-slides="4"
-        :slide-multiple="2"
-        :gap="2"
-        :slide-ratio="1 / 3.5"
-        :dragging-distance="300"
-        :breakpoints="breakpoints"
-      >
-        <vueper-slide
-          v-for="movie in slides"
-          :key="movie"
-          :image="movie.image"
-          :title="movie.title"
-        />
-        <div
-          class="card-gradient"
-          @click.prevent="createChallenge"
-          style="cursor: pointer"
-        >
+      <vueper-slides :arrows="true" :infinite="false" :bullets="true" :visible-slides="4" :slide-multiple="2" :gap="2"
+        :slide-ratio="1 / 3.5" :dragging-distance="300" :breakpoints="breakpoints" autoplay :duration="3000">
+        <vueper-slide v-for="movie in slides" :key="movie" :image="movie.image" :title="movie.title" />
+        <div class="card-gradient" @click.prevent="createChallenge" style="cursor: pointer">
           <img src="../assets/icons/plus-button-challenge.svg" />
           <h2>Create Your Own Challenge!</h2>
         </div>
