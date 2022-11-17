@@ -10,10 +10,6 @@
 #address,
 #reserved {
     font-size: 12px;
-}
-
-.addressAndReserved {
-    margin-top: 15px;
     display: flex;
     flex-direction: column;
     text-align: center;
@@ -30,14 +26,14 @@
         justify-content: space-between;
         margin: auto;
         padding: 1.2rem 0;
+        padding-bottom: 2.5rem;
     }
 
     #sevenKnights {
         position: absolute;
         bottom: 0;
         margin-left: 2rem;
-        // margin-bottom: .5rem;
-        // margin-top: 1rem;
+        padding-bottom: 1rem;
     }
 
     // #linksAbout {
@@ -54,6 +50,7 @@
         right: 0;
         margin-right: 2rem;
         font-size: 1.125rem;
+        padding-bottom: 1rem;
     }
 
     #watchappLogo {
