@@ -7,37 +7,27 @@
       <form @submit.prevent="doLogin" class="formLogin">
         <div class="emailContainer">
           <label>Email Address <span class="req">*</span></label>
-          <input
-            v-model="email"
-            type="email"
-            class="inputArea"
-            placeholder="email@gmail.com"
-          />
+          <input v-model="email" type="email" class="inputArea" placeholder="email@gmail.com" />
           <p class="error">{{ errorMessage }}</p>
         </div>
         <div class="passwordContainer">
           <label>Password <span class="req">*</span></label>
-          <input
-            class="inputArea"
-            v-model="password"
-            type="password"
-            placeholder="***********"
-          />
+          <input class="inputArea" v-model="password" type="password" placeholder="***********" />
           <p class="error">{{ pwdError }}</p>
         </div>
         <button type="submit" class="primaryBtn">Login</button>
+        <SimplePopup @close="togglePopup" :popupActive="popupActive">
+          <h1>Login Successful!</h1>
+          <!-- <h3>Welcome {{ sessionStorage.getItem("nickname") }}</h3> -->
+        </SimplePopup>
         <!-- @click.prevent="addUser" -->
       </form>
       <button type="submit" class="secondaryBtn" @click.prevent="gotoAccount">
         Create Account
       </button>
       <div class="linksContainer">
-        <router-link to="/reset-password" class="link"
-          >Forgot Password? Click Here.</router-link
-        >
-        <router-link to="/forgot-email" class="link"
-          >Forgot Email? Click Here.</router-link
-        >
+        <router-link to="/reset-password" class="link">Forgot Password? Click Here.</router-link>
+        <router-link to="/forgot-email" class="link">Forgot Email? Click Here.</router-link>
       </div>
     </div>
   </div>
@@ -49,15 +39,18 @@
 // import { query, collection, getDocs } from "firebase/firestore";
 import { auth } from "../firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
+import { ref } from 'vue';
 
 import NavigationBar from "../components/NavigationBar.vue";
 import FooterBar from "../components/FooterBar.vue";
+import SimplePopup from "@/components/SimplePopup.vue";
 
 export default {
   name: "LoginPage",
   components: {
     NavigationBar,
     FooterBar,
+    SimplePopup
   },
   data() {
     return {
@@ -67,6 +60,7 @@ export default {
       pwdError: "",
       fillMessage: "",
       userID: "",
+      nickname: ""
     };
   },
 
@@ -91,7 +85,7 @@ export default {
           .then((userCredential) => {
             const uid = userCredential.user.uid;
             this.userID = uid;
-            alert("Login Successfully");
+            // alert("Login Successfully");
             //console.log(uid);
             sessionStorage.setItem("uid", uid);
             this.$router.push("/");
@@ -103,12 +97,18 @@ export default {
             console.log(errorCode);
             console.log(errorMessage);
           });
-
+        this.togglePopup();
         this.email = "";
         this.password = "";
       }
     },
-    // Working
+    setup() {
+      const popupActive = ref(false);
+      const togglePopup = () => {
+        popupActive.value = !popupActive.value;
+      }
+      return { popupActive, togglePopup };
+    }
   },
 };
 </script>

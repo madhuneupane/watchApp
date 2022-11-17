@@ -45,6 +45,7 @@ export default {
       const userId = doc.data().uid;
       if (userId == uid) {
         this.imageSource = doc.data().profilePicUrl;
+        sessionStorage.setItem("nickname", doc.data().nickname);
       }
     });
   },
