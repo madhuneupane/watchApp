@@ -4,10 +4,8 @@
         <p id="sevenKnights">The Seven Knights</p>
         <router-link id="linksAbout" to="/about-us">About Us</router-link>
         <router-link id="linksContact" to="/contact-us">Contact Us</router-link>
-        <div class="addressAndReserved">
-            <span id="address">100 W 49th Ave, Vancouver, BC V5Y 2Z6</span>
-            <span id="reserved">All rights reserved</span>
-        </div>
+        <span id="address">100 W 49th Ave, Vancouver, BC V5Y 2Z6</span>
+        <span id="reserved">All rights reserved</span>
     </footer>
 </template>
 
