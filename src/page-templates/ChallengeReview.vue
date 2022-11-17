@@ -2,6 +2,7 @@
   <NavigationBar />
   <!-- <img src="https://images.pexels.com/photos/10313368/pexels-photo-10313368.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
         alt="testing"> -->
+  <img :src="'https://image.tmdb.org/t/p/w500' + this.moviePoster" alt="">
   <h1>{{ movieName }}</h1>
   <h3>{{ movieID }}</h3>
   <p><strong>Release Date: </strong>{{ movieRelease }}</p>
@@ -11,41 +12,33 @@
   <hr />
   <h3>What do you think of this movie?</h3>
 
-  <label for="userRating">Rating<span class="req">*</span></label>
-  <input v-model="userRating" type="number" name="userRating" id="userRating" />
+  <label>Rating<span class="req">*</span></label>
+  <!-- <input v-model="userRating" type="number" name="userRating" id="userRating" /> -->
+  <vue3starRatings v-model="userRating" class="ratingStars" starColor="#ffffff" starSize="25" controlBg="#00002A" />
 
   <label for="userReview">Review<span class="req">*</span></label>
-  <textarea
-    v-model="userReview"
-    id="userReview"
-    cols="30"
-    rows="10"
-    placeholder="Leave your review here!"
-  ></textarea>
+  <textarea v-model="userReview" id="userReview" cols="30" rows="10" placeholder="Leave your review here!"></textarea>
 
   <p class="error">{{ fillMessage }}</p>
 
-  <SaveButton
-    @click.prevent="
-      saveReview();
-      togglePopup();
-    "
-  />
+  <SaveButton @click.prevent="
+  saveReview();
+togglePopup();
+  " />
   <BackButton @click.prevent="goBack" title="Back" />
-  <PopupModal @close="togglePopup" :popupActive="popupActive">
+  <SimplePopup @close="togglePopup" :popupActive="popupActive">
     <div class="popupContent">
       <h1>Your review has been saved!</h1>
       <p>For retrieving this information,<br />please visit your profile</p>
       <button @click="redirect" type="button" class="secondaryBtn">Done</button>
     </div>
-  </PopupModal>
+  </SimplePopup>
   <FooterBar />
 </template>
 
 <script>
 import NavigationBar from "../components/NavigationBar.vue";
 import FooterBar from "../components/FooterBar.vue";
-import PopupModal from "../components/PopupModal.vue";
 import { ref } from "vue";
 import SaveButton from "../components/SaveButton.vue";
 import BackButton from "../components/BackButton.vue";
@@ -59,14 +52,19 @@ import {
   doc,
 } from "firebase/firestore";
 
+// import { defineComponent } from "vue";
+import vue3starRatings from "vue3-star-ratings";
+import SimplePopup from "@/components/SimplePopup.vue";
+
 export default {
   name: "ChallengeReview",
   components: {
     NavigationBar,
     FooterBar,
-    PopupModal,
     SaveButton,
     BackButton,
+    vue3starRatings,
+    SimplePopup
   },
   data() {
     return {
@@ -79,6 +77,7 @@ export default {
       movieRating: "",
       movieOverview: "",
       chalID: "",
+      moviePoster: ""
     };
   },
   setup() {
@@ -94,7 +93,7 @@ export default {
     this.movieRelease = sessionStorage.getItem("movieRelease");
     this.movieRating = sessionStorage.getItem("movieRating");
     this.movieOverview = sessionStorage.getItem("movieOverview");
-
+    this.moviePoster = sessionStorage.getItem("moviePoster");
     // console.log(test);
     // console.log(this.movieArray);
   },
@@ -106,10 +105,11 @@ export default {
       } else {
         let chalName = sessionStorage.getItem("chalName");
         const test = await getDocs(
-          query(collection(db, "challenge"), where("chalName", "==", chalName))
+          query(collection(db, "challenge"), where("chalName", "==", chalName, true))
         );
         test.forEach((doc) => {
           this.chalID = doc.id;
+          // console.log(doc.data().endDate);
         });
         //let review = this.movieName + "userReview";
         updateDoc(doc(db, "challenge", this.chalID), {
