@@ -2,51 +2,64 @@
   <NavigationBar />
   <!-- <img src="https://images.pexels.com/photos/10313368/pexels-photo-10313368.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
         alt="testing"> -->
-  <img :src="'https://image.tmdb.org/t/p/w500' + moviePoster" />
-  <h1>{{ movieName }}</h1>
-  <h3>{{ movieID }}</h3>
-  <p><strong>Release Date: </strong>{{ movieRelease }}</p>
-  <p><strong>Rating: </strong>{{ movieRating }}/10</p>
-  <h3>Overview</h3>
-  <p>{{ movieOverview }}</p>
-  <hr />
-  <h3>What do you think of this movie?</h3>
-
-  <label>Rating<span class="req">*</span></label>
-  <!-- <input v-model="userRating" type="number" name="userRating" id="userRating" /> -->
-  <vue3starRatings
-    v-model="userRating"
-    class="ratingStars"
-    starColor="#ffffff"
-    starSize="25"
-    controlBg="#00002A"
-  />
-
-  <label for="userReview">Review<span class="req">*</span></label>
-  <textarea
-    v-model="userReview"
-    id="userReview"
-    cols="30"
-    rows="10"
-    placeholder="Leave your review here!"
-  ></textarea>
-
-  <p class="error">{{ fillMessage }}</p>
-
-  <SaveButton
-    @click.prevent="
-      saveReview();
-      togglePopup();
-    "
-  />
-  <BackButton @click.prevent="goBack" title="Back" />
-  <SimplePopup @close="togglePopup" :popupActive="popupActive">
-    <div class="popupContent">
-      <h1>Your review has been saved!</h1>
-      <p>For retrieving this information,<br />please visit your profile</p>
-      <button @click="redirect" type="button" class="secondaryBtn">Done</button>
+  <section id="movieReviewPage">
+    <div class="movieInfoContainer">
+      <img :src="'https://image.tmdb.org/t/p/w500' + moviePoster" />
+      <div class="movieInfo">
+        <span class="movieInfo__name">{{ movieName }}</span>
+        <span class="movieInfo__id">{{ movieID }}</span>
+        <span class="movieInfo__releaseDate">Release Date:<br>{{ movieRelease }}</span>
+        <span class="movieInfo__rating">Rating: {{ movieRating }}/10</span>
+      </div>
     </div>
-  </SimplePopup>
+    <div class="overviewContainer">
+      <h3>Overview</h3>
+      <p>{{ movieOverview }}</p>
+    </div>
+    <h3>What do you think of this movie?</h3>
+
+    <label>Rating<span class="req">*</span></label>
+    <!-- <input v-model="userRating" type="number" name="userRating" id="userRating" /> -->
+    <vue3starRatings
+      v-model="userRating"
+      class="ratingStars"
+      starColor="#ffffff"
+      starSize="25"
+      controlBg="#00002A"
+    />
+
+    <div class="userReviewContainer">
+      <label for="userReview">Review<span class="req">*</span></label>
+      <textarea
+        v-model="userReview"
+        id="userReview"
+        cols="30"
+        rows="10"
+        placeholder="Leave your review here!"
+      ></textarea>
+    </div>
+    
+
+    <p class="error">{{ fillMessage }}</p>
+
+    <div class="btnContainer">
+      <SaveButton
+      @click.prevent="
+        saveReview();
+        togglePopup();
+      "
+      />
+      <BackButton @click.prevent="goBack" title="Back" />
+    </div>
+    <SimplePopup @close="togglePopup" :popupActive="popupActive">
+      <div class="popupContent">
+        <h1>Your review has been saved!</h1>
+        <p>For retrieving this information, please visit your profile</p>
+        <button @click="redirect" type="button" class="secondaryBtn">Done</button>
+      </div>
+    </SimplePopup>
+  </section>
+
   <FooterBar />
 </template>
 

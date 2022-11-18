@@ -187,6 +187,7 @@ export default {
       tSectionOn: false,
       descriptionArea: false,
       quantity: 3,
+      selectedMoviesQuantity: 0,
       chalName: "",
       startDate: "",
       endDate: "",
@@ -196,16 +197,16 @@ export default {
       chooseMovie: [],
       a: "selected-movie.svg",
       imgPreURL: "https://image.tmdb.org/t/p/w500",
-      movieOfChoice: "",
+      genreOfChoice: 0,
       description: "",
       uid: "",
       selectedMovies: [],
     };
   },
-  created() {
+  /* created() {
     this.chooseMovie = axios
       .get(
-        "https://api.themoviedb.org/3/movie/popular?api_key=8ec942643846f64d66eed102868455f3&language=en-US&page=1&region=US"
+        "https://api.themoviedb.org/3/discover/movie?api_key=8ec942643846f64d66eed102868455f3&with_genres="+this.genreOfChoice+"&language=en-US&page=1&region=CA"
       )
       .then((info) => {
         this.chooseMovie = info.data.results;
@@ -214,12 +215,26 @@ export default {
         this.chooseMovie = JSON.parse(JSON.stringify(this.chooseMovie));
         this.forceRerender();
       });
-  },
+  }, */
   methods: {
     movieSelect() {
       this.fSectionOn = false;
       this.sSectionOn = true;
       this.tSectionOn = false;
+      this.quantity = document.getElementById('quantity').value;
+      this.genreOfChoice = document.getElementById('genreDropdown').value;
+
+      this.chooseMovie = axios
+      .get(
+        "https://api.themoviedb.org/3/discover/movie?api_key=8ec942643846f64d66eed102868455f3&with_genres="+this.genreOfChoice+"&language=en-US&page=1&region=CA"
+      )
+      .then((info) => {
+        this.chooseMovie = info.data.results;
+      })
+      .then(() => {
+        this.chooseMovie = JSON.parse(JSON.stringify(this.chooseMovie));
+        this.forceRerender();
+      });
     },
     decrease() {
       if (this.quantity == 3) {
@@ -248,7 +263,10 @@ export default {
       this.carouselKey += 1;
     },
     selectMovie() {
-      event.currentTarget.classList.toggle("selected");
+      if(this.selectedMoviesQuantity < this.quantity) {
+        event.currentTarget.classList.toggle("selected");
+        this.selectedMoviesQuantity++;
+      }
     },
 
     setSelectedMoviesArray() {

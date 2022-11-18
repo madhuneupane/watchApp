@@ -47,14 +47,18 @@
         <p class="chalDescription">{{ description }}</p>
       </div>
     </div>
-    <div v-for="(movies, i) in movie" :key="i">
+    <div class="ongoingChalContainer">
+      <div v-for="(movies, i) in movie" :key="i" class="ongoingChalItem">
         <img
           :src="'https://image.tmdb.org/t/p/w500' + movie[i].poster_path"
           @click.prevent="movieClicked(movie[i])"
         />
-        <h3>{{ movie[i].title }}</h3>
-        <h3 v-if="movie[i].review">Congrats you watched this movie</h3>
+        <!-- <h3>{{ movie[i].title }}</h3> -->
+        <div class="movieWatched" v-if="movie[i].review">
+          <span>Watched</span>
+        </div>
       </div>
+    </div>
   </section>
   <FooterBar />
 </template>
@@ -184,6 +188,7 @@ export default {
   },
   
   created() {
+    this.windowSize = window.innerWidth;
     window.addEventListener('resize', this.handleResize);
   },
   unmounted() {

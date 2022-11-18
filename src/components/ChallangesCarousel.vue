@@ -1,9 +1,9 @@
 <template>
   <section id="challangeCarousel">
     <div v-if="carouselKey">
-      <vueper-slides autoplay fade :touchable="false" :duration='3000' :arrows="true" :slide-ratio="1 / 4">
+      <vueper-slides autoplay fade :touchable="false" :duration='3000' :arrows="true" :slide-ratio="1 / 4" :breakpoints="breakpoints">
         <vueper-slide v-for="(slide, i) in slides" :key="i" :image="slide.image" :title="slide.title"
-          :content="slide.content" />
+          :content="slide.content" @click.prevent="gotoChallengesPage" />
       </vueper-slides>
     </div>
   </section>
@@ -24,9 +24,9 @@ export default {
   data() {
     return {
       recommendationMovieList: [],
-      /* breakpoints: {
-                1024: { visibleSlides: 1, slideMultiple: 2, slideRatio: 1 / 3 }
-            }, */
+      breakpoints: {
+                1024: { visibleSlides: 1, slideMultiple: 2, slideRatio: 2 / 3, arrows: false}
+            },
       carouselKey: false,
       slides: [],
       // {
@@ -84,6 +84,9 @@ export default {
     },
     gotoRecommendationsPage() {
       this.$router.push("/recommendations-page");
+    },
+    gotoChallengesPage() {
+      this.$router.push("/challenge-main");
     },
   },
 };
