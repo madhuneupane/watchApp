@@ -1,0 +1,199 @@
+#createAccount {
+    padding: $standardSpacement;
+    margin-bottom: $standardSpacement;
+
+    @media only screen and (min-width: $media-desktop) {
+        display: flex;
+        justify-content: center;
+    }
+}
+
+//First Part Start
+#createAccount .fPart {
+    display: flex;
+    flex-direction: column;
+
+    @media only screen and (min-width: $media-desktop) {
+        justify-content: center;
+        align-items: center;
+        width: 50%;
+    }
+}
+
+#createAccount h2 {
+    font-size: 2rem;
+    margin: $standardSpacement 0;
+}
+
+#createAccount .error {
+    margin-bottom: ($standardSpacement)/2;
+}
+
+#createAccount .formContainer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-top: ($standardSpacement)*2;
+}
+
+#createAccount .formContainer input {
+    margin: ($standardSpacement)/2 0 $standardSpacement 0;
+    width: 100%;
+}
+
+#createAccount .formContainer .nameContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+}
+
+#createAccount .formContainer .nameContainer .fNameContainer,
+.lNameContainer {
+    display: flex;
+    flex-direction: column;
+    width: 48%;
+}
+
+#createAccount .formContainer .primaryBtn {
+
+    @media only screen and (min-width: $media-desktop) {
+        align-self: center;
+    }
+}
+
+#createAccount .link {
+    align-self: center;
+    margin-top: $standardSpacement;
+}
+
+//First Part End
+
+//Second Part Start
+#createAccount .sPart {
+    @media only screen and (min-width: $media-desktop) {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 40%;
+    }
+}
+
+#createAccount .profilePicSectionFirst {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: $standardSpacement 0;
+}
+
+#createAccount .profilePicSectionFirst p {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+#createAccount .profilePicSectionFirst .profilePictureContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $grey;
+    width: 8rem;
+    height: 8rem;
+    border-radius: 50%;
+    margin-bottom: $standardSpacement;
+}
+
+#createAccount .profilePicSectionFirst .profilePictureContainer img {
+    width: 50%;
+}
+
+#createAccount .profilePicSectionFirst .profilePictureContainer .capturedPicture {
+    border-radius: 50%;
+    height: 8rem;
+    width: 8rem;
+    object-fit: cover;
+    object-position: 50% 25%;
+}
+
+#createAccount .profilePicSectionSecond {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: $standardSpacement;
+}
+
+#createAccount .profilePicSectionSecond .feed {
+    width: 100%;
+}
+
+#createAccount .profilePicSectionSecond .secondaryBtn {
+    margin-top: $standardSpacement;
+}
+
+#createAccount .nicknameContainer {
+    margin: ($standardSpacement)*2 0;
+    display: flex;
+    flex-direction: column;
+
+    @media only screen and (min-width: $media-desktop) {
+        width: 70%;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+#createAccount .nicknameContainer p {
+    margin-bottom: $standardSpacement;
+}
+
+#createAccount .nicknameContainer input {
+    @media only screen and (min-width: $media-desktop) {
+        width: 100%;
+    }
+}
+
+#createAccount .primaryBtn {
+    @media only screen and (min-width: $media-desktop) {
+        width: 30%;
+    }
+}
+
+//Second Part End
+
+//Genre Part Start
+#createAccount .genrePart {
+    width: 100%;
+
+    @media only screen and (min-width: $media-desktop) {
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+#createAccount .genrePart h3 {
+    text-align: unset;
+}
+
+#createAccount .genrePart .genreSelectionContainer {
+    margin: ($standardSpacement)*2 0;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 100%;
+}
+
+#createAccount .genrePart .genreSelectionContainer div {
+    width: 50%;
+    margin-bottom: $standardSpacement;
+
+    @media only screen and (min-width: $media-desktop) {
+        width: 33%;
+    }
+}
