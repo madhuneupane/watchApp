@@ -41,7 +41,7 @@
     margin-top: .5rem;
 }
 
-#loginPage .primaryBtn, .secondaryBtn {
+#loginPage .primaryBtn, .createAccBtn {
     margin-bottom: $standardSpacement;
 
     @media only screen and (min-width: $media-desktop) {
@@ -66,4 +66,28 @@
 
 #loginPage .link {
     margin-bottom: $standardSpacement;
+}
+
+#loginPage .createAccBtn {
+    background-color: $beige;
+    color: $black;
+    position: relative;
+    border-radius: $btn_radius;
+    border: none;
+    width: 100%;
+    padding: 0.875rem 0;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+
+    @media only screen and (min-width: $media-desktop) {
+        font-size: 1.125rem;
+        width: 50%;
+        padding: 0.875rem 2rem;
+
+        &:hover {
+            background: linear-gradient(91.25deg, $blue 0%, $purple 51.47%, $orange 100%);
+            color: $white;
+        }
+    }
 }
