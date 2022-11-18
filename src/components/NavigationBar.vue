@@ -7,11 +7,27 @@
         <DropdownMenu v-if="isSignedIn" title="Challenges" />
       </div>
       <!-- v-if="user" -->
-      <div v-if="!isSignedIn" class="nav-link" id="login" @click.prevent="goToLogin">
+      <div
+        v-if="!isSignedIn"
+        class="nav-link"
+        id="login"
+        @click.prevent="goToLogin"
+      >
         Login
       </div>
-      <img v-if="isSignedIn" id="userIcon" :src="imageSource" alt="userPic" @click.prevent="profile" />
-      <button v-if="isSignedIn" @click.prevent="signingOut" class="nav-link tertiaryBtn" id="signOut">
+      <img
+        v-if="isSignedIn"
+        id="userIcon"
+        :src="imageSource"
+        alt="userPic"
+        @click.prevent="profile"
+      />
+      <button
+        v-if="isSignedIn"
+        @click.prevent="signingOut"
+        class="nav-link tertiaryBtn"
+        id="signOut"
+      >
         Sign Out
       </button>
     </div>

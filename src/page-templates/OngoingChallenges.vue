@@ -86,21 +86,49 @@ export default {
   },
 
   async mounted() {
+    // const querySnap = await getDocs(query(collection(db, "challenge")));
+    // querySnap.forEach((doc) => {
+    //   const uid = sessionStorage.getItem("uid");
+
+    //   const userId = doc.data().uid;
+    //   if (userId == uid) {
+    //     let newChallenge = {
+    //       title: doc.data().chalName,
+    //       image: doc.data().image,
+    //       content: doc.data().description,
+    //       endDate: doc.data().endDate,
+    //       selectedMovies: doc.data().selectedMovies,
+    //       startDate: doc.data().startDate,
+    //     };
+    //     this.slides.push(newChallenge);
+    //   }
+    // });
+
     const querySnap = await getDocs(query(collection(db, "challenge")));
     querySnap.forEach((doc) => {
       const uid = sessionStorage.getItem("uid");
-
+      let flag = 0;
       const userId = doc.data().uid;
       if (userId == uid) {
-        let newChallenge = {
-          title: doc.data().chalName,
-          image: doc.data().image,
-          content: doc.data().description,
-          endDate: doc.data().endDate,
-          selectedMovies: doc.data().selectedMovies,
-          startDate: doc.data().startDate,
-        };
-        this.slides.push(newChallenge);
+        //  console.log(doc.data().selectedMovies.length);
+        for (let i = 0; i < doc.data().selectedMovies.length; i++) {
+          if (doc.data().selectedMovies[i].review) {
+            flag = flag + 1;
+          }
+        }
+        console.log(flag);
+        if (flag != doc.data().selectedMovies.length) {
+          let newChallenge = {
+            title: doc.data().chalName,
+            image: doc.data().image,
+            content: doc.data().description,
+            endDate: doc.data().endDate,
+            selectedMovies: doc.data().selectedMovies,
+            startDate: doc.data().startDate,
+          };
+          // console.log(newChallenge);
+          this.slides.push(newChallenge);
+        }
       }
     });
   },

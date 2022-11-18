@@ -4,9 +4,16 @@
     <h1>Past Challenges</h1>
     <h2>You've achieved this much!</h2>
     <div class="chalList">
-      <div class="chalInfo" v-for="(challenge, index) in chalLoading" :key="index">
-        <div class="challenge" v-bind:style="{ backgroundImage: 'url(' + challenge.image + ')' }"
-          @click.prevent="challengeClicked(index)">
+      <div
+        class="chalInfo"
+        v-for="(challenge, index) in chalLoading"
+        :key="index"
+      >
+        <div
+          class="challenge"
+          v-bind:style="{ backgroundImage: 'url(' + challenge.image + ')' }"
+          @click.prevent="challengeClicked(index)"
+        >
           <div class="chalDetailsContainer">
             <h3>{{ challenge.title }}</h3>
             <span id="ending">Ending on {{ challenge.endDate }}</span>
@@ -70,18 +77,28 @@ export default {
     const querySnap = await getDocs(query(collection(db, "challenge")));
     querySnap.forEach((doc) => {
       const uid = sessionStorage.getItem("uid");
-
+      let flag = 0;
       const userId = doc.data().uid;
       if (userId == uid) {
-        let newChallenge = {
-          title: doc.data().chalName,
-          image: doc.data().image,
-          content: doc.data().description,
-          endDate: doc.data().endDate,
-          selectedMovies: doc.data().selectedMovies,
-          startDate: doc.data().startDate,
-        };
-        this.slides.push(newChallenge);
+        //  console.log(doc.data().selectedMovies.length);
+        for (let i = 0; i < doc.data().selectedMovies.length; i++) {
+          if (doc.data().selectedMovies[i].review) {
+            flag = flag + 1;
+          }
+        }
+        console.log(flag);
+        if (flag == doc.data().selectedMovies.length) {
+          let newChallenge = {
+            title: doc.data().chalName,
+            image: doc.data().image,
+            content: doc.data().description,
+            endDate: doc.data().endDate,
+            selectedMovies: doc.data().selectedMovies,
+            startDate: doc.data().startDate,
+          };
+          // console.log(newChallenge);
+          this.slides.push(newChallenge);
+        }
       }
     });
   },
@@ -122,7 +139,7 @@ export default {
     backList() {
       this.firstPart = true;
       this.moviePart = false;
-    }
+    },
   },
   computed: {
     chalLoading() {
