@@ -1,151 +1,133 @@
 <template>
   <NavigationBar />
-  <section class="pastChalOverview">
+  <section v-if="firstPart" id="ongoingChalSec">
     <h1>Past Challenges</h1>
     <h2>You've achieved this much!</h2>
-    <BackButton title="Back to Challenges" @click.prevent="goToHome" />
-  </section>
-
-  <!-- Review this. Not matching with the mockup -->
-
-  <section class="pastChalDetail">
-    <h1>{{ challengeName }}</h1>
-    <div class="mainContent">
-      <h2>{{ challengeDuration }}</h2>
-      <h3>Completed: {{ challengeEnd }}</h3>
-      <img v-bind:src="imageSource" style="width: 100%; height: 35rem" />
-      <p style="margin-top: 1rem">{{ movieDetails }}</p>
-      <hr style="
-        height: 3px;
-        border-width: 0;
-        color: gray;
-        background-color: white;
-        margin-top: 1rem;
-        margin-bottom: 1rem;
-      " />
-      <div class="movieList">
-        <div class="movieItem">
-          <img src="https://image.tmdb.org/t/p/w500/spCAxD99U1A6jsiePFoqdEcY0dG.jpg" alt="posterImage" />
-          <h2>
-            Finished On <br />
-            2022.09.05
-          </h2>
-          <h3>Movie</h3>
-        </div>
-
-        <div class="movieItem">
-          <img src="https://image.tmdb.org/t/p/w500/spCAxD99U1A6jsiePFoqdEcY0dG.jpg" alt="posterImage" />
-          <h2>
-            Finished On <br />
-            2022.09.05
-          </h2>
-          <h3>Movie</h3>
-        </div>
-
-        <div class="movieItem">
-          <img src="https://image.tmdb.org/t/p/w500/spCAxD99U1A6jsiePFoqdEcY0dG.jpg" alt="posterImage" />
-          <h2>
-            Finished On <br />
-            2022.09.05
-          </h2>
-          <h3>Movie</h3>
-        </div>
-
-        <div class="movieItem">
-          <img src="https://image.tmdb.org/t/p/w500/spCAxD99U1A6jsiePFoqdEcY0dG.jpg" alt="posterImage" />
-          <h2>
-            Finished On <br />
-            2022.09.05
-          </h2>
-          <h3>Movie</h3>
+    <div class="chalList">
+      <div class="chalInfo" v-for="(challenge, index) in chalLoading" :key="index">
+        <div class="challenge" v-bind:style="{ backgroundImage: 'url(' + challenge.image + ')' }"
+          @click.prevent="challengeClicked(index)">
+          <div class="chalDetailsContainer">
+            <h3>{{ challenge.title }}</h3>
+            <span id="ending">Ending on {{ challenge.endDate }}</span>
+          </div>
         </div>
       </div>
-      <BackButton title="Back to List" />
+    </div>
+    <a class="seeMoreBtn" @click.prevent="loadMore">Load More</a>
+    <div class="btnContainer">
+      <BackButton title="Back to Challenges" @click.prevent="backChal" />
     </div>
   </section>
+
+  <div v-if="moviePart">
+    <img :src="chalImage" alt="not displayed" style="height: 300px" />
+    <h2>{{ chalName }}</h2>
+    <h3>{{ startDate }}---{{ endDate }}</h3>
+    <!-- Completion date -->
+    <p>
+      {{ description }}
+    </p>
+    <div v-for="(movies, i) in movie" :key="i">
+      <img :src="'https://image.tmdb.org/t/p/w500' + movie[i].poster_path" />
+      <h3 v-if="movie[i].review">Congrats you watched this movie</h3>
+    </div>
+    <BackButton title="Back to List" @click.prevent="backList"></BackButton>
+  </div>
   <FooterBar />
 </template>
-
 <script>
 import NavigationBar from "../components/NavigationBar.vue";
 import FooterBar from "../components/FooterBar.vue";
 import BackButton from "../components/BackButton.vue";
+import { db } from "@/firebase";
+import { query, collection, getDocs } from "firebase/firestore";
 
 export default {
-  name: "PastChallenge",
+  name: "OngoingChallenges",
   components: {
     NavigationBar,
     FooterBar,
-    BackButton
+    BackButton,
   },
   data() {
     return {
-      challengeName: "Back to School",
-      challengeDuration: "2022.09.01 - 2022.09.15",
-      challengeEnd: "2022.09.12",
-      imageSource:
-        "https://image.tmdb.org/t/p/w500/spCAxD99U1A6jsiePFoqdEcY0dG.jpg",
-      movieDetails:
-        "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea, provident. Doloremque vel reiciendis eaque veritatis officia tempore, rerum optio tenetur laborum sunt quae. Explicabo eos accusamus libero itaque recusandae corrupti maxime repellendus, eveniet veniam facere, beatae quos excepturi voluptatum maiores perspiciatis, error placeat earum laborum inventore est iste aperiam. Saepe.",
+      challengedb: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
+      length: 4,
+      slides: [],
+      moviePart: false,
+      firstPart: true,
+      chalImage: "",
+      movie: [],
+      chalName: "",
+      startDate: "",
+      endDate: "",
+      description: "",
     };
   },
+
+  async mounted() {
+    const querySnap = await getDocs(query(collection(db, "challenge")));
+    querySnap.forEach((doc) => {
+      const uid = sessionStorage.getItem("uid");
+
+      const userId = doc.data().uid;
+      if (userId == uid) {
+        let newChallenge = {
+          title: doc.data().chalName,
+          image: doc.data().image,
+          content: doc.data().description,
+          endDate: doc.data().endDate,
+          selectedMovies: doc.data().selectedMovies,
+          startDate: doc.data().startDate,
+        };
+        this.slides.push(newChallenge);
+      }
+    });
+  },
   methods: {
-    goToHome() {
+    // movieClicked(movieArray, j) {
+    //   // let movieData = movieArray.title;
+    //   // console.log(movieData);
+    //   sessionStorage.setItem("movieName", movieArray.title);
+    //   sessionStorage.setItem("movieRelease", movieArray.release_date);
+    //   sessionStorage.setItem("movieID", movieArray.genre_ids);
+    //   sessionStorage.setItem("movieRating", movieArray.vote_average);
+    //   sessionStorage.setItem("movieOverview", movieArray.overview);
+    //   sessionStorage.setItem("moviePoster", movieArray.poster_path);
+    //   sessionStorage.setItem("index", j);
+
+    //   this.$router.push("/challenge-review");
+    // },
+    challengeClicked(index) {
+      this.firstPart = false;
+      this.moviePart = true;
+      this.chalImage = this.slides[index].image;
+      this.chalName = this.slides[index].title;
+      sessionStorage.setItem("chalName", this.chalName);
+      this.startDate = this.slides[index].startDate;
+      this.endDate = this.slides[index].endDate;
+      this.description = this.slides[index].content;
+      // console.log(this.description);
+      this.movie = this.slides[index].selectedMovies;
+      // console.log(index);
+    },
+    backChal() {
       this.$router.push("/challenge-main");
+    },
+    loadMore() {
+      if (this.length > this.challengedb.length) return;
+      this.length = this.length + 4;
+    },
+    backList() {
+      this.firstPart = true;
+      this.moviePart = false;
     }
-  }
+  },
+  computed: {
+    chalLoading() {
+      return this.slides.slice(0, this.length);
+    },
+  },
 };
 </script>
-<!-- <style>
-.mainContent {
-  margin: 15px;
-}
-
-.movieList {
-  position: relative;
-  display: flex;
-  width: 100%;
-  flex-direction: row;
-  flex-wrap: wrap;
-  padding: 0 1.125rem;
-  margin-bottom: 3.75rem;
-
-  @media only screen and (min-width: $media-desktop) {
-    padding: 0 2.5rem;
-  }
-}
-
-.movieList .movieItem {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  /* padding-right: 1.125rem; */
-  cursor: pointer;
-
-  text-align: center;
-  color: black;
-}
-
-.movieList .movieItem img {
-  align-items: center;
-  width: 25rem;
-  height: 25rem;
-  margin-bottom: 1rem;
-  margin-top: 1rem;
-  border-radius: 0.625rem;
-  opacity: 0.8;
-}
-
-.movieList .movieItem h3 {
-  left: 50%;
-}
-
-.movieList .movieItem h2 {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  color: black;
-  transform: translate(-50%, -50%);
-}
-</style>
- -->
