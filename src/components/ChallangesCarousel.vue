@@ -1,7 +1,7 @@
 <template>
   <section id="challangeCarousel">
     <div v-if="carouselKey">
-      <vueper-slides autoplay fade :touchable="false" :duration='3000' :arrows="true" :slide-ratio="1 / 4" :breakpoints="breakpoints">
+      <vueper-slides fade :touchable="false" :arrows="true" :slide-ratio="1 / 4" :breakpoints="breakpoints">
         <vueper-slide v-for="(slide, i) in slides" :key="i" :image="slide.image" :title="slide.title"
           :content="slide.content" @click.prevent="gotoChallengesPage" />
       </vueper-slides>
@@ -25,8 +25,8 @@ export default {
     return {
       recommendationMovieList: [],
       breakpoints: {
-                1024: { visibleSlides: 1, slideMultiple: 2, slideRatio: 2 / 3, arrows: false}
-            },
+        1024: { visibleSlides: 1, slideMultiple: 2, slideRatio: 2 / 3, arrows: false }
+      },
       carouselKey: false,
       slides: [],
       // {

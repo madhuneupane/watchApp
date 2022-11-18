@@ -6,7 +6,7 @@
         <a class="seeMoreBtn" @click.prevent="gotoAdminPage">See All</a>
       </div>
       <vueper-slides :arrows="true" :infinite="false" :bullets="true" :visible-slides="2" :slide-multiple="2" :gap="2"
-        :slide-ratio="1 / 3.5" :dragging-distance="100" :breakpoints="breakpoints" autoplay :duration='3000'>
+        :slide-ratio="1 / 3.5" :dragging-distance="100" :breakpoints="breakpoints">
         <vueper-slide v-for="movie in slides" :key="movie" :image="movie.image" :title="movie.title"
           :content="movie.startDate + ' to ' + movie.endDate" />
       </vueper-slides>

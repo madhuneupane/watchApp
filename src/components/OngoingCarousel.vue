@@ -6,7 +6,7 @@
         <a class="seeMoreBtn" @click.prevent="gotoOngoingPage">See All</a>
       </div>
       <vueper-slides :arrows="true" :infinite="false" :bullets="true" :visible-slides="4" :slide-multiple="2" :gap="2"
-        :slide-ratio="1 / 3.5" :dragging-distance="300" :breakpoints="breakpoints" autoplay :duration="3000">
+        :slide-ratio="1 / 3.5" :dragging-distance="300" :breakpoints="breakpoints">
         <vueper-slide v-for="movie in slides" :key="movie" :image="movie.image" :title="movie.title" />
         <div class="card-gradient" @click.prevent="createChallenge" style="cursor: pointer">
           <img src="../assets/icons/plus-button-challenge.svg" />
@@ -61,15 +61,24 @@ export default {
     const querySnap = await getDocs(query(collection(db, "challenge")));
     querySnap.forEach((doc) => {
       const uid = sessionStorage.getItem("uid");
-
+      let flag = 0;
       const userId = doc.data().uid;
       if (userId == uid) {
-        let newChallenge = {
-          title: doc.data().chalName,
-          image: doc.data().image,
-          content: doc.data().description,
-        };
-        this.slides.push(newChallenge);
+        //  console.log(doc.data().selectedMovies.length);
+        for (let i = 0; i < doc.data().selectedMovies.length; i++) {
+          if (doc.data().selectedMovies[i].review) {
+            flag = flag + 1;
+          }
+        }
+        console.log(flag);
+        if (flag != doc.data().selectedMovies.length) {
+          let newChallenge = {
+            title: doc.data().chalName,
+            image: doc.data().image,
+            content: doc.data().description,
+          };
+          this.slides.push(newChallenge);
+        }
       }
     });
   },

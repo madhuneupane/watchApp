@@ -122,34 +122,57 @@ setSelectedMoviesArray();
           This will be cover of the challenge. You can select from the default
           image or you can upload the one you want!
         </p>
-
-        <div class="imageSelectionContainer">
+        <!-- <div class="imageSelectionContainer">
           <label class="picture">
-            <input type="file" accept="image/*" class="chalImageInput" />
-            <!-- @change.prevent="test" -->
-            <span class="chalImage"> Choose an image </span>
+            <input id="inputForImage" type="file" accept="image/*" class="chalImageInput" hidden />
+            <p style="text-decoration: underline; cursor: default" id="chooseChalImage"
+              @click.prevent="chooseChalImage">Choose
+              an image</p>
           </label>
-        </div>
+        </div> -->
 
-        <div class="addDescriptionContainer">
-          <img src="../assets/icons/plus-button-challenge.svg" @click.prevent="addDescription" />
-          <label>Add a Challenge Description</label>
-          <textarea v-model="description" v-if="descriptionArea" name="chalDescription" id="description" cols="30"
-            rows="6"></textarea>
+        <p style="text-decoration: underline; cursor: default" @click.prevent="clickImage">
+          Take a photo
+        </p>
+      </div>
+
+      <div v-if="secondPartFirst" class="profilePicSectionFirst">
+        <div class="profilePictureContainer">
+          <img id="profilePicture" src="../assets/icons/profile.svg" alt="sorry"
+            :class="{ capturedPicture: photoSnapped === true }" />
         </div>
+      </div>
+
+
+      <div v-if="secondPartSecond" class="profilePicSectionSecond">
+        <video autoplay class="feed"></video>
+        <button class="secondaryBtn" @click.prevent="displayImage">Snap</button>
+      </div>
+
+
+
+
+
+
+
+      <div class="addDescriptionContainer">
+        <img src="../assets/icons/plus-button-challenge.svg" @click.prevent="addDescription" />
+        <label>Add a Challenge Description</label>
+        <textarea v-model="description" v-if="descriptionArea" name="chalDescription" id="description" cols="30"
+          rows="6"></textarea>
       </div>
 
       <div class="btnContainer">
         <SaveButton @click.prevent="addChallenge" />
         <BackButton @click.prevent="backSelection" title="Back" />
       </div>
-      <SimplePopup @close="togglePopup" :popupActive="popupActive">
+      <!-- <SimplePopup @close="togglePopup" :popupActive="popupActive">
         <div class="popupContent">
           <h1 class="popUpHeading">Saved!</h1>
           <h3 class="popUpText">Hooray! Challenge created!<br>Watch movies to earn special badges!</h3>
           <button @click="redirect" type="button" class="secondaryBtn">Go to Challenges</button>
         </div>
-      </SimplePopup>
+      </SimplePopup> -->
     </div>
   </div>
   <FooterBar />
@@ -158,6 +181,7 @@ setSelectedMoviesArray();
 
 <script>
 import { db } from "@/firebase";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { addDoc, collection } from "firebase/firestore";
 import axios from "axios";
 
@@ -166,8 +190,8 @@ import FooterBar from "../components/FooterBar.vue";
 import NextButton from "../components/NextButton.vue";
 import BackButton from "../components/BackButton.vue";
 import SaveButton from "../components/SaveButton.vue";
-import SimplePopup from '../components/SimplePopup.vue';
-import { ref } from 'vue';
+// import SimplePopup from '../components/SimplePopup.vue';
+// import { ref } from 'vue';
 
 
 export default {
@@ -178,7 +202,7 @@ export default {
     NextButton,
     BackButton,
     SaveButton,
-    SimplePopup
+    // SimplePopup
   },
   data() {
     return {
@@ -201,6 +225,9 @@ export default {
       description: "",
       uid: "",
       selectedMovies: [],
+      secondPartSecond: false,
+      secondPartFirst: false,
+      urlOfImage: ""
     };
   },
   /* created() {
@@ -221,20 +248,22 @@ export default {
       this.fSectionOn = false;
       this.sSectionOn = true;
       this.tSectionOn = false;
+      this.secondPartFirst = false;
+      this.secondPartSecond = false;
       this.quantity = document.getElementById('quantity').value;
       this.genreOfChoice = document.getElementById('genreDropdown').value;
 
       this.chooseMovie = axios
-      .get(
-        "https://api.themoviedb.org/3/discover/movie?api_key=8ec942643846f64d66eed102868455f3&with_genres="+this.genreOfChoice+"&language=en-US&page=1&region=CA"
-      )
-      .then((info) => {
-        this.chooseMovie = info.data.results;
-      })
-      .then(() => {
-        this.chooseMovie = JSON.parse(JSON.stringify(this.chooseMovie));
-        this.forceRerender();
-      });
+        .get(
+          "https://api.themoviedb.org/3/discover/movie?api_key=8ec942643846f64d66eed102868455f3&with_genres=" + this.genreOfChoice + "&language=en-US&page=1&region=CA"
+        )
+        .then((info) => {
+          this.chooseMovie = info.data.results;
+        })
+        .then(() => {
+          this.chooseMovie = JSON.parse(JSON.stringify(this.chooseMovie));
+          this.forceRerender();
+        });
     },
     decrease() {
       if (this.quantity == 3) {
@@ -253,27 +282,30 @@ export default {
       this.fSectionOn = false;
       this.sSectionOn = false;
       this.tSectionOn = true;
+      this.secondPartFirst = true;
+      this.secondPartSecond = false;
     },
     backMovieSelect() {
       this.fSectionOn = true;
       this.sSectionOn = false;
       this.tSectionOn = false;
+      this.secondPartFirst = false;
+      this.secondPartSecond = false;
       this.selectedMoviesQuantity = 0;
     },
     forceRerender() {
       this.carouselKey += 1;
     },
     selectMovie() {
-      if(this.selectedMoviesQuantity < this.quantity && !event.currentTarget.classList.contains("selected")) {
+      if (this.selectedMoviesQuantity < this.quantity && !event.currentTarget.classList.contains("selected")) {
         event.currentTarget.classList.toggle("selected");
         this.selectedMoviesQuantity++;
-      } 
-      else if(event.currentTarget.classList.contains("selected")) {
+      }
+      else if (event.currentTarget.classList.contains("selected")) {
         event.currentTarget.classList.toggle("selected");
         this.selectedMoviesQuantity--;
       }
     },
-
     setSelectedMoviesArray() {
       let selected = document.querySelectorAll(".selected");
 
@@ -287,6 +319,8 @@ export default {
       this.fSectionOn = false;
       this.sSectionOn = true;
       this.tSectionOn = false;
+      this.secondPartFirst = false;
+      this.secondPartSecond = false;
       this.selectedMovies = [];
     },
     addDescription() {
@@ -315,7 +349,7 @@ export default {
         this.endError = "Please input the end date";
         return false;
       }
-      this.togglePopup();
+      // this.togglePopup();
       try {
         const uid = sessionStorage.getItem("uid");
         const docRef = addDoc(collection(db, "challenge"), {
@@ -328,6 +362,7 @@ export default {
           uid: uid,
           selectedMovies: this.selectedMovies,
           adminChallenge: false,
+          image: this.urlOfImage
         });
         // this.$router.push("/challenge-main");
         console.log(docRef);
@@ -335,83 +370,104 @@ export default {
         console.log(e);
       }
     },
-    redirect() {
-      this.$router.push("/ongoing-challenges");
+    // redirect() {
+    //   this.$router.push("/ongoing-challenges");
+    // },
+
+    // chooseChalImage() {
+    //   document.getElementById("inputForImage").click();
+    //   const imgInput = document.getElementById("inputForImage");
+    //   const imgEl = document.getElementById("profilePicture");
+    //   imgInput.addEventListener("change", () => {
+    //     if (imgInput.files && imgInput.files[0]) {
+    //       const reader = new FileReader();
+    //       reader.onload = (e) => {
+    //         imgEl.src = e.target.result;
+    //       };
+    //       reader.readAsDataURL(imgInput.files[0]);
+    //     }
+    //   });
+
+    //   imgEl.src.toBlob((blob) => {
+
+    //     const storage = getStorage();
+    //     const storageRef = ref(storage, `images/${this.chalName}`);
+    //     uploadBytes(storageRef, blob).then(() => {
+    //       getDownloadURL(storageRef).then((result) => {
+    //         console.log(result);
+    //         this.urlOfImage = result;
+    //         let profilePhoto = document.getElementById("profilePicture");
+    //         // console.log("this" + this.a);
+    //         profilePhoto.src = result;
+    //       });
+    //     });
+    //   });
+
+    // },
+
+    clickImage() {
+      this.fSectionOn = false;
+      this.sSectionOn = false;
+      this.tSectionOn = true;
+      this.secondPartFirst = false;
+      this.secondPartSecond = true;
+      this.init();
+      this.photoSnapped = true;
+    },
+
+    displayImage() {
+      const picture = document.createElement("canvas");
+      const ctx = picture.getContext("2d");
+
+      ctx.imageSmoothingEnabled = true;
+      ctx.imageSmoothingQuality = "high";
+      ctx.drawImage(
+        document.querySelector("video"),
+        0,
+        0,
+        picture.width,
+        picture.height
+      );
+
+      // this.imageSource = picture.toDataURL();
+
+      picture.toBlob((blob) => {
+        const storage = getStorage();
+        const storageRef = ref(storage, `images/${new Date()}`);
+        uploadBytes(storageRef, blob).then(() => {
+          getDownloadURL(storageRef).then((result) => {
+            console.log(result);
+            this.urlOfImage = result;
+            let profilePhoto = document.getElementById("profilePicture");
+            // console.log("this" + this.a);
+            profilePhoto.src = result;
+          });
+        });
+      });
+      picture.remove();
+
+      this.secondPartSecond = false;
+      this.secondPartFirst = true;
+    },
+    init() {
+      if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+        navigator.mediaDevices.getUserMedia({ video: true }).then((stream) => {
+          const videoPlayer = document.querySelector("video");
+          videoPlayer.srcObject = stream;
+          videoPlayer.play();
+        });
+      } else {
+        console.log("ok");
+      }
     },
   },
-  setup() {
-    const popupActive = ref(false);
-    const togglePopup = () => {
-      popupActive.value = !popupActive.value;
-    }
-    return { popupActive, togglePopup };
-  }
+
+  // setup() {
+  //   const popupActive = ref(false);
+  //   const togglePopup = () => {
+  //     popupActive.value = !popupActive.value;
+  //   }
+  //   return { popupActive, togglePopup };
+  // }
 };
 </script>
-
-<!-- <style>
-.chalImageInput {
-  display: none;
-}
-
-.picture {
-  width: 400px;
-  aspect-ratio: 16/9;
-  background-color: #aaa;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: gray;
-  border: 2px dashed currentColor;
-  cursor: pointer;
-}
-
-.picture:hover {
-  background: #ccc;
-}
-
-.chalPicture {
-  max-width: 100%;
-}
-
-select {
-  border-radius: 0.75rem;
-  padding: 10px;
-  background: #00002a;
-  border: 3px solid white;
-  margin: 10px;
-  color: white;
-  font-family: sans-serif;
-  font-size: inherit;
-}
-
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-#quantity {
-  border: none;
-  width: 70px;
-  text-align: center;
-  margin: 10px;
-}
-
-#minusSign,
-#plusSign {
-  width: 30px;
-}
-
-div {
-  text-align: center;
-}
-
-::-webkit-calendar-picker-indicator {
-  filter: invert(1);
-}
-
-#chalName {
-  width: 100%;
-}
-</style> -->

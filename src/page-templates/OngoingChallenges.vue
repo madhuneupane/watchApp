@@ -1,39 +1,32 @@
 <template>
-  <button class="createChllgBtn" v-if="windowSize<1024 && !moviePart" @click.prevent="createChallenge"></button>
+  <button class="createChllgBtn" v-if="windowSize < 1024 && !moviePart" @click.prevent="createChallenge"></button>
   <NavigationBar />
-  <ChallengesMenu :challengePage="'ongoing'" v-if="windowSize<1024 && !moviePart" />
+  <ChallengesMenu :challengePage="'ongoing'" v-if="windowSize < 1024 && !moviePart" />
   <section v-if="firstPart" id="ongoingChalSec">
-    <h1 v-if="windowSize>1024">Ongoing Challenges</h1>
+    <h1 v-if="windowSize > 1024">Ongoing Challenges</h1>
     <h2>Keep up! You are almost there</h2>
     <div class="chalList">
-      <div
-        class="chalInfo"
-        v-for="(challenge, index) in chalLoading"
-        :key="index"
-      >
-        <div
-          class="challenge"
-          v-bind:style="{ backgroundImage: 'url(' + challenge.image + ')' }"
-          @click.prevent="challengeClicked(index)"
-        >
+      <div class="chalInfo" v-for="(challenge, index) in chalLoading" :key="index">
+        <div class="challenge" v-bind:style="{ backgroundImage: 'url(' + challenge.image + ')' }"
+          @click.prevent="challengeClicked(index)">
           <div class="chalDetailsContainer">
             <h3>{{ challenge.title }}</h3>
             <span id="ending">Ending on {{ challenge.endDate }}</span>
-            <span id="qntWatched" v-if="windowSize>1024">
-            Watched # out of {{ challenge.selectedMovies.length }} movies!
+            <span id="qntWatched" v-if="windowSize > 1024">
+              Watched {{ challenge.totalWatched }} out of {{ challenge.selectedMovies.length }} movies!
             </span>
           </div>
         </div>
         <!-- Implement bar -->
       </div>
-      <div class="createChalCard" @click.prevent="createChallenge" v-if="windowSize>1024" >
+      <div class="createChalCard" @click.prevent="createChallenge" v-if="windowSize > 1024">
         <img src="../assets/icons/plus-button-challenge.svg" />
         <h3>Create Your Own Challenge!</h3>
         <!-- <button class="primaryBtn">Create a Challenge</button> -->
       </div>
     </div>
     <a class="seeMoreBtn link" @click.prevent="loadMore">Load More</a>
-    <div class="btnContainer" v-if="windowSize>1024">
+    <div class="btnContainer" v-if="windowSize > 1024">
       <BackButton title="Back to Challenge" @click.prevent="backChal" />
     </div>
   </section>
@@ -49,10 +42,7 @@
     </div>
     <div class="ongoingChalContainer">
       <div v-for="(movies, i) in movie" :key="i" class="ongoingChalItem">
-        <img
-          :src="'https://image.tmdb.org/t/p/w500' + movie[i].poster_path"
-          @click.prevent="movieClicked(movie[i])"
-        />
+        <img :src="'https://image.tmdb.org/t/p/w500' + movie[i].poster_path" @click.prevent="movieClicked(movie[i])" />
         <!-- <h3>{{ movie[i].title }}</h3> -->
         <div class="movieWatched" v-if="movie[i].review">
           <span>Watched</span>
@@ -92,26 +82,11 @@ export default {
       endDate: "",
       description: "",
       windowSize: 0,
+      totalWatched: 0
     };
   },
 
   async mounted() {
-    // const querySnap = await getDocs(query(collection(db, "challenge")));
-    // querySnap.forEach((doc) => {
-    //   const uid = sessionStorage.getItem("uid");
-    //   const userId = doc.data().uid;
-    //   if (userId == uid) {
-    //     let newChallenge = {
-    //       title: doc.data().chalName,
-    //       image: doc.data().image,
-    //       content: doc.data().description,
-    //       endDate: doc.data().endDate,
-    //       selectedMovies: doc.data().selectedMovies,
-    //       startDate: doc.data().startDate,
-    //     };
-    //     this.slides.push(newChallenge);
-    //   }
-    // });
     const querySnap = await getDocs(query(collection(db, "challenge")));
     querySnap.forEach((doc) => {
       const uid = sessionStorage.getItem("uid");
@@ -124,6 +99,7 @@ export default {
             flag = flag + 1;
           }
         }
+        this.totalWatched = flag;
         console.log(flag);
         if (flag != doc.data().selectedMovies.length) {
           let newChallenge = {
@@ -133,6 +109,7 @@ export default {
             endDate: doc.data().endDate,
             selectedMovies: doc.data().selectedMovies,
             startDate: doc.data().startDate,
+            totalWatched: this.totalWatched,
           };
           // console.log(newChallenge);
           this.slides.push(newChallenge);
@@ -175,10 +152,10 @@ export default {
     },
     loadMore() {
       if (this.length > this.challengedb.length) return;
-      this.length = this.length + 4;
+      this.length = this.length + 5;
     },
     handleResize() {
-        this.windowSize = window.innerWidth;
+      this.windowSize = window.innerWidth;
     },
   },
   computed: {
@@ -186,7 +163,7 @@ export default {
       return this.slides.slice(0, this.length);
     },
   },
-  
+
   created() {
     this.windowSize = window.innerWidth;
     window.addEventListener('resize', this.handleResize);

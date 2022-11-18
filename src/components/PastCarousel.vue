@@ -7,7 +7,7 @@
             </div>
             <vueper-slides :arrows="false" :infinite="false" :bullets="false" :visible-slides="2" :slide-multiple="2"
                 :gap="2" :slide-ratio="1 / 7" :dragging-distance="300" :breakpoints="breakpoints">
-                <vueper-slide v-for="movie in recommendationMovieList" :key="movie"
+                <vueper-slide v-for="movie in slides" :key="movie"
                     :image="'https://image.tmdb.org/t/p/w500' + movie.poster_path" />
             </vueper-slides>
         </div>
@@ -18,6 +18,10 @@
 import { VueperSlides, VueperSlide } from 'vueperslides';
 import 'vueperslides/dist/vueperslides.css';
 import axios from "axios";
+
+import { db } from "@/firebase";
+import { query, collection, getDocs } from "firebase/firestore";
+
 
 export default {
     name: "PastCarousel",
@@ -32,6 +36,8 @@ export default {
                 1023: { visibleSlides: 4, slideMultiple: 2, slideRatio: 1 / 3 }
             },
             carouselKey: false,
+            slides: [],
+
         }
     },
 
@@ -51,9 +57,34 @@ export default {
             this.carouselKey += 1;
         },
         gotoPastPage() {
-            this.$router.push("/past-challenges");
+            this.$router.push("/past-challenge");
         },
-    }
+    },
+    async mounted() {
+        const querySnap = await getDocs(query(collection(db, "challenge")));
+        querySnap.forEach((doc) => {
+            const uid = sessionStorage.getItem("uid");
+            let flag = 0;
+            const userId = doc.data().uid;
+            if (userId == uid) {
+                //  console.log(doc.data().selectedMovies.length);
+                for (let i = 0; i < doc.data().selectedMovies.length; i++) {
+                    if (doc.data().selectedMovies[i].review) {
+                        flag = flag + 1;
+                    }
+                }
+                console.log(flag);
+                if (flag != doc.data().selectedMovies.length) {
+                    let newChallenge = {
+                        title: doc.data().chalName,
+                        image: doc.data().image,
+                        content: doc.data().description,
+                    };
+                    this.slides.push(newChallenge);
+                }
+            }
+        });
+    },
 }
 
 </script>
