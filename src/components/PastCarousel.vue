@@ -6,9 +6,9 @@
         <a class="seeMoreBtn" @click.prevent="gotoPastPage">See All</a>
       </div>
       <vueper-slides
-        :arrows="false"
+        :arrows="true"
         :infinite="false"
-        :bullets="false"
+        :bullets="true"
         :visible-slides="2"
         :slide-multiple="2"
         :gap="2"
@@ -19,7 +19,8 @@
         <vueper-slide
           v-for="movie in slides"
           :key="movie"
-          :image="'https://image.tmdb.org/t/p/w500' + movie.poster_path"
+          :image="movie.image"
+          :title="movie.title"
         />
       </vueper-slides>
     </div>
