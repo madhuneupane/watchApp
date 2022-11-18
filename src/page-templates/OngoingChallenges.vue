@@ -1,7 +1,9 @@
 <template>
+  <button class="createChllgBtn" v-if="windowSize<1024 && !moviePart" @click.prevent="createChallenge"></button>
   <NavigationBar />
+  <ChallengesMenu :challengePage="'ongoing'" v-if="windowSize<1024 && !moviePart" />
   <section v-if="firstPart" id="ongoingChalSec">
-    <h1>Ongoing Challenges</h1>
+    <h1 v-if="windowSize>1024">Ongoing Challenges</h1>
     <h2>Keep up! You are almost there</h2>
     <div class="chalList">
       <div
@@ -17,48 +19,50 @@
           <div class="chalDetailsContainer">
             <h3>{{ challenge.title }}</h3>
             <span id="ending">Ending on {{ challenge.endDate }}</span>
-            <span id="qntWatched"
-              >Watched # out of
-              {{ challenge.selectedMovies.length }} movies!</span
-            >
+            <span id="qntWatched" v-if="windowSize>1024">
+            Watched # out of {{ challenge.selectedMovies.length }} movies!
+            </span>
           </div>
         </div>
         <!-- Implement bar -->
       </div>
-      <div class="createChalCard" @click.prevent="createChallenge">
+      <div class="createChalCard" @click.prevent="createChallenge" v-if="windowSize>1024" >
         <img src="../assets/icons/plus-button-challenge.svg" />
         <h3>Create Your Own Challenge!</h3>
-        <button class="primaryBtn">Create a Challenge</button>
+        <!-- <button class="primaryBtn">Create a Challenge</button> -->
       </div>
     </div>
-    <a class="seeMoreBtn" @click.prevent="loadMore">Load More</a>
-    <div class="btnContainer">
+    <a class="seeMoreBtn link" @click.prevent="loadMore">Load More</a>
+    <div class="btnContainer" v-if="windowSize>1024">
       <BackButton title="Back to Challenge" @click.prevent="backChal" />
     </div>
   </section>
 
-  <div v-if="moviePart">
-    <img :src="chalImage" alt="not displayed" style="height: 300px" />
-    <h2>{{ chalName }}</h2>
-    <h3>{{ startDate }}---{{ endDate }}</h3>
-    <p>
-      {{ description }}
-    </p>
-    <div v-for="(movies, i) in movie" :key="i">
-      <img
-        :src="'https://image.tmdb.org/t/p/w500' + movie[i].poster_path"
-        @click.prevent="movieClicked(movie[i], i)"
-      />
-      <h3>{{ movie[i].title }}</h3>
-      <h3 v-if="movie[i].review">Congrats you watched this movie</h3>
+  <section v-if="moviePart" id="chalDetailSection">
+    <div class="chalDetailContainer">
+      <div class="chalImgContainer" v-bind:style="{ backgroundImage: 'url(' + chalImage + ')' }"></div>
+      <div class="chalDetailsInfo">
+        <span class="chalTitle">{{ chalName }}</span>
+        <span class="chalDates">{{ startDate }} ~ {{ endDate }}</span>
+        <p class="chalDescription">{{ description }}</p>
+      </div>
     </div>
-  </div>
+    <div v-for="(movies, i) in movie" :key="i">
+        <img
+          :src="'https://image.tmdb.org/t/p/w500' + movie[i].poster_path"
+          @click.prevent="movieClicked(movie[i])"
+        />
+        <h3>{{ movie[i].title }}</h3>
+        <h3 v-if="movie[i].review">Congrats you watched this movie</h3>
+      </div>
+  </section>
   <FooterBar />
 </template>
 <script>
 import NavigationBar from "../components/NavigationBar.vue";
 import FooterBar from "../components/FooterBar.vue";
 import BackButton from "../components/BackButton.vue";
+import ChallengesMenu from "../components/ChallengesMenu.vue";
 import { db } from "@/firebase";
 import { query, collection, getDocs } from "firebase/firestore";
 
@@ -68,6 +72,7 @@ export default {
     NavigationBar,
     FooterBar,
     BackButton,
+    ChallengesMenu,
   },
   data() {
     return {
@@ -82,6 +87,7 @@ export default {
       startDate: "",
       endDate: "",
       description: "",
+      windowSize: 0,
     };
   },
 
@@ -89,7 +95,6 @@ export default {
     // const querySnap = await getDocs(query(collection(db, "challenge")));
     // querySnap.forEach((doc) => {
     //   const uid = sessionStorage.getItem("uid");
-
     //   const userId = doc.data().uid;
     //   if (userId == uid) {
     //     let newChallenge = {
@@ -103,7 +108,6 @@ export default {
     //     this.slides.push(newChallenge);
     //   }
     // });
-
     const querySnap = await getDocs(query(collection(db, "challenge")));
     querySnap.forEach((doc) => {
       const uid = sessionStorage.getItem("uid");
@@ -169,11 +173,21 @@ export default {
       if (this.length > this.challengedb.length) return;
       this.length = this.length + 4;
     },
+    handleResize() {
+        this.windowSize = window.innerWidth;
+    },
   },
   computed: {
     chalLoading() {
       return this.slides.slice(0, this.length);
     },
+  },
+  
+  created() {
+    window.addEventListener('resize', this.handleResize);
+  },
+  unmounted() {
+    window.removeEventListener('resize', this.handleResize);
   },
 };
 </script>
