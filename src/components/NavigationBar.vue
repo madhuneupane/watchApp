@@ -7,27 +7,11 @@
         <DropdownMenu v-if="isSignedIn && imageSource" title="Challenges" />
       </div>
       <!-- v-if="user" -->
-      <div
-        v-if="!isSignedOut"
-        class="nav-link"
-        id="login"
-        @click.prevent="goToLogin"
-      >
+      <div v-if="!isSignedOut" class="nav-link" id="login" @click.prevent="goToLogin">
         Login
       </div>
-      <img
-        v-if="isSignedIn && imageSource"
-        id="userIcon"
-        :src="imageSource"
-        alt="userPic"
-        @click.prevent="profile"
-      />
-      <button
-        v-if="isSignedIn && imageSource"
-        @click.prevent="signingOut"
-        class="nav-link tertiaryBtn"
-        id="signOut"
-      >
+      <img v-if="isSignedIn && imageSource" id="userIcon" :src="imageSource" alt="userPic" @click.prevent="profile" />
+      <button v-if="isSignedIn && imageSource" @click.prevent="signingOut" class="nav-link tertiaryBtn" id="signOut">
         Sign Out
       </button>
     </div>
@@ -90,42 +74,3 @@ export default {
   },
 };
 </script>
-
-<style>
-.navbar {
-  display: flex;
-  flex-direction: row-reverse;
-  justify-content: space-between;
-}
-@media only screen and (min-width: 1024px) {
-  .navbar {
-    flex-direction: row;
-  }
-}
-#userIcon {
-  width: 3.5rem;
-  height: 3.5rem;
-  border-radius: 50%;
-  cursor: pointer;
-}
-.navbar-items {
-  display: inline-flex;
-  align-items: center;
-  padding: 5px;
-}
-.nav-link {
-  margin-left: 40px;
-  margin-right: 40px;
-}
-.icon {
-  width: 20px;
-  padding-left: 5px;
-}
-#logo {
-  padding-left: 20px;
-}
-#home,
-#login {
-  cursor: pointer;
-}
-</style>
