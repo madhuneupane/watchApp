@@ -14,8 +14,10 @@
     .navbar {
         flex-direction: row;
         position: fixed;
+        margin-top: 0;
         z-index: 99;
         width: 100%;
+        top: 0;
     }
 }
 
