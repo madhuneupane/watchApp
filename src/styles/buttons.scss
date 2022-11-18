@@ -43,6 +43,10 @@
     height: 5.5rem;
     border-radius: 50%;
     background: linear-gradient(91.25deg, $orange 0%, $purple 100%);
+    position: fixed;
+    bottom: $standardSpacement;
+    right: $standardSpacement;
+    z-index: 5;
 
     &::after {
         content: "Create Challenge";
@@ -53,7 +57,7 @@
     text-decoration: none;
     padding: 0;
     margin: 0;
-    font-size: 20px;
+    font-size: 14px;
 }
 
 .btnContainer {
