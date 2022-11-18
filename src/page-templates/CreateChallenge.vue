@@ -8,9 +8,25 @@
       <div class="movieSelection movieQuantity">
         <label for="quantity">Movies</label>
         <div class="movieQuantitySelection">
-          <img class="icon" id="minusSign" src="../assets/icons/minus-sign.svg" @click.prevent="decrease" />
-          <input v-model="quantity" type="number" id="quantity" name="quantity" min="3" />
-          <img class="icon" id="plusSign" src="../assets/icons/plus-sign.svg" @click.prevent="increase" />
+          <img
+            class="icon"
+            id="minusSign"
+            src="../assets/icons/minus-sign.svg"
+            @click.prevent="decrease"
+          />
+          <input
+            v-model="quantity"
+            type="number"
+            id="quantity"
+            name="quantity"
+            min="3"
+          />
+          <img
+            class="icon"
+            id="plusSign"
+            src="../assets/icons/plus-sign.svg"
+            @click.prevent="increase"
+          />
         </div>
       </div>
 
@@ -53,10 +69,18 @@
 
       <section id="recommendPageSec">
         <div class="movieList">
-          <div id="movieSelected" class="movieItem" v-for="(movie, index) in chooseMovie" :key="index" :index="index"
-            @click="selectMovie">
-            <img :src="'https://image.tmdb.org/t/p/w500' + movie.poster_path"
-              alt="{{ movie.original_title }} + ' Movie Poster'" />
+          <div
+            id="movieSelected"
+            class="movieItem"
+            v-for="(movie, index) in chooseMovie"
+            :key="index"
+            :index="index"
+            @click="selectMovie"
+          >
+            <img
+              :src="'https://image.tmdb.org/t/p/w500' + movie.poster_path"
+              alt="{{ movie.original_title }} + ' Movie Poster'"
+            />
             <!-- <span>{{ movie.original_title }}</span> -->
           </div>
         </div>
@@ -65,10 +89,12 @@
       <a href="#">Load More</a>
 
       <div class="btnContainer">
-        <NextButton @click.prevent="
-  movieDesc();
-setSelectedMoviesArray();
-        " />
+        <NextButton
+          @click.prevent="
+            movieDesc();
+            setSelectedMoviesArray();
+          "
+        />
         <BackButton @click.prevent="backMovieSelect" title="Back" />
         <!-- <PopupModal @close="togglePopup" :popupActive="popupActive">
           <div class="popupContent">
@@ -88,7 +114,11 @@ setSelectedMoviesArray();
       <div class="selectedMoviesContainer">
         <p class="moviesSelectedText">Movies Selected</p>
         <ul class="selectedMoviesList">
-          <li class="selectedMovieTitle" v-for="movie in selectedMovies" :key="movie">
+          <li
+            class="selectedMovieTitle"
+            v-for="movie in selectedMovies"
+            :key="movie"
+          >
             <!-- {{ selectedMovies[movie].original_title }} -->
             {{ movie.original_title }}
             <!-- Include the call from the db -->
@@ -100,13 +130,23 @@ setSelectedMoviesArray();
       <form class="challengeInfoForm">
         <div class="form_challangeName">
           <label for="chalName">Challenge Name<span class="req">*</span></label>
-          <input v-model="chalName" type="text" class="inputArea" id="chalName" />
+          <input
+            v-model="chalName"
+            type="text"
+            class="inputArea"
+            id="chalName"
+          />
           <p class="error">{{ errorMessage }}</p>
         </div>
         <div class="dateContainer">
           <div class="form_startDate">
             <label for="startDate">Start Date<span class="req">*</span></label>
-            <input v-model="startDate" type="date" name="start" id="startDate" />
+            <input
+              v-model="startDate"
+              type="date"
+              name="start"
+              id="startDate"
+            />
             <p class="error">{{ startError }}</p>
           </div>
           <div class="form_endDate">
@@ -131,48 +171,61 @@ setSelectedMoviesArray();
           </label>
         </div> -->
 
-        <p style="text-decoration: underline; cursor: default" @click.prevent="clickImage">
+        <p
+          style="text-decoration: underline; cursor: default"
+          @click.prevent="clickImage"
+        >
           Take a photo
         </p>
       </div>
 
       <div v-if="secondPartFirst" class="profilePicSectionFirst">
         <div class="profilePictureContainer">
-          <img id="profilePicture" src="../assets/icons/profile.svg" alt="sorry"
-            :class="{ capturedPicture: photoSnapped === true }" />
+          <img
+            id="profilePicture"
+            src="../assets/icons/profile.svg"
+            alt="sorry"
+            :class="{ capturedPicture: photoSnapped === true }"
+          />
         </div>
       </div>
-
 
       <div v-if="secondPartSecond" class="profilePicSectionSecond">
         <video autoplay class="feed"></video>
         <button class="secondaryBtn" @click.prevent="displayImage">Snap</button>
       </div>
 
-
-
-
-
-
-
       <div class="addDescriptionContainer">
-        <img src="../assets/icons/plus-button-challenge.svg" @click.prevent="addDescription" />
+        <img
+          src="../assets/icons/plus-button-challenge.svg"
+          @click.prevent="addDescription"
+        />
         <label>Add a Challenge Description</label>
-        <textarea v-model="description" v-if="descriptionArea" name="chalDescription" id="description" cols="30"
-          rows="6"></textarea>
+        <textarea
+          v-model="description"
+          v-if="descriptionArea"
+          name="chalDescription"
+          id="description"
+          cols="30"
+          rows="6"
+        ></textarea>
       </div>
 
       <div class="btnContainer">
         <SaveButton @click.prevent="addChallenge" />
         <BackButton @click.prevent="backSelection" title="Back" />
       </div>
-      <!-- <SimplePopup @close="togglePopup" :popupActive="popupActive">
+      <SimplePopup @close="togglePopup" :popupActive="popupActive">
         <div class="popupContent">
           <h1 class="popUpHeading">Saved!</h1>
-          <h3 class="popUpText">Hooray! Challenge created!<br>Watch movies to earn special badges!</h3>
-          <button @click="redirect" type="button" class="secondaryBtn">Go to Challenges</button>
+          <h3 class="popUpText">
+            Hooray! Challenge created!<br />Watch movies to earn special badges!
+          </h3>
+          <button @click="redirect" type="button" class="secondaryBtn">
+            Go to Challenges
+          </button>
         </div>
-      </SimplePopup> -->
+      </SimplePopup>
     </div>
   </div>
   <FooterBar />
@@ -190,9 +243,10 @@ import FooterBar from "../components/FooterBar.vue";
 import NextButton from "../components/NextButton.vue";
 import BackButton from "../components/BackButton.vue";
 import SaveButton from "../components/SaveButton.vue";
-// import SimplePopup from '../components/SimplePopup.vue';
-// import { ref } from 'vue';
 
+import SimplePopup from "../components/SimplePopup.vue";
+// import { ref } as ref1 from 'vue';
+import * as vue from "vue";
 
 export default {
   name: "CreateChallenge",
@@ -202,7 +256,7 @@ export default {
     NextButton,
     BackButton,
     SaveButton,
-    // SimplePopup
+    SimplePopup,
   },
   data() {
     return {
@@ -227,7 +281,8 @@ export default {
       selectedMovies: [],
       secondPartSecond: false,
       secondPartFirst: false,
-      urlOfImage: ""
+      urlOfImage: "",
+      adminChallenge: false,
     };
   },
   /* created() {
@@ -250,12 +305,14 @@ export default {
       this.tSectionOn = false;
       this.secondPartFirst = false;
       this.secondPartSecond = false;
-      this.quantity = document.getElementById('quantity').value;
-      this.genreOfChoice = document.getElementById('genreDropdown').value;
+      this.quantity = document.getElementById("quantity").value;
+      this.genreOfChoice = document.getElementById("genreDropdown").value;
 
       this.chooseMovie = axios
         .get(
-          "https://api.themoviedb.org/3/discover/movie?api_key=8ec942643846f64d66eed102868455f3&with_genres=" + this.genreOfChoice + "&language=en-US&page=1&region=CA"
+          "https://api.themoviedb.org/3/discover/movie?api_key=8ec942643846f64d66eed102868455f3&with_genres=" +
+            this.genreOfChoice +
+            "&language=en-US&page=1&region=CA"
         )
         .then((info) => {
           this.chooseMovie = info.data.results;
@@ -297,11 +354,13 @@ export default {
       this.carouselKey += 1;
     },
     selectMovie() {
-      if (this.selectedMoviesQuantity < this.quantity && !event.currentTarget.classList.contains("selected")) {
+      if (
+        this.selectedMoviesQuantity < this.quantity &&
+        !event.currentTarget.classList.contains("selected")
+      ) {
         event.currentTarget.classList.toggle("selected");
         this.selectedMoviesQuantity++;
-      }
-      else if (event.currentTarget.classList.contains("selected")) {
+      } else if (event.currentTarget.classList.contains("selected")) {
         event.currentTarget.classList.toggle("selected");
         this.selectedMoviesQuantity--;
       }
@@ -349,9 +408,12 @@ export default {
         this.endError = "Please input the end date";
         return false;
       }
-      // this.togglePopup();
+      this.togglePopup();
       try {
         const uid = sessionStorage.getItem("uid");
+        if (uid == "HWKvoha2m2dfjdZSMvIQIV3CVK52") {
+          this.adminChallenge = true;
+        }
         const docRef = addDoc(collection(db, "challenge"), {
           quantity: this.quantity,
           genreDropdown: this.genreDropdown,
@@ -361,8 +423,8 @@ export default {
           description: this.description,
           uid: uid,
           selectedMovies: this.selectedMovies,
-          adminChallenge: false,
-          image: this.urlOfImage
+          adminChallenge: this.adminChallenge,
+          image: this.urlOfImage,
         });
         // this.$router.push("/challenge-main");
         console.log(docRef);
@@ -370,9 +432,9 @@ export default {
         console.log(e);
       }
     },
-    // redirect() {
-    //   this.$router.push("/ongoing-challenges");
-    // },
+    redirect() {
+      this.$router.push("/ongoing-challenges");
+    },
 
     // chooseChalImage() {
     //   document.getElementById("inputForImage").click();
@@ -462,12 +524,12 @@ export default {
     },
   },
 
-  // setup() {
-  //   const popupActive = ref(false);
-  //   const togglePopup = () => {
-  //     popupActive.value = !popupActive.value;
-  //   }
-  //   return { popupActive, togglePopup };
-  // }
+  setup() {
+    const popupActive = vue.ref(false);
+    const togglePopup = () => {
+      popupActive.value = !popupActive.value;
+    };
+    return { popupActive, togglePopup };
+  },
 };
 </script>
