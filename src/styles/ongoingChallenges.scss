@@ -26,7 +26,7 @@
     }
 }
 
-#ongoingChalSec .btnContainer .secondaryBtn{
+#ongoingChalSec .btnContainer .secondaryBtn {
     @media only screen and (min-width: $media-desktop) {
         width: auto;
     }
@@ -90,10 +90,12 @@ span {
     width: 100%;
     display: flex;
     flex-direction: column;
-    
+
     @media only screen and (min-width: $media-desktop) {
         flex-direction: row;
+        flex-wrap: wrap;
     }
+
     /* justify-content: space-between; */
 }
 
@@ -114,6 +116,7 @@ span {
     font-size: 1rem;
     padding: .75rem;
 }
+
 //First Section End
 
 //Second Section Start
@@ -209,7 +212,7 @@ span {
     }
 }
 
-#chalDetailSection .ongoingChalContainer .ongoingChalItem img{
+#chalDetailSection .ongoingChalContainer .ongoingChalItem img {
     width: 100%;
     height: 100%;
     border-radius: $poster_radius;
@@ -231,6 +234,7 @@ span {
     display: flex;
     justify-content: center;
     align-items: center;
+
     @media only screen and (min-width: $media-desktop) {
         height: 98.5%;
     }
@@ -239,7 +243,7 @@ span {
 #chalDetailSection .ongoingChalContainer .ongoingChalItem .movieWatched span {
     color: $black;
     font-weight: bold;
-   /*  @media only screen and (min-width: $media-desktop) {
+    /*  @media only screen and (min-width: $media-desktop) {
         height: auto;
     } */
 }
