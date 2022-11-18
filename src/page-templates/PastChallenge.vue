@@ -4,19 +4,12 @@
     <h1>Past Challenges</h1>
     <h2>You've achieved this much!</h2>
     <div class="chalList">
-      <div
-        class="chalInfo"
-        v-for="(challenge, index) in chalLoading"
-        :key="index"
-      >
-        <div
-          class="challenge"
-          v-bind:style="{ backgroundImage: 'url(' + challenge.image + ')' }"
-          @click.prevent="challengeClicked(index)"
-        >
+      <div class="chalInfo" v-for="(challenge, index) in chalLoading" :key="index">
+        <div class="challenge" v-bind:style="{ backgroundImage: 'url(' + challenge.image + ')' }"
+          @click.prevent="challengeClicked(index)">
           <div class="chalDetailsContainer">
             <h3>{{ challenge.title }}</h3>
-            <span id="ending">Ending on {{ challenge.endDate }}</span>
+            <span id="ending">Ended on {{ challenge.endDate }}</span>
           </div>
         </div>
       </div>

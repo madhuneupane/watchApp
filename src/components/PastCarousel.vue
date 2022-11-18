@@ -5,10 +5,9 @@
                 <h2>You've achieved this much!</h2>
                 <a class="seeMoreBtn" @click.prevent="gotoPastPage">See All</a>
             </div>
-            <vueper-slides :arrows="false" :infinite="false" :bullets="false" :visible-slides="2" :slide-multiple="2"
+            <vueper-slides :arrows="true" :infinite="false" :bullets="true" :visible-slides="2" :slide-multiple="2"
                 :gap="2" :slide-ratio="1 / 7" :dragging-distance="300" :breakpoints="breakpoints">
-                <vueper-slide v-for="movie in slides" :key="movie"
-                    :image="'https://image.tmdb.org/t/p/w500' + movie.poster_path" />
+                <vueper-slide v-for="movie in slides" :key="movie" :image="movie.image" :title="movie.title" />
             </vueper-slides>
         </div>
     </section>
@@ -74,7 +73,7 @@ export default {
                     }
                 }
                 console.log(flag);
-                if (flag != doc.data().selectedMovies.length) {
+                if (flag == doc.data().selectedMovies.length) {
                     let newChallenge = {
                         title: doc.data().chalName,
                         image: doc.data().image,
