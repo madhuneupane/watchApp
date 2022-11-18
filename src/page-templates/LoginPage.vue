@@ -22,7 +22,7 @@
         </SimplePopup>
         <!-- @click.prevent="addUser" -->
       </form>
-      <button type="submit" class="secondaryBtn" @click.prevent="gotoAccount">
+      <button type="submit" class="createAccBtn" @click.prevent="gotoAccount">
         Create Account
       </button>
       <div class="linksContainer">
