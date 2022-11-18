@@ -3,3 +3,50 @@
     font-display: block;
     display: inline-block;
 }
+
+.navbar {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+}
+
+@media only screen and (min-width: 1024px) {
+    .navbar {
+        flex-direction: row;
+        position: fixed;
+        z-index: 99;
+        width: 100%;
+    }
+}
+
+#userIcon {
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.navbar-items {
+    display: inline-flex;
+    align-items: center;
+    padding: 5px;
+}
+
+.nav-link {
+    margin-left: 40px;
+    margin-right: 40px;
+}
+
+.icon {
+    width: 20px;
+    padding-left: 5px;
+}
+
+#logo {
+    padding-left: 20px;
+}
+
+#home,
+#login {
+    cursor: pointer;
+}
