@@ -258,14 +258,19 @@ export default {
       this.fSectionOn = true;
       this.sSectionOn = false;
       this.tSectionOn = false;
+      this.selectedMoviesQuantity = 0;
     },
     forceRerender() {
       this.carouselKey += 1;
     },
     selectMovie() {
-      if(this.selectedMoviesQuantity < this.quantity) {
+      if(this.selectedMoviesQuantity < this.quantity && !event.currentTarget.classList.contains("selected")) {
         event.currentTarget.classList.toggle("selected");
         this.selectedMoviesQuantity++;
+      } 
+      else if(event.currentTarget.classList.contains("selected")) {
+        event.currentTarget.classList.toggle("selected");
+        this.selectedMoviesQuantity--;
       }
     },
 
