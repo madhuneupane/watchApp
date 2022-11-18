@@ -103,6 +103,7 @@ export default {
             //console.log(uid);
             sessionStorage.setItem("uid", uid);
             this.$router.push("/");
+            this.togglePopup();
           })
           .catch((error) => {
             const errorCode = error.code;
@@ -111,7 +112,6 @@ export default {
             console.log(errorCode);
             console.log(errorMessage);
           });
-        this.togglePopup();
         this.email = "";
         this.password = "";
       }
