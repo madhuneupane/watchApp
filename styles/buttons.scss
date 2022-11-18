@@ -1,0 +1,68 @@
+.primaryBtn,
+.secondaryBtn,
+.tertiaryBtn {
+    position: relative;
+    border-radius: $btn_radius;
+    border: none;
+    width: 100%;
+    padding: 0.875rem 0;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+
+    @media only screen and (min-width: $media-desktop) {
+        font-size: 1.125rem;
+        width: fit-content;
+        padding: 0.875rem 2rem;
+
+        &:hover {
+            background: linear-gradient(91.25deg, $blue 0%, $purple 51.47%, $orange 100%);
+            color: $white;
+        }
+    }
+}
+
+.primaryBtn {
+    background-color: $orange;
+    color: $white;
+}
+
+.secondaryBtn {
+    background-color: $beige;
+    color: $black;
+}
+
+.tertiaryBtn {
+    background-color: $grey;
+    color: $black;
+}
+
+.createChllgBtn {
+    color: $white;
+    width: 5.5rem;
+    height: 5.5rem;
+    border-radius: 50%;
+    background: linear-gradient(91.25deg, $orange 0%, $purple 100%);
+    position: fixed;
+    bottom: $standardSpacement;
+    right: $standardSpacement;
+    z-index: 5;
+
+    &::after {
+        content: "Create Challenge";
+    }
+}
+
+.seeMoreBtn {
+    text-decoration: none;
+    padding: 0;
+    margin: 0;
+    font-size: 14px;
+}
+
+.btnContainer {
+
+    @media only screen and (min-width: $media-desktop) {
+        width: 30%;
+    }
+}

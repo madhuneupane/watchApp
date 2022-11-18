@@ -1,0 +1,25 @@
+.challengesMenu {
+    display: flex;
+    flex-direction: column;
+    padding: $standardSpacement $standardSpacement 0;
+}
+
+.challengesMenu h2 {
+    font-size: 1.75rem;
+}
+
+.challengesMenu .challengesMenuList {
+    border: 3px solid white;
+    padding: 0.25rem $standardSpacement;
+    border-radius: $poster_radius;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.challengesMenu .challengesMenuList .challengePageActive {
+    border-radius: $poster_radius;
+    padding: $standardSpacement/2 $standardSpacement;
+    background: linear-gradient(91.25deg, $orange 0%, $purple 100%);
+}

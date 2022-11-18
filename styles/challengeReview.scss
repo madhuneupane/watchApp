@@ -1,0 +1,87 @@
+#movieReviewPage {
+    padding: $standardSpacement;
+
+    @media only screen and (min-width: $media-desktop) {
+        width: 60%;
+        margin: auto;
+    }
+}
+
+#movieReviewPage h3 {
+    font-weight: bold;
+    text-align: unset !important;
+}
+
+#movieReviewPage .movieInfoContainer {
+    display: flex;
+    flex-direction: row;
+}
+
+#movieReviewPage .movieInfoContainer img {
+    height: 15rem;
+    border-radius: $poster_radius;
+
+    @media only screen and (min-width: $media-desktop) {
+        height: 20rem;
+    }
+}
+
+#movieReviewPage .movieInfoContainer .movieInfo {
+    display: flex;
+    flex-direction: column;
+    margin-left: $standardSpacement;
+}
+
+#movieReviewPage .movieInfoContainer .movieInfo span {
+    margin-bottom: $standardSpacement;
+
+    @media only screen and (min-width: $media-desktop) {
+        font-size: 1.25rem;
+    }
+}
+
+#movieReviewPage .movieInfoContainer .movieInfo .movieInfo__name {
+    font-size: 1.5rem;
+    font-weight: bold;
+
+    @media only screen and (min-width: $media-desktop) {
+        font-size: 3rem;
+    }
+}
+
+#movieReviewPage .vue3-star-ratings__wrapper {
+    margin: 0 auto;
+}
+
+#movieReviewPage .overviewContainer {
+    padding-bottom: $standardSpacement;
+    border-bottom: 3px solid $white;
+}
+
+#movieReviewPage .userReviewContainer {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: $standardSpacement;
+}
+
+#movieReviewPage .userReviewContainer textarea {
+    margin-top: $standardSpacement;
+}
+
+#movieReviewPage .btnContainer {
+    display: flex;
+    flex-direction: column;
+    margin: $standardSpacement auto;
+}
+
+#movieReviewPage .primaryBtn {
+    margin-bottom: $standardSpacement;
+}
+
+#movieReviewPage .primaryBtn, .secondaryBtn {
+    align-self: unset !important;
+    width: 100%;
+}
+
+//popup start
+
