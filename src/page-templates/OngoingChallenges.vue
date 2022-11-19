@@ -73,7 +73,7 @@ import FooterBar from "../components/FooterBar.vue";
 import BackButton from "../components/BackButton.vue";
 import ChallengesMenu from "../components/ChallengesMenu.vue";
 import { db } from "@/firebase";
-import { query, collection, getDocs, deleteDoc, where } from "firebase/firestore";
+import { query, collection, getDocs } from "firebase/firestore";
 
 import SimplePopup from "../components/SimplePopup.vue";
 import * as vue from "vue";
@@ -185,26 +185,26 @@ export default {
       this.togglePopup();
     },
     async redirect() {
-      const querySnap = await getDocs(query(collection(db, "challenge"), where("chalName", "==", this.chalName, true)));
-      querySnap.forEach((doc) => {
-        // const uid = sessionStorage.getItem("uid");
-        // const userId = doc.data().uid;
-        this.chalID = doc.id;
-        const docRef = doc(db, "challenge", this.chalID);
-
-        // if (userId != "HWKvoha2m2dfjdZSMvIQIV3CVK52") {
-        //   deleteDoc(doc(db, "challenge", this.chalID));
-        //   console.log("Challenge deleted hahahahah");
-        // }
-      });
-      deleteDoc(docRef)
-        .then(() => {
-          console.log("Deleted");
-          this.$router.push("/ongoing-challenges");
-        })
-        .catch((error) => {
-          console.log(error);
-        })
+      // const querySnap = await getDocs(query(collection(db, "challenge"), where("chalName", "==", this.chalName, true)));
+      // querySnap.forEach((doc) => {
+      //   // const uid = sessionStorage.getItem("uid");
+      //   // const userId = doc.data().uid;
+      //   this.chalID = doc.id;
+      //   const docRef = doc(db, "challenge", this.chalID);
+      //   console.log(docRef);
+      //   // if (userId != "HWKvoha2m2dfjdZSMvIQIV3CVK52") {
+      //   //   deleteDoc(doc(db, "challenge", this.chalID));
+      //   //   console.log("Challenge deleted hahahahah");
+      //   // }
+      // });
+      // deleteDoc(docRef)
+      //   .then(() => {
+      //     console.log("Deleted");
+      //     this.$router.push("/ongoing-challenges");
+      //   })
+      //   .catch((error) => {
+      //     console.log(error);
+      //   })
     },
 
 
