@@ -8,9 +8,7 @@
       <div class="movieInfo">
         <span class="movieInfo__name">{{ movieName }}</span>
         <span class="movieInfo__id">{{ movieID }}</span>
-        <span class="movieInfo__releaseDate"
-          >Release Date:<br />{{ movieRelease }}</span
-        >
+        <span class="movieInfo__releaseDate">Release Date:<br />{{ movieRelease }}</span>
         <span class="movieInfo__rating">Rating: {{ movieRating }}/10</span>
       </div>
     </div>
@@ -22,34 +20,20 @@
 
     <label>Rating<span class="req">*</span></label>
     <!-- <input v-model="userRating" type="number" name="userRating" id="userRating" /> -->
-    <vue3starRatings
-      v-model="userRating"
-      class="ratingStars"
-      starColor="#ffffff"
-      starSize="25"
-      controlBg="#00002A"
-    />
+    <vue3starRatings v-model="userRating" class="ratingStars" starColor="#ffffff" starSize="25" controlBg="#00002A" />
 
     <div class="userReviewContainer">
       <label for="userReview">Review<span class="req">*</span></label>
-      <textarea
-        v-model="userReview"
-        id="userReview"
-        cols="30"
-        rows="10"
-        placeholder="Leave your review here!"
-      ></textarea>
+      <textarea v-model="userReview" id="userReview" cols="30" rows="10"
+        placeholder="Leave your review here!"></textarea>
     </div>
 
     <p class="error">{{ fillMessage }}</p>
 
     <div class="btnContainer">
-      <SaveButton
-        @click.prevent="
-          saveReview();
-          togglePopup();
-        "
-      />
+      <SaveButton @click.prevent="
+        saveReview
+      " />
       <BackButton @click.prevent="goBack" title="Back" />
     </div>
     <SimplePopup @close="togglePopup" :popupActive="popupActive">
@@ -151,6 +135,7 @@ export default {
       if (this.userRating == "" || this.userReview == "") {
         this.fillMessage = "Don't forget to write your review!";
       } else {
+        this.togglePopup();
         let i = sessionStorage.getItem("index");
 
         this.movieList[i].review = this.userReview;
@@ -173,6 +158,9 @@ export default {
         });
       }
       // We need to update db using the challenge title
+
+      // UPDATE - USER REVIEW NOT WORKING
+
     },
     goBack() {
       this.$router.push("/ongoing-challenges");
