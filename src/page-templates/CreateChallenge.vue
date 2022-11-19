@@ -215,13 +215,17 @@
         <SaveButton @click.prevent="addChallenge" />
         <BackButton @click.prevent="backSelection" title="Back" />
       </div>
-      <!-- <SimplePopup @close="togglePopup" :popupActive="popupActive">
+      <SimplePopup @close="togglePopup" :popupActive="popupActive">
         <div class="popupContent">
           <h1 class="popUpHeading">Saved!</h1>
-          <h3 class="popUpText">Hooray! Challenge created!<br>Watch movies to earn special badges!</h3>
-          <button @click="redirect" type="button" class="secondaryBtn">Go to Challenges</button>
+          <h3 class="popUpText">
+            Hooray! Challenge created!<br />Watch movies to earn special badges!
+          </h3>
+          <button @click="redirect" type="button" class="secondaryBtn">
+            Go to Challenges
+          </button>
         </div>
-      </SimplePopup> -->
+      </SimplePopup>
     </div>
   </div>
   <FooterBar />
@@ -239,8 +243,10 @@ import FooterBar from "../components/FooterBar.vue";
 import NextButton from "../components/NextButton.vue";
 import BackButton from "../components/BackButton.vue";
 import SaveButton from "../components/SaveButton.vue";
-// import SimplePopup from '../components/SimplePopup.vue';
-// import { ref } from 'vue';
+
+import SimplePopup from "../components/SimplePopup.vue";
+// import { ref } as ref1 from 'vue';
+import * as vue from "vue";
 
 export default {
   name: "CreateChallenge",
@@ -250,7 +256,7 @@ export default {
     NextButton,
     BackButton,
     SaveButton,
-    // SimplePopup
+    SimplePopup,
   },
   data() {
     return {
@@ -276,6 +282,7 @@ export default {
       secondPartSecond: false,
       secondPartFirst: false,
       urlOfImage: "",
+      adminChallenge: false,
     };
   },
   /* created() {
@@ -401,9 +408,12 @@ export default {
         this.endError = "Please input the end date";
         return false;
       }
-      // this.togglePopup();
+      this.togglePopup();
       try {
         const uid = sessionStorage.getItem("uid");
+        if (uid == "HWKvoha2m2dfjdZSMvIQIV3CVK52") {
+          this.adminChallenge = true;
+        }
         const docRef = addDoc(collection(db, "challenge"), {
           quantity: this.quantity,
           genreDropdown: this.genreDropdown,
@@ -413,7 +423,7 @@ export default {
           description: this.description,
           uid: uid,
           selectedMovies: this.selectedMovies,
-          adminChallenge: false,
+          adminChallenge: this.adminChallenge,
           image: this.urlOfImage,
         });
         // this.$router.push("/challenge-main");
@@ -422,9 +432,9 @@ export default {
         console.log(e);
       }
     },
-    // redirect() {
-    //   this.$router.push("/ongoing-challenges");
-    // },
+    redirect() {
+      this.$router.push("/ongoing-challenges");
+    },
 
     // chooseChalImage() {
     //   document.getElementById("inputForImage").click();
@@ -488,6 +498,7 @@ export default {
         const storageRef = ref(storage, `images/${new Date()}`);
         uploadBytes(storageRef, blob).then(() => {
           getDownloadURL(storageRef).then((result) => {
+            console.log(result);
             this.urlOfImage = result;
             let profilePhoto = document.getElementById("profilePicture");
             // console.log("this" + this.a);
@@ -513,12 +524,12 @@ export default {
     },
   },
 
-  // setup() {
-  //   const popupActive = ref(false);
-  //   const togglePopup = () => {
-  //     popupActive.value = !popupActive.value;
-  //   }
-  //   return { popupActive, togglePopup };
-  // }
+  setup() {
+    const popupActive = vue.ref(false);
+    const togglePopup = () => {
+      popupActive.value = !popupActive.value;
+    };
+    return { popupActive, togglePopup };
+  },
 };
 </script>
