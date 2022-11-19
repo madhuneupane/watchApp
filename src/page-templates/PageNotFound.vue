@@ -1,15 +1,17 @@
 <template>
   <NavigationBar />
-  <div class="404">
+  <div class="pageNotFound">
     <h1>Oops!</h1>
     <h2>We can't seem to find the page you are looking for.</h2>
-    <p>Don't worry! You can try these useful links instead:</p>
-    <button type="submit" class="secondaryBtn" @click.prevent="home">
-      Home
-    </button>
-    <button type="submit" class="secondaryBtn" @click.prevent="goChallenge">
-      Challenges
-    </button>
+    <p class="usefulLinks">Don't worry! You can try these useful links instead:</p>
+    <div class="btnContainer">
+      <button type="submit" class="secondaryBtn" @click.prevent="home">
+        Home
+      </button>
+      <button type="submit" class="primaryBtn" @click.prevent="goChallenge">
+        Challenges
+      </button>
+    </div>
   </div>
   <FooterBar />
 </template>
