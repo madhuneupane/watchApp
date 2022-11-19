@@ -1,0 +1,16 @@
+.offline {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-top: 5rem;
+    margin-bottom: 5rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
+.offline .offlineMessage {
+    margin-bottom: 5rem;
+}
+
+@media only screen and (min-width: 1024px) {}
