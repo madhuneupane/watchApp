@@ -488,7 +488,6 @@ export default {
         const storageRef = ref(storage, `images/${new Date()}`);
         uploadBytes(storageRef, blob).then(() => {
           getDownloadURL(storageRef).then((result) => {
-            console.log(result);
             this.urlOfImage = result;
             let profilePhoto = document.getElementById("profilePicture");
             // console.log("this" + this.a);

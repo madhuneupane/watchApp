@@ -1,106 +1,169 @@
 <template>
-    <NavigationBar />
-    <section id="ongoingChalSec" v-if="chalBrief">
-        <h1>Defy Us!</h1>
-        <h2>Try beating WatchApp!</h2>
-        <div class="chalList">
-            <div class="chalInfo" v-for="(challenge, index) in chalLoading" :key="index"
-                :class="{ active: index === activeItem }">
-                {{ challenge }}
-                <div>
-                    <img src="" id="chalImage">
-                    <h2 id="chalName" @click.prevent="chalDetailCall">TEST</h2>
-                    <p id="dates">2022.10.01 - 2022.10.31</p>
-                    <p id="qntExisting"># movies waiting for you!</p>
-                    <button @click="selectItem">Accept Challenge</button>
-                    <!-- <button v-if="fButton" @click.prevent="acceptChal">Accept Challenge</button> -->
-                    <!-- Include a v-model or whatever to save it to the DB -->
-                    <!-- <button v-if="sButton">Challenge Accepted <img src="../assets/icons/challenge-accepted.svg"></button> -->
-                </div>
-            </div>
-            <button @click.prevent="loadMore">Load More</button>
-            <BackButton title="Back to Challenge" @click.prevent="backChal" />
+  <button
+    class="createChllgBtn"
+    v-if="windowSize < 1024 && !moviePart"
+    @click.prevent="createChallenge"
+  ></button>
+  <NavigationBar />
+  <ChallengesMenu
+    :challengePage="'ongoing'"
+    v-if="windowSize < 1024 && !moviePart"
+  />
+  <section v-if="firstPart" id="ongoingChalSec">
+    <h1 v-if="windowSize > 1024">Ongoing Challenges</h1>
+    <h2>Keep up! You are almost there</h2>
+    <div class="chalList">
+      <div
+        class="chalInfo"
+        v-for="(challenge, index) in chalLoading"
+        :key="index"
+      >
+        <div
+          class="challenge"
+          v-bind:style="{ backgroundImage: 'url(' + challenge.image + ')' }"
+          @click.prevent="challengeClicked(index)"
+        >
+          <div class="chalDetailsContainer">
+            <h3>{{ challenge.title }}</h3>
+            <span id="ending">Ending on {{ challenge.endDate }}</span>
+          </div>
         </div>
+        <!-- Implement bar -->
+      </div>
+    </div>
+    <a class="seeMoreBtn link" @click.prevent="loadMore">Load More</a>
+    <div class="btnContainer" v-if="windowSize > 1024">
+      <BackButton title="Back to Challenge" @click.prevent="backChal" />
+    </div>
+  </section>
 
-        <section id="ongoingChalDetails" v-if="chalDetail">
-            <div>
-                <img src="" id="chalImage">
-                <h1 id="chalName">TEST</h1>
-                <h2 id="dates">2022.10.01 - 2022.10.31</h2>
-                <h3>Ready for a Challenge?</h3>
-                <p>TESTTESTTESTTESTTESTTESTTESTTESTTESTTEST</p>
-                <!-- Movies list -->
-                <button v-if="fButton" @click.prevent="acceptChal">Accept Challenge</button>
-                <!-- Include a v-model or whatever to save it to the DB -->
-                <button v-if="sButton">Challenge Accepted <img src="../assets/icons/challenge-accepted.svg">
-                </button>
-                <BackButton title="Back to List" @click.prevent="backToList" />
-            </div>
-        </section>
-
-    </section>
-    <FooterBar />
+  <section v-if="moviePart" id="chalDetailSection">
+    <div class="chalDetailContainer">
+      <div
+        class="chalImgContainer"
+        v-bind:style="{ backgroundImage: 'url(' + chalImage + ')' }"
+      ></div>
+      <div class="chalDetailsInfo">
+        <span class="chalTitle">{{ chalName }}</span>
+        <span class="chalDates">{{ startDate }} ~ {{ endDate }}</span>
+        <p class="chalDescription">{{ description }}</p>
+      </div>
+    </div>
+    <div class="ongoingChalContainer">
+      <div v-for="(movies, i) in movie" :key="i" class="ongoingChalItem">
+        <img :src="'https://image.tmdb.org/t/p/w500' + movie[i].poster_path" />
+        <!-- <h3>{{ movie[i].title }}</h3> -->
+        <div class="movieWatched" v-if="movie[i].review">
+          <span>Watched</span>
+        </div>
+      </div>
+    </div>
+    <button class="primaryBtn">Join Challenge</button>
+  </section>
+  <FooterBar />
 </template>
-
 <script>
 import NavigationBar from "../components/NavigationBar.vue";
 import FooterBar from "../components/FooterBar.vue";
 import BackButton from "../components/BackButton.vue";
+import { db } from "@/firebase";
+import { query, collection, getDocs } from "firebase/firestore";
 
 export default {
-    name: "OngoingChallenges",
-    components: {
-        NavigationBar,
-        FooterBar,
-        BackButton
-    },
-    data() {
-        return {
-            challengedb: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
-            length: 4,
-            fButton: true,
-            sButton: false,
-            chalBrief: true,
-            chalDetail: false,
+  name: "OngoingChallenges",
+  components: {
+    NavigationBar,
+    FooterBar,
+    BackButton,
+  },
+  data() {
+    return {
+      challengedb: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
+      length: 4,
+      fButton: true,
+      sButton: false,
+      chalBrief: true,
+      chalDetail: false,
+      slides: [],
+      firstPart: true,
+      moviePart: false,
+      chalName: "",
+      startDate: "",
+      endDate: "",
+      description: "",
+      chalImage: "",
+      windowSize: 0,
+      totalWatched: 0,
+    };
+  },
+  async mounted() {
+    const querySnap = await getDocs(query(collection(db, "challenge")));
+    querySnap.forEach((doc) => {
+      const challengeType = doc.data().adminChallenge;
+      if (challengeType == true) {
+        this.i = this.i + 1;
+        let newChallenge = {
+          title: doc.data().chalName,
+          image: doc.data().image,
+          content: doc.data().description,
+          startDate: doc.data().startDate,
+          endDate: doc.data().endDate,
+          selectedMovies: doc.data().selectedMovies,
         };
+
+        this.slides.push(newChallenge);
+      }
+    });
+  },
+  methods: {
+    challengeClicked(index) {
+      this.firstPart = false;
+      this.moviePart = true;
+      this.chalImage = this.slides[index].image;
+      this.chalName = this.slides[index].title;
+      sessionStorage.setItem("chalName", this.chalName);
+      this.startDate = this.slides[index].startDate;
+      this.endDate = this.slides[index].endDate;
+      this.description = this.slides[index].content;
+
+      this.movie = this.slides[index].selectedMovies;
     },
-    methods: {
-        createChallenge() {
-            this.$router.push("/create-challenge")
-        },
-        backChal() {
-            this.$router.push("/challenge-main")
-        },
-        loadMore() {
-            if (this.length > this.challengedb.length) return;
-            this.length = this.length + 4;
-        },
-        acceptChal() {
-            this.fButton = false;
-            this.sButton = true;
-        },
-        backToList() {
-            this.chalDetail = false;
-            this.chalBrief = true;
-        },
-        chalDetailCall() {
-            this.chalBrief = false;
-            this.chalDetail = true;
-        },
-        selectItem(event) {
-            event.target.classList.toggle('active');
-        }
+    createChallenge() {
+      this.$router.push("/create-challenge");
     },
-    computed: {
-        chalLoading() {
-            return this.challengedb.slice(0, this.length);
-        }
-    }
-}
+    backChal() {
+      this.$router.push("/challenge-main");
+    },
+    loadMore() {
+      if (this.length > this.challengedb.length) return;
+      this.length = this.length + 4;
+    },
+    acceptChal() {
+      this.fButton = false;
+      this.sButton = true;
+    },
+    backToList() {
+      this.chalDetail = false;
+      this.chalBrief = true;
+    },
+    chalDetailCall() {
+      this.chalBrief = false;
+      this.chalDetail = true;
+    },
+    selectItem(event) {
+      event.target.classList.toggle("active");
+    },
+  },
+  computed: {
+    chalLoading() {
+      return this.slides.slice(0, this.length);
+    },
+  },
+};
 </script>
 
 <style>
 .active {
-    background-color: yellow;
+  background-color: yellow;
 }
 </style>

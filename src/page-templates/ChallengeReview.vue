@@ -8,7 +8,9 @@
       <div class="movieInfo">
         <span class="movieInfo__name">{{ movieName }}</span>
         <span class="movieInfo__id">{{ movieID }}</span>
-        <span class="movieInfo__releaseDate">Release Date:<br>{{ movieRelease }}</span>
+        <span class="movieInfo__releaseDate"
+          >Release Date:<br />{{ movieRelease }}</span
+        >
         <span class="movieInfo__rating">Rating: {{ movieRating }}/10</span>
       </div>
     </div>
@@ -38,16 +40,15 @@
         placeholder="Leave your review here!"
       ></textarea>
     </div>
-    
 
     <p class="error">{{ fillMessage }}</p>
 
     <div class="btnContainer">
       <SaveButton
-      @click.prevent="
-        saveReview();
-        togglePopup();
-      "
+        @click.prevent="
+          saveReview();
+          togglePopup();
+        "
       />
       <BackButton @click.prevent="goBack" title="Back" />
     </div>
@@ -55,7 +56,9 @@
       <div class="popupContent">
         <h1>Your review has been saved!</h1>
         <p>For retrieving this information, please visit your profile</p>
-        <button @click="redirect" type="button" class="secondaryBtn">Done</button>
+        <button @click="redirect" type="button" class="secondaryBtn">
+          Done
+        </button>
       </div>
     </SimplePopup>
   </section>
@@ -124,7 +127,7 @@ export default {
     this.moviePoster = sessionStorage.getItem("moviePoster");
     const uid = sessionStorage.getItem("uid");
     let chalName = sessionStorage.getItem("chalName");
-    console.log(chalName);
+
     const querySnap = await getDocs(query(collection(db, "challenge")));
     querySnap.forEach((doc) => {
       const userId = doc.data().uid;

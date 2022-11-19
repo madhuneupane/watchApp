@@ -8,32 +8,59 @@
         <p class="error">{{ fillMessage }}</p>
         <div>
           <label>Email Address <span class="req">*</span></label>
-          <input v-model="email" type="email" class="inputArea" placeholder="email@gmail.com" />
+          <input
+            v-model="email"
+            type="email"
+            class="inputArea"
+            placeholder="email@gmail.com"
+          />
         </div>
         <div class="nameContainer">
           <div class="fNameContainer">
             <label>First Name <span class="req">*</span></label>
-            <input v-model="fname" type="text" class="inputArea" placeholder="John" />
+            <input
+              v-model="fname"
+              type="text"
+              class="inputArea"
+              placeholder="John"
+            />
           </div>
           <div class="lNameContainer">
             <label>Last Name <span class="req">*</span></label>
-            <input v-model="lname" type="text" class="inputArea" placeholder="Doe" />
+            <input
+              v-model="lname"
+              type="text"
+              class="inputArea"
+              placeholder="Doe"
+            />
           </div>
         </div>
         <div></div>
         <div>
           <label>Password <span class="req">*</span></label>
-          <input class="inputArea" v-model="password" type="password" placeholder="***********" />
+          <input
+            class="inputArea"
+            v-model="password"
+            type="password"
+            placeholder="***********"
+          />
         </div>
         <div>
           <label>Confirm Password <span class="req">*</span></label>
-          <input class="inputArea" v-model="cpassword" type="password" placeholder="***********" />
+          <input
+            class="inputArea"
+            v-model="cpassword"
+            type="password"
+            placeholder="***********"
+          />
         </div>
         <button type="submit" class="primaryBtn" @click.prevent="newAccount">
           Create Account
         </button>
       </form>
-      <router-link to="/login-page" class="link">Back to Login Page</router-link>
+      <router-link to="/login-page" class="link"
+        >Back to Login Page</router-link
+      >
     </div>
 
     <div v-if="secondPart" class="sPart">
@@ -45,8 +72,12 @@
       <!-- <input type="file" id="imgInput" name="img" accept="image/*" v-bind:style="cssData" /> -->
       <div v-if="secondPartFirst" class="profilePicSectionFirst">
         <div class="profilePictureContainer">
-          <img id="profilePicture" src="../assets/icons/profile.svg" alt="sorry"
-            :class="{ capturedPicture: photoSnapped === true }" />
+          <img
+            id="profilePicture"
+            src="../assets/icons/profile.svg"
+            alt="sorry"
+            :class="{ capturedPicture: photoSnapped === true }"
+          />
         </div>
         <!-- <router-link to="/create-account" @click.prevent="displayImage"
           >Add your profile photo</router-link
@@ -283,7 +314,6 @@ export default {
           this.fname = "";
           this.lname.value = "";
 
-          console.log(docRef);
           // this.emitter.emit("docRef", docRef);
           this.emitter.emit("uid", uid);
         })
