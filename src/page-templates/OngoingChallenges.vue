@@ -48,8 +48,23 @@
           <span>Watched</span>
         </div>
       </div>
+      <div>
+        <BackButton title="Back to List" @click.prevent="backToList" />
+        <a class="seeMoreBtn link" @click.prevent="quitChal">Quit Challenge</a>
+      </div>
     </div>
   </section>
+  <SimplePopup @close="togglePopup" :popupActive="popupActive">
+    <div class="popupContent">
+      <h1 class="popUpHeading">Quit?</h1>
+      <h3 class="popUpText">
+        If you quit the challenge,<br />you will lose all data.<br>Do you wish to continue?
+      </h3>
+      <button @click="redirect" type="button" class="secondaryBtn">
+        Quit Challenge
+      </button>
+    </div>
+  </SimplePopup>
   <FooterBar />
 </template>
 <script>
@@ -58,7 +73,10 @@ import FooterBar from "../components/FooterBar.vue";
 import BackButton from "../components/BackButton.vue";
 import ChallengesMenu from "../components/ChallengesMenu.vue";
 import { db } from "@/firebase";
-import { query, collection, getDocs } from "firebase/firestore";
+import { query, collection, getDocs, deleteDoc, where } from "firebase/firestore";
+
+import SimplePopup from "../components/SimplePopup.vue";
+import * as vue from "vue";
 
 export default {
   name: "OngoingChallenges",
@@ -67,11 +85,12 @@ export default {
     FooterBar,
     BackButton,
     ChallengesMenu,
+    SimplePopup
   },
   data() {
     return {
-      challengedb: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
-      length: 4,
+      challengedb: [],
+      length: 5,
       slides: [],
       moviePart: false,
       firstPart: true,
@@ -82,7 +101,8 @@ export default {
       endDate: "",
       description: "",
       windowSize: 0,
-      totalWatched: 0
+      totalWatched: 0,
+      // uid: ""
     };
   },
 
@@ -157,6 +177,42 @@ export default {
     handleResize() {
       this.windowSize = window.innerWidth;
     },
+    backToList() {
+      this.firstPart = true;
+      this.moviePart = false;
+    },
+    quitChal() {
+      this.togglePopup();
+    },
+    async redirect() {
+      const querySnap = await getDocs(query(collection(db, "challenge"), where("chalName", "==", this.chalName, true)));
+      querySnap.forEach((doc) => {
+        // const uid = sessionStorage.getItem("uid");
+        // const userId = doc.data().uid;
+        this.chalID = doc.id;
+        const docRef = doc(db, "challenge", this.chalID);
+
+        // if (userId != "HWKvoha2m2dfjdZSMvIQIV3CVK52") {
+        //   deleteDoc(doc(db, "challenge", this.chalID));
+        //   console.log("Challenge deleted hahahahah");
+        // }
+      });
+      deleteDoc(docRef)
+        .then(() => {
+          console.log("Deleted");
+          this.$router.push("/ongoing-challenges");
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+    },
+
+
+
+
+
+
+
   },
   computed: {
     chalLoading() {
@@ -170,6 +226,13 @@ export default {
   },
   unmounted() {
     window.removeEventListener('resize', this.handleResize);
+  },
+  setup() {
+    const popupActive = vue.ref(false);
+    const togglePopup = () => {
+      popupActive.value = !popupActive.value;
+    };
+    return { popupActive, togglePopup };
   },
 };
 </script>
