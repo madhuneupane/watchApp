@@ -58,7 +58,10 @@
         </div>
       </div>
     </div>
-    <button class="primaryBtn">Join Challenge</button>
+    <button class="primaryBtn" @click.prevent="joinChallenge">
+      Join Challenge
+    </button>
+    <BackButton title="Back to List" @click.prevent="backList" />
   </section>
   <FooterBar />
 </template>
@@ -67,7 +70,7 @@ import NavigationBar from "../components/NavigationBar.vue";
 import FooterBar from "../components/FooterBar.vue";
 import BackButton from "../components/BackButton.vue";
 import { db } from "@/firebase";
-import { query, collection, getDocs } from "firebase/firestore";
+import { query, collection, getDocs, addDoc } from "firebase/firestore";
 
 export default {
   name: "OngoingChallenges",
@@ -94,6 +97,7 @@ export default {
       chalImage: "",
       windowSize: 0,
       totalWatched: 0,
+      chalDocument: {},
     };
   },
   async mounted() {
@@ -134,6 +138,10 @@ export default {
     backChal() {
       this.$router.push("/challenge-main");
     },
+    backList() {
+      this.firstPart = true;
+      this.moviePart = false;
+    },
     loadMore() {
       if (this.length > this.challengedb.length) return;
       this.length = this.length + 4;
@@ -152,6 +160,23 @@ export default {
     },
     selectItem(event) {
       event.target.classList.toggle("active");
+    },
+    async joinChallenge() {
+      const uid = sessionStorage.getItem("uid");
+      const querySnap = await getDocs(query(collection(db, "challenge")));
+      querySnap.forEach((doc) => {
+        const challengeName = doc.data().chalName;
+        if (challengeName == this.chalName) {
+          this.chalDocument = doc.data();
+        }
+      });
+      this.chalDocument.userChallenge = true;
+      this.chalDocument.adminChallenge = false;
+      this.chalDocument.uid = uid;
+      console.log(this.chalDocument.userChallenge);
+      const docRef = addDoc(collection(db, "challenge"), this.chalDocument);
+      this.$router.push("/admin-challenge");
+      console.log(docRef);
     },
   },
   computed: {

@@ -1,25 +1,44 @@
 <template>
-  <button class="createChllgBtn" v-if="windowSize < 1024 && !moviePart" @click.prevent="createChallenge"></button>
+  <button
+    class="createChllgBtn"
+    v-if="windowSize < 1024 && !moviePart"
+    @click.prevent="createChallenge"
+  ></button>
   <NavigationBar />
-  <ChallengesMenu :challengePage="'ongoing'" v-if="windowSize < 1024 && !moviePart" />
+  <ChallengesMenu
+    :challengePage="'ongoing'"
+    v-if="windowSize < 1024 && !moviePart"
+  />
   <section v-if="firstPart" id="ongoingChalSec">
     <h1 v-if="windowSize > 1024">Ongoing Challenges</h1>
     <h2>Keep up! You are almost there</h2>
     <div class="chalList">
-      <div class="chalInfo" v-for="(challenge, index) in chalLoading" :key="index">
-        <div class="challenge" v-bind:style="{ backgroundImage: 'url(' + challenge.image + ')' }"
-          @click.prevent="challengeClicked(index)">
+      <div
+        class="chalInfo"
+        v-for="(challenge, index) in chalLoading"
+        :key="index"
+      >
+        <div
+          class="challenge"
+          v-bind:style="{ backgroundImage: 'url(' + challenge.image + ')' }"
+          @click.prevent="challengeClicked(index)"
+        >
           <div class="chalDetailsContainer">
             <h3>{{ challenge.title }}</h3>
             <span id="ending">Ending on {{ challenge.endDate }}</span>
             <span id="qntWatched" v-if="windowSize > 1024">
-              Watched {{ challenge.totalWatched }} out of {{ challenge.selectedMovies.length }} movies!
+              Watched {{ challenge.totalWatched }} out of
+              {{ challenge.selectedMovies.length }} movies!
             </span>
           </div>
         </div>
         <!-- Implement bar -->
       </div>
-      <div class="createChalCard" @click.prevent="createChallenge" v-if="windowSize > 1024">
+      <div
+        class="createChalCard"
+        @click.prevent="createChallenge"
+        v-if="windowSize > 1024"
+      >
         <img src="../assets/icons/plus-button-challenge.svg" />
         <h3>Create Your Own Challenge!</h3>
         <!-- <button class="primaryBtn">Create a Challenge</button> -->
@@ -33,7 +52,10 @@
 
   <section v-if="moviePart" id="chalDetailSection">
     <div class="chalDetailContainer">
-      <div class="chalImgContainer" v-bind:style="{ backgroundImage: 'url(' + chalImage + ')' }"></div>
+      <div
+        class="chalImgContainer"
+        v-bind:style="{ backgroundImage: 'url(' + chalImage + ')' }"
+      ></div>
       <div class="chalDetailsInfo">
         <span class="chalTitle">{{ chalName }}</span>
         <span class="chalDates">{{ startDate }} ~ {{ endDate }}</span>
@@ -42,7 +64,10 @@
     </div>
     <div class="ongoingChalContainer">
       <div v-for="(movies, i) in movie" :key="i" class="ongoingChalItem">
-        <img :src="'https://image.tmdb.org/t/p/w500' + movie[i].poster_path" @click.prevent="movieClicked(movie[i])" />
+        <img
+          :src="'https://image.tmdb.org/t/p/w500' + movie[i].poster_path"
+          @click.prevent="movieClicked(movie[i], i)"
+        />
         <!-- <h3>{{ movie[i].title }}</h3> -->
         <div class="movieWatched" v-if="movie[i].review">
           <span>Watched</span>
@@ -58,7 +83,8 @@
     <div class="popupContent">
       <h1 class="popUpHeading">Quit?</h1>
       <h3 class="popUpText">
-        If you quit the challenge,<br />you will lose all data.<br>Do you wish to continue?
+        If you quit the challenge,<br />you will lose all data.<br />Do you wish
+        to continue?
       </h3>
       <button @click="redirect" type="button" class="secondaryBtn">
         Quit Challenge
@@ -85,7 +111,7 @@ export default {
     FooterBar,
     BackButton,
     ChallengesMenu,
-    SimplePopup
+    SimplePopup,
   },
   data() {
     return {
@@ -148,6 +174,7 @@ export default {
       sessionStorage.setItem("movieOverview", movieArray.overview);
       sessionStorage.setItem("moviePoster", movieArray.poster_path);
       sessionStorage.setItem("index", j);
+      // console.log("hello" + j);
 
       this.$router.push("/challenge-review");
     },
@@ -206,13 +233,6 @@ export default {
       //     console.log(error);
       //   })
     },
-
-
-
-
-
-
-
   },
   computed: {
     chalLoading() {
@@ -222,10 +242,10 @@ export default {
 
   created() {
     this.windowSize = window.innerWidth;
-    window.addEventListener('resize', this.handleResize);
+    window.addEventListener("resize", this.handleResize);
   },
   unmounted() {
-    window.removeEventListener('resize', this.handleResize);
+    window.removeEventListener("resize", this.handleResize);
   },
   setup() {
     const popupActive = vue.ref(false);
