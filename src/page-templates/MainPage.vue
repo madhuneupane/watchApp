@@ -1,6 +1,7 @@
 <template>
   <NavigationBar />
   <ChallangesCarousel />
+  <h1 v-if="nickName">Hello, {{ nickName }}</h1>
   <UpcomingMovies />
   <RecommendationMovies />
   <h2>Interested in Challenges?</h2>
@@ -14,7 +15,8 @@ import UpcomingMovies from "../components/UpcomingMovies";
 import RecommendationMovies from "../components/RecommendationMovies.vue";
 import NavigationBar from "../components/NavigationBar.vue";
 import FooterBar from "../components/FooterBar.vue";
-
+import { db } from "@/firebase";
+import { query, collection, getDocs } from "firebase/firestore";
 export default {
   name: "MainPage",
 
@@ -24,6 +26,22 @@ export default {
     RecommendationMovies,
     NavigationBar,
     FooterBar,
+  },
+  data() {
+    return {
+      nickName: "",
+    };
+  },
+
+  async mounted() {
+    const querySnap = await getDocs(query(collection(db, "user")));
+    querySnap.forEach((doc) => {
+      this.uid = sessionStorage.getItem("uid");
+      const userId = doc.data().uid;
+      if (userId == this.uid) {
+        this.nickName = doc.data().nickname;
+      }
+    });
   },
 };
 </script>
