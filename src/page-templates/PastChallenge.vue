@@ -1,5 +1,6 @@
 <template>
   <NavigationBar />
+  <ChallengesMenu :challengePage="'past'" v-if="windowSize < 1024" />
   <section v-if="firstPart" id="ongoingChalSec">
     <h1>Past Challenges</h1>
     <h2>You've achieved this much!</h2>
@@ -42,6 +43,7 @@ import FooterBar from "../components/FooterBar.vue";
 import BackButton from "../components/BackButton.vue";
 import { db } from "@/firebase";
 import { query, collection, getDocs } from "firebase/firestore";
+import ChallengesMenu from "../components/ChallengesMenu.vue";
 
 export default {
   name: "OngoingChallenges",
@@ -49,6 +51,7 @@ export default {
     NavigationBar,
     FooterBar,
     BackButton,
+    ChallengesMenu
   },
   data() {
     return {
@@ -63,6 +66,7 @@ export default {
       startDate: "",
       endDate: "",
       description: "",
+      windowSize: 0,
     };
   },
 
@@ -133,11 +137,21 @@ export default {
       this.firstPart = true;
       this.moviePart = false;
     },
+    handleResize() {
+      this.windowSize = window.innerWidth;
+    },
   },
   computed: {
     chalLoading() {
       return this.slides.slice(0, this.length);
     },
+  },
+  created() {
+    this.windowSize = window.innerWidth;
+    window.addEventListener("resize", this.handleResize);
+  },
+  unmounted() {
+    window.removeEventListener("resize", this.handleResize);
   },
 };
 </script>
