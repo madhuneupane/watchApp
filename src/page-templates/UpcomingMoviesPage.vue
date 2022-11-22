@@ -2,33 +2,23 @@
   <NavigationBar />
   <section id="upcomingPageSec">
     <h2>Upcoming Movies</h2>
-    <PopupModal
-      :popupActive="popupActive"
-      :popupTitle="popupTitle"
-      :popupPoster="popupPoster"
-      :popupGenreIDs="popupGenreIDs"
-      :popupReleaseDate="popupReleaseDate"
-      :popupAvarage="popupAvarage"
-      :popupOverview="popupOverview"
-      v-on:closeClicked="closePopup"
-    />
+    <PopupModal :popupActive="popupActive" :popupTitle="popupTitle" :popupPoster="popupPoster"
+      :popupGenreIDs="popupGenreIDs" :popupReleaseDate="popupReleaseDate" :popupAvarage="popupAvarage"
+      :popupOverview="popupOverview" v-on:closeClicked="closePopup" />
     <div class="movieList">
       <div class="movieItem" :key="movie" v-for="movie in upcomingMovieList">
-        <img
-          :src="'https://image.tmdb.org/t/p/w500' + movie.poster_path"
-          alt="{{ movie.original_title }} + ' Movie Poster'"
-          @click="
-            togglePopup(
-              movie.poster_path,
-              movie.original_title,
-              movie.genre_ids,
-              movie.release_date,
-              movie.vote_average,
-              movie.overview,
-              movie
-            )
-          "
-        />
+        <img :src="'https://image.tmdb.org/t/p/w500' + movie.poster_path"
+          alt="{{ movie.original_title }} + ' Movie Poster'" @click="
+  togglePopup(
+    movie.poster_path,
+    movie.original_title,
+    movie.genre_ids,
+    movie.release_date,
+    movie.vote_average,
+    movie.overview,
+    movie
+  )
+          " />
       </div>
     </div>
   </section>
