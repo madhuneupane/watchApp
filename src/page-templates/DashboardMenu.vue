@@ -6,10 +6,19 @@
 
     <div v-if="secondPartFirst" class="profilePicSectionFirst">
       <div class="profilePictureContainer">
-        <img id="profilePicture" :src="profilePic" alt="profilePic"
-          :class="{ capturedPicture: photoSnapped === true }" />
+        <img
+          id="profilePicture"
+          :src="profilePic"
+          alt="profilePic"
+          :class="{ capturedPicture: photoSnapped === true }"
+        />
       </div>
-      <img id="changing" src="../assets/icons/edit-photo.svg" alt="changeProfile" @click.prevent="clickImage">
+      <img
+        id="changing"
+        src="../assets/icons/edit-photo.svg"
+        alt="changeProfile"
+        @click.prevent="clickImage"
+      />
     </div>
 
     <div v-if="secondPartSecond" class="profilePicSectionSecond">
@@ -110,9 +119,7 @@
           <label for="genre">Western</label>
         </div>
       </div>
-      <button type="cancel" class="secondaryBtn" @click="cancel">
-        Cancel
-      </button>
+      <button type="cancel" class="secondaryBtn" @click="cancel">Cancel</button>
       <button type="save" class="primaryBtn" @click="saveNewGenres">
         Save
       </button>
@@ -121,12 +128,33 @@
     <div v-if="secondPart">
       <h1>Movies you've watched</h1>
       <p>Here are the list of movies you've seen from the challenges</p>
+      <div class="ongoingChalContainer">
+        <div
+          v-for="(movies, i) in watchedMovies"
+          :key="i"
+          class="ongoingChalItem"
+        >
+          <img
+            :src="
+              'https://image.tmdb.org/t/p/w500' + watchedMovies[i].poster_path
+            "
+          />
+          <!-- <h3>{{ movie[i].title }}</h3> -->
+        </div>
+      </div>
       <a class="seeMoreBtn link" href="">Load More</a>
     </div>
 
-    <PopupModal :popupActive=popupActive :popupTitle=popupTitle :popupPoster=popupPoster :popupGenreIDs=popupGenreIDs
-      :popupReleaseDate=popupReleaseDate :popupAvarage=popupAvarage :popupOverview=popupOverview
-      v-on:closeClicked="closePopup">
+    <PopupModal
+      :popupActive="popupActive"
+      :popupTitle="popupTitle"
+      :popupPoster="popupPoster"
+      :popupGenreIDs="popupGenreIDs"
+      :popupReleaseDate="popupReleaseDate"
+      :popupAvarage="popupAvarage"
+      :popupOverview="popupOverview"
+      v-on:closeClicked="closePopup"
+    >
     </PopupModal>
 
     <div v-if="thirdPart">
@@ -144,31 +172,35 @@
         <BadgesPopup @close="FirstTogglePopup" :popupActive="FirstpopupActive">
           <div class="popupContent">
             <h1 class="popUpHeading">Popcorn</h1>
-            <img src="#" alt="#">
+            <img src="#" alt="#" />
             <h3 class="popUpText">20th movie milestone</h3>
-            <button @click="redirect" type="button" class="secondaryBtn">Share Badge</button>
+            <button @click="redirect" type="button" class="secondaryBtn">
+              Share Badge
+            </button>
           </div>
         </BadgesPopup>
-        <SharedBadgesPopup @close="SecondTogglePopup" :popupActive="SecondpopupActive">
+        <SharedBadgesPopup
+          @close="SecondTogglePopup"
+          :popupActive="SecondpopupActive"
+        >
           <div class="popupSecondContent">
             <h1 class="popUpHeading">Unlock at 130th movie</h1>
-            <img src="#" alt="#">
+            <img src="#" alt="#" />
             <h3 class="popUpText">Watched more movies to unlock this badge</h3>
-            <button @click="redirect" type="button" class="secondaryBtn">Watch more movies</button>
+            <button @click="redirect" type="button" class="secondaryBtn">
+              Watch more movies
+            </button>
           </div>
         </SharedBadgesPopup>
       </div>
-
     </div>
 
     <div v-if="fourthPart" class="accountProfile">
-      <h1>
-        Your Account
-      </h1>
+      <h1>Your Account</h1>
       <section>
         <div>Name:</div>
         <div>{{ this.fname + " " + this.lname }}</div>
-        <br>
+        <br />
         <div>Nickname:</div>
         <div>{{ nickname }}</div>
       </section>
@@ -184,15 +216,22 @@
 
 <script>
 import * as vue from "vue";
-import BadgesPopup from '../components/BadgesPopup.vue';
-import SharedBadgesPopup from '../components/SharedBadgesPopup.vue';
-import NavigationBar from '../components/NavigationBar.vue';
-import FooterBar from '../components/FooterBar.vue';
-import PopupModal from '../components/PopupModal.vue';
+import BadgesPopup from "../components/BadgesPopup.vue";
+import SharedBadgesPopup from "../components/SharedBadgesPopup.vue";
+import NavigationBar from "../components/NavigationBar.vue";
+import FooterBar from "../components/FooterBar.vue";
+import PopupModal from "../components/PopupModal.vue";
 
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { db } from "@/firebase";
-import { collection, updateDoc, doc, where, query, getDocs } from "firebase/firestore";
+import {
+  collection,
+  updateDoc,
+  doc,
+  where,
+  query,
+  getDocs,
+} from "firebase/firestore";
 
 export default {
   name: "DashboardMenu",
@@ -201,7 +240,7 @@ export default {
     SharedBadgesPopup,
     NavigationBar,
     FooterBar,
-    PopupModal
+    PopupModal,
   },
   data() {
     return {
@@ -222,7 +261,8 @@ export default {
       popupActive: false,
       profilePic: "",
       secondPartFirst: true,
-      genreArray: []
+      genreArray: [],
+      watchedMovies: [],
     };
   },
   methods: {
@@ -279,10 +319,7 @@ export default {
       }
       const uid = sessionStorage.getItem("uid");
       const test = await getDocs(
-        query(
-          collection(db, "user"),
-          where("uid", "==", uid)
-        )
+        query(collection(db, "user"), where("uid", "==", uid))
       );
       test.forEach((doc) => {
         this.chalID = doc.id;
@@ -333,10 +370,7 @@ export default {
       picture.remove();
       const uid = sessionStorage.getItem("uid");
       const test = await getDocs(
-        query(
-          collection(db, "user"),
-          where("uid", "==", uid)
-        )
+        query(collection(db, "user"), where("uid", "==", uid))
       );
       test.forEach((doc) => {
         this.chalID = doc.id;
@@ -370,16 +404,30 @@ export default {
     this.profilePic = sessionStorage.getItem("profilePic");
     let uid = sessionStorage.getItem("uid");
     const test1 = await getDocs(
-      query(
-        collection(db, "user"),
-        where("uid", "==", uid)
-      )
+      query(collection(db, "user"), where("uid", "==", uid))
     );
     test1.forEach((doc) => {
       this.chalID = doc.id;
       this.points = Number(doc.data().points);
       this.points = this.points / 5;
       // console.log(doc.data().endDate);
+    });
+    const querySnap = await getDocs(query(collection(db, "challenge")));
+    querySnap.forEach((doc1) => {
+      const userId = doc1.data().uid;
+      if (userId == uid) {
+        // console.log(doc1.data().chalName);
+        for (let i = 0; i < doc1.data().selectedMovies.length; i++) {
+          // console.log(
+          //   doc1.data().chalName + doc1.data().selectedMovies[i].review
+          // );
+          if (doc1.data().selectedMovies[i].review != "") {
+            //console.log(doc1.data().selectedMovies[i]);
+
+            this.watchedMovies.push(doc1.data().selectedMovies[i]);
+          }
+        }
+      }
     });
   },
   setup() {
@@ -391,10 +439,14 @@ export default {
     const SecondTogglePopup = () => {
       SecondpopupActive.value = !SecondpopupActive.value;
     };
-    return { FirstpopupActive, FirstTogglePopup, SecondpopupActive, SecondTogglePopup }
+    return {
+      FirstpopupActive,
+      FirstTogglePopup,
+      SecondpopupActive,
+      SecondTogglePopup,
+    };
   },
-}
-
+};
 </script>
 
 <style>
