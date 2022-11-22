@@ -1,28 +1,14 @@
 <template>
-  <button
-    class="createChllgBtn"
-    v-if="windowSize < 1024 && !moviePart"
-    @click.prevent="createChallenge"
-  ></button>
+  <button class="createChllgBtn" v-if="windowSize < 1024 && !moviePart" @click.prevent="createChallenge"></button>
   <NavigationBar />
-  <ChallengesMenu
-    :challengePage="'ongoing'"
-    v-if="windowSize < 1024 && !moviePart"
-  />
+  <ChallengesMenu :challengePage="'ongoing'" v-if="windowSize < 1024 && !moviePart" />
   <section v-if="firstPart" id="ongoingChalSec">
     <h1 v-if="windowSize > 1024">Ongoing Challenges</h1>
     <h2>Keep up! You are almost there</h2>
     <div class="chalList">
-      <div
-        class="chalInfo"
-        v-for="(challenge, index) in chalLoading"
-        :key="index"
-      >
-        <div
-          class="challenge"
-          v-bind:style="{ backgroundImage: 'url(' + challenge.image + ')' }"
-          @click.prevent="challengeClicked(index)"
-        >
+      <div class="chalInfo" v-for="(challenge, index) in chalLoading" :key="index">
+        <div class="challenge" v-bind:style="{ backgroundImage: 'url(' + challenge.image + ')' }"
+          @click.prevent="challengeClicked(index)">
           <div class="chalDetailsContainer">
             <h3>{{ challenge.title }}</h3>
             <span id="ending">Ending on {{ challenge.endDate }}</span>
@@ -30,22 +16,14 @@
               Watched {{ challenge.totalWatched }} out of
               {{ challenge.selectedMovies.length }} movies!
             </span>
-            <progress
-              id="file"
-              :value="
-                (challenge.totalWatched * 100) / challenge.selectedMovies.length
-              "
-              max="100"
-            ></progress>
+            <progress id="file" :value="
+              (challenge.totalWatched * 100) / challenge.selectedMovies.length
+            " max="100"></progress>
           </div>
         </div>
         <!-- Implement bar -->
       </div>
-      <div
-        class="createChalCard"
-        @click.prevent="createChallenge"
-        v-if="windowSize > 1024"
-      >
+      <div class="createChalCard" @click.prevent="createChallenge" v-if="windowSize > 1024">
         <img src="../assets/icons/plus-button-challenge.svg" />
         <h3>Create Your Own Challenge!</h3>
         <!-- <button class="primaryBtn">Create a Challenge</button> -->
@@ -59,10 +37,7 @@
 
   <section v-if="moviePart" id="chalDetailSection">
     <div class="chalDetailContainer">
-      <div
-        class="chalImgContainer"
-        v-bind:style="{ backgroundImage: 'url(' + chalImage + ')' }"
-      ></div>
+      <div class="chalImgContainer" v-bind:style="{ backgroundImage: 'url(' + chalImage + ')' }"></div>
       <div class="chalDetailsInfo">
         <span class="chalTitle">{{ chalName }}</span>
         <span class="chalDates">{{ startDate }} ~ {{ endDate }}</span>
@@ -71,10 +46,8 @@
     </div>
     <div class="ongoingChalContainer">
       <div v-for="(movies, i) in movie" :key="i" class="ongoingChalItem">
-        <img
-          :src="'https://image.tmdb.org/t/p/w500' + movie[i].poster_path"
-          @click.prevent="movieClicked(movie[i], i)"
-        />
+        <img :src="'https://image.tmdb.org/t/p/w500' + movie[i].poster_path"
+          @click.prevent="movieClicked(movie[i], i)" />
         <!-- <h3>{{ movie[i].title }}</h3> -->
         <div class="movieWatched" v-if="movie[i].review">
           <span>Watched</span>
@@ -365,3 +338,21 @@ export default {
   },
 };
 </script>
+
+<style>
+progress {
+  border: 1px solid white;
+  background: transparent;
+  border-radius: 10px;
+}
+
+progress::-webkit-progress-value {
+  background: white;
+  border-radius: 10px;
+}
+
+progress::-webkit-progress-bar {
+  background: transparent;
+  border-radius: 10px;
+}
+</style>
