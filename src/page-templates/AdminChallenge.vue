@@ -1,7 +1,7 @@
 <template>
-  <button class="createChllgBtn" v-if="windowSize < 1024 && !moviePart" @click.prevent="createChallenge"></button>
+  <button class="createChllgBtn" v-if="windowSize < 1024" @click.prevent="createChallenge"></button>
   <NavigationBar />
-  <ChallengesMenu :challengePage="'ongoing'" v-if="windowSize < 1024 && !moviePart" />
+  <ChallengesMenu :challengePage="'defyUs'" v-if="windowSize < 1024" />
   <section v-if="firstPart" id="ongoingChalSec">
     <h1 v-if="windowSize > 1024">Ongoing Challenges</h1>
     <h2>Keep up! You are almost there</h2>
@@ -54,6 +54,7 @@ import FooterBar from "../components/FooterBar.vue";
 import BackButton from "../components/BackButton.vue";
 import { db } from "@/firebase";
 import { query, collection, getDocs, addDoc } from "firebase/firestore";
+import ChallengesMenu from "../components/ChallengesMenu.vue";
 
 export default {
   name: "OngoingChallenges",
@@ -61,6 +62,7 @@ export default {
     NavigationBar,
     FooterBar,
     BackButton,
+    ChallengesMenu
   },
   data() {
     return {
@@ -161,19 +163,22 @@ export default {
       this.$router.push("/admin-challenge");
       console.log(docRef);
     },
+    handleResize() {
+      this.windowSize = window.innerWidth;
+    },
   },
   computed: {
     chalLoading() {
       return this.slides.slice(0, this.length);
     },
   },
-  // created() {
-  //   this.windowSize = window.innerWidth;
-  //   window.addEventListener('resize', this.handleResize);
-  // },
-  // unmounted() {
-  //   window.removeEventListener('resize', this.handleResize);
-  // },
+  created() {
+    this.windowSize = window.innerWidth;
+    window.addEventListener('resize', this.handleResize);
+  },
+  unmounted() {
+    window.removeEventListener('resize', this.handleResize);
+  },
 };
 </script>
 
