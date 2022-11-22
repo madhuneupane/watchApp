@@ -2,23 +2,17 @@
     <NavigationBar />
     <section id="recommendPageSec">
         <h2>You will like this!</h2>
-        <PopupModal
-        :popupActive=popupActive
-        :popupTitle=popupTitle
-        :popupPoster=popupPoster
-        :popupGenreIDs=popupGenreIDs
-        :popupReleaseDate=popupReleaseDate
-        :popupAvarage=popupAvarage
-        :popupOverview=popupOverview
-        v-on:closeClicked="closePopup"
-        />
+        <PopupModal :popupActive=popupActive :popupTitle=popupTitle :popupPoster=popupPoster
+            :popupGenreIDs=popupGenreIDs :popupReleaseDate=popupReleaseDate :popupAvarage=popupAvarage
+            :popupOverview=popupOverview v-on:closeClicked="closePopup" />
         <div class="movieList">
-            <div class="movieItem" :key="movie" v-for="movie in recommendationMovieList" >
+            <div class="movieItem" :key="movie" v-for="movie in recommendationMovieList">
                 <img :src="'https://image.tmdb.org/t/p/w500' + movie.poster_path"
-                    alt="{{ movie.original_title }} + ' Movie Poster'" 
+                    alt="{{ movie.original_title }} + ' Movie Poster'"
                     @click="togglePopup(movie.poster_path, movie.original_title, movie.genre_ids, movie.release_date, movie.vote_average, movie.overview)">
             </div>
         </div>
+        <a class="seeMoreBtn link" @click.prevent="loadMore">Load More</a>
     </section>
     <!-- <PopupModal @close="togglePopup" :popupActive="popupActive" :key="movie" v-for="movie in recommendationMovieList">
         <div class="popupContent">
@@ -49,11 +43,12 @@ export default {
     components: {
         NavigationBar,
         FooterBar,
-        PopupModal
+        PopupModal,
     },
     data() {
         return {
             recommendationMovieList: [],
+            // length: 5,
             imgPreURL: 'https://image.tmdb.org/t/p/w500',
             //For popups
             popupTitle: "",
@@ -92,6 +87,10 @@ export default {
         },
         closePopup() {
             this.popupActive = false;
+        },
+        loadMore() {
+            if (this.length > this.recommendationMovieList.length) return;
+            this.length = this.length + 5;
         }
     },
     /* setup() {
