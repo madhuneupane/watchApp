@@ -1,10 +1,10 @@
 <template>
   <NavigationBar />
   <div class="contactContainer">
-    <h1 class="contactUsHeading">Send us a message</h1>
-    <h3 class="contactUsHeading">We'd love to hear from you!</h3>
+    <h2 class="contactUsHeading">Send us a message</h2>
+    <p class="contactUsHeading">We'd love to hear from you!</p>
 
-    <form @submit.prevent="submitMessage()" class="formContact">
+    <form @submit.prevent="submitMessage()" class="formContainer" id="formData">
       <div>
         <p class="error">{{ fillMessage }}</p>
         <div class="form_email">
