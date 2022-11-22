@@ -30,6 +30,13 @@
               Watched {{ challenge.totalWatched }} out of
               {{ challenge.selectedMovies.length }} movies!
             </span>
+            <progress
+              id="file"
+              :value="
+                (challenge.totalWatched * 100) / challenge.selectedMovies.length
+              "
+              max="100"
+            ></progress>
           </div>
         </div>
         <!-- Implement bar -->

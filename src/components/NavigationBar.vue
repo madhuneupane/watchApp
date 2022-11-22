@@ -57,6 +57,7 @@ export default {
     const querySnap = await getDocs(query(collection(db, "user")));
     querySnap.forEach((doc) => {
       this.uid = sessionStorage.getItem("uid");
+      //this.log = sessionStorage.getItem("log");
       const userId = doc.data().uid;
       if (userId == this.uid) {
         this.imageSource = doc.data().profilePicUrl;
