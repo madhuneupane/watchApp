@@ -4,8 +4,7 @@
   <h1 v-if="nickName">Hello, {{ nickName }}</h1>
   <UpcomingMovies />
   <RecommendationMovies />
-  <h2>Interested in Challenges?</h2>
-  <!-- Call challenges from db -->
+  <AdminCarousel />
   <FooterBar />
 </template>
   
@@ -13,6 +12,7 @@
 import ChallangesCarousel from "../components/ChallangesCarousel";
 import UpcomingMovies from "../components/UpcomingMovies";
 import RecommendationMovies from "../components/RecommendationMovies.vue";
+import AdminCarousel from "../components/AdminCarousel.vue";
 import NavigationBar from "../components/NavigationBar.vue";
 import FooterBar from "../components/FooterBar.vue";
 import { db } from "@/firebase";
@@ -24,6 +24,7 @@ export default {
     ChallangesCarousel,
     UpcomingMovies,
     RecommendationMovies,
+    AdminCarousel,
     NavigationBar,
     FooterBar,
   },
