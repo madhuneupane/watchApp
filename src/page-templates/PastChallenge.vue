@@ -14,7 +14,7 @@
         </div>
       </div>
     </div>
-    <a class="seeMoreBtn" @click.prevent="loadMore">Load More</a>
+    <a class="seeMoreBtn link" @click.prevent="loadMore">Load More</a>
     <div class="btnContainer">
       <BackButton title="Back to Challenges" @click.prevent="backChal" />
     </div>
