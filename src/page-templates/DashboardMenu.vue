@@ -119,21 +119,30 @@
     <div v-if="secondPart">
       <h1>Movies you've watched</h1>
       <p>Here are the list of movies you've seen from the challenges</p>
+      <PopupModal :popupActive="popupActive" :popupTitle="popupTitle" :popupPoster="popupPoster"
+        :popupGenreIDs="popupGenreIDs" :popupReleaseDate="popupReleaseDate" :popupAvarage="popupAvarage"
+        :popupOverview="popupOverview" v-on:closeClicked="closePopup">
+      </PopupModal>
       <div class="ongoingChalContainer">
         <div v-for="(movies, i) in watchedMovies" :key="i" class="ongoingChalItem">
           <img :src="
-            'https://image.tmdb.org/t/p/w500' + watchedMovies[i].poster_path
-          " />
+          'https://image.tmdb.org/t/p/w500' + watchedMovies[i].poster_path" @click="
+  togglePopup(
+    movies.poster_path,
+    movies.original_title,
+    movies.genre_ids,
+    movies.release_date,
+    movies.vote_average,
+    movies.overview,
+    movies
+  )" />
           <!-- <h3>{{ movie[i].title }}</h3> -->
         </div>
       </div>
       <a class="seeMoreBtn link" href="">Load More</a>
     </div>
 
-    <PopupModal :popupActive="popupActive" :popupTitle="popupTitle" :popupPoster="popupPoster"
-      :popupGenreIDs="popupGenreIDs" :popupReleaseDate="popupReleaseDate" :popupAvarage="popupAvarage"
-      :popupOverview="popupOverview" v-on:closeClicked="closePopup">
-    </PopupModal>
+
 
     <div v-if="thirdPart">
       <h1>Here are your badges!</h1>
@@ -236,8 +245,86 @@ export default {
       popupActive: false,
       profilePic: "",
       secondPartFirst: true,
-      genreArray: [],
+      // genreArray: [],
       watchedMovies: [],
+      genreArray: [
+        {
+          id: 28,
+          name: "Action",
+        },
+        {
+          id: 12,
+          name: "Adventure",
+        },
+        {
+          id: 16,
+          name: "Animation",
+        },
+        {
+          id: 35,
+          name: "Comedy",
+        },
+        {
+          id: 80,
+          name: "Crime",
+        },
+        {
+          id: 99,
+          name: "Documentary",
+        },
+        {
+          id: 18,
+          name: "Drama",
+        },
+        {
+          id: 10751,
+          name: "Family",
+        },
+        {
+          id: 14,
+          name: "Fantasy",
+        },
+        {
+          id: 36,
+          name: "History",
+        },
+        {
+          id: 27,
+          name: "Horror",
+        },
+        {
+          id: 10402,
+          name: "Music",
+        },
+        {
+          id: 9648,
+          name: "Mystery",
+        },
+        {
+          id: 10749,
+          name: "Romance",
+        },
+        {
+          id: 878,
+          name: "Science Fiction",
+        },
+        {
+          id: 10770,
+          name: "TV Movie",
+        },
+        {
+          id: 53,
+          name: "Thriller",
+        },
+        {
+          id: 10752,
+          name: "War",
+        },
+        {
+          id: 37,
+          name: "Western",
+        },
+      ],
     };
   },
   methods: {
@@ -303,6 +390,34 @@ export default {
         genre: this.genreArray,
       });
       // maybe include to go back to the profile
+    },
+    togglePopup(
+      posterPath,
+      originalTitle,
+      genreids,
+      releaseDate,
+      voteAverage,
+      overview,
+      movie
+    ) {
+      this.popupPoster = posterPath;
+      this.popupTitle = originalTitle;
+
+      this.popupReleaseDate = releaseDate;
+      this.popupAvarage = voteAverage;
+      this.popupOverview = overview;
+      this.popupActive = true;
+      //console.log(movie);
+      //movie.genre_ids
+      let genreName = "";
+      for (let i = 0; i < this.genreArray.length; i++) {
+        for (let j = 0; j < movie.genre_ids.length; j++) {
+          if (Number(this.genreArray[i].id) == Number(movie.genre_ids[j])) {
+            genreName += this.genreArray[i].name + ", ";
+          }
+        }
+      }
+      this.popupGenreIDs = genreName.slice(0, genreName.length - 2);
     },
     closePopup() {
       this.popupActive = false;
