@@ -6,19 +6,10 @@
 
     <div v-if="secondPartFirst" class="profilePicSectionFirst">
       <div class="profilePictureContainer">
-        <img
-          id="profilePicture"
-          :src="profilePic"
-          alt="profilePic"
-          :class="{ capturedPicture: photoSnapped === true }"
-        />
+        <img id="profilePicture" :src="profilePic" alt="profilePic"
+          :class="{ capturedPicture: photoSnapped === true }" />
       </div>
-      <img
-        id="changing"
-        src="../assets/icons/edit-photo.svg"
-        alt="changeProfile"
-        @click.prevent="clickImage"
-      />
+      <img id="changing" src="../assets/icons/edit-photo.svg" alt="changeProfile" @click.prevent="clickImage" />
     </div>
 
     <div v-if="secondPartSecond" class="profilePicSectionSecond">
@@ -129,32 +120,19 @@
       <h1>Movies you've watched</h1>
       <p>Here are the list of movies you've seen from the challenges</p>
       <div class="ongoingChalContainer">
-        <div
-          v-for="(movies, i) in watchedMovies"
-          :key="i"
-          class="ongoingChalItem"
-        >
-          <img
-            :src="
-              'https://image.tmdb.org/t/p/w500' + watchedMovies[i].poster_path
-            "
-          />
+        <div v-for="(movies, i) in watchedMovies" :key="i" class="ongoingChalItem">
+          <img :src="
+            'https://image.tmdb.org/t/p/w500' + watchedMovies[i].poster_path
+          " />
           <!-- <h3>{{ movie[i].title }}</h3> -->
         </div>
       </div>
       <a class="seeMoreBtn link" href="">Load More</a>
     </div>
 
-    <PopupModal
-      :popupActive="popupActive"
-      :popupTitle="popupTitle"
-      :popupPoster="popupPoster"
-      :popupGenreIDs="popupGenreIDs"
-      :popupReleaseDate="popupReleaseDate"
-      :popupAvarage="popupAvarage"
-      :popupOverview="popupOverview"
-      v-on:closeClicked="closePopup"
-    >
+    <PopupModal :popupActive="popupActive" :popupTitle="popupTitle" :popupPoster="popupPoster"
+      :popupGenreIDs="popupGenreIDs" :popupReleaseDate="popupReleaseDate" :popupAvarage="popupAvarage"
+      :popupOverview="popupOverview" v-on:closeClicked="closePopup">
     </PopupModal>
 
     <div v-if="thirdPart">
@@ -163,13 +141,13 @@
       <h1>{{ this.points }}</h1>
       <p>You have 22 movies left to unlock the next badge</p>
       <div class="btnContainer">
-        <button type="save" class="primaryBtn" @click="BadgesPopup">
+        <button type="save" class="primaryBtn" @click="badgesPopup">
           Badges
         </button>
-        <button type="save" class="primaryBtn" @click="SharedBadgesPopup">
+        <button type="save" class="primaryBtn" @click="sharedBadgesPopup">
           Shared Badges
         </button>
-        <BadgesPopup @close="FirstTogglePopup" :popupActive="FirstpopupActive">
+        <BadgesPopup @close="firstTogglePopup" :popupActive="firstpopupActive">
           <div class="popupContent">
             <h1 class="popUpHeading">Popcorn</h1>
             <img src="#" alt="#" />
@@ -179,10 +157,7 @@
             </button>
           </div>
         </BadgesPopup>
-        <SharedBadgesPopup
-          @close="SecondTogglePopup"
-          :popupActive="SecondpopupActive"
-        >
+        <SharedBadgesPopup @close="secondTogglePopup" :popupActive="secondpopupActive">
           <div class="popupSecondContent">
             <h1 class="popUpHeading">Unlock at 130th movie</h1>
             <img src="#" alt="#" />
@@ -296,11 +271,11 @@ export default {
     resetPassword() {
       this.$router.push("/reset-password");
     },
-    async BadgesPopup() {
-      this.FirstTogglePopup();
+    async badgesPopup() {
+      this.firstTogglePopup();
     },
-    async SharedBadgesPopup() {
-      this.SecondTogglePopup();
+    async sharedBadgesPopup() {
+      this.secondTogglePopup();
     },
     cancel() {
       this.firstPart = false;
@@ -327,6 +302,7 @@ export default {
       updateDoc(doc(db, "user", this.chalID), {
         genre: this.genreArray,
       });
+      // maybe include to go back to the profile
     },
     closePopup() {
       this.popupActive = false;
@@ -431,19 +407,19 @@ export default {
     });
   },
   setup() {
-    const FirstpopupActive = vue.ref(false);
-    const FirstTogglePopup = () => {
-      FirstpopupActive.value = !FirstpopupActive.value;
+    const firstpopupActive = vue.ref(false);
+    const firstTogglePopup = () => {
+      firstpopupActive.value = !firstpopupActive.value;
     };
-    const SecondpopupActive = vue.ref(false);
-    const SecondTogglePopup = () => {
-      SecondpopupActive.value = !SecondpopupActive.value;
+    const secondpopupActive = vue.ref(false);
+    const secondTogglePopup = () => {
+      secondpopupActive.value = !secondpopupActive.value;
     };
     return {
-      FirstpopupActive,
-      FirstTogglePopup,
-      SecondpopupActive,
-      SecondTogglePopup,
+      firstpopupActive,
+      firstTogglePopup,
+      secondpopupActive,
+      secondTogglePopup,
     };
   },
 };
