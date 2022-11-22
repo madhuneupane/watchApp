@@ -273,6 +273,7 @@ export default {
             nickname: this.nickname,
             profilePicUrl: this.urlOfImage,
             genre: this.genreArray,
+            points: 0
           });
           this.email = "";
           this.password.value = "";
