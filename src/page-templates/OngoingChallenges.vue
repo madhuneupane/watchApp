@@ -106,7 +106,14 @@ import FooterBar from "../components/FooterBar.vue";
 import BackButton from "../components/BackButton.vue";
 import ChallengesMenu from "../components/ChallengesMenu.vue";
 import { db } from "@/firebase";
-import { query, collection, getDocs, deleteDoc, where, doc } from "firebase/firestore";
+import {
+  query,
+  collection,
+  getDocs,
+  deleteDoc,
+  where,
+  doc,
+} from "firebase/firestore";
 
 import SimplePopup from "../components/SimplePopup.vue";
 import * as vue from "vue";
@@ -232,7 +239,7 @@ export default {
           }
         }
         this.totalWatched = flag;
-        console.log(flag);
+
         if (flag != doc.data().selectedMovies.length) {
           let newChallenge = {
             title: doc.data().chalName,
@@ -243,6 +250,7 @@ export default {
             startDate: doc.data().startDate,
             totalWatched: this.totalWatched,
           };
+          flag = 0;
           // console.log(newChallenge);
           this.slides.push(newChallenge);
         }
@@ -310,7 +318,12 @@ export default {
       this.togglePopup();
     },
     async redirect() {
-      const querySnap = await getDocs(query(collection(db, "challenge"), where("chalName", "==", this.chalName, true)));
+      const querySnap = await getDocs(
+        query(
+          collection(db, "challenge"),
+          where("chalName", "==", this.chalName, true)
+        )
+      );
       querySnap.forEach((doc1) => {
         // const uid = sessionStorage.getItem("uid");
         // const userId = doc.data().uid;
@@ -325,7 +338,7 @@ export default {
             })
             .catch((error) => {
               console.log(error);
-            })
+            });
         }
       });
     },
