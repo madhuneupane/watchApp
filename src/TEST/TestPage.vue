@@ -21,6 +21,8 @@
             <button @click.prevent="togglePopup" class="primaryBtn">Done</button>
         </div>
     </SimplePopup>
+    <h1>Login Auth</h1>
+    <LoginAuth />
 </template>
 
 <script>
@@ -50,4 +52,9 @@ export default {
         return { popupActive, togglePopup };
     },
 }
+name: "TestPage",
+    components: {
+    LoginAuth,
+  },
+};
 </script>
