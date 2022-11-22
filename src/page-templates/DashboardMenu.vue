@@ -131,7 +131,7 @@
 
     <div v-if="thirdPart">
       <h1>Here are your badges!</h1>
-      <h2>Total of movies you've watched have so far:</h2>
+      <h2>Total of movies you've watched so far:</h2>
       <h1>{{ this.points }}</h1>
       <p>You have 22 movies left to unlock the next badge</p>
       <div class="btnContainer">
