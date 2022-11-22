@@ -8,9 +8,7 @@
       <div class="movieInfo">
         <span class="movieInfo__name">{{ movieName }}</span>
         <span class="movieInfo__id">{{ movieID }}</span>
-        <span class="movieInfo__releaseDate"
-          >Release Date:<br />{{ movieRelease }}</span
-        >
+        <span class="movieInfo__releaseDate">Release Date:<br />{{ movieRelease }}</span>
         <span class="movieInfo__rating">Rating: {{ movieRating }}/10</span>
       </div>
     </div>
@@ -22,23 +20,12 @@
 
     <label>Rating<span class="req">*</span></label>
     <!-- <input v-model="userRating" type="number" name="userRating" id="userRating" /> -->
-    <vue3starRatings
-      v-model="userRating"
-      class="ratingStars"
-      starColor="#ffffff"
-      starSize="25"
-      controlBg="#00002A"
-    />
+    <vue3starRatings v-model="userRating" class="ratingStars" starColor="#ffffff" starSize="25" controlBg="#00002A" />
 
     <div class="userReviewContainer">
       <label for="userReview">Review<span class="req">*</span></label>
-      <textarea
-        v-model="userReview"
-        id="userReview"
-        cols="30"
-        rows="10"
-        placeholder="Leave your review here!"
-      ></textarea>
+      <textarea v-model="userReview" id="userReview" cols="30" rows="10"
+        placeholder="Leave your review here!"></textarea>
     </div>
 
     <p class="error">{{ fillMessage }}</p>
@@ -104,6 +91,7 @@ export default {
       chalID: "",
       moviePoster: "",
       movieList: [],
+      points: 0
     };
   },
   setup() {
@@ -152,6 +140,7 @@ export default {
         this.movieList[i].review = this.userReview;
         this.movieList[i].rating = this.userRating;
         let chalName = sessionStorage.getItem("chalName");
+        let uid = sessionStorage.getItem("uid");
 
         const test = await getDocs(
           query(
@@ -167,10 +156,25 @@ export default {
         updateDoc(doc(db, "challenge", this.chalID), {
           selectedMovies: this.movieList,
         });
-      }
-      // We need to update db using the challenge title
 
-      // UPDATE - USER REVIEW NOT WORKING
+        const test1 = await getDocs(
+          query(
+            collection(db, "user"),
+            where("uid", "==", uid)
+          )
+        );
+        let point = 0;
+        test1.forEach((doc) => {
+          this.chalID = doc.id;
+          point = Number(doc.data().points);
+          // console.log(doc.data().endDate);
+        });
+        //let review = this.movieName + "userReview";
+        updateDoc(doc(db, "user", this.chalID), {
+          points: point + 5,
+        });
+      }
+
     },
     goBack() {
       this.$router.push("/ongoing-challenges");

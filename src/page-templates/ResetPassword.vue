@@ -12,7 +12,7 @@
             <button type="submit" class="primaryBtn" @click.prevent="passwordRetrieve">Next</button>
         </div>
     </form>
-    <router-link id="backToLogin" to="/login-page">Back to login page</router-link>
+    <router-link class="seeMoreBtn link" to="/login-page">Back to login page</router-link>
     <FooterBar />
 </template>
 

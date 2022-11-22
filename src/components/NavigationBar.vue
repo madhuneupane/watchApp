@@ -7,27 +7,11 @@
         <DropdownMenu v-if="isSignedIn && imageSource" title="Challenges" />
       </div>
       <!-- v-if="user" -->
-      <div
-        v-if="!isSignedOut"
-        class="nav-link"
-        id="login"
-        @click.prevent="goToLogin"
-      >
+      <div v-if="!isSignedOut" class="nav-link" id="login" @click.prevent="goToLogin">
         Login
       </div>
-      <img
-        v-if="isSignedIn && imageSource"
-        id="userIcon"
-        :src="imageSource"
-        alt="userPic"
-        @click.prevent="profile"
-      />
-      <button
-        v-if="isSignedIn && imageSource"
-        @click.prevent="signingOut"
-        class="nav-link tertiaryBtn"
-        id="signOut"
-      >
+      <img v-if="isSignedIn && imageSource" id="userIcon" :src="imageSource" alt="userPic" @click.prevent="profile" />
+      <button v-if="isSignedIn && imageSource" @click.prevent="signingOut" class="nav-link tertiaryBtn" id="signOut">
         Sign Out
       </button>
     </div>
@@ -62,6 +46,9 @@ export default {
       if (userId == this.uid) {
         this.imageSource = doc.data().profilePicUrl;
         sessionStorage.setItem("nickname", doc.data().nickname);
+        sessionStorage.setItem("fname", doc.data().fname);
+        sessionStorage.setItem("lname", doc.data().lname);
+        sessionStorage.setItem("profilePic", this.imageSource);
       }
     });
   },

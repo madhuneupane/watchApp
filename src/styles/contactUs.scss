@@ -1,3 +1,9 @@
+.contactContainer h2 {
+    font-size: 2rem;
+    margin: $standardSpacement 0;
+}
+
+
 .contactContainer {
     display: flex;
     flex-direction: column;
@@ -14,11 +20,13 @@
     text-align: center;
 }
 
-.form_email,
+.contactContainer .formContainer .form_email,
 .form_fName,
+.form_lName,
 .form_subject,
 .form_message {
     display: flex;
     flex-direction: column;
     margin-bottom: $standardSpacement;
+
 }

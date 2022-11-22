@@ -16,6 +16,7 @@ import OfflinePage from "./page-templates/OfflinePage.vue";
 import PastChallenge from "./page-templates/PastChallenge.vue";
 import ContactUs from "./page-templates/ContactUs.vue";
 import ChallengeReview from "./page-templates/ChallengeReview.vue";
+import DashboardMenu from "./page-templates/DashboardMenu.vue";
 
 // Test page just for testing things
 import TestPage from "./TEST/TestPage.vue";
@@ -110,6 +111,11 @@ const routes = [
     name: "ChallengeReview",
     path: "/challenge-review",
     component: ChallengeReview,
+  },
+  {
+    name: "DashboardMenu",
+    path: "/profile-page",
+    component: DashboardMenu,
   },
 
   // Test page just for testing things

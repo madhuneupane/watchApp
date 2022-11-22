@@ -1,24 +1,35 @@
 <template>
-
-
-
-
+  <section>
+    <NavigationBar />
     <!-- <div v-if="FirstSection" class="fSect"> -->
-      <h1>Howdy, nickname!</h1>
-      <h2>nickname</h2>
- 
-  
-            
-    <a @click="First">Favorite Genre</a>   
-  
+    <h1>Howdy, {{ nickname }}!</h1>
 
-  <a @click="Second">Watched Movies</a>
+    <div v-if="secondPartFirst" class="profilePicSectionFirst">
+      <div class="profilePictureContainer">
+        <img id="profilePicture" :src="profilePic" alt="profilePic"
+          :class="{ capturedPicture: photoSnapped === true }" />
+      </div>
+      <img id="changing" src="../assets/icons/edit-photo.svg" alt="changeProfile" @click.prevent="clickImage">
+    </div>
 
-    <a @click="Third">Badges</a>
+    <div v-if="secondPartSecond" class="profilePicSectionSecond">
+      <video autoplay class="feed"></video>
+      <button class="secondaryBtn" @click.prevent="displayImage">Snap</button>
+    </div>
 
-  <a @click="Fourth">Profile</a>
+    <h2>{{ nickname }}</h2>
 
-  <div v-if="FirstPart" >
+    <div class="sideMenu">
+      <a @click="first">Favorite Genre</a>
+
+      <a @click="second">Watched Movies</a>
+
+      <a @click="third">Badges</a>
+
+      <a @click="fourth">Profile</a>
+    </div>
+
+    <div v-if="firstPart">
       <h1>Edit Your preferences</h1>
       <p>Select at least one genre</p>
       <div class="genreSelectionContainer">
@@ -99,152 +110,299 @@
           <label for="genre">Western</label>
         </div>
       </div>
-      
-      
-      <button type="cancel" class="secondaryBtn" @click="Fourth">
-			Cancel
-		</button>
-    <button type="save" class="primaryBtn" @click="Fourth">
-			Save
-		</button>
-  </div>
+      <button type="cancel" class="secondaryBtn" @click="cancel">
+        Cancel
+      </button>
+      <button type="save" class="primaryBtn" @click="saveNewGenres">
+        Save
+      </button>
+    </div>
 
-  <div v-if="SecondPart">
-        <h1>Movies you've watched</h1>
+    <div v-if="secondPart">
+      <h1>Movies you've watched</h1>
       <p>Here are the list of movies you've seen from the challenges</p>
-      <a href="">See All</a>
+      <a class="seeMoreBtn link" href="">Load More</a>
+    </div>
+
+    <PopupModal :popupActive=popupActive :popupTitle=popupTitle :popupPoster=popupPoster :popupGenreIDs=popupGenreIDs
+      :popupReleaseDate=popupReleaseDate :popupAvarage=popupAvarage :popupOverview=popupOverview
+      v-on:closeClicked="closePopup">
+    </PopupModal>
+
+    <div v-if="thirdPart">
+      <h1>Here are your badges!</h1>
+      <h2>Total of movies you've watched so far:</h2>
+      <h1>{{ this.points }}</h1>
+      <p>You have 22 movies left to unlock the next badge</p>
+      <div class="btnContainer">
+        <button type="save" class="primaryBtn" @click="BadgesPopup">
+          Badges
+        </button>
+        <button type="save" class="primaryBtn" @click="SharedBadgesPopup">
+          Shared Badges
+        </button>
+        <BadgesPopup @close="FirstTogglePopup" :popupActive="FirstpopupActive">
+          <div class="popupContent">
+            <h1 class="popUpHeading">Popcorn</h1>
+            <img src="#" alt="#">
+            <h3 class="popUpText">20th movie milestone</h3>
+            <button @click="redirect" type="button" class="secondaryBtn">Share Badge</button>
+          </div>
+        </BadgesPopup>
+        <SharedBadgesPopup @close="SecondTogglePopup" :popupActive="SecondpopupActive">
+          <div class="popupSecondContent">
+            <h1 class="popUpHeading">Unlock at 130th movie</h1>
+            <img src="#" alt="#">
+            <h3 class="popUpText">Watched more movies to unlock this badge</h3>
+            <button @click="redirect" type="button" class="secondaryBtn">Watch more movies</button>
+          </div>
+        </SharedBadgesPopup>
+      </div>
 
     </div>
 
-    <div v-if="ThirdPart">
-      <h1>Here are your badges!</h1>
-      <h2>Total of movie you've watched so far:</h2>
-      <h1>108</h1>
-      <p>You have 22 movies left to unlock the next badge</p>
-      <div class="btnContainer">
-      <button type="save" class="primaryBtn" @click="BadgesPopup">
-			Badges
-		</button>
-    <button type="save" class="primaryBtn" @click="SharedBadgesPopup">
-			Shared Badges
-		</button>
-    <BadgesPopup @close="FirstTogglePopup" :popupActive="FirstpopupActive">
-        <div class="popupContent">
-          <h1 class="popUpHeading">PopCorn</h1>
-          <img src="#" alt="#">
-          <h3 class="popUpText">20th movie milestone</h3>
-          <button @click="redirect" type="button" class="secondaryBtn">Share Badge</button>
-        </div>
-      </BadgesPopup>
-      <SharedBadgesPopup @close="SecondTogglePopup" :popupActive="SecondpopupActive">
-        <div class="popupSecondContent">
-          <h1 class="popUpHeading">Unlock at 130th movie</h1>
-          <img src="#" alt="#">
-          <h3 class="popUpText">Watched more movies to unlock this badge</h3>
-          <button @click="redirect" type="button" class="secondaryBtn">Watch more movies</button>
-        </div>
-      </SharedBadgesPopup>
-  </div>
-
-  </div>
-
-  <div v-if="FourthPart" class="accountProfile">
-    <h1>
-				Your Account
-			</h1>
-			<section style="list-style-type:none;">
-				<span>Name:</span>
-        <span>John Doe</span>
+    <div v-if="fourthPart" class="accountProfile">
+      <h1>
+        Your Account
+      </h1>
+      <section>
+        <div>Name:</div>
+        <div>{{ this.fname + " " + this.lname }}</div>
         <br>
-        <span>Nickname:</span>
-        <span>John</span>
-        <br>
-        <span>Email:</span>
-        <span>email@example.com</span>
-      </section>  
-			<button type="submit" class="primaryBtn" @click.prevent="resetPassword">
-			Change Password
-		</button>
-  </div>
+        <div>Nickname:</div>
+        <div>{{ nickname }}</div>
+      </section>
+      <button type="submit" class="primaryBtn" @click.prevent="resetPassword">
+        Change Password
+      </button>
+    </div>
 
-  
-<!-- </div> -->
+    <FooterBar />
+  </section>
+  <!-- </div> -->
 </template>
 
 <script>
-import { ref } from 'vue';
-import BadgesPopup from './BadgesPopup.vue';
-import SharedBadgesPopup from './SharedBadgesPopup.vue';
+import * as vue from "vue";
+import BadgesPopup from '../components/BadgesPopup.vue';
+import SharedBadgesPopup from '../components/SharedBadgesPopup.vue';
+import NavigationBar from '../components/NavigationBar.vue';
+import FooterBar from '../components/FooterBar.vue';
+import PopupModal from '../components/PopupModal.vue';
+
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { db } from "@/firebase";
+import { collection, updateDoc, doc, where, query, getDocs } from "firebase/firestore";
+
 export default {
+  name: "DashboardMenu",
+  components: {
+    BadgesPopup,
+    SharedBadgesPopup,
+    NavigationBar,
+    FooterBar,
+    PopupModal
+  },
+  data() {
+    return {
+      firstPart: false,
+      secondPart: false,
+      thirdPart: false,
+      fourthPart: true,
+      nickname: "",
+      fname: "",
+      lname: "",
+      points: "",
+      popupTitle: "",
+      popupPoster: "",
+      popupGenreIDs: "",
+      popupReleaseDate: "",
+      popupAvarage: "",
+      popupOverview: "",
+      popupActive: false,
+      profilePic: "",
+      secondPartFirst: true,
+      genreArray: []
+    };
+  },
+  methods: {
+    backToHome() {
+      this.$router.push("/");
+    },
+    first() {
+      this.firstPart = true;
+      this.secondPart = false;
+      this.thirdPart = false;
+      this.fourthPart = false;
+    },
+    second() {
+      this.firstPart = false;
+      this.secondPart = true;
+      this.thirdPart = false;
+      this.fourthPart = false;
+    },
+    third() {
+      this.firstPart = false;
+      this.secondPart = false;
+      this.thirdPart = true;
+      this.fourthPart = false;
+    },
+    fourth() {
+      this.firstPart = false;
+      this.secondPart = false;
+      this.thirdPart = false;
+      this.fourthPart = true;
+    },
+    resetPassword() {
+      this.$router.push("/reset-password");
+    },
+    async BadgesPopup() {
+      this.FirstTogglePopup();
+    },
+    async SharedBadgesPopup() {
+      this.SecondTogglePopup();
+    },
+    cancel() {
+      this.firstPart = false;
+      this.secondPart = false;
+      this.thirdPart = false;
+      this.fourthPart = true;
+    },
+    async saveNewGenres() {
+      let checkboxes = document.getElementsByName("genre");
+      //let selected = [];
+      for (let i = 0; i < checkboxes.length; i++) {
+        if (checkboxes[i].checked) {
+          console.log(checkboxes[i].value);
+          this.genreArray.push(checkboxes[i].value);
+        }
+      }
+      const uid = sessionStorage.getItem("uid");
+      const test = await getDocs(
+        query(
+          collection(db, "user"),
+          where("uid", "==", uid)
+        )
+      );
+      test.forEach((doc) => {
+        this.chalID = doc.id;
+      });
+      updateDoc(doc(db, "user", this.chalID), {
+        genre: this.genreArray,
+      });
+    },
+    closePopup() {
+      this.popupActive = false;
+    },
+    clickImage() {
+      this.secondPartFirst = false;
+      this.secondPartSecond = true;
+      this.init();
+      this.photoSnapped = true;
+    },
+    async displayImage() {
+      const picture = document.createElement("canvas");
+      const ctx = picture.getContext("2d");
+
+      ctx.imageSmoothingEnabled = true;
+      ctx.imageSmoothingQuality = "high";
+      ctx.drawImage(
+        document.querySelector("video"),
+        0,
+        0,
+        picture.width,
+        picture.height
+      );
+
+      // this.imageSource = picture.toDataURL();
+      picture.toBlob((blob) => {
+        const storage = getStorage();
+        const fname = sessionStorage.getItem("fname");
+        const storageRef = ref(storage, `images/${fname}`);
+        uploadBytes(storageRef, blob).then(() => {
+          getDownloadURL(storageRef).then((result) => {
+            //console.log(result);
+            this.urlOfImage = result;
+            console.log(this.urlOfImage);
+            let profilePhoto = document.getElementById("profilePicture");
+            // console.log("this" + this.a);
+            profilePhoto.src = result;
+          });
+        });
+      });
+      picture.remove();
+      const uid = sessionStorage.getItem("uid");
+      const test = await getDocs(
+        query(
+          collection(db, "user"),
+          where("uid", "==", uid)
+        )
+      );
+      test.forEach((doc) => {
+        this.chalID = doc.id;
+        // console.log(doc.data().endDate);
+      });
+      console.log(this.urlOfImage);
+      //let review = this.movieName + "userReview";
+      updateDoc(doc(db, "user", this.chalID), {
+        profilePicUrl: this.urlOfImage,
+      });
+
+      this.secondPartSecond = false;
+      this.secondPartFirst = true;
+    },
+    init() {
+      if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+        navigator.mediaDevices.getUserMedia({ video: true }).then((stream) => {
+          const videoPlayer = document.querySelector("video");
+          videoPlayer.srcObject = stream;
+          videoPlayer.play();
+        });
+      } else {
+        console.log("ok");
+      }
+    },
+  },
+  async mounted() {
+    this.nickname = sessionStorage.getItem("nickname");
+    this.fname = sessionStorage.getItem("fname");
+    this.lname = sessionStorage.getItem("lname");
+    this.profilePic = sessionStorage.getItem("profilePic");
+    let uid = sessionStorage.getItem("uid");
+    const test1 = await getDocs(
+      query(
+        collection(db, "user"),
+        where("uid", "==", uid)
+      )
+    );
+    test1.forEach((doc) => {
+      this.chalID = doc.id;
+      this.points = Number(doc.data().points);
+      this.points = this.points / 5;
+      // console.log(doc.data().endDate);
+    });
+  },
   setup() {
-    const FirstpopupActive = ref(false);
+    const FirstpopupActive = vue.ref(false);
     const FirstTogglePopup = () => {
       FirstpopupActive.value = !FirstpopupActive.value;
     };
-    const SecondpopupActive = ref(false);
+    const SecondpopupActive = vue.ref(false);
     const SecondTogglePopup = () => {
       SecondpopupActive.value = !SecondpopupActive.value;
     };
     return { FirstpopupActive, FirstTogglePopup, SecondpopupActive, SecondTogglePopup }
   },
-  name: "DashboardMenu",
-  components: {
-    BadgesPopup,
-    SharedBadgesPopup
-  },
- 
-  data() {
-    return {
-      FirstPart: false,
-      SecondPart: false,
-      ThirdPart: false,
-      FourthPart: false,
-    };
-  },
-
-  methods: {
-    backToHome() {
-      this.$router.push("/login");
-    },
-    First() {
-      this.FirstPart = true;
-      this.SecondPart = false;
-      this.ThirdPart = false;
-      this.FourthPart = false;
-    },
-    Second(){
-      this.FirstPart = false;
-      this.SecondPart = true;
-      this.ThirdPart = false;
-      this.FourthPart = false;
-    },
-    Third(){
-      this.FirstPart = false;
-      this.SecondPart = false;
-      this.ThirdPart = true;
-      this.FourthPart = false;
-    },
-    Fourth(){
-      this.FirstPart = false;
-      this.SecondPart = false;
-      this.ThirdPart = false;
-      this.FourthPart = true;        
-      },
-      resetPassword(){
-        this.$router.push("/reset-password");
-      },
-      async BadgesPopup(){
-        this.FirstTogglePopup();
-      },
-      async SharedBadgesPopup(){
-        this.SecondTogglePopup();
-      }
-      
-  }
 }
 
 </script>
 
 <style>
+.sideMenu a {
+  cursor: pointer;
+}
 
+#changing {
+  cursor: pointer;
+}
 </style>
