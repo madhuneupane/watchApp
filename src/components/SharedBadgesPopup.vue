@@ -1,23 +1,23 @@
 <template>
-  <transition name="popupAnimation">
-      <div v-show="popupActive" class="popup">
-          <transition name="popupAnimationInner">
-              <div v-show="popupActive" class="popupInner">
-                  <img @click="close" src="../assets/icons/close.svg" alt="close" id="closePopup">
-                  <slot />
-              </div>
-          </transition>
-      </div>
-  </transition>
+    <transition name="popupAnimation">
+        <div v-show="popupActive" class="popup">
+            <transition name="popupAnimationInner">
+                <div v-show="popupActive" class="popupInner">
+                    <img @click="close" src="../assets/icons/close.svg" alt="close" id="closePopup">
+                    <slot />
+                </div>
+            </transition>
+        </div>
+    </transition>
 </template>
 <script>
 export default {
-  props: ["popupActive"],
-  setup(props, { emit }) {
-      const close = () => {
-          emit("close");
-      }
-      return { close };
-  },
+    props: ["popupActive"],
+    setup(props, { emit }) {
+        const close = () => {
+            emit("close");
+        }
+        return { close };
+    },
 }
 </script>
