@@ -5,9 +5,16 @@
     <h1>Past Challenges</h1>
     <h2>You've achieved this much!</h2>
     <div class="chalList">
-      <div class="chalInfo" v-for="(challenge, index) in chalLoading" :key="index">
-        <div class="challenge" v-bind:style="{ backgroundImage: 'url(' + challenge.image + ')' }"
-          @click.prevent="challengeClicked(index)">
+      <div
+        class="chalInfo"
+        v-for="(challenge, index) in chalLoading"
+        :key="index"
+      >
+        <div
+          class="challenge"
+          v-bind:style="{ backgroundImage: 'url(' + challenge.image + ')' }"
+          @click.prevent="challengeClicked(index)"
+        >
           <div class="chalDetailsContainer">
             <h3>{{ challenge.title }}</h3>
             <span id="ending">Ended on {{ challenge.endDate }}</span>
@@ -20,21 +27,26 @@
       <BackButton title="Back to Challenges" @click.prevent="backChal" />
     </div>
   </section>
-
-  <div v-if="moviePart">
-    <img :src="chalImage" alt="not displayed" style="height: 300px" />
-    <h2>{{ chalName }}</h2>
-    <h3>{{ startDate }}---{{ endDate }}</h3>
-    <!-- Completion date -->
-    <p>
-      {{ description }}
-    </p>
-    <div v-for="(movies, i) in movie" :key="i">
-      <img :src="'https://image.tmdb.org/t/p/w500' + movie[i].poster_path" />
-      <h3 v-if="movie[i].review">Congrats you watched this movie</h3>
+  <section id="upcomingPageSec">
+    <div v-if="moviePart">
+      <img :src="chalImage" alt="not displayed" style="height: 300px" />
+      <h2>{{ chalName }}</h2>
+      <h3>{{ startDate }}---{{ endDate }}</h3>
+      <!-- Completion date -->
+      <p>
+        {{ description }}
+      </p>
+      <div class="movieList">
+        <div v-for="(movies, i) in movie" :key="i">
+          <img
+            :src="'https://image.tmdb.org/t/p/w500' + movie[i].poster_path"
+          />
+          <h3 v-if="movie[i].review">Congrats you watched this movie</h3>
+        </div>
+      </div>
+      <BackButton title="Back to List" @click.prevent="backList"></BackButton>
     </div>
-    <BackButton title="Back to List" @click.prevent="backList"></BackButton>
-  </div>
+  </section>
   <FooterBar />
 </template>
 <script>
@@ -51,7 +63,7 @@ export default {
     NavigationBar,
     FooterBar,
     BackButton,
-    ChallengesMenu
+    ChallengesMenu,
   },
   data() {
     return {

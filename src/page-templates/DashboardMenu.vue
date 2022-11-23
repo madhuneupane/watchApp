@@ -265,6 +265,8 @@ export default {
       lname: "",
       points: "",
       popupTitle: "",
+      rating: "",
+      overview: "",
       popupPoster: "",
       popupGenreIDs: "",
       popupReleaseDate: "",
