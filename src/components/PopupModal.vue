@@ -3,18 +3,11 @@
     <div v-if="popupActive" class="popup">
       <transition name="popupAnimationInner">
         <div class="popupInner">
-          <img
-            src="../assets/icons/close.svg"
-            alt="close"
-            id="closePopup"
-            @click="(click) => this.$emit('closeClicked', click)"
-          />
+          <img src="../assets/icons/close.svg" alt="close" id="closePopup"
+            @click="(click) => this.$emit('closeClicked', click)" />
           <div class="popupContent">
-            <img
-              class="movieImg"
-              :src="'https://image.tmdb.org/t/p/w500' + popupPoster"
-              alt="{{ popupTitle }} + ' Movie Poster'"
-            />
+            <img class="movieImg" :src="'https://image.tmdb.org/t/p/w500' + popupPoster"
+              alt="{{ popupTitle }} + ' Movie Poster'" />
             <div class="infoArea">
               <h3>{{ popupTitle }}</h3>
               <p>{{ popupGenreIDs }}</p>
@@ -44,19 +37,6 @@ export default {
     popupOverview: String,
     popupActive: Boolean,
   },
-  /*     methods: {
-        close() {
-            this.popupActive = !this.popupActive
-        },
-
-    } */
-  /* props: ["popupActive"],
-    setup(props, { emit }) {
-        const close = () => {
-            emit("close");
-        }
-        return { close };
-    }, */
-};
+}
 </script>
 
