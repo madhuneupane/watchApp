@@ -1,37 +1,47 @@
 <template>
-  <div class="navbar navbar-gradient">
-    <img id="logo" src="../assets/icons/whitelogo.svg" alt="watchapp" />
-    <div class="navbar-items">
-      <div>
-        <div class="nav-link" id="home" @click.prevent="goToHome">Home</div>
-        <DropdownMenu v-if="isSignedIn && imageSource" title="Challenges" />
+  <header>
+    <div v-show="!mobile" class="desktopNav navbar navbar-gradient">
+      <img id="logo" src="../assets/icons/whitelogo.svg" alt="watchapp" />
+      <div class="navbar-items">
+        <div>
+          <div class="nav-link" id="home" @click.prevent="goToHome">Home</div>
+          <DropdownMenu v-if="isSignedIn && imageSource" title="Challenges" />
+        </div>
+        <!-- v-if="user" -->
+        <div v-if="!loggedIn" class="nav-link" id="login" @click.prevent="goToLogin">
+          Login
+        </div>
+        <img v-if="isSignedIn && imageSource" id="userIcon" :src="imageSource" alt="userPic" @click.prevent="profile" />
+        <button v-if="isSignedIn && imageSource" @click.prevent="signingOut" class="nav-link tertiaryBtn" id="signOut">
+          Sign Out
+        </button>
       </div>
-      <!-- v-if="user" -->
-      <div
-        v-if="!loggedIn"
-        class="nav-link"
-        id="login"
-        @click.prevent="goToLogin"
-      >
-        Login
-      </div>
-      <img
-        v-if="isSignedIn && imageSource"
-        id="userIcon"
-        :src="imageSource"
-        alt="userPic"
-        @click.prevent="profile"
-      />
-      <button
-        v-if="isSignedIn && imageSource"
-        @click.prevent="signingOut"
-        class="nav-link tertiaryBtn"
-        id="signOut"
-      >
-        Sign Out
-      </button>
     </div>
-  </div>
+    <div class="icon">
+      <img @click="toggleMobileNav" v-show="mobile" class="mobileNav" :class="{ 'icon-active': mobileNav }" />
+    </div>
+    <transition name="mobileNav">
+      <div v-show="mobileNav" class="dropdownNav">
+        <img id="logo" src="../assets/icons/colored-logo.svg" alt="watchapp" />
+        <div class="navbar-items">
+          <img v-if="isSignedIn && imageSource" id="userIcon" :src="imageSource" alt="userPic"
+            @click.prevent="profile" />
+          <div>
+            <div class="nav-link" id="home" @click.prevent="goToHome">Home</div>
+            <DropdownMenu v-if="isSignedIn && imageSource" title="Challenges" />
+          </div>
+          <!-- v-if="user" -->
+          <div v-if="!loggedIn" class="nav-link" id="login" @click.prevent="goToLogin">
+            Login
+          </div>
+          <button v-if="isSignedIn && imageSource" @click.prevent="signingOut" class="nav-link tertiaryBtn"
+            id="signOut">
+            Sign Out
+          </button>
+        </div>
+      </div>
+    </transition>
+  </header>
 </template>
 
 <script>
@@ -52,6 +62,9 @@ export default {
       imageSource: "",
       uid: "",
       loggedIn: false,
+      mobile: null,
+      mobileNav: null,
+      windowWidth: null
     };
   },
   async mounted() {
