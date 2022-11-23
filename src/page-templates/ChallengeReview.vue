@@ -8,7 +8,9 @@
       <div class="movieInfo">
         <span class="movieInfo__name">{{ movieName }}</span>
         <span class="movieInfo__id">{{ movieID }}</span>
-        <span class="movieInfo__releaseDate">Release Date:<br />{{ movieRelease }}</span>
+        <span class="movieInfo__releaseDate"
+          >Release Date:<br />{{ movieRelease }}</span
+        >
         <span class="movieInfo__rating">Rating: {{ movieRating }}/10</span>
       </div>
     </div>
@@ -20,12 +22,23 @@
 
     <label>Rating<span class="req">*</span></label>
     <!-- <input v-model="userRating" type="number" name="userRating" id="userRating" /> -->
-    <vue3starRatings v-model="userRating" class="ratingStars" starColor="#ffffff" starSize="25" controlBg="#00002A" />
+    <vue3starRatings
+      v-model="userRating"
+      class="ratingStars"
+      starColor="#ffffff"
+      starSize="25"
+      controlBg="#00002A"
+    />
 
     <div class="userReviewContainer">
       <label for="userReview">Review<span class="req">*</span></label>
-      <textarea v-model="userReview" id="userReview" cols="30" rows="10"
-        placeholder="Leave your review here!"></textarea>
+      <textarea
+        v-model="userReview"
+        id="userReview"
+        cols="30"
+        rows="10"
+        placeholder="Leave your review here!"
+      ></textarea>
     </div>
 
     <p class="error">{{ fillMessage }}</p>
@@ -91,7 +104,7 @@ export default {
       chalID: "",
       moviePoster: "",
       movieList: [],
-      points: 0
+      points: 0,
     };
   },
   setup() {
@@ -149,7 +162,9 @@ export default {
           )
         );
         test.forEach((doc) => {
-          this.chalID = doc.id;
+          if (uid == doc.data().uid) {
+            this.chalID = doc.id;
+          }
           // console.log(doc.data().endDate);
         });
         //let review = this.movieName + "userReview";
@@ -158,10 +173,7 @@ export default {
         });
 
         const test1 = await getDocs(
-          query(
-            collection(db, "user"),
-            where("uid", "==", uid)
-          )
+          query(collection(db, "user"), where("uid", "==", uid))
         );
         let point = 0;
         test1.forEach((doc) => {
@@ -174,7 +186,6 @@ export default {
           points: point + 5,
         });
       }
-
     },
     goBack() {
       this.$router.push("/ongoing-challenges");
