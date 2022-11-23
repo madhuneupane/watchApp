@@ -19,7 +19,7 @@ import ChallengeReview from "./page-templates/ChallengeReview.vue";
 import DashboardMenu from "./page-templates/DashboardMenu.vue";
 
 // Test page just for testing things
-import TestPage from "./TEST/TestPage.vue";
+// import TestPage from "./TEST/TestPage.vue";
 // import ProfileSettings from "./TEST/ProfileSettings.vue";
 
 // Additional pages that will be consolidated into a single one.
@@ -119,11 +119,11 @@ const routes = [
   },
 
   // Test page just for testing things
-  {
-    name: "TestPage",
-    path: "/test-page",
-    component: TestPage,
-  },
+  // {
+  //   name: "TestPage",
+  //   path: "/test-page",
+  //   component: TestPage,
+  // },
 
 ];
 
