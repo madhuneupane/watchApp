@@ -6,10 +6,19 @@
 
     <div v-if="secondPartFirst" class="profilePicSectionFirst">
       <div class="profilePictureContainer">
-        <img id="profilePicture" :src="profilePic" alt="profilePic"
-          :class="{ capturedPicture: photoSnapped === true }" />
+        <img
+          id="profilePicture"
+          :src="profilePic"
+          alt="profilePic"
+          :class="{ capturedPicture: photoSnapped === true }"
+        />
       </div>
-      <img id="changing" src="../assets/icons/edit-photo.svg" alt="changeProfile" @click.prevent="clickImage" />
+      <img
+        id="changing"
+        src="../assets/icons/edit-photo.svg"
+        alt="changeProfile"
+        @click.prevent="clickImage"
+      />
     </div>
 
     <div v-if="secondPartSecond" class="profilePicSectionSecond">
@@ -117,32 +126,48 @@
     </div>
 
     <div v-if="secondPart">
-      <h1>Movies you've watched</h1>
-      <p>Here are the list of movies you've seen from the challenges</p>
-      <PopupModal :popupActive="popupActive" :popupTitle="popupTitle" :popupPoster="popupPoster"
-        :popupGenreIDs="popupGenreIDs" :popupReleaseDate="popupReleaseDate" :popupAvarage="popupAvarage"
-        :popupOverview="popupOverview" v-on:closeClicked="closePopup">
-      </PopupModal>
-      <div class="ongoingChalContainer">
-        <div v-for="(movies, i) in watchedMovies" :key="i" class="ongoingChalItem">
-          <img :src="
-          'https://image.tmdb.org/t/p/w500' + watchedMovies[i].poster_path" @click="
-  togglePopup(
-    movies.poster_path,
-    movies.original_title,
-    movies.genre_ids,
-    movies.release_date,
-    movies.vote_average,
-    movies.overview,
-    movies
-  )" />
-          <!-- <h3>{{ movie[i].title }}</h3> -->
+      <section id="upcomingPageSec">
+        <h1>Movies you've watched</h1>
+        <p>Here are the list of movies you've seen from the challenges</p>
+        <PopupModal
+          :popupActive="popupActive"
+          :popupTitle="popupTitle"
+          :popupPoster="popupPoster"
+          :popupGenreIDs="popupGenreIDs"
+          :popupReleaseDate="popupReleaseDate"
+          :popupAvarage="popupAvarage"
+          :popupOverview="popupOverview"
+          v-on:closeClicked="closePopup"
+        >
+        </PopupModal>
+        <div class="movieList">
+          <div
+            v-for="(movies, i) in watchedMovies"
+            :key="i"
+            class="ongoingChalItem"
+          >
+            <img
+              :src="
+                'https://image.tmdb.org/t/p/w500' + watchedMovies[i].poster_path
+              "
+              @click="
+                togglePopup(
+                  movies.poster_path,
+                  movies.original_title,
+                  movies.genre_ids,
+                  movies.release_date,
+                  movies.vote_average,
+                  movies.overview,
+                  movies
+                )
+              "
+            />
+            <!-- <h3>{{ movie[i].title }}</h3> -->
+          </div>
         </div>
-      </div>
+      </section>
       <a class="seeMoreBtn link" href="">Load More</a>
     </div>
-
-
 
     <div v-if="thirdPart">
       <h1>Here are your badges!</h1>
@@ -166,7 +191,10 @@
             </button>
           </div>
         </BadgesPopup>
-        <SharedBadgesPopup @close="secondTogglePopup" :popupActive="secondpopupActive">
+        <SharedBadgesPopup
+          @close="secondTogglePopup"
+          :popupActive="secondpopupActive"
+        >
           <div class="popupSecondContent">
             <h1 class="popUpHeading">Unlock at 130th movie</h1>
             <img src="#" alt="#" />
