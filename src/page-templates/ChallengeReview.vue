@@ -49,11 +49,13 @@
     </div>
     <SimplePopup @close="togglePopup" :popupActive="popupActive">
       <div class="popupContent">
-        <h1>Your review has been saved!</h1>
-        <p>For retrieving this information, please visit your profile</p>
-        <button @click="redirect" type="button" class="secondaryBtn">
-          Done
-        </button>
+        <div class="reviewSaved">
+          <h1>Your review has been saved!</h1>
+          <p>For retrieving this information, please visit your profile</p>
+          <button @click="redirect" type="button" class="secondaryBtn">
+            Done
+          </button>
+        </div>
       </div>
     </SimplePopup>
   </section>
