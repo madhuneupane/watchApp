@@ -1,7 +1,7 @@
 <template>
   <NavigationBar />
   <ChallangesCarousel />
-  <h1 v-if="nickName">Hello, {{ nickName }}</h1>
+  <h1 v-if="nickName" class="mainPageUserNickName">Hello, {{ nickName }}</h1>
   <UpcomingMovies />
   <RecommendationMovies />
   <AdminCarousel />

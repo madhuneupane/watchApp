@@ -16,10 +16,32 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
+    @media only screen and (min-width: 1024px) {
+        flex-direction: row;
+    }
+}
+
+.popupContent .movieImg {
+    width: 15rem;
+    height: 20rem;
+    border-radius: $poster_radius;
+
+    @media only screen and (min-width: 1024px) {
+        width: 20rem;
+        height: 30rem;
+    }
 }
 
 .popupContent .infoArea{
-    margin: 0 $standardSpacement;
+    width: 100%;
+    padding: $standardSpacement;
+
+    @media only screen and (min-width: 1024px) {
+        width: auto;
+        margin: 0 $standardSpacement;
+        padding: auto;
+    }
 }
 
 .popupContent .infoArea h3 {
@@ -34,14 +56,26 @@
 }
 
 .popupContent .infoArea .movieOverview {
-    margin: $standardSpacement 0 $standardSpacement;
+    width: 100%;
+
+    @media only screen and (min-width: 1024px) {
+        width: auto;
+    }
 }
 
 .popupInner {
+    width: 100%;
+    height: 100%;
     position: relative;
     background-color: $bg-blue;
-    padding: 30px;
+    padding: $standardSpacement;
     border-radius: 0.75rem;
+
+    @media only screen and (min-width: 1024px) {
+        width: 70%;
+        height: auto;
+        padding: 30px;
+    }
 }
 
 .popupInner button {

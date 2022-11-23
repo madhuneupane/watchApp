@@ -1,0 +1,7 @@
+.mainPageUserNickName {
+    padding-left: $standardSpacement;
+
+    @media only screen and (min-width: $media-desktop) {
+        padding-left: 2.5rem;
+    }
+}

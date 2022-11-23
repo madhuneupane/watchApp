@@ -53,10 +53,10 @@
           <span>Watched</span>
         </div>
       </div>
-      <div>
-        <BackButton title="Back to List" @click.prevent="backToList" />
-        <a class="seeMoreBtn link" @click.prevent="quitChal">Quit Challenge</a>
-      </div>
+    </div>
+    <div class="ongoingChlPageBottomBtnContainer">
+      <BackButton class="backtoListBtn" title="Back to List" @click.prevent="backToList" />
+      <a class="seeMoreBtn link" @click.prevent="quitChal">Quit Challenge</a>
     </div>
   </section>
   <SimplePopup @close="togglePopup" :popupActive="popupActive">

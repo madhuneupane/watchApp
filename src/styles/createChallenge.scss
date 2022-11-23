@@ -258,3 +258,15 @@ h3 {
 ::-webkit-calendar-picker-indicator {
     filter: invert(1);
 }
+
+.profilePicSectionSecond {
+    margin: $standardSpacement 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.profilePicSectionSecond .feed {
+    margin: $standardSpacement 0;
+}

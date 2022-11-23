@@ -1,11 +1,13 @@
 <template>
     <NavigationBar />
-    <div class="headContainer">
-        <h1>Challenges</h1>
+    <div id="chlngMainPage">
+        <div class="headContainer">
+            <h1 class="pageTitle">Challenges</h1>
+        </div>
+        <OngoingCarousel />
+        <AdminCarousel />
+        <PastCarousel />
     </div>
-    <OngoingCarousel />
-    <AdminCarousel />
-    <PastCarousel />
     <FooterBar />
 </template>
 

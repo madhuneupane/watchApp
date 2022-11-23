@@ -41,10 +41,12 @@
         </div>
       </div>
     </div>
-    <button class="primaryBtn" @click.prevent="joinChallenge">
+    <div class="ongoingChlPageBottomBtnContainer">
+      <button class="primaryBtn joinChlgBtn" @click.prevent="joinChallenge">
       Join Challenge
-    </button>
-    <BackButton title="Back to List" @click.prevent="backList" />
+      </button>
+      <BackButton class="backtoListBtn" title="Back to List" @click.prevent="backList" />
+    </div>
   </section>
   <FooterBar />
 </template>

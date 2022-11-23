@@ -247,3 +247,19 @@ span {
         height: auto;
     } */
 }
+
+#chalDetailSection .ongoingChlPageBottomBtnContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#chalDetailSection .ongoingChlPageBottomBtnContainer .backtoListBtn, .joinChlgBtn{
+    width: 100%;
+    margin-bottom: $standardSpacement;
+
+    @media only screen and (min-width: $media-desktop) {
+        width: 50%;
+    }
+}

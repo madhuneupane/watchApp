@@ -27,12 +27,11 @@
       <BackButton title="Back to Challenges" @click.prevent="backChal" />
     </div>
   </section>
-  <section id="upcomingPageSec">
+  <!-- <section id="upcomingPageSec">
     <div v-if="moviePart">
       <img :src="chalImage" alt="not displayed" style="height: 300px" />
       <h2>{{ chalName }}</h2>
       <h3>{{ startDate }}---{{ endDate }}</h3>
-      <!-- Completion date -->
       <p>
         {{ description }}
       </p>
@@ -45,6 +44,29 @@
         </div>
       </div>
       <BackButton title="Back to List" @click.prevent="backList"></BackButton>
+    </div>
+  </section> -->
+  <section v-if="moviePart" id="chalDetailSection">
+    <div class="chalDetailContainer">
+      <div class="chalImgContainer" v-bind:style="{ backgroundImage: 'url(' + chalImage + ')' }"></div>
+      <div class="chalDetailsInfo">
+        <span class="chalTitle">{{ chalName }}</span>
+        <span class="chalDates">{{ startDate }} ~ {{ endDate }}</span>
+        <p class="chalDescription">{{ description }}</p>
+      </div>
+    </div>
+    <div class="ongoingChalContainer">
+      <div v-for="(movies, i) in movie" :key="i" class="ongoingChalItem">
+        <img :src="'https://image.tmdb.org/t/p/w500' + movie[i].poster_path"
+          @click.prevent="movieClicked(movie[i], i)" />
+        <!-- <h3>{{ movie[i].title }}</h3> -->
+        <div class="movieWatched" v-if="movie[i].review">
+          <span>Watched</span>
+        </div>
+      </div>
+    </div>
+    <div class="ongoingChlPageBottomBtnContainer">
+      <BackButton class="backtoListBtn" title="Back to List" @click.prevent="backList" />
     </div>
   </section>
   <FooterBar />
