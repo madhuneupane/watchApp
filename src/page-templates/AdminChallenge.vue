@@ -1,14 +1,25 @@
 <template>
-  <button class="createChllgBtn" v-if="windowSize < 1024" @click.prevent="createChallenge"></button>
+  <button
+    class="createChllgBtn"
+    v-if="windowSize < 1024"
+    @click.prevent="createChallenge"
+  ></button>
   <NavigationBar />
   <ChallengesMenu :challengePage="'defyUs'" v-if="windowSize < 1024" />
   <section v-if="firstPart" id="ongoingChalSec">
     <h1 v-if="windowSize > 1024">Ongoing Challenges</h1>
     <h2>Keep up! You are almost there</h2>
     <div class="chalList">
-      <div class="chalInfo" v-for="(challenge, index) in chalLoading" :key="index">
-        <div class="challenge" v-bind:style="{ backgroundImage: 'url(' + challenge.image + ')' }"
-          @click.prevent="challengeClicked(index)">
+      <div
+        class="chalInfo"
+        v-for="(challenge, index) in chalLoading"
+        :key="index"
+      >
+        <div
+          class="challenge"
+          v-bind:style="{ backgroundImage: 'url(' + challenge.image + ')' }"
+          @click.prevent="challengeClicked(index)"
+        >
           <div class="chalDetailsContainer">
             <h3>{{ challenge.title }}</h3>
             <span id="ending">Ending on {{ challenge.endDate }}</span>
@@ -25,7 +36,10 @@
 
   <section v-if="moviePart" id="chalDetailSection">
     <div class="chalDetailContainer">
-      <div class="chalImgContainer" v-bind:style="{ backgroundImage: 'url(' + chalImage + ')' }"></div>
+      <div
+        class="chalImgContainer"
+        v-bind:style="{ backgroundImage: 'url(' + chalImage + ')' }"
+      ></div>
       <div class="chalDetailsInfo">
         <span class="chalTitle">{{ chalName }}</span>
         <span class="chalDates">{{ startDate }} ~ {{ endDate }}</span>
@@ -42,10 +56,16 @@
       </div>
     </div>
     <div class="ongoingChlPageBottomBtnContainer">
-      <button class="primaryBtn joinChlgBtn" @click.prevent="joinChallenge">
-      Join Challenge
-      </button>
-      <BackButton class="backtoListBtn" title="Back to List" @click.prevent="backList" />
+      <div class="ongoingChlPageBottomBtnContainer" v-if="userID">
+        <button class="primaryBtn joinChlgBtn" @click.prevent="joinChallenge">
+          Join Challenge
+        </button>
+      </div>
+      <BackButton
+        class="backtoListBtn"
+        title="Back to List"
+        @click.prevent="backList"
+      />
     </div>
   </section>
   <FooterBar />
@@ -64,7 +84,7 @@ export default {
     NavigationBar,
     FooterBar,
     BackButton,
-    ChallengesMenu
+    ChallengesMenu,
   },
   data() {
     return {
@@ -85,9 +105,11 @@ export default {
       windowSize: 0,
       totalWatched: 0,
       chalDocument: {},
+      userID: "",
     };
   },
   async mounted() {
+    this.userID = sessionStorage.getItem("uid");
     const querySnap = await getDocs(query(collection(db, "challenge")));
     querySnap.forEach((doc) => {
       const challengeType = doc.data().adminChallenge;
@@ -176,10 +198,10 @@ export default {
   },
   created() {
     this.windowSize = window.innerWidth;
-    window.addEventListener('resize', this.handleResize);
+    window.addEventListener("resize", this.handleResize);
   },
   unmounted() {
-    window.removeEventListener('resize', this.handleResize);
+    window.removeEventListener("resize", this.handleResize);
   },
 };
 </script>
