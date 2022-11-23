@@ -160,7 +160,7 @@
         <h3>Challenge Cover Image</h3>
         <p id="small">
           This will be cover of the challenge. You can select from the default
-          image or you can upload the one you want!
+          image or you can take the picture that you want!
         </p>
         <!-- <div class="imageSelectionContainer">
           <label class="picture">
@@ -170,6 +170,21 @@
               an image</p>
           </label>
         </div> -->
+        <img
+          src="https://firebasestorage.googleapis.com/v0/b/app1-504b3.appspot.com/o/images%2Fsamuel-ferrara-1527pjeb6jg-unsplash.jpg?alt=media&token=d9d36de1-0033-4e6c-9171-566f1085b5c6"
+          @click="photo1Clicked"
+          style="width: 100px; height: 100px"
+        />
+        <img
+          src="https://firebasestorage.googleapis.com/v0/b/app1-504b3.appspot.com/o/images%2Fmyke-simon-atsUqIm3wxo-unsplash.jpg?alt=media&token=03de8d15-04ca-41d4-ab6c-72c8dafb1ccc"
+          @click="photo2Clicked"
+          style="width: 100px; height: 100px"
+        />
+        <img
+          src="https://firebasestorage.googleapis.com/v0/b/app1-504b3.appspot.com/o/images%2Fcharlesdeluvio-PvAAYZx-yf8-unsplash.jpg?alt=media&token=5df36fa5-8309-4467-8761-288d1634cf17"
+          @click="photo3Clicked"
+          style="width: 100px; height: 100px"
+        />
 
         <p
           style="text-decoration: underline; cursor: default"
@@ -436,6 +451,18 @@ export default {
       } catch (e) {
         console.log(e);
       }
+    },
+    photo1Clicked() {
+      this.urlOfImage =
+        "https://firebasestorage.googleapis.com/v0/b/app1-504b3.appspot.com/o/images%2Fsamuel-ferrara-1527pjeb6jg-unsplash.jpg?alt=media&token=d9d36de1-0033-4e6c-9171-566f1085b5c6";
+    },
+    photo2Clicked() {
+      this.urlOfImage =
+        "https://firebasestorage.googleapis.com/v0/b/app1-504b3.appspot.com/o/images%2Fmyke-simon-atsUqIm3wxo-unsplash.jpg?alt=media&token=03de8d15-04ca-41d4-ab6c-72c8dafb1ccc";
+    },
+    photo3Clicked() {
+      this.urlOfImage =
+        "https://firebasestorage.googleapis.com/v0/b/app1-504b3.appspot.com/o/images%2Fcharlesdeluvio-PvAAYZx-yf8-unsplash.jpg?alt=media&token=5df36fa5-8309-4467-8761-288d1634cf17";
     },
     redirect() {
       this.$router.push("/ongoing-challenges");

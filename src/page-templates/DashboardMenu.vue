@@ -129,7 +129,7 @@
       <section id="upcomingPageSec">
         <h1>Movies you've watched</h1>
         <p>Here are the list of movies you've seen from the challenges</p>
-        <PopupModal
+        <SecondPopupModal
           :popupActive="popupActive"
           :popupTitle="popupTitle"
           :popupPoster="popupPoster"
@@ -137,9 +137,11 @@
           :popupReleaseDate="popupReleaseDate"
           :popupAvarage="popupAvarage"
           :popupOverview="popupOverview"
+          :popupRating="popupRating"
+          :popupReview="popupReview"
           v-on:closeClicked="closePopup"
         >
-        </PopupModal>
+        </SecondPopupModal>
         <div class="movieList">
           <div
             v-for="(movies, i) in watchedMovies"
@@ -158,6 +160,8 @@
                   movies.release_date,
                   movies.vote_average,
                   movies.overview,
+                  movies.rating,
+                  movies.review,
                   movies
                 )
               "
@@ -173,7 +177,26 @@
       <h1>Here are your badges!</h1>
       <h2>Total of movies you've watched so far:</h2>
       <h1>{{ this.points }}</h1>
-      <p>You have 22 movies left to unlock the next badge</p>
+      <p>You have {{ movieLeft }} movies left to unlock the next badge</p>
+      <div v-if="badgeOne">
+        <img src="../assets/popcorn-badge.png" alt="" />
+        <h3>Popcorn</h3>
+        <p>10th Movie Milestone</p>
+      </div>
+      <div v-if="badgeTwo">
+        <img src="../assets/3d-glasses.png" alt="" />
+        <h3>3D Glasses</h3>
+        <p>20th Movie Milestone</p>
+      </div>
+      <div v-if="badgeThree">
+        <img src="../assets/mask-badge.png" alt="" />
+        <h3>Mask</h3>
+        <p>30th Movie Milestone</p>
+      </div>
+
+      <img src="../assets/no-badge.png" />
+      <h3>{{ nextBadge }}th movie badge</h3>
+      <p>Watch more movies to unlock this badge!</p>
       <div class="btnContainer">
         <button type="save" class="primaryBtn" @click="badgesPopup">
           Badges
@@ -232,7 +255,7 @@ import BadgesPopup from "../components/BadgesPopup.vue";
 import SharedBadgesPopup from "../components/SharedBadgesPopup.vue";
 import NavigationBar from "../components/NavigationBar.vue";
 import FooterBar from "../components/FooterBar.vue";
-import PopupModal from "../components/PopupModal.vue";
+import SecondPopupModal from "../components/SecondPopupModal.vue";
 
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { db } from "@/firebase";
@@ -252,7 +275,7 @@ export default {
     SharedBadgesPopup,
     NavigationBar,
     FooterBar,
-    PopupModal,
+    SecondPopupModal,
   },
   data() {
     return {
@@ -272,11 +295,18 @@ export default {
       popupReleaseDate: "",
       popupAvarage: "",
       popupOverview: "",
+      popupRating: "",
+      popupReview: "",
+      nextBadge: 10,
       popupActive: false,
       profilePic: "",
       secondPartFirst: true,
+      badgeOne: false,
+      badgeTwo: false,
+      badgeThree: false,
       // genreArray: [],
       watchedMovies: [],
+      movieLeft: 0,
       genreArray: [
         {
           id: 28,
@@ -428,14 +458,17 @@ export default {
       releaseDate,
       voteAverage,
       overview,
+      rating,
+      review,
       movie
     ) {
       this.popupPoster = posterPath;
       this.popupTitle = originalTitle;
-
       this.popupReleaseDate = releaseDate;
       this.popupAvarage = voteAverage;
       this.popupOverview = overview;
+      this.popupRating = rating;
+      this.popupReview = review;
       this.popupActive = true;
       //console.log(movie);
       //movie.genre_ids
@@ -537,12 +570,11 @@ export default {
     querySnap.forEach((doc1) => {
       const userId = doc1.data().uid;
       if (userId == uid) {
-        // console.log(doc1.data().chalName);
         for (let i = 0; i < doc1.data().selectedMovies.length; i++) {
           // console.log(
           //   doc1.data().chalName + doc1.data().selectedMovies[i].review
           // );
-          if (doc1.data().selectedMovies[i].review != "") {
+          if (doc1.data().selectedMovies[i].review) {
             //console.log(doc1.data().selectedMovies[i]);
 
             this.watchedMovies.push(doc1.data().selectedMovies[i]);
@@ -550,6 +582,20 @@ export default {
         }
       }
     });
+    if (this.points >= 10) {
+      this.badgeOne = true;
+      this.nextBadge = 20;
+    }
+    if (this.points >= 20) {
+      this.badgeTwo = true;
+      this.nextBadge = 30;
+    }
+    if (this.points >= 30) {
+      this.badgeThree = true;
+      this.nextBadge = 40;
+    }
+    this.movieLeft = this.points % 10;
+    this.movieLeft = 10 - this.movieLeft;
   },
   setup() {
     const firstpopupActive = vue.ref(false);
