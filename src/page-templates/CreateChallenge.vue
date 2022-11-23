@@ -431,7 +431,7 @@ export default {
       this.togglePopup();
       try {
         const uid = sessionStorage.getItem("uid");
-        if (uid == "HWKvoha2m2dfjdZSMvIQIV3CVK52") {
+        if (uid == "ZrWSmu9sXegAiU2XO7rPXMF0Jwj1") {
           this.adminChallenge = true;
         }
         const docRef = addDoc(collection(db, "challenge"), {
