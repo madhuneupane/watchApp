@@ -54,7 +54,7 @@ export default {
       slides: [],
 
       breakpoints: {
-        1024: { visibleSlides: 4, slideMultiple: 2, slideRatio: 1 / 3 },
+        1024: { visibleSlides: 4, slideMultiple: 2, slideRatio: 1 / 3, arrows: false},
       },
       carouselKey: false,
     };
