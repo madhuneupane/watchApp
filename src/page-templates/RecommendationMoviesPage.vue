@@ -9,24 +9,11 @@
             <div class="movieItem" :key="movie" v-for="movie in recommendationMovieList">
                 <img :src="'https://image.tmdb.org/t/p/w500' + movie.poster_path"
                     alt="{{ movie.original_title }} + ' Movie Poster'"
-                    @click="togglePopup(movie.poster_path, movie.original_title, movie.genre_ids, movie.release_date, movie.vote_average, movie.overview)">
+                    @click="togglePopup(movie.poster_path, movie.original_title, movie.genre_ids, movie.release_date, movie.vote_average, movie.overview, movie)">
             </div>
         </div>
-        <a class="seeMoreBtn link" @click.prevent="loadMore">Load More</a>
+        <!-- <a class="seeMoreBtn link" @click.prevent="loadMore">Load More</a> -->
     </section>
-    <!-- <PopupModal @close="togglePopup" :popupActive="popupActive" :key="movie" v-for="movie in recommendationMovieList">
-        <div class="popupContent">
-            <img class="movieImg" :src="'https://image.tmdb.org/t/p/w500' + movie.poster_path"
-                alt="{{ movie.original_title }} + ' Movie Poster'">
-            <h1>{{ movie.original_title }}</h1>
-            <p>{{ movie.genre_ids }}</p>
-            <p><strong>Release Date: </strong> {{ movie.release_date }}</p>
-            <p><strong>TMDB Rating: </strong> {{ movie.vote_average }}/10</p>
-            <br>
-            <p><strong>Overview</strong></p>
-            <p class="movieOverview">{{ movie.overview }}</p>
-        </div>
-    </PopupModal> -->
     <FooterBar />
 </template>
 
@@ -36,7 +23,6 @@ import axios from "axios";
 import NavigationBar from "../components/NavigationBar.vue";
 import FooterBar from "../components/FooterBar.vue";
 import PopupModal from "../components/PopupModal.vue";
-/* import { ref } from 'vue'; */
 
 export default {
     name: 'RecommendationMoviesPage',
@@ -58,6 +44,84 @@ export default {
             popupAvarage: "",
             popupOverview: "",
             popupActive: false,
+            genreArray: [
+                {
+                    id: 28,
+                    name: "Action",
+                },
+                {
+                    id: 12,
+                    name: "Adventure",
+                },
+                {
+                    id: 16,
+                    name: "Animation",
+                },
+                {
+                    id: 35,
+                    name: "Comedy",
+                },
+                {
+                    id: 80,
+                    name: "Crime",
+                },
+                {
+                    id: 99,
+                    name: "Documentary",
+                },
+                {
+                    id: 18,
+                    name: "Drama",
+                },
+                {
+                    id: 10751,
+                    name: "Family",
+                },
+                {
+                    id: 14,
+                    name: "Fantasy",
+                },
+                {
+                    id: 36,
+                    name: "History",
+                },
+                {
+                    id: 27,
+                    name: "Horror",
+                },
+                {
+                    id: 10402,
+                    name: "Music",
+                },
+                {
+                    id: 9648,
+                    name: "Mystery",
+                },
+                {
+                    id: 10749,
+                    name: "Romance",
+                },
+                {
+                    id: 878,
+                    name: "Science Fiction",
+                },
+                {
+                    id: 10770,
+                    name: "TV Movie",
+                },
+                {
+                    id: 53,
+                    name: "Thriller",
+                },
+                {
+                    id: 10752,
+                    name: "War",
+                },
+                {
+                    id: 37,
+                    name: "Western",
+                },
+            ],
         }
     },
 
@@ -76,7 +140,7 @@ export default {
         forceRerender() {
             this.carouselKey += 1;
         },
-        togglePopup(posterPath, originalTitle, genreids, releaseDate, voteAverage, overview) {
+        togglePopup(posterPath, originalTitle, genreids, releaseDate, voteAverage, overview, movie) {
             this.popupPoster = posterPath;
             this.popupTitle = originalTitle;
             this.popupGenreIDs = genreids;
@@ -84,6 +148,15 @@ export default {
             this.popupAvarage = voteAverage;
             this.popupOverview = overview;
             this.popupActive = true;
+            let genreName = "";
+            for (let i = 0; i < this.genreArray.length; i++) {
+                for (let j = 0; j < movie.genre_ids.length; j++) {
+                    if (Number(this.genreArray[i].id) == Number(movie.genre_ids[j])) {
+                        genreName += this.genreArray[i].name + ", ";
+                    }
+                }
+            }
+            this.popupGenreIDs = genreName.slice(0, genreName.length - 2);
         },
         closePopup() {
             this.popupActive = false;
@@ -93,17 +166,5 @@ export default {
             this.length = this.length + 5;
         }
     },
-    /* setup() {
-        const popupActive = ref(false);
-        const togglePopup = () => {
-            // sessionStorage.setItem("movieArray", this.recommendationMovieList);
-            popupActive.value = !popupActive.value;
-        }
-        return { popupActive, togglePopup };
-    }, */
-
-    // mounted() {
-    //     this.movieArray = sessionStorage.getItem("movieArray");
-    // }
 };
 </script>
