@@ -167,6 +167,7 @@ export default {
       this.chalBrief = false;
       this.chalDetail = true;
     },
+    //
     selectItem(event) {
       event.target.classList.toggle("active");
     },
