@@ -27,6 +27,10 @@
     flex-direction: column;
 }
 
+.popupContent .reviewSaved .popUpText {
+    text-align: unset !important;
+}
+
 .popupContent .movieImg {
     width: 15rem;
     height: 20rem;
@@ -38,7 +42,7 @@
     }
 }
 
-.popupContent .infoArea{
+.popupContent .infoArea {
     width: 100%;
     padding: $standardSpacement;
 

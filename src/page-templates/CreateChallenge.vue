@@ -8,25 +8,9 @@
       <div class="movieSelection movieQuantity">
         <label for="quantity">Movies</label>
         <div class="movieQuantitySelection">
-          <img
-            class="icon"
-            id="minusSign"
-            src="../assets/icons/minus-sign.svg"
-            @click.prevent="decrease"
-          />
-          <input
-            v-model="quantity"
-            type="number"
-            id="quantity"
-            name="quantity"
-            min="3"
-          />
-          <img
-            class="icon"
-            id="plusSign"
-            src="../assets/icons/plus-sign.svg"
-            @click.prevent="increase"
-          />
+          <img class="icon" id="minusSign" src="../assets/icons/minus-sign.svg" @click.prevent="decrease" />
+          <input v-model="quantity" type="number" id="quantity" name="quantity" min="3" />
+          <img class="icon" id="plusSign" src="../assets/icons/plus-sign.svg" @click.prevent="increase" />
         </div>
       </div>
 
@@ -69,18 +53,10 @@
 
       <section id="recommendPageSec">
         <div class="movieList">
-          <div
-            id="movieSelected"
-            class="movieItem"
-            v-for="(movie, index) in chooseMovie"
-            :key="index"
-            :index="index"
-            @click="selectMovie"
-          >
-            <img
-              :src="'https://image.tmdb.org/t/p/w500' + movie.poster_path"
-              alt="{{ movie.original_title }} + ' Movie Poster'"
-            />
+          <div id="movieSelected" class="movieItem" v-for="(movie, index) in chooseMovie" :key="index" :index="index"
+            @click="selectMovie">
+            <img :src="'https://image.tmdb.org/t/p/w500' + movie.poster_path"
+              alt="{{ movie.original_title }} + ' Movie Poster'" />
             <!-- <span>{{ movie.original_title }}</span> -->
           </div>
         </div>
@@ -89,12 +65,10 @@
       <a href="#">Load More</a>
 
       <div class="btnContainer">
-        <NextButton
-          @click.prevent="
-            movieDesc();
-            setSelectedMoviesArray();
-          "
-        />
+        <NextButton @click.prevent="
+          movieDesc();
+        setSelectedMoviesArray();
+        " />
         <BackButton @click.prevent="backMovieSelect" title="Back" />
         <!-- <PopupModal @close="togglePopup" :popupActive="popupActive">
           <div class="popupContent">
@@ -114,11 +88,7 @@
       <div class="selectedMoviesContainer">
         <p class="moviesSelectedText">Movies Selected</p>
         <ul class="selectedMoviesList">
-          <li
-            class="selectedMovieTitle"
-            v-for="movie in selectedMovies"
-            :key="movie"
-          >
+          <li class="selectedMovieTitle" v-for="movie in selectedMovies" :key="movie">
             <!-- {{ selectedMovies[movie].original_title }} -->
             {{ movie.original_title }}
             <!-- Include the call from the db -->
@@ -130,23 +100,13 @@
       <form class="challengeInfoForm">
         <div class="form_challangeName">
           <label for="chalName">Challenge Name<span class="req">*</span></label>
-          <input
-            v-model="chalName"
-            type="text"
-            class="inputArea"
-            id="chalName"
-          />
+          <input v-model="chalName" type="text" class="inputArea" id="chalName" />
           <p class="error">{{ errorMessage }}</p>
         </div>
         <div class="dateContainer">
           <div class="form_startDate">
             <label for="startDate">Start Date<span class="req">*</span></label>
-            <input
-              v-model="startDate"
-              type="date"
-              name="start"
-              id="startDate"
-            />
+            <input v-model="startDate" type="date" name="start" id="startDate" />
             <p class="error">{{ startError }}</p>
           </div>
           <div class="form_endDate">
@@ -172,35 +132,22 @@
         </div> -->
         <img
           src="https://firebasestorage.googleapis.com/v0/b/app1-504b3.appspot.com/o/images%2Fsamuel-ferrara-1527pjeb6jg-unsplash.jpg?alt=media&token=d9d36de1-0033-4e6c-9171-566f1085b5c6"
-          @click="photo1Clicked"
-          style="width: 100px; height: 100px"
-        />
+          @click="photo1Clicked" style="width: 100px; height: 100px" />
         <img
           src="https://firebasestorage.googleapis.com/v0/b/app1-504b3.appspot.com/o/images%2Fmyke-simon-atsUqIm3wxo-unsplash.jpg?alt=media&token=03de8d15-04ca-41d4-ab6c-72c8dafb1ccc"
-          @click="photo2Clicked"
-          style="width: 100px; height: 100px"
-        />
+          @click="photo2Clicked" style="width: 100px; height: 100px" />
         <img
           src="https://firebasestorage.googleapis.com/v0/b/app1-504b3.appspot.com/o/images%2Fcharlesdeluvio-PvAAYZx-yf8-unsplash.jpg?alt=media&token=5df36fa5-8309-4467-8761-288d1634cf17"
-          @click="photo3Clicked"
-          style="width: 100px; height: 100px"
-        />
+          @click="photo3Clicked" style="width: 100px; height: 100px" />
 
-        <p
-          style="text-decoration: underline; cursor: default"
-          @click.prevent="clickImage"
-        >
+        <p style="text-decoration: underline; cursor: default" @click.prevent="clickImage">
           Take a photo
         </p>
       </div>
 
       <div v-if="secondPartFirst" class="profilePicSectionFirst">
         <div class="profilePictureContainer">
-          <img
-            id="profilePicture"
-            src=""
-            :class="{ capturedPicture: photoSnapped === true }"
-          />
+          <img id="profilePicture" src="" :class="{ capturedPicture: photoSnapped === true }" />
         </div>
       </div>
 
@@ -210,19 +157,10 @@
       </div>
 
       <div class="addDescriptionContainer">
-        <img
-          src="../assets/icons/plus-button-challenge.svg"
-          @click.prevent="addDescription"
-        />
+        <img src="../assets/icons/plus-button-challenge.svg" @click.prevent="addDescription" />
         <label>Add a Challenge Description</label>
-        <textarea
-          v-model="description"
-          v-if="descriptionArea"
-          name="chalDescription"
-          id="description"
-          cols="30"
-          rows="6"
-        ></textarea>
+        <textarea v-model="description" v-if="descriptionArea" name="chalDescription" id="description" cols="30"
+          rows="6"></textarea>
       </div>
 
       <div class="btnContainer">
@@ -231,13 +169,15 @@
       </div>
       <SimplePopup @close="togglePopup" :popupActive="popupActive">
         <div class="popupContent">
-          <h1 class="popUpHeading">Saved!</h1>
-          <h3 class="popUpText">
-            Hooray! Challenge created!<br />Watch movies to earn special badges!
-          </h3>
-          <button @click="redirect" type="button" class="secondaryBtn">
-            Go to Challenges
-          </button>
+          <div class="reviewSaved">
+            <h1 class="popUpHeading">Saved!</h1>
+            <h3 class="popUpText">
+              Hooray! Challenge created!<br />Watch movies to earn special badges!
+            </h3>
+            <button @click="redirect" type="button" class="secondaryBtn">
+              Go to Challenges
+            </button>
+          </div>
         </div>
       </SimplePopup>
     </div>
@@ -325,8 +265,8 @@ export default {
       this.chooseMovie = axios
         .get(
           "https://api.themoviedb.org/3/discover/movie?api_key=8ec942643846f64d66eed102868455f3&with_genres=" +
-            this.genreOfChoice +
-            "&language=en-US&page=1&region=CA"
+          this.genreOfChoice +
+          "&language=en-US&page=1&region=CA"
         )
         .then((info) => {
           this.chooseMovie = info.data.results;
