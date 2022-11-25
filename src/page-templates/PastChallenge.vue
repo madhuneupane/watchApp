@@ -5,16 +5,9 @@
     <h1>Past Challenges</h1>
     <h2>You've achieved this much!</h2>
     <div class="chalList">
-      <div
-        class="chalInfo"
-        v-for="(challenge, index) in chalLoading"
-        :key="index"
-      >
-        <div
-          class="challenge"
-          v-bind:style="{ backgroundImage: 'url(' + challenge.image + ')' }"
-          @click.prevent="challengeClicked(index)"
-        >
+      <div class="chalInfo" v-for="(challenge, index) in chalLoading" :key="index">
+        <div class="challenge" v-bind:style="{ backgroundImage: 'url(' + challenge.image + ')' }"
+          @click.prevent="challengeClicked(index)">
           <div class="chalDetailsContainer">
             <h3>{{ challenge.title }}</h3>
             <span id="ending">Ended on {{ challenge.endDate }}</span>
@@ -89,8 +82,7 @@ export default {
   },
   data() {
     return {
-      challengedb: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
-      length: 4,
+      length: 5,
       slides: [],
       moviePart: false,
       firstPart: true,
@@ -164,8 +156,8 @@ export default {
       this.$router.push("/challenge-main");
     },
     loadMore() {
-      if (this.length > this.challengedb.length) return;
-      this.length = this.length + 4;
+      if (this.length > this.slides.length) return;
+      this.length = this.length + 5;
     },
     backList() {
       this.firstPart = true;

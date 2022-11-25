@@ -126,9 +126,9 @@
           v-on:closeClicked="closePopup">
         </SecondPopupModal>
         <div class="movieList">
-          <div v-for="(movies, i) in watchedMovies" :key="i" class="ongoingChalItem">
+          <div v-for="(movies, i) in chalLoading" :key="i" class="ongoingChalItem">
             <img :src="
-              'https://image.tmdb.org/t/p/w500' + watchedMovies[i].poster_path
+              'https://image.tmdb.org/t/p/w500' + movies.poster_path
             " @click="
   togglePopup(
     movies.poster_path,
@@ -146,7 +146,7 @@
           </div>
         </div>
       </section>
-      <a class="seeMoreBtn link" href="">Load More</a>
+      <a class="seeMoreBtn link" @click.prevent="loadMore">Load More</a>
     </div>
 
     <div v-if="thirdPart">
@@ -277,7 +277,7 @@ export default {
       badgeOne: false,
       badgeTwo: false,
       badgeThree: false,
-      // genreArray: [],
+      length: 4,
       watchedMovies: [],
       movieLeft: 0,
       genreArray: [
@@ -523,6 +523,10 @@ export default {
         console.log("ok");
       }
     },
+    loadMore() {
+      if (this.length > this.watchedMovies.length) return;
+      this.length = this.length + 4;
+    },
   },
   async mounted() {
     this.nickname = sessionStorage.getItem("nickname");
@@ -585,6 +589,11 @@ export default {
       secondpopupActive,
       secondTogglePopup,
     };
+  },
+  computed: {
+    chalLoading() {
+      return this.watchedMovies.slice(0, this.length);
+    },
   },
 };
 </script>

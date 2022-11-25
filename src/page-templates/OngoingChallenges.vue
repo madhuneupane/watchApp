@@ -102,7 +102,6 @@ export default {
   },
   data() {
     return {
-      challengedb: [],
       length: 5,
       slides: [],
       moviePart: false,
@@ -277,7 +276,7 @@ export default {
       this.$router.push("/challenge-main");
     },
     loadMore() {
-      if (this.length > this.challengedb.length) return;
+      if (this.length > this.slides.length) return;
       this.length = this.length + 5;
     },
     handleResize() {
