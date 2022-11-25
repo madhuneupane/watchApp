@@ -1,14 +1,30 @@
 <template>
-  <button class="createChllgBtn" v-if="windowSize < 1024" @click.prevent="createChallenge"></button>
+  <button
+    class="createChllgBtn"
+    v-if="userID && windowSize < 1024"
+    @click.prevent="createChallenge"
+  ></button>
   <NavigationBar />
-  <ChallengesMenu :challengePage="'defyUs'" v-if="windowSize < 1024" />
+  <ChallengesMenu
+    :challengePage="'defyUs'"
+    v-if="userID && windowSize < 1024"
+  />
+
   <section v-if="firstPart" id="ongoingChalSec">
-    <h1 v-if="windowSize > 1024">Admin Challenges</h1>
+    <h1 v-if="windowSize > 1024">Defy Us</h1>
+    <h1 v-if="windowSize < 1024 && !userID">Defy Us</h1>
     <h2>Keep up! You are almost there</h2>
     <div class="chalList">
-      <div class="chalInfo" v-for="(challenge, index) in chalLoading" :key="index">
-        <div class="challenge" v-bind:style="{ backgroundImage: 'url(' + challenge.image + ')' }"
-          @click.prevent="challengeClicked(index)">
+      <div
+        class="chalInfo"
+        v-for="(challenge, index) in chalLoading"
+        :key="index"
+      >
+        <div
+          class="challenge"
+          v-bind:style="{ backgroundImage: 'url(' + challenge.image + ')' }"
+          @click.prevent="challengeClicked(index)"
+        >
           <div class="chalDetailsContainer">
             <h3>{{ challenge.title }}</h3>
             <span id="ending">Ending on {{ challenge.endDate }}</span>
@@ -19,13 +35,20 @@
     </div>
     <a class="seeMoreBtn link" @click.prevent="loadMore">Load More</a>
     <div class="btnContainer" v-if="windowSize > 1024">
-      <BackButton v-if="userID" title="Back to Challenge" @click.prevent="backChal" />
+      <BackButton
+        v-if="userID"
+        title="Back to Challenge"
+        @click.prevent="backChal"
+      />
     </div>
   </section>
 
   <section v-if="moviePart" id="chalDetailSection">
     <div class="chalDetailContainer">
-      <div class="chalImgContainer" v-bind:style="{ backgroundImage: 'url(' + chalImage + ')' }"></div>
+      <div
+        class="chalImgContainer"
+        v-bind:style="{ backgroundImage: 'url(' + chalImage + ')' }"
+      ></div>
       <div class="chalDetailsInfo">
         <span class="chalTitle">{{ chalName }}</span>
         <span class="chalDates">{{ startDate }} ~ {{ endDate }}</span>
@@ -47,7 +70,11 @@
           Join Challenge
         </button>
       </div>
-      <BackButton class="backtoListBtn" title="Back to List" @click.prevent="backList" />
+      <BackButton
+        class="backtoListBtn"
+        title="Back to List"
+        @click.prevent="backList"
+      />
     </div>
   </section>
   <FooterBar />
