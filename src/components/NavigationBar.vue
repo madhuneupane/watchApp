@@ -18,7 +18,8 @@
       </div>
     </div>
     <div class="icon">
-      <img @click="toggleMobileNav" v-show="mobile" class="mobileNav" :class="{ 'icon-active': mobileNav }" />
+      <img src="../assets/icons/burger-menu.svg" @click="toggleMobileNav" v-show="mobile" class="mobileNav"
+        :class="{ 'icon-active': mobileNav }" />
     </div>
     <transition name="mobileNav">
       <div v-show="mobileNav" class="dropdownNav">
