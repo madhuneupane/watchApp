@@ -2,7 +2,7 @@
   <NavigationBar />
   <ChallengesMenu :challengePage="'past'" v-if="windowSize < 1024" />
   <section v-if="firstPart" id="ongoingChalSec">
-    <h1>Past Challenges</h1>
+    <h1 v-if="windowSize > 1024">Past Challenges</h1>
     <h2>You've achieved this much!</h2>
     <div class="chalList">
       <div class="chalInfo" v-for="(challenge, index) in chalLoading" :key="index">
