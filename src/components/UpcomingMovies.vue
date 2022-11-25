@@ -5,10 +5,22 @@
         <h2>Upcoming Movies</h2>
         <a class="seeMoreBtn" @click.prevent="gotoUpcomingsPage">See All</a>
       </div>
-      <vueper-slides :arrows="false" :infinite="false" :bullets="false" :visible-slides="5" :slide-multiple="2" :gap="2"
-        :slide-ratio="1 / 3.5" :dragging-distance="200" :breakpoints="breakpoints">
-        <vueper-slide v-for="movie in upcomingMovieList" :key="movie"
-          :image="'https://image.tmdb.org/t/p/w500' + movie.poster_path" />
+      <vueper-slides
+        :arrows="false"
+        :infinite="false"
+        :bullets="false"
+        :visible-slides="5"
+        :slide-multiple="2"
+        :gap="2"
+        :slide-ratio="1 / 3.5"
+        :dragging-distance="200"
+        :breakpoints="breakpoints"
+      >
+        <vueper-slide
+          v-for="movie in upcomingMovieList"
+          :key="movie"
+          :image="'https://image.tmdb.org/t/p/w500' + movie.poster_path"
+        />
       </vueper-slides>
     </div>
   </section>
@@ -45,6 +57,12 @@ export default {
       )
       .then((info) => {
         this.upcomingMovieList = info.data.results;
+        // for (let i = 0; i < this.upcomingMovieList.length; i++) {
+        //   if (!this.upcomingMovieList[i].poster_path) {
+        //     this.upcomingMovieList[i].poster_path =
+        //       "/xIGr7UHsKf0URWmyyd5qFMAq4d8.jpg";
+        //   }
+        // }
       })
       .then(() => {
         this.upcomingMovieList = JSON.parse(
