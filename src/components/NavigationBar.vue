@@ -17,13 +17,17 @@
         </button>
       </div>
     </div>
-    <div class="icon">
-      <img src="../assets/icons/burger-menu.svg" @click="toggleMobileNav" v-show="mobile" class="mobileNav"
-        :class="{ 'icon-active': mobileNav }" />
+    <div class="logoIcon" v-show="mobile">
+      <div class="icon">
+        <img src="../assets/icons/burger-menu.svg" @click="toggleMobileNav" class="mobileNav"
+          :class="{ 'icon-active': mobileNav }" />
+      </div>
+      <div class="logo">
+        <img id="logo" src="../assets/icons/colored-logo.svg" alt="watchapp" />
+      </div>
     </div>
     <transition name="mobileNav">
       <div v-show="mobileNav" class="dropdownNav">
-        <img id="logo" src="../assets/icons/colored-logo.svg" alt="watchapp" />
         <div class="navbar-items">
           <img v-if="isSignedIn && imageSource" id="userIcon" :src="imageSource" alt="userPic"
             @click.prevent="profile" />
@@ -35,10 +39,9 @@
           <div v-if="!loggedIn" class="nav-link" id="login" @click.prevent="goToLogin">
             Login
           </div>
-          <button v-if="isSignedIn && imageSource" @click.prevent="signingOut" class="nav-link tertiaryBtn"
-            id="signOut">
+          <div v-if="isSignedIn && imageSource" @click.prevent="signingOut" class="nav-link" id="signOut">
             Sign Out
-          </button>
+          </div>
         </div>
       </div>
     </transition>
@@ -112,6 +115,23 @@ export default {
           console.log(error);
         });
     },
+    toggleMobileNav() {
+      this.mobileNav = !this.mobileNav;
+    },
+    checkScreen() {
+      this.windowWidth = window.innerWidth;
+      if (this.windowWidth < 1024) {
+        this.mobile = true;
+        return;
+      }
+      this.mobile = false;
+      this.mobileNav = false;
+      return;
+    }
   },
+  created() {
+    window.addEventListener('resize', this.checkScreen);
+    this.checkScreen();
+  }
 };
 </script>

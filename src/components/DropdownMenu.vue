@@ -30,23 +30,3 @@ export default {
     },
 }
 </script>
-
-<style>
-.drop-down {
-    position: absolute;
-    background: linear-gradient(91.25deg, #02025F 0%, #7F11C3 51.47%, #E74B02 100%);
-    border: 1px solid white;
-    z-index: 2;
-    transform: translateX(20px);
-    border-radius: 5px;
-}
-
-.sub-menu {
-    padding: .3rem;
-    transition: all 0.2s ease-in-out;
-}
-
-.sub-menu:hover {
-    background-color: #5F01A3;
-}
-</style>

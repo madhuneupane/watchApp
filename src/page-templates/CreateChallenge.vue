@@ -62,12 +62,12 @@
         </div>
       </section>
 
-      <a href="#">Load More</a>
+      <!-- <a @click.prevent="loadMoreMovies">Load More</a> -->
 
       <div class="btnContainer">
         <NextButton @click.prevent="
-          movieDesc();
-        setSelectedMoviesArray();
+  movieDesc();
+setSelectedMoviesArray();
         " />
         <BackButton @click.prevent="backMovieSelect" title="Back" />
         <!-- <PopupModal @close="togglePopup" :popupActive="popupActive">
@@ -130,15 +130,18 @@
               an image</p>
           </label>
         </div> -->
-        <img
-          src="https://firebasestorage.googleapis.com/v0/b/app1-504b3.appspot.com/o/images%2Fsamuel-ferrara-1527pjeb6jg-unsplash.jpg?alt=media&token=d9d36de1-0033-4e6c-9171-566f1085b5c6"
-          @click="photo1Clicked" style="width: 100px; height: 100px" />
-        <img
-          src="https://firebasestorage.googleapis.com/v0/b/app1-504b3.appspot.com/o/images%2Fmyke-simon-atsUqIm3wxo-unsplash.jpg?alt=media&token=03de8d15-04ca-41d4-ab6c-72c8dafb1ccc"
-          @click="photo2Clicked" style="width: 100px; height: 100px" />
-        <img
-          src="https://firebasestorage.googleapis.com/v0/b/app1-504b3.appspot.com/o/images%2Fcharlesdeluvio-PvAAYZx-yf8-unsplash.jpg?alt=media&token=5df36fa5-8309-4467-8761-288d1634cf17"
-          @click="photo3Clicked" style="width: 100px; height: 100px" />
+
+        <div class="standardImages">
+          <img class="standardImage"
+            src="https://firebasestorage.googleapis.com/v0/b/app1-504b3.appspot.com/o/images%2Fsamuel-ferrara-1527pjeb6jg-unsplash.jpg?alt=media&token=d9d36de1-0033-4e6c-9171-566f1085b5c6"
+            @click="selectStandardImg" style="width: 100px; height: 100px" />
+          <img class="standardImage"
+            src="https://firebasestorage.googleapis.com/v0/b/app1-504b3.appspot.com/o/images%2Fmyke-simon-atsUqIm3wxo-unsplash.jpg?alt=media&token=03de8d15-04ca-41d4-ab6c-72c8dafb1ccc"
+            @click="selectStandardImg" style="width: 100px; height: 100px" />
+          <img class="standardImage"
+            src="https://firebasestorage.googleapis.com/v0/b/app1-504b3.appspot.com/o/images%2Fcharlesdeluvio-PvAAYZx-yf8-unsplash.jpg?alt=media&token=5df36fa5-8309-4467-8761-288d1634cf17"
+            @click="selectStandardImg" style="width: 100px; height: 100px" />
+        </div>
 
         <p style="text-decoration: underline; cursor: default" @click.prevent="clickImage">
           Take a photo
@@ -237,6 +240,7 @@ export default {
       secondPartFirst: false,
       urlOfImage: "",
       adminChallenge: false,
+      apiMoviePages: 1,
     };
   },
   /* created() {
@@ -266,7 +270,7 @@ export default {
         .get(
           "https://api.themoviedb.org/3/discover/movie?api_key=8ec942643846f64d66eed102868455f3&with_genres=" +
           this.genreOfChoice +
-          "&language=en-US&page=1&region=CA"
+          "&language=en-US&page=" + this.apiMoviePages + "&region=CA"
         )
         .then((info) => {
           this.chooseMovie = info.data.results;
@@ -407,7 +411,22 @@ export default {
     redirect() {
       this.$router.push("/ongoing-challenges");
     },
-
+    // loadMoreMovies() {
+    //   this.apiMoviePages++;
+    //   this.chooseMovie = axios
+    //     .get(
+    //       "https://api.themoviedb.org/3/discover/movie?api_key=8ec942643846f64d66eed102868455f3&with_genres=" +
+    //       this.genreOfChoice +
+    //       "&language=en-US&page=" + this.apiMoviePages + "&region=CA"
+    //     )
+    //     .then((info) => {
+    //       this.chooseMovie = info.data.results;
+    //     })
+    //     .then(() => {
+    //       this.chooseMovie = JSON.parse(JSON.stringify(this.chooseMovie));
+    //       this.forceRerender();
+    //     });
+    // },
     clickImage() {
       this.fSectionOn = false;
       this.sSectionOn = false;
@@ -471,6 +490,9 @@ export default {
         console.log("ok");
       }
     },
+    selectStandardImg(event) {
+      event.target.classList.toggle("selectedStandardImg");
+    }
   },
 
   setup() {
@@ -482,3 +504,26 @@ export default {
   },
 };
 </script>
+
+<style>
+.standardImages {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin: 1.25rem 0;
+}
+
+.profilePictureContainer {
+  text-align: center;
+  margin-top: 1.25rem;
+}
+
+.standardImage {
+  cursor: pointer;
+}
+
+.selectedStandardImg {
+  border: 3px solid white;
+  border-radius: 5px;
+}
+</style>

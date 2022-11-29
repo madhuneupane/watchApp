@@ -1,24 +1,49 @@
+.navbar-items {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 5px;
+}
+
 .nav-link {
     font-weight: 600;
     font-display: block;
     display: inline-block;
+    padding: 0 10px;
+    margin: 0 20px;
 }
 
-.navbar {
+.logoIcon {
     display: flex;
-    flex-direction: row-reverse;
     justify-content: space-between;
+    margin: $standardSpacement;
+    align-items: center;
 }
 
-@media only screen and (min-width: 1024px) {
-    .navbar {
-        flex-direction: row;
-        // position: fixed;
-        margin-top: 0;
-        z-index: 99;
-        width: 100%;
-        top: 0;
-    }
+.icon {
+    width: 20px;
+    padding-left: 5px;
+    cursor: pointer;
+    transition: 0.5s ease all;
+}
+
+// .icon-active {
+//     transform: rotate(270deg);
+// }
+
+#logo {
+    padding-left: 20px;
+}
+
+#home.nav-link,
+#drop.nav-link,
+#login.nav-link {
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+
+#login.nav-link {
+    margin-top: 20px;
 }
 
 #userIcon {
@@ -26,29 +51,109 @@
     height: 3.5rem;
     border-radius: 50%;
     cursor: pointer;
+    margin: 20px 20px;
 }
 
-.navbar-items {
-    display: inline-flex;
-    align-items: center;
-    padding: 5px;
+.dropdownNav {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    z-index: 99;
+    width: 100%;
+    max-width: 250px;
+    height: 100%;
+    top: 90px;
+    left: 0;
+    background-color: $bg-blue;
 }
 
-.nav-link {
-    margin-left: 40px;
-    margin-right: 40px;
+.drop-down {
+    background: $bg-blue;
+    // border: 1px solid white;
+    z-index: 2;
+    transform: translate(20px);
+    border-radius: 5px;
 }
 
-.icon {
-    width: 20px;
-    padding-left: 5px;
+.sub-menu {
+    padding: .3rem;
+    transition: all 0.3s ease-in-out;
 }
 
-#logo {
-    padding-left: 20px;
+.sub-menu:hover {
+    background-color: $orange;
 }
 
-#home,
-#login {
+.sub-menu:hover a {
+    color: $bg-blue;
+}
+
+.mobileNav-enter-active,
+.mobileNav-leave-active {
+    transition: 1s ease all;
+
+}
+
+.mobileNav-enter-from,
+.mobileNav-leave-to {
+    transform: translateX(-250px);
+}
+
+.mobileNav-enter-to {
+    transform: translateX(0);
+}
+
+#signOut.nav-link {
     cursor: pointer;
+}
+
+
+@media only screen and (min-width: $media-desktop) {
+    .navbar {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        // position: fixed;
+        margin-top: 0;
+        z-index: 99;
+        width: 100%;
+        top: 0;
+    }
+
+    .navbar-items {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        padding: 5px;
+    }
+
+    #home.nav-link,
+    #drop.nav-link {
+        margin-bottom: 0;
+    }
+
+    #signOut.nav-link {
+        padding: 0.875rem 2rem;
+    }
+
+    .drop-down {
+        position: absolute;
+        background: linear-gradient(91.25deg, #02025F 0%, #7F11C3 51.47%, #E74B02 100%);
+        // border: 1px solid white;
+        z-index: 2;
+        transform: translateY(15px);
+        border-radius: 5px;
+    }
+
+    .sub-menu:hover {
+        background-color: #5F01A3;
+    }
+
+    .sub-menu:hover a {
+        color: $white;
+    }
+
+    #userIcon {
+        margin: 0 0;
+    }
 }
