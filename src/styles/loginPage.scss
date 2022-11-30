@@ -24,6 +24,10 @@
     }
 }
 
+#loginPage .formContainer .emailAddressLabel, .passwordLabel, .inputArea {
+    color: $white;
+}
+
 #loginPage .formContainer .formLogin {
 
     @media only screen and (min-width: $media-desktop) {

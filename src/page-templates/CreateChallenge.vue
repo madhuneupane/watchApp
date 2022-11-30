@@ -6,7 +6,7 @@
       <h3>How many and what kind of movies<br />do you want to watch?</h3>
 
       <div class="movieSelection movieQuantity">
-        <label for="quantity">Movies</label>
+        <label class="movieLabel" for="quantity">Movies</label>
         <div class="movieQuantitySelection">
           <img class="icon" id="minusSign" src="../assets/icons/minus-sign.svg" @click.prevent="decrease" />
           <input v-model="quantity" type="number" id="quantity" name="quantity" min="3" />
@@ -15,7 +15,7 @@
       </div>
 
       <div class="movieSelection">
-        <label for="genreDropdown">Genre</label>
+        <label class="genreLabel" for="genreDropdown">Genre</label>
         <select v-model="genreDropdown" name="genre" id="genreDropdown">
           <option value="" selected disabled>Select</option>
           <option value="28">Action</option>
@@ -99,18 +99,18 @@ setSelectedMoviesArray();
 
       <form class="challengeInfoForm">
         <div class="form_challangeName">
-          <label for="chalName">Challenge Name<span class="req">*</span></label>
+          <label class="labelClass" for="chalName">Challenge Name<span class="req">*</span></label>
           <input v-model="chalName" type="text" class="inputArea" id="chalName" />
           <p class="error">{{ errorMessage }}</p>
         </div>
         <div class="dateContainer">
           <div class="form_startDate">
-            <label for="startDate">Start Date<span class="req">*</span></label>
+            <label class="labelClass" for="startDate">Start Date<span class="req">*</span></label>
             <input v-model="startDate" type="date" name="start" id="startDate" />
             <p class="error">{{ startError }}</p>
           </div>
           <div class="form_endDate">
-            <label for="endDate">End Date<span class="req">*</span></label>
+            <label class="labelClass" for="endDate">End Date<span class="req">*</span></label>
             <input v-model="endDate" type="date" name="end" id="endDate" />
             <p class="error">{{ endError }}</p>
           </div>
@@ -118,7 +118,7 @@ setSelectedMoviesArray();
       </form>
       <div class="challengeCoverContainer">
         <h3>Challenge Cover Image</h3>
-        <p id="small">
+        <p class="labelClass" id="small">
           This will be cover of the challenge. You can select from the default
           image or you can take the picture that you want!
         </p>
@@ -143,7 +143,7 @@ setSelectedMoviesArray();
             @click="selectStandardImg" style="width: 100px; height: 100px" />
         </div>
 
-        <p style="text-decoration: underline; cursor: default" @click.prevent="clickImage">
+        <p class="labelClass" style="text-decoration: underline; cursor: default" @click.prevent="clickImage">
           Take a photo
         </p>
       </div>
@@ -161,7 +161,7 @@ setSelectedMoviesArray();
 
       <div class="addDescriptionContainer">
         <img src="../assets/icons/plus-button-challenge.svg" @click.prevent="addDescription" />
-        <label>Add a Challenge Description</label>
+        <label class="labelClass">Add a Challenge Description</label>
         <textarea v-model="description" v-if="descriptionArea" name="chalDescription" id="description" cols="30"
           rows="6"></textarea>
       </div>

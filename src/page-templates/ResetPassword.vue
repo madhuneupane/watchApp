@@ -1,18 +1,19 @@
 <template>
     <NavigationBar />
-    <section>
+    <section id="resetPasswordPage">
         <h1>Reset your password</h1>
         <h2>Please fill in the required fieds below</h2>
         <form class="resetForm">
             <div id="newPassword">
-                <label for="email">Email address<span class="req">*</span></label>
+                <label class="labelClass" for="email">Email address<span class="req">*</span></label>
                 <input v-model="email" type="email" name="email" id="email" placeholder="email@gmail.com">
                 <p class="error">{{ errorMessage }}</p>
             </div>
             <div>
-                <button type="submit" class="primaryBtn" @click.prevent="passwordRetrieve">Next</button>
+                <button type="submit" class="primaryBtn nextBtn" @click.prevent="passwordRetrieve">Next</button>
             </div>
         </form>
+        <router-link class="seeMoreBtn link backToLogin" to="/login-page">Back to login page</router-link>
     </section>
     <SimplePopup @close="togglePopup" :popupActive="popupActive">
         <div class="popupContent">
@@ -23,7 +24,7 @@
             </div>
         </div>
     </SimplePopup>
-    <router-link class="seeMoreBtn link" to="/login-page">Back to login page</router-link>
+    
 
     <FooterBar />
 </template>

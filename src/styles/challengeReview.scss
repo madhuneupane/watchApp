@@ -58,6 +58,10 @@
     border-bottom: 3px solid $white;
 }
 
+#movieReviewPage .overviewContainer .movieOverviewContent, .movieRating, .userReview {
+    color: $white;
+}
+
 #movieReviewPage .userReviewContainer {
     display: flex;
     flex-direction: column;

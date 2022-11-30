@@ -10,6 +10,10 @@
     }
 }
 
+.sectionContainer .movieLabel, #quantity, .genreLabel, .labelClass, #startDate, #endDate{
+    color: $white;
+}
+
 //Create Challenge button's custom CSS
 .sectionContainer .btnContainer {
     display: flex;
