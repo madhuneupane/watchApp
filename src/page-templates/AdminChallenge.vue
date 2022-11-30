@@ -52,6 +52,15 @@
       <BackButton class="backtoListBtn" title="Back to List" @click.prevent="backList" />
     </div>
   </section>
+  <SimplePopup @close="togglePopup" :popupActive="popupActive">
+    <div class="popupContent">
+      <div class="reviewSaved">
+        <h1>Congratz!</h1>
+        <p>Check this challenge on your Ongoing Challenges page</p>
+        <button @click="redirect" type="button" class="secondaryBtn">Go to Challenges</button>
+      </div>
+    </div>
+  </SimplePopup>
   <FooterBar />
 </template>
 <script>
@@ -61,6 +70,8 @@ import BackButton from "../components/BackButton.vue";
 import { db } from "@/firebase";
 import { query, collection, getDocs, addDoc } from "firebase/firestore";
 import ChallengesMenu from "../components/ChallengesMenu.vue";
+import SimplePopup from "../components/SimplePopup.vue";
+import { ref } from 'vue';
 
 export default {
   name: "OngoingChallenges",
@@ -69,6 +80,7 @@ export default {
     FooterBar,
     BackButton,
     ChallengesMenu,
+    SimplePopup
   },
   data() {
     return {
@@ -169,11 +181,15 @@ export default {
       console.log(this.chalDocument.userChallenge);
       const docRef = addDoc(collection(db, "challenge"), this.chalDocument);
       this.$router.push("/admin-challenge");
+      this.togglePopup();
       console.log(docRef);
     },
     handleResize() {
       this.windowSize = window.innerWidth;
     },
+    redirect() {
+      this.$router.push("/ongoing-challenges");
+    }
   },
   computed: {
     chalLoading() {
@@ -187,6 +203,13 @@ export default {
   unmounted() {
     window.removeEventListener("resize", this.handleResize);
   },
+  setup() {
+    const popupActive = ref(false);
+    const togglePopup = () => {
+      popupActive.value = !popupActive.value;
+    }
+    return { popupActive, togglePopup };
+  }
 };
 </script>
 <!-- 
