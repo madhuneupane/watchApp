@@ -10,7 +10,7 @@
     }
 }
 
-.sectionContainer .movieLabel, #quantity, .genreLabel, .labelClass, #startDate, #endDate{
+.sectionContainer .movieLabel, #quantity, .genreLabel, .labelClass, #startDate, #endDate, .moviesSelectedText{
     color: $white;
 }
 
@@ -233,6 +233,15 @@ h3 {
     margin-top: $standardSpacement;
     display: flex;
     align-items: center;
+    flex-direction: column;
+}
+
+.createChallenge_tSection .addDescriptionContainer .addDescriptionLabelContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: $standardSpacement;
 }
 
 .createChallenge_tSection .addDescriptionContainer img {
@@ -247,12 +256,12 @@ h3 {
 #description {
     border: 3px solid $white;
     border-radius: 0.75rem;
-    margin-left: 10px;
     width: 20vw;
     background-color: $bg-blue;
     color: $white;
     font-family: 'Noto Sans Ethiopic Regular', sans-serif;
     padding: 1rem 1.5rem;
+    width: auto;
 }
 
 // #description:active {
@@ -273,4 +282,5 @@ h3 {
 
 .profilePicSectionSecond .feed {
     margin: $standardSpacement 0;
+    width: 100%;
 }

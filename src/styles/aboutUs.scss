@@ -12,6 +12,10 @@
     padding: $standardSpacement;
 }
 
+#aboutUs .aboutUsTitle, .aboutUsText, .titleAboutUs {
+    color: $white;
+}
+
 .card img {
     width: 18vw;
     clip-path: circle(50% at 50% 50%);

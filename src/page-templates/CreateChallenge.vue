@@ -160,8 +160,10 @@ setSelectedMoviesArray();
       </div>
 
       <div class="addDescriptionContainer">
-        <img src="../assets/icons/plus-button-challenge.svg" @click.prevent="addDescription" />
-        <label class="labelClass">Add a Challenge Description</label>
+        <div class="addDescriptionLabelContainer">
+          <img src="../assets/icons/plus-button-challenge.svg" @click.prevent="addDescription" />
+          <label class="labelClass">Add a Challenge Description</label>
+        </div>
         <textarea v-model="description" v-if="descriptionArea" name="chalDescription" id="description" cols="30"
           rows="6"></textarea>
       </div>

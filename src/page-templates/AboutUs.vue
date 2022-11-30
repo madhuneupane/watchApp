@@ -1,15 +1,15 @@
 <template>
   <NavigationBar />
   <div id="aboutUs">
-    <h1>Meet The Seven Knights!</h1>
-    <p>
+    <h1 class="aboutUsTitle">Meet The Seven Knights!</h1>
+    <p class="aboutUsText">
       As nowadays we live in a flood of information, sometimes can be difficult
       to find the information we really want. The same is applied to movies,
       when we usually take a long time to find the program we actually want to
       see or we become lost considering the amount of movies that are released
       every single month, and how to get all the information provided.
     </p>
-    <p>
+    <p class="aboutUsText">
       We, Seven Knights, exist to provide users with essential movie information
       and also the pleasure of watching movies. WatchApp, created by Seven
       Knights, allows users to quickly access the new movie information,
