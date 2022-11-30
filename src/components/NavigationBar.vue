@@ -88,6 +88,17 @@ export default {
         sessionStorage.setItem("profilePic", this.imageSource);
       }
     });
+
+    const navbar = document.querySelector('.logoIcon');
+    const navbarHeight = navbar.getBoundingClientRect().height;
+
+    document.addEventListener('scroll', () => {
+      if (window.scrollY > navbarHeight / 10) {
+        navbar.classList.add('navbar--fixed');
+      } else {
+        navbar.classList.remove('navbar--fixed');
+      }
+    });
   },
   methods: {
     profile() {

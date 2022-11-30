@@ -16,11 +16,11 @@
     </div>
     <div class="overviewContainer">
       <h3>Overview</h3>
-      <p>{{ movieOverview }}</p>
+      <p class="movieOverviewContent">{{ movieOverview }}</p>
     </div>
     <h3>What do you think of this movie?</h3>
 
-    <label>Rating<span class="req">*</span></label>
+    <label class="movieRating">Rating<span class="req">*</span></label>
     <!-- <input v-model="userRating" type="number" name="userRating" id="userRating" /> -->
     <vue3starRatings
       v-model="userRating"
@@ -31,7 +31,7 @@
     />
 
     <div class="userReviewContainer">
-      <label for="userReview">Review<span class="req">*</span></label>
+      <label class="userReview" for="userReview">Review<span class="req">*</span></label>
       <textarea
         v-model="userReview"
         id="userReview"

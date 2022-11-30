@@ -1,0 +1,14 @@
+#forgotEmail {
+    padding: $standardSpacement;
+}
+
+#forgotEmail .forgotEmailText {
+    color: $white;
+    margin-bottom: $standardSpacement;
+}
+
+@media only screen and (min-width: $media-desktop) {
+    #forgotEmail {
+        text-align: center;
+    }
+}

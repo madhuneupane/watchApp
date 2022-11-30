@@ -1,0 +1,358 @@
+.profilePagePicContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    @media only screen and (min-width: $media-desktop) {
+        background-color: #02025F;
+        border-radius: $poster_radius 0 0 0;
+    }
+}
+
+.profilePagePicContainer h1, h2{
+    @media only screen and (min-width: $media-desktop) {
+        color: $white !important;
+    }
+}
+
+.profilePagePicContainer h1 {
+    margin-bottom: 0;
+}
+
+.profilePagePicContainer  .profilePicSectionFirst {
+    position: relative;
+}
+
+.profilePagePicContainer  .profilePicSectionFirst .profilePictureContainer #profilePicture {
+    border-radius: 50%;
+    height: 10rem;
+    width: 10rem;
+}
+
+.profilePagePicContainer .profilePicSectionFirst #changing {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+#profilePage .profilePicAndMenuContainer {
+    @media only screen and (min-width: $media-desktop) {
+        display: flex;
+        flex-direction: column;
+        flex-basis: 30%;
+    }
+}
+
+#profilePage .pageContentContainer {
+    @media only screen and (min-width: $media-desktop) {
+        display: flex;
+        flex-direction: row;
+        padding: $standardSpacement*3;
+    }
+}
+
+#profilePage .sideMenu {
+    padding: $standardSpacement;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    @media only screen and (min-width: $media-desktop) {
+        padding: 0;
+    }
+}
+
+#profilePage .sideMenu a {
+    color: $black;
+    background-color: #E9F8FF;
+    font-weight: bold;
+    width: 100%;
+    padding: 1.5rem 1rem;
+    border-bottom: 2px solid #0096D7;
+    transition: all ease-in-out 0.2s;
+}
+
+#profilePage .sideMenu a:first-child {
+    border-radius: $poster_radius $poster_radius 0 0;
+
+    @media only screen and (min-width: $media-desktop) {
+        border-radius: 0;
+    }
+}
+
+#profilePage .sideMenu a:last-child {
+    border-radius: 0 0 $poster_radius $poster_radius ;
+    border-bottom: none;
+
+    @media only screen and (min-width: $media-desktop) {
+        border-radius: 0;
+    }
+}
+
+#profilePage .sideMenu a:hover {
+    color: $white;
+    background-color: #0096D7;
+}
+
+//Profile preferences Section
+#profilePreferencesSec {
+    display: flex;
+    flex-direction: column;
+    padding: 0 $standardSpacement;
+
+    @media only screen and (min-width: $media-desktop) {
+        padding: $standardSpacement $standardSpacement*2;
+        border-radius: 0 $poster_radius $poster_radius 0;
+    }
+}
+
+#profilePreferencesSec .profilePageSecTitle {
+    @media only screen and (min-width: $media-desktop) {
+        color: $black;
+    }
+}
+
+#profilePreferencesSec .genreSelectionContainer {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-top: $standardSpacement;
+}
+
+#profilePreferencesSec .genreSelectionContainer div {
+    flex-basis: 50%;
+    padding: $standardSpacement/2 0;
+}
+
+#profilePreferencesSec .profilePreferencesBtnContainer {
+    margin-top: $standardSpacement;
+    display: flex;
+    flex-direction: column;
+
+    @media only screen and (min-width: $media-desktop) {
+        flex-direction: row;
+    }
+}
+
+#profilePreferencesSec .profilePreferencesBtnContainer .cancelBtn {
+    margin-bottom: $standardSpacement;
+}
+
+#profilePreferencesSec .profilePreferencesBtnContainer .cancelBtn, .saveBtn{
+    @media only screen and (min-width: $media-desktop) {
+        width: 15rem;
+        margin: $standardSpacement;
+    }
+}
+
+#profilePreferencesSec .profilePreferencesBtnContainer button:last-child {
+    margin-bottom: $standardSpacement;
+
+    @media only screen and (min-width: $media-desktop) {
+        margin-bottom: $standardSpacement;
+    }
+}
+
+//Watched Movies section
+#profilePageWatchedMovies {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0 $standardSpacement;
+
+    @media only screen and (min-width: $media-desktop) {
+        justify-content: unset;
+        align-items: unset;
+        padding: $standardSpacement $standardSpacement $standardSpacement $standardSpacement*2;
+        border-radius: 0 $poster_radius $poster_radius 0;
+    }
+}
+
+#profilePageWatchedMovies section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    @media only screen and (min-width: $media-desktop) {
+        justify-content: unset;
+        align-items: unset;
+    }
+}
+
+#profilePageWatchedMovies .profilePageSecTitle, .profilePageSecDescription {
+    @media only screen and (min-width: $media-desktop) {
+        align-self: flex-start;
+    }
+}
+
+#profilePageWatchedMovies .profilePageSecTitle {
+    @media only screen and (min-width: $media-desktop) {
+        color: $black;
+    }
+}
+
+#profilePageWatchedMovies .profilePageWatchedMovieList {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#profilePageWatchedMovies .profilePageWatchedMovieList .movieWatched {
+    margin-top: $standardSpacement;
+
+    @media only screen and (min-width: $media-desktop) {
+        flex-basis: 25%;
+    }
+}
+
+#profilePageWatchedMovies .profilePageWatchedMovieList .movieWatched img {
+    width: 8rem;
+    height: 12rem;
+    border-radius: $poster_radius;
+    cursor: pointer;
+
+    @media only screen and (min-width: $media-desktop) {
+        width: 12rem;
+        height: 18rem;
+    }
+}
+
+#profilePageWatchedMovies .seeMoreBtn {
+    margin: $standardSpacement 0;
+
+    @media only screen and (min-width: $media-desktop) {
+        color: $black;
+    }
+}
+
+
+#profilePreferencesSec, #profilePageWatchedMovies, #profileBadgesSec, #accountProfile {
+    @media only screen and (min-width: $media-desktop) {
+        flex-basis: 70%;
+        background-color: #E9F8FF;
+    }
+}
+
+#profilePreferencesSec, #profilePageWatchedMovies, #profileBadgesSec, #accountProfile
+a, p, span, h1, h2, h3, h4, label, input {
+    @media only screen and (min-width: $media-desktop) {
+        color: $black;
+    }
+}
+
+//Profile Page badges Section
+#profileBadgesSec {
+    display: flex;
+    flex-direction: column;
+    padding: $standardSpacement;
+
+    @media only screen and (min-width: $media-desktop) {
+        padding: $standardSpacement $standardSpacement*2 $standardSpacement;
+        border-radius: 0 $poster_radius $poster_radius 0;
+    }
+}
+
+#profileBadgesSec .badgesSecTitle, .badgesSecDescription, .badgesSecPoints, .badgesSecPointsLeft {
+    color: $white;
+    margin: $standardSpacement 0;
+    @media only screen and (min-width: $media-desktop) {
+        color: $black;
+    }
+}
+
+#profileBadgesSec .badgesSecDescription {
+    font-size: 1.5rem;
+    font-weight: normal;
+
+    @media only screen and (min-width: $media-desktop) {
+        font-size: 1.5rem;
+        font-weight: normal;
+    }
+}
+
+#profileBadgesSec .badgesContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+#profileBadgesSec .badgesContainer .badgeInfo {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: $standardSpacement;
+    
+}
+
+#profileBadgesSec .badgesContainer .badgeInfo img {
+    cursor: pointer;
+}
+
+#profileBadgesSec .badgesContainer .badgeInfo .badgeDescription {
+    margin-left: $standardSpacement;
+}
+
+#profileBadgesSec .badgesContainer .badgeInfo .badgeDescription .badgeName {
+    text-align: unset;
+    font-weight: bold;
+    color: $white;
+
+    @media only screen and (min-width: $media-desktop) {
+        color: $black;
+    }
+}
+
+//Account profile Section {
+#accountProfile {
+    display: flex;
+    flex-direction: column;
+    padding: 0 $standardSpacement $standardSpacement;
+
+    @media only screen and (min-width: $media-desktop) {
+        padding: $standardSpacement $standardSpacement*2 $standardSpacement;
+        border-radius: 0 $poster_radius $poster_radius 0;
+    }
+}
+
+#accountProfile .accountSecTitle, .userNameLabel, .userName, .userNicknameLabel, .userNickname {
+    color: $white;
+
+    @media only screen and (min-width: $media-desktop) {
+        color: $black;
+    }
+}
+
+#accountProfile .accountSecTitle, .userNameLabel, .userNicknameLabel {
+    font-weight: bold;
+}
+
+#accountProfile .userNameLabel, .userNicknameLabel {
+    width: 7rem;
+}
+
+#accountProfile .accountNameContainer {
+    margin-bottom: $standardSpacement;
+}
+
+#accountProfile .accountNameContainer, .accountNicknameContainer {
+    display: flex;
+    flex-direction: row;
+}
+
+#accountProfile .accountInfoSaveBtn {
+    margin: $standardSpacement 0;
+}
+
+
+//Badges Section Popup
+#profileBadgesSec .popupContent {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
