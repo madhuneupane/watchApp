@@ -87,6 +87,10 @@
     }
 }
 
+.popupInner p, span, h1, h2, h3, h4, a {
+    color: $white;
+}
+
 .popupInner button {
     margin-top: 20px;
 }
