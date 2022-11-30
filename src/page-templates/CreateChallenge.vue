@@ -493,7 +493,13 @@ export default {
       }
     },
     selectStandardImg(event) {
-      event.target.classList.toggle("selectedStandardImg");
+      const standardImage = document.querySelector(".standardImage");
+
+      if (
+        !event.currentTarget.classList.contains("selectedStandardImg") && !standardImage.classList.contains("selectedStandardImg")
+      ) {
+        event.target.classList.toggle("selectedStandardImg");
+      }
     }
   },
 
