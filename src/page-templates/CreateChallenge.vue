@@ -180,20 +180,23 @@
         <div class="standardImages">
           <img
             class="standardImage"
+            id="firstImage"
             src="https://firebasestorage.googleapis.com/v0/b/app1-504b3.appspot.com/o/images%2Fsamuel-ferrara-1527pjeb6jg-unsplash.jpg?alt=media&token=d9d36de1-0033-4e6c-9171-566f1085b5c6"
-            @click="selectStandardImg"
+            @click="photo1Clicked"
             style="width: 100px; height: 100px"
           />
           <img
             class="standardImage"
+            id="secondImage"
             src="https://firebasestorage.googleapis.com/v0/b/app1-504b3.appspot.com/o/images%2Fmyke-simon-atsUqIm3wxo-unsplash.jpg?alt=media&token=03de8d15-04ca-41d4-ab6c-72c8dafb1ccc"
-            @click="selectStandardImg"
+            @click="photo2Clicked"
             style="width: 100px; height: 100px"
           />
           <img
             class="standardImage"
+            id="thirdImage"
             src="https://firebasestorage.googleapis.com/v0/b/app1-504b3.appspot.com/o/images%2Fcharlesdeluvio-PvAAYZx-yf8-unsplash.jpg?alt=media&token=5df36fa5-8309-4467-8761-288d1634cf17"
-            @click="selectStandardImg"
+            @click="photo3Clicked"
             style="width: 100px; height: 100px"
           />
         </div>
@@ -488,14 +491,33 @@ export default {
       }
     },
     photo1Clicked() {
+      let photo1 = document.getElementById("firstImage");
+      let photo2 = document.getElementById("secondImage");
+      let photo3 = document.getElementById("thirdImage");
+      photo1.style.border = "3px solid white";
+      photo2.style.border = "";
+      photo3.style.border = "";
+
       this.urlOfImage =
         "https://firebasestorage.googleapis.com/v0/b/app1-504b3.appspot.com/o/images%2Fsamuel-ferrara-1527pjeb6jg-unsplash.jpg?alt=media&token=d9d36de1-0033-4e6c-9171-566f1085b5c6";
     },
     photo2Clicked() {
+      let photo1 = document.getElementById("firstImage");
+      let photo2 = document.getElementById("secondImage");
+      let photo3 = document.getElementById("thirdImage");
+      photo2.style.border = "3px solid white";
+      photo1.style.border = "";
+      photo3.style.border = "";
       this.urlOfImage =
         "https://firebasestorage.googleapis.com/v0/b/app1-504b3.appspot.com/o/images%2Fmyke-simon-atsUqIm3wxo-unsplash.jpg?alt=media&token=03de8d15-04ca-41d4-ab6c-72c8dafb1ccc";
     },
     photo3Clicked() {
+      let photo1 = document.getElementById("firstImage");
+      let photo2 = document.getElementById("secondImage");
+      let photo3 = document.getElementById("thirdImage");
+      photo3.style.border = "3px solid white";
+      photo2.style.border = "";
+      photo1.style.border = "";
       this.urlOfImage =
         "https://firebasestorage.googleapis.com/v0/b/app1-504b3.appspot.com/o/images%2Fcharlesdeluvio-PvAAYZx-yf8-unsplash.jpg?alt=media&token=5df36fa5-8309-4467-8761-288d1634cf17";
     },
