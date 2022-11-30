@@ -16,8 +16,19 @@
 .logoIcon {
     display: flex;
     justify-content: space-between;
-    margin: $standardSpacement;
+    background-color: $bg-blue;
+    padding: $standardSpacement;
     align-items: center;
+    width: 100%;
+    transition: all ease-in-out 0.3s;
+}
+
+.navbar--fixed {
+    position: fixed;
+    top: 0;
+    z-index: 99;
+    transition: all ease-in-out 0.3s;
+
 }
 
 .icon {
