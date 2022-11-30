@@ -22,6 +22,9 @@
 @media only screen and (min-width: 1024px) {
     #footer {
         position: relative;
+        // position: absolute;
+        // bottom: 0;
+        // width: 100%;
         background-color: $black;
         display: flex;
         justify-content: center;
@@ -31,6 +34,8 @@
         margin: auto;
         padding: 1.2rem 0;
         padding-bottom: 2.5rem;
+        // z-index: 5;
+        // margin-top: $standardSpacement;
     }
 
     #sevenKnights {
@@ -38,18 +43,7 @@
         bottom: 0;
         margin-left: 2rem;
         padding-bottom: 1rem;
-
-        // margin-bottom: .5rem;
-        // margin-top: 1rem;
     }
-
-    // #linksAbout {
-    //     transform: translateX(-150px);
-    // }
-
-    // #linksContact {
-    //     transform: translateX(-300px);
-    // }
 
     #reserved {
         position: absolute;
