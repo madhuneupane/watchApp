@@ -10,7 +10,13 @@
     }
 }
 
-.sectionContainer .movieLabel, #quantity, .genreLabel, .labelClass, #startDate, #endDate, .moviesSelectedText{
+.sectionContainer .movieLabel,
+#quantity,
+.genreLabel,
+.labelClass,
+#startDate,
+#endDate,
+.moviesSelectedText {
     color: $white;
 }
 
@@ -283,4 +289,25 @@ h3 {
 .profilePicSectionSecond .feed {
     margin: $standardSpacement 0;
     width: 100%;
+}
+
+.standardImages {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin: 1.25rem 0;
+}
+
+.profilePictureContainer {
+    text-align: center;
+    margin-top: 1.25rem;
+}
+
+.standardImage {
+    cursor: pointer;
+}
+
+.selectedStandardImg {
+    border: 3px solid white;
+    border-radius: 5px;
 }

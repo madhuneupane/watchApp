@@ -243,6 +243,7 @@ export default {
       urlOfImage: "",
       adminChallenge: false,
       apiMoviePages: 1,
+      selectedImageQuantity: 1
     };
   },
   /* created() {
@@ -493,12 +494,12 @@ export default {
       }
     },
     selectStandardImg(event) {
-      const standardImage = document.querySelector(".standardImage");
-
-      if (
-        !event.currentTarget.classList.contains("selectedStandardImg") && !standardImage.classList.contains("selectedStandardImg")
-      ) {
+      if (this.selectedImageQuantity == 1 && !event.currentTarget.classList.contains("selectedStandardImg")) {
         event.target.classList.toggle("selectedStandardImg");
+        this.selectedImageQuantity++;
+      } else if (event.currentTarget.classList.contains("selectedStandardImg")) {
+        event.target.classList.toggle("selectedStandardImg");
+        this.selectedImageQuantity--;
       }
     }
   },
@@ -512,26 +513,3 @@ export default {
   },
 };
 </script>
-
-<style>
-.standardImages {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  margin: 1.25rem 0;
-}
-
-.profilePictureContainer {
-  text-align: center;
-  margin-top: 1.25rem;
-}
-
-.standardImage {
-  cursor: pointer;
-}
-
-.selectedStandardImg {
-  border: 3px solid white;
-  border-radius: 5px;
-}
-</style>
