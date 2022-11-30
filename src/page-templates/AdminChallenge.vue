@@ -3,6 +3,7 @@
   <NavigationBar />
   <ChallengesMenu :challengePage="'defyUs'" v-if="userID && windowSize < 1024" />
 
+  <!-- <div class="ultraContainer"> -->
   <section v-if="firstPart" id="ongoingChalSec">
     <h1 v-if="windowSize > 1024">Defy Us</h1>
     <h1 v-if="windowSize < 1024 && !userID">Defy Us</h1>
@@ -62,6 +63,7 @@
     </div>
   </SimplePopup>
   <FooterBar />
+  <!-- </div> -->
 </template>
 <script>
 import NavigationBar from "../components/NavigationBar.vue";

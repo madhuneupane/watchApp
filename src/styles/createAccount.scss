@@ -161,6 +161,12 @@
     }
 }
 
+#createAccount .createAccBtn {
+    @media only screen and (min-width: $media-desktop) {
+        width: 50%;
+    }
+}
+
 //Second Part End
 
 //Genre Part Start

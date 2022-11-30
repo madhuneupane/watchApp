@@ -10,7 +10,8 @@
                 <p class="error">{{ errorMessage }}</p>
             </div>
             <div>
-                <button type="submit" class="primaryBtn nextBtn" @click.prevent="passwordRetrieve">Next</button>
+                <button type="submit" class="primaryBtn nextBtn" @click.prevent="passwordRetrieve">Reset
+                    Password</button>
             </div>
         </form>
         <router-link class="seeMoreBtn link backToLogin" to="/login-page">Back to login page</router-link>
@@ -24,7 +25,7 @@
             </div>
         </div>
     </SimplePopup>
-    
+
 
     <FooterBar />
 </template>

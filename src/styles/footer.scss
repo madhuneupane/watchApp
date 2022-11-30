@@ -22,7 +22,7 @@
 @media only screen and (min-width: 1024px) {
     #footer {
         position: relative;
-        // position: absolute;
+        // position: fixed;
         // bottom: 0;
         // width: 100%;
         background-color: $black;
@@ -34,8 +34,9 @@
         margin: auto;
         padding: 1.2rem 0;
         padding-bottom: 2.5rem;
-        // z-index: 5;
+        z-index: 99;
         // margin-top: $standardSpacement;
+        align-self: flex-end;
     }
 
     #sevenKnights {
@@ -62,4 +63,14 @@
         margin-right: 2rem;
         font-size: 1.125rem;
     }
+
+    .cssFooterAdjustment {
+        padding-bottom: 50px;
+    }
 }
+
+// .ultraContainer {
+//     position: relative;
+//     height: 100vh;
+//     margin: 0;
+// }

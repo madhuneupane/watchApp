@@ -2,7 +2,7 @@
   <NavigationBar />
   <div class="contactContainer">
     <h2 class="contactUsHeading">Send us a message</h2>
-    <p class="contactUsHeading">We'd love to hear from you!</p>
+    <p class="labelClass">We'd love to hear from you!</p>
 
     <form @submit.prevent="submitMessage()" class="formContainer" id="formData">
       <div>
@@ -11,25 +11,29 @@
           <label class="labelClass">Email Address <span class="req">*</span></label>
           <input v-model="email" type="email" class="inputArea" placeholder="email@gmail.com" />
         </div>
-        <div class="form_fName">
-          <label class="labelClass">First Name <span class="req">*</span></label>
-          <input v-model="fName" type="text" class="inputArea" />
+
+        <div class="nameContainer">
+          <div class="lNameContainer contactFormNames">
+            <label class="labelClass">First Name</label>
+            <input type="text" class="inputArea" />
+          </div>
+          <div class="lNameContainer last contactFormNames">
+            <label class="labelClass last">Last Name</label>
+            <input type="text" class="inputArea" />
+          </div>
         </div>
-        <div class="form_lName">
-          <label class="labelClass">Last Name <span class="req">*</span></label>
-          <input v-model="lName" type="text" class="inputArea" />
-        </div>
+
         <div class="form_subject">
           <label class="labelClass">Subject <span class="req">*</span></label>
           <input v-model="subject" class="inputArea" type="subject" placeholder="Subject line" />
         </div>
         <div class="form_message">
-          <label class="labelClass">Message<span class="req">*</span></label><br>
-          <textarea v-model="message" class="messageArea" id="description" placeholder="Message"></textarea>
+          <label class="labelClass">Message<span class="req">*</span></label>
+          <textarea v-model="message" class="messageArea inputArea" id="description" placeholder="Message"></textarea>
         </div>
 
         <div class="btnContainer">
-          <button type="submit" class="primaryBtn">
+          <button type="submit" class="primaryBtn submitContact">
             Submit
           </button>
         </div>

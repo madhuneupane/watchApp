@@ -39,3 +39,26 @@
         width: 50%;
     }
 }
+
+.nameContainer {
+    margin-bottom: 1.25rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.contactFormNames {
+    width: 48%;
+}
+
+.submitContact {
+    width: 100%;
+
+    @media only screen and (min-width: $media-desktop) {
+        width: 70%;
+    }
+}
+
+.inputArea {
+    margin-top: 0.5rem;
+    width: 100%;
+}

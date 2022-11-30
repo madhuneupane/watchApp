@@ -3,33 +3,33 @@
   <div id="createAccount">
     <div v-if="firstPart" class="fPart">
       <h2>Sign Up</h2>
-      <p class="errorMsg">Please fill the required details below</p>
+      <p class="errorMsg labelClass">Please fill the required details below</p>
       <form class="formContainer" id="formData">
         <p class="error">{{ fillMessage }}</p>
         <div>
-          <label>Email Address <span class="req">*</span></label>
+          <label class="labelClass">Email Address <span class="req">*</span></label>
           <input v-model="email" type="email" class="inputArea" placeholder="email@gmail.com" />
         </div>
         <div class="nameContainer">
           <div class="fNameContainer">
-            <label>First Name <span class="req">*</span></label>
+            <label class="labelClass">First Name <span class="req">*</span></label>
             <input v-model="fname" type="text" class="inputArea" placeholder="John" />
           </div>
           <div class="lNameContainer">
-            <label>Last Name <span class="req">*</span></label>
+            <label class="labelClass">Last Name <span class="req">*</span></label>
             <input v-model="lname" type="text" class="inputArea" placeholder="Doe" />
           </div>
         </div>
         <div></div>
         <div>
-          <label>Password <span class="req">*</span></label>
+          <label class="labelClass">Password <span class="req">*</span></label>
           <input class="inputArea" v-model="password" type="password" placeholder="***********" />
         </div>
         <div>
-          <label>Confirm Password <span class="req">*</span></label>
+          <label class="labelClass">Confirm Password <span class="req">*</span></label>
           <input class="inputArea" v-model="cpassword" type="password" placeholder="***********" />
         </div>
-        <button type="submit" class="primaryBtn" @click.prevent="newAccount">
+        <button type="submit" class="primaryBtn createAccBtn" @click.prevent="newAccount">
           Create Account
         </button>
       </form>
@@ -38,7 +38,7 @@
 
     <div v-if="secondPart" class="sPart">
       <h1>Howdy</h1>
-      <p>Can you tell about yourself more?</p>
+      <p class="labelClass">Can you tell about yourself more?</p>
       <!-- <router-link to="/join-sign-up" class="routerLink" @click.prevent="displayImage">Add your profile photo
       </router-link> -->
       <!-- Necessary to check this -->
@@ -51,7 +51,7 @@
         <!-- <router-link to="/create-account" @click.prevent="displayImage"
           >Add your profile photo</router-link
         > -->
-        <p style="text-decoration: underline; cursor: default" @click.prevent="clickImage">
+        <p class="labelClass" style="text-decoration: underline; cursor: default" @click.prevent="clickImage">
           Add your profile photo
         </p>
       </div>
@@ -60,7 +60,7 @@
         <button class="secondaryBtn" @click.prevent="displayImage">Snap</button>
       </div>
       <div class="nicknameContainer">
-        <p>Please input your nickname</p>
+        <p class="labelClass">Please input your nickname</p>
         <input v-model="nickname" type="text" placeholder="Nickname" />
       </div>
       <NextButton @click.prevent="submitted" />
@@ -72,79 +72,79 @@
       <div class="genreSelectionContainer">
         <div>
           <input name="genre" type="checkbox" value="28" />
-          <label for="genre">Action</label>
+          <label class="labelClass" for="genre">Action</label>
         </div>
         <div>
           <input name="genre" type="checkbox" value="12" />
-          <label for="genre">Adventure</label>
+          <label class="labelClass" for="genre">Adventure</label>
         </div>
         <div>
           <input name="genre" type="checkbox" value="16" />
-          <label for="genre">Animation</label>
+          <label class="labelClass" for="genre">Animation</label>
         </div>
         <div>
           <input name="genre" type="checkbox" value="35" />
-          <label for="genre">Comedy</label>
+          <label class="labelClass" for="genre">Comedy</label>
         </div>
         <div>
           <input name="genre" type="checkbox" value="80" />
-          <label for="genre">Crime</label>
+          <label class="labelClass" for="genre">Crime</label>
         </div>
         <div>
           <input name="genre" type="checkbox" value="99" />
-          <label for="genre">Documentary</label>
+          <label class="labelClass" for="genre">Documentary</label>
         </div>
         <div>
           <input name="genre" type="checkbox" value="18" />
-          <label for="genre">Drama</label>
+          <label class="labelClass" for="genre">Drama</label>
         </div>
         <div>
           <input name="genre" type="checkbox" value="10751" />
-          <label for="genre">Family</label>
+          <label class="labelClass" for="genre">Family</label>
         </div>
         <div>
           <input name="genre" type="checkbox" value="14" />
-          <label for="genre">Fantasy</label>
+          <label class="labelClass" for="genre">Fantasy</label>
         </div>
         <div>
           <input name="genre" type="checkbox" value="36" />
-          <label for="genre">History</label>
+          <label class="labelClass" for="genre">History</label>
         </div>
         <div>
           <input name="genre" type="checkbox" value="27" />
-          <label for="genre">Horror</label>
+          <label class="labelClass" for="genre">Horror</label>
         </div>
         <div>
           <input name="genre" type="checkbox" value="10402" />
-          <label for="genre">Music</label>
+          <label class="labelClass" for="genre">Music</label>
         </div>
         <div>
           <input name="genre" type="checkbox" value="9648" />
-          <label for="genre">Mystery</label>
+          <label class="labelClass" for="genre">Mystery</label>
         </div>
         <div>
           <input name="genre" type="checkbox" value="10749" />
-          <label for="genre">Romance</label>
+          <label class="labelClass" for="genre">Romance</label>
         </div>
         <div>
           <input name="genre" type="checkbox" value="878" />
-          <label for="genre">Science Fiction</label>
+          <label class="labelClass" for="genre">Science Fiction</label>
         </div>
         <div>
           <input name="genre" type="checkbox" value="10770" />
-          <label for="genre">TV Movie</label>
+          <label class="labelClass" for="genre">TV Movie</label>
         </div>
         <div>
           <input name="genre" type="checkbox" value="53" />
-          <label for="genre">Thriller</label>
+          <label class="labelClass" for="genre">Thriller</label>
         </div>
         <div>
           <input name="genre" type="checkbox" value="1752" />
-          <label for="genre">War</label>
+          <label class="labelClass" for="genre">War</label>
         </div>
         <div>
           <input name="genre" type="checkbox" value="37" />
-          <label for="genre">Western</label>
+          <label class="labelClass" for="genre">Western</label>
         </div>
       </div>
       <button class="primaryBtn" @click.prevent="genreSelection">

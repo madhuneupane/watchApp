@@ -1,5 +1,6 @@
 <template>
   <NavigationBar />
+  <!-- <div class="ultraContainer"> -->
   <div id="aboutUs">
     <h1 class="aboutUsTitle">Meet The Seven Knights!</h1>
     <p class="aboutUsText">
@@ -92,6 +93,7 @@
     </div>
   </div>
   <FooterBar />
+  <!-- </div> -->
 </template>
 
 <script>
