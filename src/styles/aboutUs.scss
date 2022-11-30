@@ -1,0 +1,44 @@
+#aboutUs {
+    padding: $standardSpacement;
+    text-align: center;
+}
+
+#aboutUs p {
+    padding: $standardSpacement;
+}
+
+#aboutUs h1,
+#aboutUs p {
+    padding: $standardSpacement;
+}
+
+.card img {
+    width: 18vw;
+    clip-path: circle(50% at 50% 50%);
+}
+
+.column {
+    display: flex;
+    justify-content: space-evenly;
+    text-align: center;
+    padding: $standardSpacement;
+    margin: $standardSpacement;
+}
+
+.containerAboutUs h3 {
+    margin: 0.5rem;
+}
+
+.titleAboutUs {
+    font-size: 0.8rem;
+}
+
+@media only screen and (min-width: $media-desktop) {
+    .titleAboutUs {
+        font-size: 1rem;
+    }
+
+    .card img {
+        width: 10vw;
+    }
+}
