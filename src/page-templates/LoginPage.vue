@@ -7,13 +7,27 @@
       <div class="formContainer">
         <form @submit.prevent="doLogin" class="formLogin">
           <div class="emailContainer">
-            <label class="emailAddressLabel">Email Address <span class="req">*</span></label>
-            <input v-model="email" type="email" class="inputArea" placeholder="email@gmail.com" />
+            <label class="emailAddressLabel"
+              >Email Address <span class="req">*</span></label
+            >
+            <input
+              v-model="email"
+              type="email"
+              class="inputArea"
+              placeholder="email@gmail.com"
+            />
             <p class="error">{{ errorMessage }}</p>
           </div>
           <div class="passwordContainer">
-            <label class="passwordLabel">Password <span class="req">*</span></label>
-            <input class="inputArea" v-model="password" type="password" placeholder="***********" />
+            <label class="passwordLabel"
+              >Password <span class="req">*</span></label
+            >
+            <input
+              class="inputArea"
+              v-model="password"
+              type="password"
+              placeholder="***********"
+            />
             <p class="error">{{ pwdError }}</p>
           </div>
           <button type="submit" class="primaryBtn">Login</button>
@@ -27,13 +41,17 @@
           Create Account
         </button>
         <div class="linksContainer">
-          <router-link to="/reset-password" class="link">Forgot Password? Click Here.</router-link>
-          <router-link to="/forgot-email" class="link">Forgot Email? Click Here.</router-link>
+          <router-link to="/reset-password" class="link"
+            >Forgot Password? Click Here.</router-link
+          >
+          <router-link to="/forgot-email" class="link"
+            >Forgot Email? Click Here.</router-link
+          >
         </div>
       </div>
     </div>
   </section>
-  <FooterBar />
+  <FooterBar style="width: 100%; bottom: 0; position: fixed" />
 </template>
 
 <script>

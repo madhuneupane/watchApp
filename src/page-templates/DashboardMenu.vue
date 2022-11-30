@@ -9,20 +9,30 @@
 
           <div v-if="secondPartFirst" class="profilePicSectionFirst">
             <div class="profilePictureContainer">
-              <img id="profilePicture" :src="profilePic" alt="profilePic"
-                :class="{ capturedPicture: photoSnapped === true }" />
+              <img
+                id="profilePicture"
+                :src="profilePic"
+                alt="profilePic"
+                :class="{ capturedPicture: photoSnapped === true }"
+              />
             </div>
-            <img id="changing" src="../assets/icons/edit-photo.svg" alt="changeProfile" @click.prevent="clickImage" />
+            <img
+              id="changing"
+              src="../assets/icons/edit-photo.svg"
+              alt="changeProfile"
+              @click.prevent="clickImage"
+            />
           </div>
 
           <div v-if="secondPartSecond" class="profilePicSectionSecond">
             <video autoplay class="feed"></video>
-            <button class="secondaryBtn" @click.prevent="displayImage">Snap</button>
+            <button class="secondaryBtn" @click.prevent="displayImage">
+              Snap
+            </button>
           </div>
 
           <h2>{{ nickname }}</h2>
         </div>
-
 
         <div class="sideMenu">
           <a @click="first">Favorite Genre</a>
@@ -34,7 +44,6 @@
           <a @click="fourth">Profile</a>
         </div>
       </div>
-
 
       <div v-if="firstPart" id="profilePreferencesSec">
         <h1 class="profilePageSecTitle">Edit Your preferences</h1>
@@ -118,7 +127,9 @@
           </div>
         </div>
         <div class="profilePreferencesBtnContainer">
-          <button type="cancel" class="secondaryBtn cancelBtn" @click="cancel">Cancel</button>
+          <button type="cancel" class="secondaryBtn cancelBtn" @click="cancel">
+            Cancel
+          </button>
           <button type="save" class="primaryBtn saveBtn" @click="saveNewGenres">
             Save
           </button>
@@ -128,29 +139,44 @@
       <div v-if="secondPart" id="profilePageWatchedMovies">
         <section>
           <h1 class="profilePageSecTitle">Movies you've watched</h1>
-          <p class="profilePageSecDescription">Here are the list of movies you've seen from the challenges</p>
-          <SecondPopupModal :popupActive="popupActive" :popupTitle="popupTitle" :popupPoster="popupPoster"
-            :popupGenreIDs="popupGenreIDs" :popupReleaseDate="popupReleaseDate" :popupAvarage="popupAvarage"
-            :popupOverview="popupOverview" :popupRating="popupRating" :popupReview="popupReview"
-            v-on:closeClicked="closePopup">
+          <p class="profilePageSecDescription">
+            Here are the list of movies you've seen from the challenges
+          </p>
+          <SecondPopupModal
+            :popupActive="popupActive"
+            :popupTitle="popupTitle"
+            :popupPoster="popupPoster"
+            :popupGenreIDs="popupGenreIDs"
+            :popupReleaseDate="popupReleaseDate"
+            :popupAvarage="popupAvarage"
+            :popupOverview="popupOverview"
+            :popupRating="popupRating"
+            :popupReview="popupReview"
+            v-on:closeClicked="closePopup"
+          >
           </SecondPopupModal>
           <div class="profilePageWatchedMovieList">
-            <div v-for="(movies, i) in chalLoading" :key="i" class="movieWatched">
-              <img :src="
-                'https://image.tmdb.org/t/p/w500' + movies.poster_path
-              " @click="
-  togglePopup(
-    movies.poster_path,
-    movies.original_title,
-    movies.genre_ids,
-    movies.release_date,
-    movies.vote_average,
-    movies.overview,
-    movies.rating,
-    movies.review,
-    movies
-  )
-" />
+            <div
+              v-for="(movies, i) in chalLoading"
+              :key="i"
+              class="movieWatched"
+            >
+              <img
+                :src="'https://image.tmdb.org/t/p/w500' + movies.poster_path"
+                @click="
+                  togglePopup(
+                    movies.poster_path,
+                    movies.original_title,
+                    movies.genre_ids,
+                    movies.release_date,
+                    movies.vote_average,
+                    movies.overview,
+                    movies.rating,
+                    movies.review,
+                    movies
+                  )
+                "
+              />
               <!-- <h3>{{ movie[i].title }}</h3> -->
             </div>
           </div>
@@ -161,9 +187,13 @@
       <div v-if="thirdPart" id="profileBadgesSec">
         <div class="badgesSecDescriptionContainer">
           <h1 class="badgesSecTitle">Here are your badges!</h1>
-          <h1 class="badgesSecDescription">Total of movies you've watched so far:</h1>
+          <h1 class="badgesSecDescription">
+            Total of movies you've watched so far:
+          </h1>
           <h1 class="badgesSecPoints">{{ this.points }}</h1>
-          <p class="badgesSecPointsLeft">You have {{ movieLeft }} movies left to unlock the next badge</p>
+          <p class="badgesSecPointsLeft">
+            You have {{ movieLeft }} movies left to unlock the next badge
+          </p>
         </div>
         <div class="badgesContainer">
           <div class="badgeInfo" v-if="badgeOne" @click="badgesPopup(10)">
@@ -204,24 +234,36 @@
           <!-- <button type="save" class="primaryBtn" @click="sharedBadgesPopup">
             Shared Badges
           </button> -->
-          <BadgesPopup @close="firstTogglePopup" :popupActive="firstpopupActive">
+          <BadgesPopup
+            @close="firstTogglePopup"
+            :popupActive="firstpopupActive"
+          >
             <div class="popupContent">
               <h1 class="popUpHeading">{{ badgesTitle }}</h1>
               <img v-if="watched == 10" src="../assets/popcorn-badge.png" />
               <img v-if="watched == 20" src="../assets/3d-glasses.png" />
               <img v-if="watched == 30" src="../assets/mask-badge.png" />
 
-
-              <h3 class="popUpText">You've earned this badge after watching {{ watched }} movies!</h3>
-
+              <h3 class="popUpText">
+                You've earned this badge after watching {{ watched }} movies!
+              </h3>
             </div>
           </BadgesPopup>
-          <SharedBadgesPopup @close="secondTogglePopup" :popupActive="secondpopupActive">
+          <SharedBadgesPopup
+            @close="secondTogglePopup"
+            :popupActive="secondpopupActive"
+          >
             <div class="popupContent">
               <h1 class="popUpHeading">Unlock at {{ nextBadge }}th movie</h1>
               <img src="../assets/no-badge.png" />
-              <h3 class="popUpText">Watched more movies to unlock this badge</h3>
-              <button @click="redirectToChallenges" type="button" class="secondaryBtn">
+              <h3 class="popUpText">
+                Watched more movies to unlock this badge
+              </h3>
+              <button
+                @click="redirectToChallenges"
+                type="button"
+                class="secondaryBtn"
+              >
                 Watch more movies
               </button>
             </div>
@@ -241,7 +283,11 @@
             <span class="userNickname">{{ nickname }}</span>
           </div>
         </div>
-        <button type="submit" class="primaryBtn accountInfoSaveBtn" @click.prevent="resetPassword">
+        <button
+          type="submit"
+          class="primaryBtn accountInfoSaveBtn"
+          @click.prevent="resetPassword"
+        >
           Change Password
         </button>
       </div>
@@ -573,7 +619,7 @@ export default {
     },
     redirectToChallenges() {
       this.$router.push("/ongoing-challenges");
-    }
+    },
   },
   async mounted() {
     this.nickname = sessionStorage.getItem("nickname");

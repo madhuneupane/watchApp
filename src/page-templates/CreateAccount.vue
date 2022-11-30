@@ -7,33 +7,72 @@
       <form class="formContainer" id="formData">
         <p class="error">{{ fillMessage }}</p>
         <div>
-          <label class="labelClass">Email Address <span class="req">*</span></label>
-          <input v-model="email" type="email" class="inputArea" placeholder="email@gmail.com" />
+          <label class="labelClass"
+            >Email Address <span class="req">*</span></label
+          >
+          <input
+            v-model="email"
+            type="email"
+            class="inputArea"
+            placeholder="email@gmail.com"
+          />
         </div>
         <div class="nameContainer">
           <div class="fNameContainer">
-            <label class="labelClass">First Name <span class="req">*</span></label>
-            <input v-model="fname" type="text" class="inputArea" placeholder="John" />
+            <label class="labelClass"
+              >First Name <span class="req">*</span></label
+            >
+            <input
+              v-model="fname"
+              type="text"
+              class="inputArea"
+              placeholder="John"
+            />
           </div>
           <div class="lNameContainer">
-            <label class="labelClass">Last Name <span class="req">*</span></label>
-            <input v-model="lname" type="text" class="inputArea" placeholder="Doe" />
+            <label class="labelClass"
+              >Last Name <span class="req">*</span></label
+            >
+            <input
+              v-model="lname"
+              type="text"
+              class="inputArea"
+              placeholder="Doe"
+            />
           </div>
         </div>
         <div></div>
         <div>
           <label class="labelClass">Password <span class="req">*</span></label>
-          <input class="inputArea" v-model="password" type="password" placeholder="***********" />
+          <input
+            class="inputArea"
+            v-model="password"
+            type="password"
+            placeholder="***********"
+          />
         </div>
         <div>
-          <label class="labelClass">Confirm Password <span class="req">*</span></label>
-          <input class="inputArea" v-model="cpassword" type="password" placeholder="***********" />
+          <label class="labelClass"
+            >Confirm Password <span class="req">*</span></label
+          >
+          <input
+            class="inputArea"
+            v-model="cpassword"
+            type="password"
+            placeholder="***********"
+          />
         </div>
-        <button type="submit" class="primaryBtn createAccBtn" @click.prevent="newAccount">
+        <button
+          type="submit"
+          class="primaryBtn createAccBtn"
+          @click.prevent="newAccount"
+        >
           Create Account
         </button>
       </form>
-      <router-link to="/login-page" class="link">Back to Login Page</router-link>
+      <router-link to="/login-page" class="link"
+        >Back to Login Page</router-link
+      >
     </div>
 
     <div v-if="secondPart" class="sPart">
@@ -45,13 +84,21 @@
       <!-- <input type="file" id="imgInput" name="img" accept="image/*" v-bind:style="cssData" /> -->
       <div v-if="secondPartFirst" class="profilePicSectionFirst">
         <div class="profilePictureContainer">
-          <img id="profilePicture" src="../assets/icons/profile.svg" alt="sorry"
-            :class="{ capturedPicture: photoSnapped === true }" />
+          <img
+            id="profilePicture"
+            src="../assets/icons/profile.svg"
+            alt="sorry"
+            :class="{ capturedPicture: photoSnapped === true }"
+          />
         </div>
         <!-- <router-link to="/create-account" @click.prevent="displayImage"
           >Add your profile photo</router-link
         > -->
-        <p class="labelClass" style="text-decoration: underline; cursor: default" @click.prevent="clickImage">
+        <p
+          class="labelClass"
+          style="text-decoration: underline; cursor: default"
+          @click.prevent="clickImage"
+        >
           Add your profile photo
         </p>
       </div>
@@ -153,7 +200,7 @@
     </div>
   </div>
 
-  <FooterBar />
+  <FooterBar style="width: 100%; bottom: 0; position: fixed" />
 </template>
 
 <script>
@@ -273,7 +320,7 @@ export default {
             nickname: this.nickname,
             profilePicUrl: this.urlOfImage,
             genre: this.genreArray,
-            points: 0
+            points: 0,
           });
           this.email = "";
           this.password.value = "";

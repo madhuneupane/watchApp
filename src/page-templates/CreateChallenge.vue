@@ -260,7 +260,7 @@
       </SimplePopup>
     </div>
   </div>
-  <FooterBar />
+  <FooterBar id="footer" />
 </template>
 
 
@@ -319,6 +319,14 @@ export default {
       selectedImageQuantity: 1,
     };
   },
+  mounted() {
+    if (this.fSectionOn) {
+      let footer = document.getElementById("footer");
+      footer.style.width = "100%";
+      footer.style.bottom = "0";
+      footer.style.position = "fixed";
+    }
+  },
   /* created() {
     this.chooseMovie = axios
       .get(
@@ -339,6 +347,11 @@ export default {
       this.tSectionOn = false;
       this.secondPartFirst = false;
       this.secondPartSecond = false;
+      let footer = document.getElementById("footer");
+      // footer.style.width = "100%";
+      // footer.style.bottom = "0";
+      footer.style.position = "relative";
+
       this.quantity = document.getElementById("quantity").value;
       this.genreOfChoice = document.getElementById("genreDropdown").value;
 

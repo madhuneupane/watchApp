@@ -1,7 +1,14 @@
 <template>
-  <button class="createChllgBtn" v-if="userID && windowSize < 1024" @click.prevent="createChallenge"></button>
+  <button
+    class="createChllgBtn"
+    v-if="userID && windowSize < 1024"
+    @click.prevent="createChallenge"
+  ></button>
   <NavigationBar />
-  <ChallengesMenu :challengePage="'defyUs'" v-if="userID && windowSize < 1024" />
+  <ChallengesMenu
+    :challengePage="'defyUs'"
+    v-if="userID && windowSize < 1024"
+  />
 
   <!-- <div class="ultraContainer"> -->
   <section v-if="firstPart" id="ongoingChalSec">
@@ -9,9 +16,16 @@
     <h1 v-if="windowSize < 1024 && !userID">Defy Us</h1>
     <h2>Try beating WatchApp!</h2>
     <div class="chalList">
-      <div class="chalInfo" v-for="(challenge, index) in chalLoading" :key="index">
-        <div class="challenge" v-bind:style="{ backgroundImage: 'url(' + challenge.image + ')' }"
-          @click.prevent="challengeClicked(index)">
+      <div
+        class="chalInfo"
+        v-for="(challenge, index) in chalLoading"
+        :key="index"
+      >
+        <div
+          class="challenge"
+          v-bind:style="{ backgroundImage: 'url(' + challenge.image + ')' }"
+          @click.prevent="challengeClicked(index)"
+        >
           <div class="chalDetailsContainer">
             <h3>{{ challenge.title }}</h3>
             <span id="ending">Ending on {{ challenge.endDate }}</span>
@@ -22,13 +36,20 @@
     </div>
     <a class="seeMoreBtn link" @click.prevent="loadMore">Load More</a>
     <div class="btnContainer" v-if="windowSize > 1024">
-      <BackButton v-if="userID" title="Back to Challenge" @click.prevent="backChal" />
+      <BackButton
+        v-if="userID"
+        title="Back to Challenge"
+        @click.prevent="backChal"
+      />
     </div>
   </section>
 
   <section v-if="moviePart" id="chalDetailSection">
     <div class="chalDetailContainer">
-      <div class="chalImgContainer" v-bind:style="{ backgroundImage: 'url(' + chalImage + ')' }"></div>
+      <div
+        class="chalImgContainer"
+        v-bind:style="{ backgroundImage: 'url(' + chalImage + ')' }"
+      ></div>
       <div class="chalDetailsInfo">
         <span class="chalTitle">{{ chalName }}</span>
         <span class="chalDates">{{ startDate }} ~ {{ endDate }}</span>
@@ -50,7 +71,11 @@
           Join Challenge
         </button>
       </div>
-      <BackButton class="backtoListBtn" title="Back to List" @click.prevent="backList" />
+      <BackButton
+        class="backtoListBtn"
+        title="Back to List"
+        @click.prevent="backList"
+      />
     </div>
   </section>
   <SimplePopup @close="togglePopup" :popupActive="popupActive">
@@ -58,11 +83,13 @@
       <div class="reviewSaved">
         <h1>Congratz!</h1>
         <p>Check this challenge on your Ongoing Challenges page</p>
-        <button @click="redirect" type="button" class="secondaryBtn">Go to Challenges</button>
+        <button @click="redirect" type="button" class="secondaryBtn">
+          Go to Challenges
+        </button>
       </div>
     </div>
   </SimplePopup>
-  <FooterBar />
+  <FooterBar style="width: 100%; bottom: 0; position: fixed" />
   <!-- </div> -->
 </template>
 <script>
@@ -73,7 +100,7 @@ import { db } from "@/firebase";
 import { query, collection, getDocs, addDoc } from "firebase/firestore";
 import ChallengesMenu from "../components/ChallengesMenu.vue";
 import SimplePopup from "../components/SimplePopup.vue";
-import { ref } from 'vue';
+import { ref } from "vue";
 
 export default {
   name: "OngoingChallenges",
@@ -82,7 +109,7 @@ export default {
     FooterBar,
     BackButton,
     ChallengesMenu,
-    SimplePopup
+    SimplePopup,
   },
   data() {
     return {
@@ -191,7 +218,7 @@ export default {
     },
     redirect() {
       this.$router.push("/ongoing-challenges");
-    }
+    },
   },
   computed: {
     chalLoading() {
@@ -209,9 +236,9 @@ export default {
     const popupActive = ref(false);
     const togglePopup = () => {
       popupActive.value = !popupActive.value;
-    }
+    };
     return { popupActive, togglePopup };
-  }
+  },
 };
 </script>
 <!-- 
