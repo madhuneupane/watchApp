@@ -22,7 +22,7 @@
 
           <h2>{{ nickname }}</h2>
         </div>
-        
+
 
         <div class="sideMenu">
           <a @click="first">Favorite Genre</a>
@@ -139,18 +139,18 @@
               <img :src="
                 'https://image.tmdb.org/t/p/w500' + movies.poster_path
               " @click="
-                togglePopup(
-                  movies.poster_path,
-                  movies.original_title,
-                  movies.genre_ids,
-                  movies.release_date,
-                  movies.vote_average,
-                  movies.overview,
-                  movies.rating,
-                  movies.review,
-                  movies
-                )
-              " />
+  togglePopup(
+    movies.poster_path,
+    movies.original_title,
+    movies.genre_ids,
+    movies.release_date,
+    movies.vote_average,
+    movies.overview,
+    movies.rating,
+    movies.review,
+    movies
+  )
+" />
               <!-- <h3>{{ movie[i].title }}</h3> -->
             </div>
           </div>
@@ -166,21 +166,21 @@
           <p class="badgesSecPointsLeft">You have {{ movieLeft }} movies left to unlock the next badge</p>
         </div>
         <div class="badgesContainer">
-          <div class="badgeInfo" v-if="badgeOne">
+          <div class="badgeInfo" v-if="badgeOne" @click="badgesPopup(10)">
             <img src="../assets/popcorn-badge.png" alt="" />
             <div class="badgeDescription">
               <h3 class="badgeName">Popcorn</h3>
               <p>10th Movie Milestone</p>
             </div>
           </div>
-          <div class="badgeInfo" v-if="badgeTwo">
+          <div class="badgeInfo" v-if="badgeTwo" @click="badgesPopup(20)">
             <img src="../assets/3d-glasses.png" alt="" />
             <div class="badgeDescription">
               <h3 class="badgeName">3D Glasses</h3>
               <p>20th Movie Milestone</p>
             </div>
           </div>
-          <div class="badgeInfo" v-if="badgeThree">
+          <div class="badgeInfo" v-if="badgeThree" @click="badgesPopup(30)">
             <img src="../assets/mask-badge.png" alt="" />
             <div class="badgeDescription">
               <h3 class="badgeName">Mask</h3>
@@ -189,37 +189,39 @@
           </div>
 
           <div class="badgeInfo">
-            <img src="../assets/no-badge.png" />
+            <img src="../assets/no-badge.png" @click="sharedBadgesPopup" />
             <div class="badgeDescription">
               <h3 class="badgeName">{{ nextBadge }}th movie badge</h3>
               <p>Watch more movies to unlock this badge!</p>
             </div>
           </div>
         </div>
-        
+
         <div class="btnContainer">
-          <button type="save" class="primaryBtn" @click="badgesPopup">
+          <!-- <button type="save" class="primaryBtn" @click="badgesPopup">
             Badges
-          </button>
-          <button type="save" class="primaryBtn" @click="sharedBadgesPopup">
+          </button> -->
+          <!-- <button type="save" class="primaryBtn" @click="sharedBadgesPopup">
             Shared Badges
-          </button>
+          </button> -->
           <BadgesPopup @close="firstTogglePopup" :popupActive="firstpopupActive">
             <div class="popupContent">
-              <h1 class="popUpHeading">Popcorn</h1>
-              <img src="#" alt="#" />
-              <h3 class="popUpText">20th movie milestone</h3>
-              <button @click="redirect" type="button" class="secondaryBtn">
-                Share Badge
-              </button>
+              <h1 class="popUpHeading">{{ badgesTitle }}</h1>
+              <img v-if="watched == 10" src="../assets/popcorn-badge.png" />
+              <img v-if="watched == 20" src="../assets/3d-glasses.png" />
+              <img v-if="watched == 30" src="../assets/mask-badge.png" />
+
+
+              <h3 class="popUpText">You've earned this badge after watching {{ watched }} movies!</h3>
+
             </div>
           </BadgesPopup>
           <SharedBadgesPopup @close="secondTogglePopup" :popupActive="secondpopupActive">
-            <div class="popupSecondContent">
-              <h1 class="popUpHeading">Unlock at 130th movie</h1>
-              <img src="#" alt="#" />
+            <div class="popupContent">
+              <h1 class="popUpHeading">Unlock at {{ nextBadge }}th movie</h1>
+              <img src="../assets/no-badge.png" />
               <h3 class="popUpText">Watched more movies to unlock this badge</h3>
-              <button @click="redirect" type="button" class="secondaryBtn">
+              <button @click="redirectToChallenges" type="button" class="secondaryBtn">
                 Watch more movies
               </button>
             </div>
@@ -308,6 +310,9 @@ export default {
       length: 4,
       watchedMovies: [],
       movieLeft: 0,
+      watched: 0,
+      badgesImage: "",
+      badgesTitle: "",
       genreArray: [
         {
           id: 28,
@@ -419,7 +424,18 @@ export default {
     resetPassword() {
       this.$router.push("/reset-password");
     },
-    async badgesPopup() {
+    async badgesPopup(a) {
+      this.watched = a;
+      if (a == 10) {
+        this.badgesTitle = "Popcorn";
+      }
+      if (a == 20) {
+        this.badgesTitle = "3D Glasses";
+      }
+      if (a == 30) {
+        this.badgesTitle = "Mask";
+      }
+
       this.firstTogglePopup();
     },
     async sharedBadgesPopup() {
@@ -555,6 +571,9 @@ export default {
       if (this.length > this.watchedMovies.length) return;
       this.length = this.length + 4;
     },
+    redirectToChallenges() {
+      this.$router.push("/ongoing-challenges");
+    }
   },
   async mounted() {
     this.nickname = sessionStorage.getItem("nickname");
