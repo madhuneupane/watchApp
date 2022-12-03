@@ -331,6 +331,7 @@ export default {
       this.secondPartSecond = false;
       this.selectedMoviesQuantity = 0;
       this.selectedMovies = [];
+      document.getElementById("footer").style.position = "fixed";
     },
     forceRerender() {
       this.carouselKey += 1;

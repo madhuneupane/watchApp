@@ -61,14 +61,16 @@
   </section>
   <SimplePopup @close="togglePopup" :popupActive="popupActive">
     <div class="popupContent">
-      <h1 class="popUpHeading">Quit?</h1>
-      <h3 class="popUpText">
-        If you quit the challenge,<br />you will lose all data.<br />Do you wish
-        to continue?
-      </h3>
-      <button @click="redirect" type="button" class="secondaryBtn">
-        Quit Challenge
-      </button>
+      <div class="reviewSaved">
+        <h1 class="popUpHeading">Quit?</h1>
+        <h3 class="popUpText">
+          If you quit the challenge,<br />you will lose all data.<br />Do you wish
+          to continue?
+        </h3>
+        <button @click="redirect" type="button" class="secondaryBtn">
+          Quit Challenge
+        </button>
+      </div>
     </div>
   </SimplePopup>
   <FooterBar />
