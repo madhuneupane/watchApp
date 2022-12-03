@@ -2,7 +2,6 @@ import { createApp } from 'vue';
 import './style.scss';
 import App from './App.vue';
 import router from "./routes";
-import './registerServiceWorker';
 import vue3StarRatings from "vue3-star-ratings";
 
 // import mitt from 'mitt';
