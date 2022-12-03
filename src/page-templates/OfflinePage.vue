@@ -1,5 +1,4 @@
 <template>
-  <NavigationBar />
   <div class="offline">
     <img src="../assets/icons/camera-roll.svg" alt="cameraRoll">
     <h1>Error</h1>
@@ -8,19 +7,11 @@
       Reload Page
     </button>
   </div>
-  <FooterBar />
 </template>
 
 <script>
-import NavigationBar from '../components/NavigationBar.vue';
-import FooterBar from "../components/FooterBar.vue";
-
 export default {
   name: "OfflinePage",
-  components: {
-    NavigationBar,
-    FooterBar
-  },
   methods: {
     reload() {
       this.$router.push("/");

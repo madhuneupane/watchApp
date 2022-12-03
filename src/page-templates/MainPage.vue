@@ -1,10 +1,15 @@
 <template>
   <NavigationBar />
-  <ChallangesCarousel />
-  <h1 v-if="nickName" class="mainPageUserNickName">Hello, {{ nickName }}</h1>
-  <UpcomingMovies />
-  <RecommendationMovies />
-  <AdminCarousel />
+  <div v-if="!isOnLine">
+    <OfflinePage />
+  </div>
+  <div v-else>
+    <ChallangesCarousel />
+    <h1 v-if="nickName" class="mainPageUserNickName">Hello, {{ nickName }}</h1>
+    <UpcomingMovies />
+    <RecommendationMovies />
+    <AdminCarousel />
+  </div>
   <FooterBar />
 </template>
   
@@ -15,6 +20,7 @@ import RecommendationMovies from "../components/RecommendationMovies.vue";
 import AdminCarousel from "../components/AdminCarousel.vue";
 import NavigationBar from "../components/NavigationBar.vue";
 import FooterBar from "../components/FooterBar.vue";
+import OfflinePage from "../page-templates/OfflinePage.vue";
 import { db } from "@/firebase";
 import { query, collection, getDocs } from "firebase/firestore";
 export default {
@@ -27,11 +33,13 @@ export default {
     AdminCarousel,
     NavigationBar,
     FooterBar,
+    OfflinePage,
   },
   data() {
     return {
       nickName: "",
       genreConverter: [],
+      isOnLine: true,
     };
   },
 
@@ -44,6 +52,9 @@ export default {
         this.nickName = doc.data().nickname;
       }
     });
+
+    window.addEventListener('online', () => { this.isOnLine = true });
+    window.addEventListener('offline', () => { this.isOnLine = false });
   },
 };
 </script>
