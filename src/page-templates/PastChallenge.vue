@@ -5,16 +5,9 @@
     <h1 v-if="windowSize > 1024">Past Challenges</h1>
     <h2>You've achieved this much!</h2>
     <div class="chalList">
-      <div
-        class="chalInfo"
-        v-for="(challenge, index) in chalLoading"
-        :key="index"
-      >
-        <div
-          class="challenge"
-          v-bind:style="{ backgroundImage: 'url(' + challenge.image + ')' }"
-          @click.prevent="challengeClicked(index)"
-        >
+      <div class="chalInfo" v-for="(challenge, index) in chalLoading" :key="index">
+        <div class="challenge" v-bind:style="{ backgroundImage: 'url(' + challenge.image + ')' }"
+          @click.prevent="challengeClicked(index)">
           <div class="chalDetailsContainer">
             <h3>{{ challenge.title }}</h3>
             <span id="ending">Ended on {{ challenge.endDate }}</span>
@@ -23,7 +16,7 @@
       </div>
     </div>
     <a class="seeMoreBtn link" @click.prevent="loadMore">Load More</a>
-    <div class="btnContainer">
+    <div class="btnContainer" v-if="windowSize > 1024">
       <BackButton title="Back to Challenges" @click.prevent="backChal" />
     </div>
   </section>
@@ -48,10 +41,7 @@
   </section> -->
   <section v-if="moviePart" id="chalDetailSection">
     <div class="chalDetailContainer">
-      <div
-        class="chalImgContainer"
-        v-bind:style="{ backgroundImage: 'url(' + chalImage + ')' }"
-      ></div>
+      <div class="chalImgContainer" v-bind:style="{ backgroundImage: 'url(' + chalImage + ')' }"></div>
       <div class="chalDetailsInfo">
         <span class="chalTitle">{{ chalName }}</span>
         <span class="chalDates">{{ startDate }} ~ {{ endDate }}</span>
@@ -60,10 +50,8 @@
     </div>
     <div class="ongoingChalContainer">
       <div v-for="(movies, i) in movie" :key="i" class="ongoingChalItem">
-        <img
-          :src="'https://image.tmdb.org/t/p/w500' + movie[i].poster_path"
-          @click.prevent="movieClicked(movie[i], i)"
-        />
+        <img :src="'https://image.tmdb.org/t/p/w500' + movie[i].poster_path"
+          @click.prevent="movieClicked(movie[i], i)" />
         <!-- <h3>{{ movie[i].title }}</h3> -->
         <div class="movieWatched" v-if="movie[i].review">
           <span>Watched</span>
@@ -71,11 +59,7 @@
       </div>
     </div>
     <div class="ongoingChlPageBottomBtnContainer">
-      <BackButton
-        class="backtoListBtn"
-        title="Back to List"
-        @click.prevent="backList"
-      />
+      <BackButton class="backtoListBtn" title="Back to List" @click.prevent="backList" />
     </div>
   </section>
   <FooterBar style="width: 100%; bottom: 0; position: fixed" />

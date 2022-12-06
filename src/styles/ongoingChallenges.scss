@@ -1,13 +1,16 @@
 //First Section Start
 #ongoingChalSec {
-    padding: $standardSpacement;
+    padding: 0 $standardSpacement $standardSpacement;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    transform: translateY(-10px);
 
     @media only screen and (min-width: $media-desktop) {
         align-items: unset;
+        transform: none;
+        padding: $standardSpacement;
     }
 }
 
@@ -261,7 +264,8 @@ span {
     width: 50%;
 }
 
-#chalDetailSection .ongoingChlPageBottomBtnContainer .backtoListBtn, .joinChlgBtn{
+#chalDetailSection .ongoingChlPageBottomBtnContainer .backtoListBtn,
+.joinChlgBtn {
     width: 100%;
     margin-bottom: $standardSpacement;
 

@@ -4,7 +4,7 @@
     <h2 class="contactUsHeading">Send us a message</h2>
     <p class="labelClass">We'd love to hear from you!</p>
 
-    <form @submit.prevent="submitMessage()" class="formContainer" id="formData">
+    <form @submit.prevent="submitMessage" class="formContainer" id="formData">
       <div>
         <p class="error">{{ fillMessage }}</p>
         <div class="form_email">
@@ -39,15 +39,17 @@
         </div>
         <SimplePopup @close="togglePopup" :popupActive="popupActive">
           <div class="popupContent">
-            <h1>Thank you for<br>your message!</h1>
-            <p>We'll be contacting you shortly to discuss your inquire</p>
-            <button @click="redirect" type="button" class="secondaryBtn">Go to Home</button>
+            <div class="reviewSaved">
+              <h1>Thank you for<br>your message!</h1>
+              <p>We'll be contacting you shortly to discuss your inquire</p>
+              <button @click="redirect" type="button" class="secondaryBtn">Go to Home</button>
+            </div>
           </div>
         </SimplePopup>
       </div>
     </form>
   </div>
-  <FooterBar />
+  <FooterBar style="width: 100%; bottom: 0; position: fixed" />
 </template>
 
 <script>
@@ -77,10 +79,10 @@ export default {
     submitMessage() {
       this.fillMessage = "";
       if (
-        this.email == "" ||
-        this.fName == "" ||
-        this.lName == "" ||
-        this.subject == "" ||
+        this.email == "" &&
+        this.fName == "" &&
+        this.lName == "" &&
+        this.subject == "" &&
         this.message == ""
       ) {
         this.fillMessage = "Please fill in all the information";

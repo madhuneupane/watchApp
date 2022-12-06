@@ -10,9 +10,11 @@
     justify-content: center;
     align-items: center;
     padding: $standardSpacement;
+    transform: translateY(-40px);
 
     @media only screen and (min-width: $media-desktop) {
         width: 100%;
+        transform: none;
     }
 }
 

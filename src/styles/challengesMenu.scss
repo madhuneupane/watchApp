@@ -2,6 +2,8 @@
     display: flex;
     flex-direction: column;
     padding: $standardSpacement $standardSpacement 0;
+    z-index: 2;
+    cursor: pointer;
 }
 
 .challengesMenu h2 {

@@ -80,6 +80,12 @@ To be able to do the rating more similar with the mockups, will be necessary to 
 npm install vue3-star-ratings --save
 ```
 
+### Readme UPDATE - Vue Offline
+To be able to make Vue capture offline/online status in the browser, it is necessary to install the following package:
+```
+npm install vue-offline --save
+```
+
 ### 10 - Run the serve
 ```
 npm run serve
