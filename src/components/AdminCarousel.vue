@@ -5,10 +5,24 @@
         <h2>Try beating WatchApp!</h2>
         <a class="seeMoreBtn" @click.prevent="gotoAdminPage">See All</a>
       </div>
-      <vueper-slides :arrows="true" :infinite="false" :bullets="true" :visible-slides="2" :slide-multiple="2" :gap="2"
-        :slide-ratio="1 / 3.5" :dragging-distance="100" :breakpoints="breakpoints">
-        <vueper-slide v-for="movie in slides" :key="movie" :image="movie.image" :title="movie.title"
-          :content="movie.startDate + ' to ' + movie.endDate" />
+      <vueper-slides
+        :arrows="true"
+        :infinite="false"
+        :bullets="true"
+        :visible-slides="2"
+        :slide-multiple="2"
+        :gap="2"
+        :slide-ratio="1 / 3.5"
+        :dragging-distance="100"
+        :breakpoints="breakpoints"
+      >
+        <vueper-slide
+          v-for="movie in slides"
+          :key="movie"
+          :image="movie.image"
+          :title="movie.title"
+          :content="movie.startDate + ' to ' + movie.endDate"
+        />
       </vueper-slides>
     </div>
   </section>
@@ -32,7 +46,12 @@ export default {
       slides: [],
       i: 0,
       breakpoints: {
-        1023: { visibleSlides: 2, slideMultiple: 2, slideRatio: 1 / 3, arrows: false },
+        1023: {
+          visibleSlides: 2,
+          slideMultiple: 2,
+          slideRatio: 1 / 3,
+          arrows: false,
+        },
       },
       carouselKey: false,
     };
@@ -74,6 +93,7 @@ export default {
     forceRerender() {
       this.carouselKey += 1;
     },
+    //done
     gotoAdminPage() {
       this.$router.push("/admin-challenge");
     },
