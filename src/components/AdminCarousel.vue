@@ -94,6 +94,7 @@ export default {
       this.carouselKey += 1;
     },
     //done
+    //push
     gotoAdminPage() {
       this.$router.push("/admin-challenge");
     },
